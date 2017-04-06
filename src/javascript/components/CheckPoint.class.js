@@ -8,10 +8,10 @@ class CheckPoint {
       this.blackboard = options.blackboard
       this.blackBoardIndex = options.blackBoardIndex
       this.index = options.index
-
       this.ratioVertical = options.ratioVertical
 
       this.init()
+      this.bind()
     }
 
     init() {
@@ -24,6 +24,39 @@ class CheckPoint {
       this.checkPoint.isChecked = false
 
       this.blackboard.addChild(this.checkPoint)
+    }
+
+    bind() {
+      let that = this
+      this.checkPoint.mouseover = function(mouseData){
+        that.drawingDetection(mouseData)
+      }
+      this.checkPoint.mousedown = function(){
+        that.drawingDetection()
+      }
+    }
+
+    drawingDetection() {
+      this.checkPoint.isChecked = true
+      let drawValidated = true
+
+      for (var i = 0; i < this.blackboard.children.length; i++) {
+        if (!this.blackboard.children[i].isChecked) {
+          drawValidated = false
+        }
+      }
+
+      if (drawValidated) {
+        TweenLite.to(this.blackboard.children, 0.3, {
+          alpha: 0.5
+        })
+      }
+    }
+
+    resetDrawingDetection() {
+      for (var i = 0; i < this.blackboard.children.length; i++) {
+        this.blackboard.children[i].isChecked = false
+      }
     }
 }
 

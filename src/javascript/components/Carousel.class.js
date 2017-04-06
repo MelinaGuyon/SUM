@@ -11,21 +11,26 @@ class Carousel {
 
       this.sprites = {}
       this.assets = {}
-
       this.totalCarouselWidth = 0
       this.ratioVertical = 1
 
       this.blackboards = []
 
       this.init()
+      this.bind()
     }
 
     init() {
-      let that = this
-
       this.loadCarouselPictures()
-      window.addEventListener('mousewheel', function(e){
+    }
+
+    bind() {
+      let that = this
+      window.addEventListener('mousewheel', function(e) {
         that.handleScroll(e)
+      })
+      window.addEventListener('resize', function(e) {
+        that.handleResize(e)
       })
     }
 
@@ -74,30 +79,17 @@ class Carousel {
       that.totalCarouselWidth = 0
 
       for (var i = 0; i < this.blackboards.length; i++) {
-        this.blackboards[i].destroy()
+        this.blackboards[i].blackboard.destroy()
       }
-      // for (var i = 0; i < this.checkPoints.length; i++) {
-      //   this.checkPoints[i].destroy()
-      // }
 
       this.blackboards = []
-      // this.checkPoints = []
       this.initBlackboards()
     }
 
     initBlackboards() {
-
       for(let i = 0; i < datas.datasBlackboards.length; i++) {
-        this.blackboards = new BlackboardClass({ renderer : this.renderer, carousel : this.carousel, index : i, ratioVertical : this.ratioVertical })
+        this.blackboards.push(new BlackboardClass({ renderer : this.renderer, carousel : this.carousel, index : i, ratioVertical : this.ratioVertical }))
       }
-
-      // for(let i = 0; i < datas.datasCheckPoints.length; i++) {
-      //   drawCheckpoint(i)
-      // }
-
-      // checkPoints.forEach(function(el) {
-      //   el.mousedown = drawingDetection
-      // })
     }
 
     handleScroll(e) {
@@ -109,6 +101,17 @@ class Carousel {
         this.carousel.x += Math.abs(e.deltaY) / 3
       }
     }
+
+    handleResize() {
+      this.renderer.renderer.resize(window.innerWidth, window.innerHeight)
+      let timeOut
+      let that = this
+      clearTimeout(timeOut)
+      timeOut = setTimeout(()=> {
+        that.makeCarousel()
+      }, 200)
+    }
+
 }
 
 export default Carousel

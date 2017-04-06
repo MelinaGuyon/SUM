@@ -26,28 +26,28 @@ class Blackboard {
       this.carousel.addChild(this.blackboard)
 
       for(let i = 0; i < datas.datasBlackboards[this.index].checkPoints.length; i++) {
-        this.checkPoints = new CheckPointClass({ index : i, blackBoardIndex : this.index, ratioVertical : this.ratioVertical, blackboard : this.blackboard })
+        this.checkpoints.push(new CheckPointClass({ index : i, blackBoardIndex : this.index, ratioVertical : this.ratioVertical, blackboard : this.blackboard }))
       }
     }
 
     bind() {
       let that = this
       this.blackboard.mousedown = function(mouseData){
-        that.onArdoiseMouseDown(mouseData)
+        that.onBlackboardMouseDown(mouseData)
       }
       this.blackboard.mouseover = function(mouseData){
-        that.onArdoiseMouseHover(mouseData)
+        that.onBlackboardMouseHover(mouseData)
       }
       this.blackboard.mouseout = function(mouseData){
-        that.onArdoiseMouseOut(mouseData)
+        that.onBlackboardMouseOut(mouseData)
       }
     }
 
-    onArdoiseMouseHover() {
+    onBlackboardMouseHover() {
       document.body.style.cursor = 'crosshair'
     }
 
-    onArdoiseMouseDown(mouseData) {
+    onBlackboardMouseDown(mouseData) {
       this.drawnLine = new PIXI.Graphics()
       this.drawnLine.beginFill(0xffffff)
       this.drawnLine.moveTo(mouseData.data.global.x, mouseData.data.global.y)
@@ -55,19 +55,19 @@ class Blackboard {
 
       let that = this
       this.blackboard.mousemove = function(mouseData){
-        that.onArdoiseMouseMove(mouseData)
+        that.onBlackboardMouseMove(mouseData)
       }
       this.blackboard.mouseup = function(mouseData){
-        that.onArdoiseMouseUp(mouseData)
+        that.onBlackboardMouseUp(mouseData)
       }
     }
 
-    onArdoiseMouseMove(mouseData) {
+    onBlackboardMouseMove(mouseData) {
       this.drawnLine.lineStyle(5, 0xffffff)
       this.drawnLine.lineTo(mouseData.data.global.x, mouseData.data.global.y)
     }
 
-    onArdoiseMouseOut() {
+    onBlackboardMouseOut() {
       if (this.drawnLine) {
         TweenLite.to(this.drawnLine, 0.3, {
           alpha: 0,
@@ -77,16 +77,16 @@ class Blackboard {
 
       document.body.style.cursor = 'auto'
 
-      // checkPoints.forEach(function(el) {
-      //   el.mouseover = null
-      // })
+      this.checkpoints.forEach(function(el) {
+        el.mouseover = null
+      })
 
       this.blackboard.mousemove = null
       this.blackboard.mouseup = null
-      // reseDrawingDetection(this.drawnLine)
+      this.checkpoints[0].resetDrawingDetection()
     }
 
-    onArdoiseMouseUp() {
+    onBlackboardMouseUp() {
       this.drawnLine.endFill()
 
       TweenLite.to(this.drawnLine, 0.3, {
@@ -94,13 +94,12 @@ class Blackboard {
         onComplete: () => { this.drawnLine.clear() }
       })
 
-      // checkPoints.forEach(function(el) {
-      //   el.mouseover = null
-      // })
+      this.checkpoints.forEach(function(el) {
+        el.mouseover = null
+      })
 
       this.blackboard.mousemove = null
-      // reseDrawingDetection(this.drawnLine)
-      // })
+      this.checkpoints[0].resetDrawingDetection()
     }
 }
 

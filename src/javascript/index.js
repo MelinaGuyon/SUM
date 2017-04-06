@@ -1,9 +1,27 @@
-import MyComponent from './components/myComponent.class.js'
+const PIXI = require('pixi.js');
+import RendererClass from './components/Renderer.class.js'
+import DessinClass from './components/Dessin.class.js'
+import CarouselClass from './components/Carousel.class.js'
 
-var test = new MyComponent()
+/*** SCENE SETUP ***/
+let Renderer,
+    Carousel
 
-animate();
+window.onload = function() {
+  initCanvas()
+}
 
-function animate() {
-    requestAnimationFrame(animate);
+function initCanvas() {
+
+  Renderer = new RendererClass()
+  Carousel = new CarouselClass()
+
+  Renderer.stage.addChild(Carousel.carousel)
+
+  render()
+}
+
+function render() {
+  requestAnimationFrame(render)
+  Renderer.renderer.render(Renderer.stage)
 }

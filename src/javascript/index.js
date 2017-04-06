@@ -1,7 +1,8 @@
 const PIXI = require('pixi.js');
+import datas from './datas.js'
 import RendererClass from './components/Renderer.class.js'
-import DessinClass from './components/Dessin.class.js'
 import CarouselClass from './components/Carousel.class.js'
+import BlackboardClass from './components/Blackboard.class.js'
 
 /*** SCENE SETUP ***/
 let Renderer,
@@ -14,7 +15,7 @@ window.onload = function() {
 function initCanvas() {
 
   Renderer = new RendererClass()
-  Carousel = new CarouselClass()
+  Carousel = new CarouselClass({ renderer : Renderer })
 
   Renderer.stage.addChild(Carousel.carousel)
 

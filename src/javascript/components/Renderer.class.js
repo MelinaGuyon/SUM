@@ -1,5 +1,3 @@
-import CarouselClass from './Carousel.class.js'
-
 class Renderer {
 
     constructor(options) {

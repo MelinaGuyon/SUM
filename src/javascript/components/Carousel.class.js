@@ -1,12 +1,21 @@
+import BlackboardClass from './Blackboard.class.js'
+import datas from '../datas.js'
+
 class Carousel {
 
     constructor(options) {
-      this.loader = PIXI.loader
       this.carousel = new PIXI.Container()
+      this.loader = PIXI.loader
+
+      this.renderer = options.renderer
+
       this.sprites = {}
+      this.assets = {}
+
       this.totalCarouselWidth = 0
       this.ratioVertical = 1
-      this.assets = {}
+
+      this.blackboards = []
 
       this.init()
     }
@@ -26,7 +35,8 @@ class Carousel {
       this.loader
       .add([
         'assets/carousel-1.jpg',
-        'assets/carousel-2.jpg'
+        'assets/carousel-2.jpg',
+        'assets/carousel-3.jpg'
       ])
       .on('progress', function(){
         that.loadProgressHandler()
@@ -40,7 +50,6 @@ class Carousel {
     }
 
     setupLoaded() {
-
       this.assets.resources = this.loader.resources
 
       let that = this
@@ -63,6 +72,32 @@ class Carousel {
         that.totalCarouselWidth += that.sprites[objectKey].width
       })
       that.totalCarouselWidth = 0
+
+      for (var i = 0; i < this.blackboards.length; i++) {
+        this.blackboards[i].destroy()
+      }
+      // for (var i = 0; i < this.checkPoints.length; i++) {
+      //   this.checkPoints[i].destroy()
+      // }
+
+      this.blackboards = []
+      // this.checkPoints = []
+      this.initBlackboards()
+    }
+
+    initBlackboards() {
+
+      for(let i = 0; i < datas.datasBlackboards.length; i++) {
+        this.blackboards = new BlackboardClass({ renderer : this.renderer, carousel : this.carousel, index : i, ratioVertical : this.ratioVertical })
+      }
+
+      // for(let i = 0; i < datas.datasCheckPoints.length; i++) {
+      //   drawCheckpoint(i)
+      // }
+
+      // checkPoints.forEach(function(el) {
+      //   el.mousedown = drawingDetection
+      // })
     }
 
     handleScroll(e) {
@@ -74,7 +109,6 @@ class Carousel {
         this.carousel.x += Math.abs(e.deltaY) / 3
       }
     }
-
 }
 
 export default Carousel

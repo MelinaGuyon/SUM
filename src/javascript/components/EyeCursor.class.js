@@ -9,6 +9,8 @@ class EyeCursor {
         this.path = new PIXI.Graphics
         this.cursor = new PIXI.Graphics
 
+        this.prev = 300
+
         this.createEye()
         this.createPath()
         this.createCursor()
@@ -24,7 +26,6 @@ class EyeCursor {
         this.bigEye.position.set(this.bigEye.graphicsData[0].shape.x+this.bigEye.width/2, this.bigEye.graphicsData[0].shape.y+this.bigEye.height/2)
         this.bigEye.pivot.set(this.bigEye.graphicsData[0].shape.x+this.bigEye.width/2, this.bigEye.graphicsData[0].shape.y+this.bigEye.height/2)
 
-
         this.bigEye.interactive = true // pour attribuer événements à this.bigEye
         STORAGE.stage.addChild(this.bigEye)
     }
@@ -33,7 +34,7 @@ class EyeCursor {
         this.path.beginFill(0xffffff)
         this.path.moveTo(100, 100)
         this.path.lineStyle(3, 0x000000)
-        this.path.lineTo(100, 500)
+        this.path.lineTo(100, 300)
         this.path.endFill()
         this.path.interactive = true // pour attribuer événements à this.path
         STORAGE.stage.addChild(this.path)
@@ -44,7 +45,7 @@ class EyeCursor {
         this.cursor.drawCircle(0, 0, 15)
         this.cursor.endFill()
         this.cursor.x = 100
-        this.cursor.y = 100
+        this.cursor.y = 300
         this.cursor.interactive = true // pour attribuer événements à this.cursor
         STORAGE.stage.addChild(this.cursor)
     }
@@ -69,23 +70,36 @@ class EyeCursor {
     }
 
     onCursorMouseMove(mouseData) {
+        
+        this.prev = this.cursor.y
         this.cursor.y = mouseData.data.global.y
-        if (this.cursor.y < 90 || this.cursor.y > 510) {
+
+        if (this.cursor.y < 100 || this.cursor.y > 300) {
             this.cursor.mousemove = null    
         }
 
         this.onRotationActivated()
     }
 
-    onCursorMouseOut(mouseData) {
-        this.cursor.mousemove = null    
-    }
-
     onRotationActivated() {
+
+        console.log(this.cursor.y)
+
+        // this.bigEye.rotation = Math.PI * 2 * 0.500
+
+        if (this.cursor.y > this.prev) {
+            this.bigEye.rotation -= Math.PI * 2 * 0.500/200 * 1.8
+        }
+        else if (this.cursor.y < this.prev && this.bigEye.rotation < Math.PI * 2 * 0.500) {
+            this.bigEye.rotation += Math.PI * 2 * 0.500/200 * 1.8
+        }
+
+/*        for (let i = 90; i < 310; i++) {
+            this.cursor.y = i;
+        }*/
         /*console.log("X :", this.bigEye.x)
         console.log("LARGEUR :", this.bigEye.width)
         console.log("ANCRE Y :", this.bigEye.y+this.bigEye.height/2)*/
-        this.bigEye.rotation += 0.05
     }
 
 }

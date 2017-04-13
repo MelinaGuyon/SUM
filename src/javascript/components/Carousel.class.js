@@ -6,7 +6,8 @@ class Carousel {
     constructor(options) {
       this.carousel = new PIXI.Container()
       STORAGE.carousel = this.carousel
-      
+      STORAGE.stage.addChild(this.carousel)
+
       this.loader = PIXI.loader
 
       this.sprites = {}

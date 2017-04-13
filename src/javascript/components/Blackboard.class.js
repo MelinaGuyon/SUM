@@ -7,7 +7,6 @@ class Blackboard {
     constructor(options) {
       this.blackboard = new PIXI.Graphics
 
-      this.ratioVertical = options.ratioVertical
       this.index = options.index
 
       this.drawnLine
@@ -18,14 +17,18 @@ class Blackboard {
     }
 
     init() {
-      this.blackboard.beginFill(0x000000, 0.3)
-      this.blackboard.drawRect(datas.datasBlackboards[this.index].x * this.ratioVertical, datas.datasBlackboards[this.index].y * this.ratioVertical, datas.datasBlackboards[this.index].width * this.ratioVertical, datas.datasBlackboards[this.index].height * this.ratioVertical)
+      this.blackboard.beginFill(0x000000, 0)
+      this.blackboard.drawRect(datas.datasBlackboards[this.index].x * STORAGE.ratioVertical, datas.datasBlackboards[this.index].y * STORAGE.ratioVertical, datas.datasBlackboards[this.index].width * STORAGE.ratioVertical, datas.datasBlackboards[this.index].height * STORAGE.ratioVertical)
       this.blackboard.interactive = true // pour attribuer événements à this.blackboard
 
       STORAGE.carousel.addChild(this.blackboard)
 
+      if (datas.datasBlackboards[this.index].isTestLaunch) {
+        this.blackboard.isTestLaunch = true
+      }
+
       for(let i = 0; i < datas.datasBlackboards[this.index].checkPoints.length; i++) {
-        this.checkpoints.push(new CheckPointClass({ index : i, blackBoardIndex : this.index, ratioVertical : this.ratioVertical, blackboard : this.blackboard }))
+        this.checkpoints.push(new CheckPointClass({ index : i, blackBoardIndex : this.index, blackboard : this.blackboard }))
       }
     }
 

@@ -1,4 +1,5 @@
 import datas from '../datas.js'
+import ImageDeformation from './ImageDeformation.class.js'
 
 class CheckPoint {
 
@@ -8,18 +9,17 @@ class CheckPoint {
       this.blackboard = options.blackboard
       this.blackBoardIndex = options.blackBoardIndex
       this.index = options.index
-      this.ratioVertical = options.ratioVertical
 
       this.init()
       this.bind()
     }
 
     init() {
-      this.checkPoint.beginFill(0xffffff, 1)
+      this.checkPoint.beginFill(0xffffff, 0)
       this.checkPoint.drawCircle(0, 0, datas.datasBlackboards[this.blackBoardIndex].checkPoints[this.index].rayon)
       this.checkPoint.endFill()
-      this.checkPoint.x = datas.datasBlackboards[this.blackBoardIndex].checkPoints[this.index].x * this.ratioVertical + this.blackboard.graphicsData[0].shape.x
-      this.checkPoint.y = datas.datasBlackboards[this.blackBoardIndex].checkPoints[this.index].y * this.ratioVertical + this.blackboard.graphicsData[0].shape.y
+      this.checkPoint.x = datas.datasBlackboards[this.blackBoardIndex].checkPoints[this.index].x * STORAGE.ratioVertical + this.blackboard.graphicsData[0].shape.x
+      this.checkPoint.y = datas.datasBlackboards[this.blackBoardIndex].checkPoints[this.index].y * STORAGE.ratioVertical + this.blackboard.graphicsData[0].shape.y
       this.checkPoint.interactive = true // pour attribuer événements à this.checkPoint
       this.checkPoint.isChecked = false
 
@@ -50,6 +50,11 @@ class CheckPoint {
         TweenLite.to(this.blackboard.children, 0.3, {
           alpha: 0.5
         })
+
+        if (this.blackboard.isTestLaunch) {
+          let ImageDeformationClass = new ImageDeformation({ image : 'assets/deformation-eye.jpg' })
+          ImageDeformationClass.animate(ImageDeformationClass)
+        }
       }
     }
 

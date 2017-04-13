@@ -10,7 +10,7 @@ class ImageDeformation {
 
     this.imageTexture = PIXI.Texture.fromImage(options.image)
 		this.image = new PIXI.Sprite(this.imageTexture)
-    STORAGE.stage.addChild(this.image)
+    this.image.alpha = 0
 
     this.angle = 'up'
     this.displacement = 'up'
@@ -27,8 +27,8 @@ class ImageDeformation {
   }
 
   resizeImage() {
-    this.ratioVertical = window.innerHeight / 2700
-    this.image.scale = new PIXI.Point(this.ratioVertical, this.ratioVertical)
+    this.image.scale = new PIXI.Point(STORAGE.ratioVertical, STORAGE.ratioVertical)
+    STORAGE.stage.addChild(this.image)
   }
 
   doBlurFilter() {
@@ -44,8 +44,8 @@ class ImageDeformation {
   }
 
   doDisplacementFilter() {
-    this.displacementSprite = PIXI.Sprite.fromImage('assets/displacement_map.jpg')
-    this.displacementSprite.scale = new PIXI.Point(2, 4)
+    this.displacementSprite = PIXI.Sprite.fromImage('assets/displacement_map.png')
+    this.displacementSprite.scale = new PIXI.Point(STORAGE.ratioVertical, STORAGE.ratioVertical )
 
 		STORAGE.stage.addChild(this.displacementSprite)
 
@@ -61,7 +61,7 @@ class ImageDeformation {
       setTimeout(function() {
         it.animateBool = false
         return
-      }, 5000)
+      }, 10000)
 
       if (it.animateBool) {
         it.animate(it);
@@ -71,6 +71,10 @@ class ImageDeformation {
     if (that.animateBool == false) {
       window.cancelAnimationFrame(requestID)
       that.animateBool = true
+    }
+
+    if (this.image.alpha < 1) {
+      this.image.alpha += 0.05
     }
 
     if (that.twist.angle < -0.5) {
@@ -100,11 +104,11 @@ class ImageDeformation {
     }
 
     if (this.displacementFilter.scale.x < 200) {
-      this.displacementFilter.scale.x += 1
-      this.displacementFilter.scale.y += 1
+      this.displacementFilter.scale.x += 5
+      this.displacementFilter.scale.y += 5
     } else if (this.displacementFilter.scale.x < 600) {
-      this.displacementFilter.scale.x += 3
-      this.displacementFilter.scale.y += 3
+      this.displacementFilter.scale.x += 20
+      this.displacementFilter.scale.y += 20
     }
 
     this.image.filters = [

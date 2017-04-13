@@ -13,7 +13,7 @@ class Carousel {
       this.sprites = {}
       this.assets = {}
       this.totalCarouselWidth = 0
-      this.ratioVertical = 1
+      STORAGE.ratioVertical = 1
 
       this.blackboards = []
 
@@ -72,8 +72,8 @@ class Carousel {
     makeCarousel() {
       let that = this
       Object.keys(that.sprites).map(function(objectKey, index) {
-        that.ratioVertical = window.innerHeight / that.sprites[objectKey].texture.height // calcul ratio vetical
-        that.sprites[objectKey].scale = new PIXI.Point(that.ratioVertical, that.ratioVertical) // redimensionnement : img = taille fenêtre
+        STORAGE.ratioVertical = window.innerHeight / that.sprites[objectKey].texture.height // calcul ratio vetical
+        that.sprites[objectKey].scale = new PIXI.Point(STORAGE.ratioVertical, STORAGE.ratioVertical) // redimensionnement : img = taille fenêtre
         that.sprites[objectKey].x = that.totalCarouselWidth
         that.totalCarouselWidth += that.sprites[objectKey].width
       })
@@ -89,7 +89,7 @@ class Carousel {
 
     initBlackboards() {
       for(let i = 0; i < datas.datasBlackboards.length; i++) {
-        this.blackboards.push(new Blackboard({ index : i, ratioVertical : this.ratioVertical }))
+        this.blackboards.push(new Blackboard({ index : i }))
       }
     }
 

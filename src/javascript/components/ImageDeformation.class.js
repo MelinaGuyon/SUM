@@ -19,16 +19,26 @@ class ImageDeformation {
 
     this.twist
 
-    this.resizeImage()
+    this.replaceImage()
 
     this.doBlurFilter()
     this.doTwistFilter()
     this.doDisplacementFilter()
   }
 
-  resizeImage() {
+  replaceImage() {
     this.image.scale = new PIXI.Point(STORAGE.ratioVertical, STORAGE.ratioVertical)
     STORAGE.stage.addChild(this.image)
+
+    let margin = Math.abs(this.image.width - window.innerWidth)
+
+    if (this.image.width > window.innerWidth) {
+      this.image.position.x -= margin
+    }
+
+    if (this.image.width < window.innerWidth) {
+      this.image.position.x += margin
+    }
   }
 
   doBlurFilter() {
@@ -61,7 +71,7 @@ class ImageDeformation {
       setTimeout(function() {
         it.animateBool = false
         return
-      }, 10000)
+      }, 20000)
 
       if (it.animateBool) {
         it.animate(it);

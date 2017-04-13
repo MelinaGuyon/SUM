@@ -8,12 +8,16 @@ class ImageDeformation {
   constructor(options) {
     STORAGE.deformationFonction = this
 
-    this.imageTexture = PIXI.Texture.fromImage('assets/deformation.png')
+    this.imageTexture = PIXI.Texture.fromImage(options.image)
 		this.image = new PIXI.Sprite(this.imageTexture)
     STORAGE.stage.addChild(this.image)
 
     this.angle = 'up'
     this.displacement = 'up'
+
+    this.animateBool = true
+
+    this.twist
 
     this.resizeImage()
 
@@ -50,31 +54,49 @@ class ImageDeformation {
     this.displacementFilter.scale.y = 60
   }
 
-  animate() {
-    if (this.twist.angle < -0.5) {
-      this.angle = 'up'
-    } else if (this.twist.angle > 0.5){
-      this.angle = 'low'
+  animate(that) {
+    let it = that
+
+    let requestID = window.requestAnimationFrame(function() {
+      setTimeout(function() {
+        it.animateBool = false
+        return
+      }, 5000)
+
+      if (it.animateBool) {
+        it.animate(it);
+      }
+    })
+
+    if (that.animateBool == false) {
+      window.cancelAnimationFrame(requestID)
+      that.animateBool = true
     }
 
-    if (this.angle == 'low') {
-      this.twist.angle -= 0.004
+    if (that.twist.angle < -0.5) {
+      that.angle = 'up'
+    } else if (that.twist.angle > 0.5){
+      that.angle = 'low'
+    }
+
+    if (that.angle == 'low') {
+      that.twist.angle -= 0.004
     } else {
-      this.twist.angle +=  0.004
+      that.twist.angle +=  0.004
     }
 
-    if (this.displacementSprite.x < -400) {
-      this.displacement = 'up'
-    } else if (this.displacementSprite.x > 400){
-      this.displacement = 'low'
+    if (that.displacementSprite.x < -400) {
+      that.displacement = 'up'
+    } else if (that.displacementSprite.x > 400){
+      that.displacement = 'low'
     }
 
-    if (this.displacement == 'low') {
-      this.displacementSprite.x -= 6
-      this.displacementSprite.y -= 6
+    if (that.displacement == 'low') {
+      that.displacementSprite.x -= 6
+      that.displacementSprite.y -= 6
     } else {
-      this.displacementSprite.x += 6
-      this.displacementSprite.y += 6
+      that.displacementSprite.x += 6
+      that.displacementSprite.y += 6
     }
 
     if (this.displacementFilter.scale.x < 200) {

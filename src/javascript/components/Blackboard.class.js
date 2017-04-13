@@ -24,6 +24,10 @@ class Blackboard {
 
       STORAGE.carousel.addChild(this.blackboard)
 
+      if (datas.datasBlackboards[this.index].isTestLaunch) {
+        this.blackboard.isTestLaunch = true
+      }
+
       for(let i = 0; i < datas.datasBlackboards[this.index].checkPoints.length; i++) {
         this.checkpoints.push(new CheckPointClass({ index : i, blackBoardIndex : this.index, ratioVertical : this.ratioVertical, blackboard : this.blackboard }))
       }

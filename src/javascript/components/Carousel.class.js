@@ -5,9 +5,9 @@ class Carousel {
 
     constructor(options) {
       this.carousel = new PIXI.Container()
+      STORAGE.carousel = this.carousel
+      
       this.loader = PIXI.loader
-
-      this.renderer = options.renderer
 
       this.sprites = {}
       this.assets = {}
@@ -88,7 +88,7 @@ class Carousel {
 
     initBlackboards() {
       for(let i = 0; i < datas.datasBlackboards.length; i++) {
-        this.blackboards.push(new BlackboardClass({ renderer : this.renderer, carousel : this.carousel, index : i, ratioVertical : this.ratioVertical }))
+        this.blackboards.push(new BlackboardClass({ index : i, ratioVertical : this.ratioVertical }))
       }
     }
 
@@ -103,7 +103,7 @@ class Carousel {
     }
 
     handleResize() {
-      this.renderer.renderer.resize(window.innerWidth, window.innerHeight)
+      STORAGE.renderer.resize(window.innerWidth, window.innerHeight)
       let timeOut
       let that = this
       clearTimeout(timeOut)

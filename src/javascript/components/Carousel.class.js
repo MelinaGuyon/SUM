@@ -1,4 +1,4 @@
-import BlackboardClass from './Blackboard.class.js'
+import Blackboard from './Blackboard.class.js'
 import datas from '../datas.js'
 
 class Carousel {
@@ -89,7 +89,7 @@ class Carousel {
 
     initBlackboards() {
       for(let i = 0; i < datas.datasBlackboards.length; i++) {
-        this.blackboards.push(new BlackboardClass({ index : i, ratioVertical : this.ratioVertical }))
+        this.blackboards.push(new Blackboard({ index : i, ratioVertical : this.ratioVertical }))
       }
     }
 

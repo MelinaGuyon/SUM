@@ -1,4 +1,5 @@
 import datas from '../datas.js'
+import ImageDeformation from './ImageDeformation.class.js'
 
 class CheckPoint {
 
@@ -50,6 +51,11 @@ class CheckPoint {
         TweenLite.to(this.blackboard.children, 0.3, {
           alpha: 0.5
         })
+
+        if (this.blackboard.isTestLaunch) {
+          let ImageDeformationClass = new ImageDeformation({ image : 'assets/deformation.png' })
+          ImageDeformationClass.animate(ImageDeformationClass)
+        }
       }
     }
 

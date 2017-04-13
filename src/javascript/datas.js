@@ -79,7 +79,8 @@ const datas = {
         x: 150,
         y: 235
       }
-    ]
+    ],
+    isTestLaunch: true
   }]
 }
 

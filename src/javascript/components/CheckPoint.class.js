@@ -52,7 +52,7 @@ class CheckPoint {
         })
 
         if (this.blackboard.isTestLaunch) {
-          let ImageDeformationClass = new ImageDeformation({ image : 'assets/carousel-3.jpg' })
+          let ImageDeformationClass = new ImageDeformation({ image : 'assets/deformation-eye.jpg' })
           ImageDeformationClass.animate(ImageDeformationClass)
         }
       }

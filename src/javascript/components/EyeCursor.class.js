@@ -87,9 +87,11 @@ class EyeCursor {
 
         // this.bigEye.rotation = Math.PI * 2 * 0.500
 
+        // on descend 
         if (this.cursor.y > this.prev) {
             this.bigEye.rotation -= Math.PI * 2 * 0.500/200
         }
+        // on monte
         else if (this.cursor.y < this.prev && this.bigEye.rotation < Math.PI * 2 * 0.500) {
             this.bigEye.rotation += Math.PI * 2 * 0.500/200
         }

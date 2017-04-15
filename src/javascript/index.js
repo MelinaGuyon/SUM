@@ -15,9 +15,9 @@ window.onload = function() {
 function initCanvas() {
 
   new Renderer()
-  // new Carousel()
-  new EyeCursor()
-  
+  new Carousel()
+  // new EyeCursor()
+
   render()
 }
 

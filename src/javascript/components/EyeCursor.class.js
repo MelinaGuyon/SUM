@@ -7,6 +7,7 @@ class EyeCursor {
     this.bigEye = new PIXI.Graphics
     this.path = new PIXI.Graphics
     this.cursor = new PIXI.Graphics
+    this.line = new PIXI.Graphics
 
     this.distanceToPass
     this.isDragging = false
@@ -22,7 +23,6 @@ class EyeCursor {
 
   createEye() {
     this.bigEye.beginFill(0x000000, 1)
-    this.bigEye.lineStyle(1, 0x000000)
     this.bigEye.drawRect(600, 300, 600, 400)
     this.bigEye.position.set(this.bigEye.graphicsData[0].shape.x+this.bigEye.width/2, this.bigEye.graphicsData[0].shape.y+this.bigEye.height/2)
     this.bigEye.pivot.set(this.bigEye.graphicsData[0].shape.x+this.bigEye.width/2, this.bigEye.graphicsData[0].shape.y+this.bigEye.height/2)

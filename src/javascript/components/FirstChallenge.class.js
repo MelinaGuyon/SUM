@@ -133,16 +133,16 @@ class FirstChallenge {
       this.distanceToPass = (this.cursor.y - this.pathStart[1]) * 3.141592653589793 / (this.pathEnd[1] - this.pathStart[1])
     }
     TweenLite.set(this.bigEye, {
-      rotation: -this.distanceToPass
+      rotation: Math.abs(this.distanceToPass - 3.141592653589793)
     })
 
-    if (this.bigEye.rotation < 3.141592653589793 && this.cursor.y < this.pathStart[1] + 40 ) {
-      TweenLite.set(this.bigEye, {
+    if (this.bigEye.rotation < 3.141592653589793 && this.cursor.y < this.pathStart[1] + 30 ) {
+      TweenLite.to(this.bigEye, 0.3,  {
         rotation: 3.141592653589793
       })
     }
-    if (this.bigEye.rotation > 0 && this.cursor.y > this.pathEnd[1] - 40) {
-      TweenLite.set(this.bigEye, {
+    if (this.bigEye.rotation > 0 && this.cursor.y > this.pathEnd[1] - 30) {
+      TweenLite.to(this.bigEye, 0.3,{
         rotation: 0
       })
     }

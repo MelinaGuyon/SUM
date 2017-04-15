@@ -5,10 +5,9 @@ class Carousel {
 
     constructor(options) {
       this.carousel = new PIXI.Container()
+      STORAGE.carouselClass = this
       STORAGE.carousel = this.carousel
       STORAGE.stage.addChild(this.carousel)
-
-      this.loader = PIXI.loader
 
       this.sprites = {}
       this.assets = {}
@@ -22,7 +21,11 @@ class Carousel {
     }
 
     init() {
-      this.loadCarouselPictures()
+      STORAGE.loaderClass.loadCarouselPictures([
+        'assets/carousel-1.jpg',
+        'assets/carousel-2.jpg',
+        'assets/carousel-3.jpg'
+      ])
     }
 
     bind() {
@@ -35,37 +38,18 @@ class Carousel {
       })
     }
 
-    loadCarouselPictures() {
-      let that = this
-
-      this.loader
-      .add([
-        'assets/carousel-1.jpg',
-        'assets/carousel-2.jpg',
-        'assets/carousel-3.jpg'
-      ])
-      .on('progress', function(){
-        that.loadProgressHandler()
-      })
-      .load(function(){
-        that.setupLoaded()
-      })
+    loadCarouselPicturesProgressHandler() {
     }
 
-    loadProgressHandler() {
-    }
-
-    setupLoaded() {
-      this.assets.resources = this.loader.resources
-
+    setupCarouselPicturesLoaded() {
       let that = this
+      this.assets.resources = STORAGE.loader.resources
 
       Object.keys(this.assets.resources).map(function(objectKey, index) {
         const sprite = new PIXI.Sprite(that.assets.resources[objectKey].texture)
         that.sprites[objectKey] = sprite
         that.carousel.addChild(sprite)
       })
-
       this.makeCarousel()
     }
 

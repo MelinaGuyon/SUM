@@ -1,31 +1,52 @@
 import datas from '../datas.js'
 import TweenLite from 'gsap'
 
-class EyeCursor {
+class FirstChallenge {
 
   constructor(options) {
+    STORAGE.FirstChallengeClass = this
+
+    this.assets = {}
+
     this.bigEye = new PIXI.Graphics
     this.path = new PIXI.Graphics
     this.cursor = new PIXI.Graphics
-    this.line = new PIXI.Graphics
 
     this.distanceToPass
     this.isDragging = false
 
     this.pathStart = [100, 400]
     this.pathEnd = [100, 1200]
+    this.init()
+    this.bind()
+  }
+
+  init() {
+    setTimeout(function(){
+      STORAGE.loaderClass.loadFirstChallengePictures(['assets/test-rect-rotation.jpg'])
+    }, 1000)
+  }
+
+  setupFirstChallengePicturesLoaded() {
+    this.assets.resources = STORAGE.loader.resources
 
     this.createEye()
     this.createPath()
     this.createCursor()
-    this.bind()
   }
 
   createEye() {
-    this.bigEye.beginFill(0x000000, 1)
-    this.bigEye.drawRect(600, 300, 600, 400)
-    this.bigEye.position.set(this.bigEye.graphicsData[0].shape.x+this.bigEye.width/2, this.bigEye.graphicsData[0].shape.y+this.bigEye.height/2)
-    this.bigEye.pivot.set(this.bigEye.graphicsData[0].shape.x+this.bigEye.width/2, this.bigEye.graphicsData[0].shape.y+this.bigEye.height/2)
+    let that = this
+    Object.keys(this.assets.resources).map(function(objectKey, index) {
+      if (index == 0) {
+        that.bigEye = new PIXI.Sprite(that.assets.resources[objectKey].texture)
+      }
+    })
+
+    this.bigEye.position.x = 1200
+    this.bigEye.position.y = 600
+    this.bigEye.anchor.x = 0.5
+    this.bigEye.anchor.y = 0.5
     STORAGE.stage.addChild(this.bigEye)
   }
 
@@ -128,4 +149,4 @@ class EyeCursor {
   }
 }
 
-export default EyeCursor
+export default FirstChallenge

@@ -13,6 +13,7 @@ class FirstChallenge {
     this.cursor = new PIXI.Graphics
 
     this.distanceToPass
+    this.distancePassed
     this.isDragging = false
 
     this.pathStart = [100, 400]
@@ -131,9 +132,10 @@ class FirstChallenge {
 
     if (this.cursor.y < this.pathEnd[1] && this.cursor.y > this.pathStart[1]) {
       this.distanceToPass = (this.cursor.y - this.pathStart[1]) * 3.141592653589793 / (this.pathEnd[1] - this.pathStart[1])
+      this.distancePassed = Math.abs(this.distanceToPass - 3.141592653589793)
     }
     TweenLite.set(this.bigEye, {
-      rotation: Math.abs(this.distanceToPass - 3.141592653589793)
+      rotation: this.distancePassed
     })
 
     if (this.bigEye.rotation < 3.141592653589793 && this.cursor.y < this.pathStart[1] + 30 ) {

@@ -15,7 +15,7 @@ class CheckPoint {
     }
 
     init() {
-      this.checkPoint.beginFill(0xffffff, 0)
+      this.checkPoint.beginFill(0xffffff, 1)
       this.checkPoint.drawCircle(0, 0, datas.datasBlackboards[this.blackBoardIndex].checkPoints[this.index].rayon)
       this.checkPoint.endFill()
       this.checkPoint.x = datas.datasBlackboards[this.blackBoardIndex].checkPoints[this.index].x * STORAGE.ratioVertical + this.blackboard.graphicsData[0].shape.x
@@ -52,8 +52,14 @@ class CheckPoint {
         })
 
         if (this.blackboard.isTestLaunch) {
-          let ImageDeformationClass = new ImageDeformation({ image : 'assets/deformation-eye.jpg' })
-          ImageDeformationClass.animate(ImageDeformationClass)
+          let ImageDeformationClass = new ImageDeformation()
+          // ImageDeformationClass.animate(ImageDeformationClass)
+          // setTimeout(function(){
+          //   STORAGE.carousel.destroy()
+          //   STORAGE.carouselClass.unbind()
+          //   STORAGE.carouselClass = null
+          //   console.log(STORAGE.carousel)
+          // }, 3000)
         }
       }
     }

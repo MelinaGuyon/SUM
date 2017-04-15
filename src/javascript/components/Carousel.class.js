@@ -30,12 +30,14 @@ class Carousel {
 
     bind() {
       let that = this
-      window.addEventListener('mousewheel', function(e) {
-        that.handleScroll(e)
-      })
-      window.addEventListener('resize', function(e) {
-        that.handleResize(e)
-      })
+      window.addEventListener('mousewheel', that.handleScroll)
+      window.addEventListener('resize', that.handleResize)
+    }
+
+    unbind() {
+      let that = this
+      window.removeEventListener('mousewheel', that.handleScroll)
+      window.removeEventListener('resize', that.handleResize)
     }
 
     loadCarouselPicturesProgressHandler() {
@@ -78,22 +80,21 @@ class Carousel {
     }
 
     handleScroll(e) {
-      if (Math.abs(this.carousel.x - window.innerWidth) < this.carousel.width - 45 && e.deltaY > 0 ) { // stop le défilement au dernier sprite (défile tant que x abs < à largeur totale de tous les sprites-1)
-        this.carousel.x -= Math.abs(e.deltaY) / 3
-      } else if (this.carousel.x > -45) {
+      if (Math.abs(STORAGE.carousel.x - window.innerWidth) < STORAGE.carousel.width - 45 && e.deltaY > 0 ) { // stop le défilement au dernier sprite (défile tant que x abs < à largeur totale de tous les sprites-1)
+        STORAGE.carousel.x -= Math.abs(e.deltaY) / 3
+      } else if (STORAGE.carousel.x > -45) {
         return
       } else if (e.deltaY < 0) {
-        this.carousel.x += Math.abs(e.deltaY) / 3
+        STORAGE.carousel.x += Math.abs(e.deltaY) / 3
       }
     }
 
     handleResize() {
       STORAGE.renderer.resize(window.innerWidth, window.innerHeight)
       let timeOut
-      let that = this
       clearTimeout(timeOut)
       timeOut = setTimeout(()=> {
-        that.makeCarousel()
+        STORAGE.carouselClass.makeCarousel()
       }, 200)
     }
 

@@ -4,6 +4,7 @@ import Renderer from './components/Renderer.class.js'
 import Carousel from './components/Carousel.class.js'
 import Blackboard from './components/Blackboard.class.js'
 import ImageDeformation from './components/ImageDeformation.class.js'
+import EyeCursor from './components/EyeCursor.class.js'
 
 window.STORAGE = {}
 
@@ -15,7 +16,7 @@ function initCanvas() {
 
   new Renderer()
   new Carousel()
-  // new ImageDeformation()
+  // new EyeCursor()
 
   render()
 }
@@ -23,5 +24,4 @@ function initCanvas() {
 function render() {
   requestAnimationFrame(render)
   STORAGE.renderer.render(STORAGE.stage)
-  // STORAGE.deformationFonction.animate()
 }

@@ -4,8 +4,7 @@ import Renderer from './components/Renderer.class.js'
 import Carousel from './components/Carousel.class.js'
 import Blackboard from './components/Blackboard.class.js'
 import ImageDeformation from './components/ImageDeformation.class.js'
-import EyeCursorTransitionAtEnd from './components/EyeCursor-transition-at-end.class.js'
-import EyeCursorFollow from './components/EyeCursor-follow.class.js'
+import EyeCursor from './components/EyeCursor.class.js'
 
 window.STORAGE = {}
 
@@ -17,8 +16,7 @@ function initCanvas() {
 
   new Renderer()
   // new Carousel()
-  new EyeCursorTransitionAtEnd()
-  // new EyeCursorFollow()
+  new EyeCursor()
   // new ImageDeformation()
 
   render()

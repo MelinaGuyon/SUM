@@ -17,13 +17,11 @@ function initCanvas() {
   new Renderer()
   // new Carousel()
   new EyeCursor()
-  // new ImageDeformation()
-
+  
   render()
 }
 
 function render() {
   requestAnimationFrame(render)
   STORAGE.renderer.render(STORAGE.stage)
-  // STORAGE.deformationFonction.animate()
 }

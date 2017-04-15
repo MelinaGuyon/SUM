@@ -125,7 +125,6 @@ class EyeCursor {
         rotation: 0
       })
     }
-
   }
 }
 

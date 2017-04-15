@@ -23,9 +23,7 @@ class FirstChallenge {
   }
 
   init() {
-    setTimeout(function(){
-      STORAGE.loaderClass.loadFirstChallengePictures(['assets/test-rect-rotation.jpg'])
-    }, 1000)
+    STORAGE.loaderClass.loadFirstChallengePictures(['assets/test-rect-rotation.jpg'])
   }
 
   setupFirstChallengePicturesLoaded() {

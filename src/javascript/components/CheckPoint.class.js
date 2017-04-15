@@ -1,5 +1,6 @@
 import datas from '../datas.js'
 import ImageDeformation from './ImageDeformation.class.js'
+import FirstChallenge from './FirstChallenge.class.js'
 
 class CheckPoint {
 
@@ -52,14 +53,17 @@ class CheckPoint {
         })
 
         if (this.blackboard.isTestLaunch) {
-          let ImageDeformationClass = new ImageDeformation()
-          // ImageDeformationClass.animate(ImageDeformationClass)
-          // setTimeout(function(){
-          //   STORAGE.carousel.destroy()
-          //   STORAGE.carouselClass.unbind()
-          //   STORAGE.carouselClass = null
-          //   console.log(STORAGE.carousel)
-          // }, 3000)
+          new ImageDeformation()
+          setTimeout(function(){
+            STORAGE.carousel.destroy()
+            STORAGE.deformation.destroy()
+            STORAGE.carouselClass.unbind()
+            STORAGE.carousel = null
+            STORAGE.carouselClass = null
+            STORAGE.deformation = null
+            STORAGE.deformationClass = null
+            new FirstChallenge()
+          }, 6000)
         }
       }
     }

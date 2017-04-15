@@ -16,11 +16,8 @@ class Loader {
       this.loader
       .add([pictures[i]])
     }
-
+    console.log('pass here')
     this.loader
-    .on('progress', function(){
-      STORAGE.carouselClass.loadCarouselPicturesProgressHandler()
-    })
     .load(function(){
       STORAGE.carouselClass.setupCarouselPicturesLoaded()
     })

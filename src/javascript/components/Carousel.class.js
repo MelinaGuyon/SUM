@@ -38,6 +38,7 @@ class Carousel {
       let that = this
       window.removeEventListener('mousewheel', that.handleScroll)
       window.removeEventListener('resize', that.handleResize)
+      document.body.style.cursor = 'auto'
     }
 
     loadCarouselPicturesProgressHandler() {

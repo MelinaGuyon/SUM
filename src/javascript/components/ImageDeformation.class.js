@@ -6,8 +6,9 @@ const FILTERS = require('pixi-filters')
 class ImageDeformation {
 
   constructor(options) {
-    STORAGE.deformationClass = this
     this.deformationContainer = new PIXI.Container()
+    STORAGE.deformationClass = this
+    STORAGE.deformation = this.deformationContainer
 
     this.assets = {}
 
@@ -108,7 +109,7 @@ class ImageDeformation {
       setTimeout(function() {
         it.animateBool = false
         return
-      }, 2000)
+      }, 6000)
 
       if (it.animateBool) {
         it.animate(it);

@@ -4,7 +4,10 @@ import TweenLite from 'gsap'
 class FirstChallenge {
 
   constructor(options) {
+    this.FirstChallengeContainer = new PIXI.Container()
+    this.FirstChallengeContainer.alpha = 0
     STORAGE.FirstChallengeClass = this
+    STORAGE.stage.addChild(this.FirstChallengeContainer)
 
     this.assets = {}
 
@@ -24,6 +27,13 @@ class FirstChallenge {
 
   init() {
     STORAGE.loaderClass.loadFirstChallengePictures(['assets/test-rect-rotation.jpg'])
+
+    TweenLite.set(STORAGE.stage, {
+      alpha: 1
+    })
+    TweenLite.to(this.FirstChallengeContainer, 0.6, {
+      alpha: 1
+    })
   }
 
   setupFirstChallengePicturesLoaded() {
@@ -46,26 +56,26 @@ class FirstChallenge {
     this.bigEye.position.y = 600
     this.bigEye.anchor.x = 0.5
     this.bigEye.anchor.y = 0.5
-    STORAGE.stage.addChild(this.bigEye)
+    this.FirstChallengeContainer.addChild(this.bigEye)
   }
 
   createPath() {
     this.path.beginFill(0xffffff)
     this.path.moveTo(this.pathStart[0], this.pathStart[1])
-    this.path.lineStyle(2, 0x000000)
+    this.path.lineStyle(2, 0xffffff)
     this.path.lineTo(this.pathEnd[0], this.pathEnd[1])
     this.path.endFill()
-    STORAGE.stage.addChild(this.path)
+    this.FirstChallengeContainer.addChild(this.path)
   }
 
   createCursor() {
-    this.cursor.beginFill(0x000000, 1)
+    this.cursor.beginFill(0xffffff, 1)
     this.cursor.drawCircle(0, 0, 35)
     this.cursor.endFill()
     this.cursor.x = this.pathEnd[0]
     this.cursor.y = this.pathEnd[1]
     this.cursor.interactive = true // pour attribuer événements à this.cursor
-    STORAGE.stage.addChild(this.cursor)
+    this.FirstChallengeContainer.addChild(this.cursor)
   }
 
   bind() {

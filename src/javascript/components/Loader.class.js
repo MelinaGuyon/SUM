@@ -16,7 +16,6 @@ class Loader {
       this.loader
       .add([pictures[i]])
     }
-    console.log('pass here')
     this.loader
     .load(function(){
       STORAGE.carouselClass.setupCarouselPicturesLoaded()

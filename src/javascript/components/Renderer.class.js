@@ -11,7 +11,7 @@ class Renderer {
     }
 
     init() {
-      this.renderer.backgroundColor = 0xffffff
+      this.renderer.backgroundColor = 0x000000
       this.renderer.autoResize = true
       document.body.appendChild(this.renderer.view)
     }

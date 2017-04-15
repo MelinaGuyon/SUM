@@ -1,5 +1,3 @@
-import TweenLite from 'gsap'
-
 const PIXI = require('pixi.js')
 const FILTERS = require('pixi-filters')
 
@@ -7,6 +5,7 @@ class ImageDeformation {
 
   constructor(options) {
     this.deformationContainer = new PIXI.Container()
+    this.deformationContainer.alpha = 0
     STORAGE.deformationClass = this
     STORAGE.deformation = this.deformationContainer
 
@@ -28,7 +27,7 @@ class ImageDeformation {
 
   init() {
     STORAGE.loaderClass.loadDeformationPictures([
-      'assets/deformation-eye.jpg',
+      'assets/deformation-eye3.jpg',
       'assets/displacement_map.png'
     ])
   }
@@ -45,6 +44,9 @@ class ImageDeformation {
       this.blurFilter
     ]
     let that = this
+    TweenLite.to(this.deformationContainer, 0.7, {
+      alpha: 1
+    })
     this.animate(that)
   }
 
@@ -58,21 +60,22 @@ class ImageDeformation {
       }
     })
 
-    this.image.alpha = 0
     this.image.scale = new PIXI.Point(STORAGE.ratioVertical, STORAGE.ratioVertical)
     this.deformationContainer.addChild(this.image)
+
     STORAGE.stage.addChild(this.deformationContainer)
 
     let initialDiff = this.image.width / 2 - window.innerWidth
 
     if (initialDiff > 0) {
       this.deformationContainer.position.x -= this.image.width / 2 + Math.abs(initialDiff)
+      this.deformationContainer.position.x += this.image.width / 16
     } else {
       this.deformationContainer.position.x -= this.image.width / 2
-      this.deformationContainer.position.x += Math.abs(initialDiff)
+      this.deformationContainer.position.x += Math.abs(initialDiff) + this.image.width / 16
     }
 
-
+    this.deformationContainer.position.y -= this.image.height / 8
   }
 
   doBlurFilter() {
@@ -94,7 +97,8 @@ class ImageDeformation {
         that.displacementSprite = new PIXI.Sprite(that.assets.resources[objectKey].texture)
       }
     })
-    this.displacementSprite.scale = new PIXI.Point(STORAGE.ratioVertical, STORAGE.ratioVertical )
+    this.displacementSprite.scale = new PIXI.Point(6, 6)
+    this.displacementSprite.position.y -= this.displacementSprite.height / 12
 		this.deformationContainer.addChild(this.displacementSprite)
 
     this.displacementFilter = new PIXI.filters.DisplacementFilter(this.displacementSprite)
@@ -109,7 +113,7 @@ class ImageDeformation {
       setTimeout(function() {
         it.animateBool = false
         return
-      }, 6000)
+      }, 7000)
 
       if (it.animateBool) {
         it.animate(it);
@@ -119,10 +123,6 @@ class ImageDeformation {
     if (that.animateBool == false) {
       window.cancelAnimationFrame(requestID)
       that.animateBool = true
-    }
-
-    if (this.image.alpha < 1) {
-      this.image.alpha += 0.05
     }
 
     if (that.twist.angle < -0.5) {
@@ -144,19 +144,19 @@ class ImageDeformation {
     }
 
     if (that.displacement == 'low') {
-      that.displacementSprite.x -= 6
-      that.displacementSprite.y -= 6
+      that.displacementSprite.x -= 20
+      that.displacementSprite.y -= 20
     } else {
-      that.displacementSprite.x += 6
-      that.displacementSprite.y += 6
+      that.displacementSprite.x += 20
+      that.displacementSprite.y += 20
     }
 
     if (this.displacementFilter.scale.x < 200) {
-      this.displacementFilter.scale.x += 5
-      this.displacementFilter.scale.y += 5
-    } else if (this.displacementFilter.scale.x < 600) {
       this.displacementFilter.scale.x += 20
       this.displacementFilter.scale.y += 20
+    } else if (this.displacementFilter.scale.x < 700) {
+      this.displacementFilter.scale.x += 25
+      this.displacementFilter.scale.y += 25
     }
 
     this.image.filters = [

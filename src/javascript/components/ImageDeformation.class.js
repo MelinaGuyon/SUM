@@ -85,9 +85,9 @@ class ImageDeformation {
 
   doTwistFilter() {
     this.twist = new FILTERS.TwistFilter()
-    this.twist.radius = 1000
+    this.twist.radius = window.innerWidth / 2.5
 		this.twist.angle = 0
-		this.twist.offset = [700, 700]
+		this.twist.offset = [window.innerWidth / 2, window.innerHeight / 2]
   }
 
   doDisplacementFilter() {
@@ -125,36 +125,33 @@ class ImageDeformation {
       that.animateBool = true
     }
 
-    if (that.twist.angle < -0.5) {
-      that.angle = 'up'
-    } else if (that.twist.angle > 0.5){
-      that.angle = 'low'
+    if (this.twist.angle < -4.5) {
+      this.angle = 'up'
+    } else if (this.twist.angle > 4.5){
+      this.angle = 'low'
     }
 
-    if (that.angle == 'low') {
-      that.twist.angle -= 0.004
+    if (this.angle == 'low') {
+      this.twist.angle -= 0.01
     } else {
-      that.twist.angle +=  0.004
+      this.twist.angle += 0.01
     }
 
-    if (that.displacementSprite.x < -400) {
-      that.displacement = 'up'
-    } else if (that.displacementSprite.x > 400){
-      that.displacement = 'low'
+    if (this.displacementSprite.x < -400) {
+      this.displacement = 'up'
+    } else if (this.displacementSprite.x > 400){
+      this.displacement = 'low'
     }
 
-    if (that.displacement == 'low') {
-      that.displacementSprite.x -= 20
-      that.displacementSprite.y -= 20
+    if (this.displacement == 'low') {
+      this.displacementSprite.x -= 25
+      this.displacementSprite.y -= 25
     } else {
-      that.displacementSprite.x += 20
-      that.displacementSprite.y += 20
+      this.displacementSprite.x += 25
+      this.displacementSprite.y += 25
     }
 
-    if (this.displacementFilter.scale.x < 200) {
-      this.displacementFilter.scale.x += 20
-      this.displacementFilter.scale.y += 20
-    } else if (this.displacementFilter.scale.x < 700) {
+   if (this.displacementFilter.scale.x < 600) {
       this.displacementFilter.scale.x += 25
       this.displacementFilter.scale.y += 25
     }
@@ -164,6 +161,7 @@ class ImageDeformation {
       this.twist,
       this.blurFilter
 		]
+
   }
 }
 

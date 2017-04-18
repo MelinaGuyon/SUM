@@ -66,7 +66,7 @@ class Blackboard {
     }
 
     onBlackboardMouseMove(mouseData) {
-      this.drawnLine.lineStyle(5, 0xffffff)
+      this.drawnLine.lineStyle(3, 0xffffff)
       this.drawnLine.lineTo(mouseData.data.global.x, mouseData.data.global.y)
     }
 

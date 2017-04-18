@@ -22,15 +22,15 @@ const datas = {
       y: 150,
       checkPoints: [
         {
-          rayon: 15,
+          rayon: 10,
           x: 25,
           y: 55
         }, {
-          rayon: 15,
+          rayon: 10,
           x: 120,
           y: 80
         }, {
-          rayon: 15,
+          rayon: 10,
           x: 220,
           y: 55
         }
@@ -43,15 +43,15 @@ const datas = {
       y: 50,
       checkPoints : [
         {
-          rayon: 15,
+          rayon: 10,
           x: 40,
           y: 70
         }, {
-          rayon: 15,
+          rayon: 10,
           x: 250,
           y: 125
         }, {
-          rayon: 15,
+          rayon: 10,
           x: 465,
           y: 60
         }
@@ -63,19 +63,19 @@ const datas = {
       x: 3150,
       y: 480,
       checkPoints : [{
-        rayon: 15,
+        rayon: 10,
         x: 40,
         y: 120
       }, {
-        rayon: 15,
+        rayon: 10,
         x: 180,
         y: 125
       }, {
-        rayon: 15,
+        rayon: 10,
         x: 260,
         y: 210
       }, {
-        rayon: 15,
+        rayon: 10,
         x: 150,
         y: 235
       }

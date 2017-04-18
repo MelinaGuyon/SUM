@@ -19,8 +19,8 @@ class FirstChallenge {
     this.distancePassed
     this.isDragging = false
 
-    this.pathStart = [100, 400]
-    this.pathEnd = [100, 1200]
+    this.pathStart = [100, window.innerHeight / 2 - 300]
+    this.pathEnd = [100, window.innerHeight / 2 + 300]
     this.init()
     this.bind()
   }
@@ -52,8 +52,8 @@ class FirstChallenge {
       }
     })
 
-    this.bigEye.position.x = 1200
-    this.bigEye.position.y = 600
+    this.bigEye.position.x = window.innerWidth / 2 - 100
+    this.bigEye.position.y = window.innerHeight / 2 - 50
     this.bigEye.anchor.x = 0.5
     this.bigEye.anchor.y = 0.5
     this.FirstChallengeContainer.addChild(this.bigEye)
@@ -70,7 +70,7 @@ class FirstChallenge {
 
   createCursor() {
     this.cursor.beginFill(0xffffff, 1)
-    this.cursor.drawCircle(0, 0, 35)
+    this.cursor.drawCircle(0, 0, 15)
     this.cursor.endFill()
     this.cursor.x = this.pathEnd[0]
     this.cursor.y = this.pathEnd[1]

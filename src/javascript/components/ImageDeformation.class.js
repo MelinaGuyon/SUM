@@ -27,7 +27,7 @@ class ImageDeformation {
 
   init() {
     STORAGE.loaderClass.loadDeformationPictures([
-      'assets/deformation-eye3.jpg',
+      'assets/deformation-eye.jpg',
       'assets/displacement_map.png'
     ])
   }

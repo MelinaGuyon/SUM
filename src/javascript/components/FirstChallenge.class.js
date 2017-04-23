@@ -12,7 +12,8 @@ class FirstChallenge {
     this.assets = {}
 
     this.background
-    this.bigEye = new PIXI.Graphics
+    this.eye = new PIXI.Graphics
+    this.pupil = new PIXI.Graphics
     this.path = new PIXI.Graphics
     this.cursor = new PIXI.Graphics
 
@@ -28,7 +29,7 @@ class FirstChallenge {
 
   init() {
     STORAGE.loaderClass.loadFirstChallengePictures([
-      'assets/test-rect-rotation.jpg',
+      'assets/first-challenge/fond.png',
       'assets/first-challenge/oeil.png',
       'assets/first-challenge/pupille.gif'
     ])
@@ -45,7 +46,7 @@ class FirstChallenge {
     this.assets.resources = STORAGE.loader.resources
 
     this.createBackground()
-    // this.createEye()
+    this.createEye()
     this.createPath()
     this.createCursor()
   }
@@ -55,33 +56,48 @@ class FirstChallenge {
     Object.keys(this.assets.resources).map(function(objectKey, index) {
       if (index == 0) {
         that.background = new PIXI.Sprite(that.assets.resources[objectKey].texture)
-        STORAGE.ratioVertical = window.innerHeight / that.background.texture.height
-        STORAGE.ratioHorizontal = window.innerWidth / that.background.texture.width
-        if (STORAGE.ratioHorizontal < STORAGE.ratioVertical) {
-          that.background.scale = new PIXI.Point(STORAGE.ratioVertical, STORAGE.ratioVertical)
-          that.background.x = - (that.background.texture.width * that.background.scale.x - window.innerWidth) / 2
-        } else {
-          that.background.scale = new PIXI.Point(STORAGE.ratioHorizontal, STORAGE.ratioHorizontal)
-          that.background.y = - (that.background.texture.height * that.background.scale.x - window.innerHeight) / 2
-        }
       }
     })
+
+    let ratioVertical = window.innerHeight / this.background.texture.height
+    let ratioHorizontal = window.innerWidth / this.background.texture.width
+    if (ratioHorizontal < ratioVertical) {
+      this.background.scale = new PIXI.Point(ratioVertical, ratioVertical)
+      this.background.x = - (this.background.texture.width * this.background.scale.x - window.innerWidth) / 2
+    } else {
+      this.background.scale = new PIXI.Point(ratioHorizontal, ratioHorizontal)
+      this.background.y = - (this.background.texture.height * this.background.scale.x - window.innerHeight) / 2
+    }
+
     this.FirstChallengeContainer.addChild(this.background)
   }
 
   createEye() {
-    // let that = this
-    // Object.keys(this.assets.resources).map(function(objectKey, index) {
-    //   if (index == 0) {
-    //     that.bigEye = new PIXI.Sprite(that.assets.resources[objectKey].texture)
-    //   }
-    // })
+    let that = this
+    Object.keys(this.assets.resources).map(function(objectKey, index) {
+      if (index == 1) {
+        that.eye = new PIXI.Sprite(that.assets.resources[objectKey].texture)
+      }
+      if (index == 2) {
+        that.pupil = new PIXI.Sprite(that.assets.resources[objectKey].texture)
+      }
+    })
 
-    this.bigEye.position.x = window.innerWidth / 2 - 100
-    this.bigEye.position.y = window.innerHeight / 2 - 50
-    this.bigEye.anchor.x = 0.5
-    this.bigEye.anchor.y = 0.5
-    this.FirstChallengeContainer.addChild(this.bigEye)
+    let ratioHorizontalEye = window.innerWidth / this.eye.texture.width
+    let ratioVerticalPupil = this.eye.texture.height / this.pupil.texture.height
+    this.eye.scale = new PIXI.Point(ratioHorizontalEye, ratioHorizontalEye)
+    this.pupil.scale = new PIXI.Point(ratioVerticalPupil, ratioVerticalPupil)
+
+    this.eye.position.x = window.innerWidth / 2
+    this.eye.position.y = window.innerHeight / 2
+    this.eye.anchor.x = 0.5
+    this.eye.anchor.y = 0.5
+
+    this.pupil.anchor.x = 0.5
+    this.pupil.anchor.y = 0.5
+
+    this.FirstChallengeContainer.addChild(this.eye)
+    this.eye.addChild(this.pupil)
   }
 
   createPath() {
@@ -167,17 +183,17 @@ class FirstChallenge {
       this.distanceToPass = (this.cursor.y - this.pathStart[1]) * 3.141592653589793 / (this.pathEnd[1] - this.pathStart[1])
       this.distancePassed = Math.abs(this.distanceToPass - 3.141592653589793)
     }
-    TweenLite.set(this.bigEye, {
+    TweenLite.set(this.eye, {
       rotation: this.distancePassed
     })
 
-    if (this.bigEye.rotation < 3.141592653589793 && this.cursor.y < this.pathStart[1] + 30 ) {
-      TweenLite.to(this.bigEye, 0.3,  {
+    if (this.eye.rotation < 3.141592653589793 && this.cursor.y < this.pathStart[1] + 30 ) {
+      TweenLite.to(this.eye, 0.3,  {
         rotation: 3.141592653589793
       })
     }
-    if (this.bigEye.rotation > 0 && this.cursor.y > this.pathEnd[1] - 30) {
-      TweenLite.to(this.bigEye, 0.3,{
+    if (this.eye.rotation > 0 && this.cursor.y > this.pathEnd[1] - 30) {
+      TweenLite.to(this.eye, 0.3,{
         rotation: 0
       })
     }

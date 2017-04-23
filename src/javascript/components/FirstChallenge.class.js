@@ -11,6 +11,7 @@ class FirstChallenge {
 
     this.assets = {}
 
+    this.background
     this.bigEye = new PIXI.Graphics
     this.path = new PIXI.Graphics
     this.cursor = new PIXI.Graphics
@@ -26,7 +27,11 @@ class FirstChallenge {
   }
 
   init() {
-    STORAGE.loaderClass.loadFirstChallengePictures(['assets/test-rect-rotation.jpg'])
+    STORAGE.loaderClass.loadFirstChallengePictures([
+      'assets/test-rect-rotation.jpg',
+      'assets/first-challenge/oeil.png',
+      'assets/first-challenge/pupille.gif'
+    ])
 
     TweenLite.set(STORAGE.stage, {
       alpha: 1
@@ -39,18 +44,38 @@ class FirstChallenge {
   setupFirstChallengePicturesLoaded() {
     this.assets.resources = STORAGE.loader.resources
 
-    this.createEye()
+    this.createBackground()
+    // this.createEye()
     this.createPath()
     this.createCursor()
   }
 
-  createEye() {
+  createBackground() {
     let that = this
     Object.keys(this.assets.resources).map(function(objectKey, index) {
       if (index == 0) {
-        that.bigEye = new PIXI.Sprite(that.assets.resources[objectKey].texture)
+        that.background = new PIXI.Sprite(that.assets.resources[objectKey].texture)
+        STORAGE.ratioVertical = window.innerHeight / that.background.texture.height
+        STORAGE.ratioHorizontal = window.innerWidth / that.background.texture.width
+        if (STORAGE.ratioHorizontal < STORAGE.ratioVertical) {
+          that.background.scale = new PIXI.Point(STORAGE.ratioVertical, STORAGE.ratioVertical)
+          that.background.x = - (that.background.texture.width * that.background.scale.x - window.innerWidth) / 2
+        } else {
+          that.background.scale = new PIXI.Point(STORAGE.ratioHorizontal, STORAGE.ratioHorizontal)
+          that.background.y = - (that.background.texture.height * that.background.scale.x - window.innerHeight) / 2
+        }
       }
     })
+    this.FirstChallengeContainer.addChild(this.background)
+  }
+
+  createEye() {
+    // let that = this
+    // Object.keys(this.assets.resources).map(function(objectKey, index) {
+    //   if (index == 0) {
+    //     that.bigEye = new PIXI.Sprite(that.assets.resources[objectKey].texture)
+    //   }
+    // })
 
     this.bigEye.position.x = window.innerWidth / 2 - 100
     this.bigEye.position.y = window.innerHeight / 2 - 50

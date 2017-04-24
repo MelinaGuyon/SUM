@@ -1,4 +1,5 @@
 import datas from '../datas.js'
+import frames from '../frames.js'
 import TweenLite from 'gsap'
 
 class FirstChallenge {
@@ -16,6 +17,7 @@ class FirstChallenge {
     this.pupil = new PIXI.Graphics
     this.path = new PIXI.Graphics
     this.cursor = new PIXI.Graphics
+    this.framesArray = []
 
     this.distanceToPass
     this.distancePassed
@@ -78,26 +80,33 @@ class FirstChallenge {
       if (index == 1) {
         that.eye = new PIXI.Sprite(that.assets.resources[objectKey].texture)
       }
-      if (index == 2) {
-        that.pupil = new PIXI.Sprite(that.assets.resources[objectKey].texture)
-      }
     })
 
     let ratioHorizontalEye = window.innerWidth / this.eye.texture.width
-    let ratioVerticalPupil = this.eye.texture.height / this.pupil.texture.height
+    //let ratioVerticalPupil = this.eye.texture.height / this.pupil.texture.height
     this.eye.scale = new PIXI.Point(ratioHorizontalEye, ratioHorizontalEye)
-    this.pupil.scale = new PIXI.Point(ratioVerticalPupil, ratioVerticalPupil)
+    //this.pupil.scale = new PIXI.Point(ratioVerticalPupil, ratioVerticalPupil)
 
     this.eye.position.x = window.innerWidth / 2
     this.eye.position.y = window.innerHeight / 2
     this.eye.anchor.x = 0.5
     this.eye.anchor.y = 0.5
 
-    this.pupil.anchor.x = 0.5
-    this.pupil.anchor.y = 0.5
-
     this.FirstChallengeContainer.addChild(this.eye)
-    this.eye.addChild(this.pupil)
+
+    for (let i = 0; i < 60; i++) {
+      let val = i < 10 ? '0' + i : i
+      this.texture = PIXI.Texture.fromImage(frames[0] + val + '.gif')
+      this.framesArray.push(this.texture)
+    }
+
+    this.movie = new PIXI.extras.AnimatedSprite(this.framesArray)
+
+    this.movie.anchor.set(0.5)
+    this.movie.animationSpeed = 0.5
+
+    this.movie.play()
+    this.eye.addChild(this.movie)
   }
 
   createPath() {

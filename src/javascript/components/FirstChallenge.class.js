@@ -94,7 +94,7 @@ class FirstChallenge {
 
     this.FirstChallengeContainer.addChild(this.eye)
 
-    for (let i = 0; i < 60; i++) {
+    for (let i = 1; i < 62; i++) {
       let val = i < 10 ? '0' + i : i
       this.texture = PIXI.Texture.fromImage(frames[0] + val + '.gif')
       this.framesArray.push(this.texture)

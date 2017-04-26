@@ -99,7 +99,7 @@ class FirstChallenge {
   createGif(index) {
     this.framesArray = []
     if (this.movie) { 
-      TweenLite.to(this.movie, 1, { alpha: 0,
+      TweenLite.to(this.movie, 0.5, { alpha: 0,
         onComplete: function() { this.eye.removeChild(this.movie) } 
       })
     }

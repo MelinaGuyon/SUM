@@ -1,4 +1,5 @@
 import datas from '../datas.js'
+import frames from '../frames.js'
 import TweenLite from 'gsap'
 
 class FirstChallenge {
@@ -13,25 +14,27 @@ class FirstChallenge {
 
     this.background
     this.eye = new PIXI.Graphics
-    this.pupil = new PIXI.Graphics
     this.path = new PIXI.Graphics
     this.cursor = new PIXI.Graphics
+    this.eyeIndex = 1
+    this.movie
+    this.movieIndex = 0
 
-    this.distanceToPass
-    this.distancePassed
+    this.nextAnimButton = document.querySelector('.js-first-challenge-next')
+
+    this.actualCursorDistance
+    this.rightCursorDistance
     this.isDragging = false
 
     this.pathStart = [100, window.innerHeight / 2 - 300]
     this.pathEnd = [100, window.innerHeight / 2 + 300]
     this.init()
-    this.bind()
   }
 
   init() {
     STORAGE.loaderClass.loadFirstChallengePictures([
       'assets/first-challenge/fond.png',
-      'assets/first-challenge/oeil.png',
-      'assets/first-challenge/pupille.gif'
+      'assets/first-challenge/oeil.png'
     ])
 
     TweenLite.set(STORAGE.stage, {
@@ -42,13 +45,30 @@ class FirstChallenge {
     })
   }
 
+  bind() {
+    let that = this
+    this.cursor.mousedown = function(){
+      that.onCursorMouseDown()
+    }
+    this.cursor.mouseover = function(){
+      that.onCursorMouseOver()
+    }
+    this.cursor.mouseout = function(){
+      that.onCursorMouseOut()
+    }
+
+    this.nextAnimButton.addEventListener('click', that.handleNextAnimButtonClick)
+  }
+
   setupFirstChallengePicturesLoaded() {
     this.assets.resources = STORAGE.loader.resources
 
     this.createBackground()
     this.createEye()
+    this.createGif(this.movieIndex)
     this.createPath()
     this.createCursor()
+    this.bind()
   }
 
   createBackground() {
@@ -78,27 +98,52 @@ class FirstChallenge {
       if (index == 1) {
         that.eye = new PIXI.Sprite(that.assets.resources[objectKey].texture)
       }
-      if (index == 2) {
-        that.pupil = new PIXI.Sprite(that.assets.resources[objectKey].texture)
-      }
     })
 
     let ratioHorizontalEye = window.innerWidth / this.eye.texture.width
-    let ratioVerticalPupil = this.eye.texture.height / this.pupil.texture.height
     this.eye.scale = new PIXI.Point(ratioHorizontalEye, ratioHorizontalEye)
-    this.pupil.scale = new PIXI.Point(ratioVerticalPupil, ratioVerticalPupil)
 
     this.eye.position.x = window.innerWidth / 2
     this.eye.position.y = window.innerHeight / 2
     this.eye.anchor.x = 0.5
     this.eye.anchor.y = 0.5
 
-    this.pupil.anchor.x = 0.5
-    this.pupil.anchor.y = 0.5
-
     this.FirstChallengeContainer.addChild(this.eye)
-    this.eye.addChild(this.pupil)
   }
+
+
+  createGif(index) {
+    this.framesArray = []
+
+    if (index == 0) {
+      for (let i = 1; i < 62; i++) {
+        let val = i < 10 ? '0' + i : i
+        let texture1 = PIXI.Texture.fromImage(frames[0] + val + '.gif')
+        this.framesArray.push(texture1)
+      }
+    } else if (index == 1) {
+      for (let i = 1; i < 15; i++) {
+        let val = i < 10 ? '0' + i : i
+        let texture2 = PIXI.Texture.fromImage(frames[1] + val + '.gif')
+        this.framesArray.push(texture2)
+      }
+    } else if (index == 2) {
+      for (let i = 1; i < 20; i++) {
+        let val = i < 10 ? '0' + i : i
+        let texture3 = PIXI.Texture.fromImage(frames[2] + val + '.gif')
+        this.framesArray.push(texture3)
+      }
+    }
+
+    this.movie = new PIXI.extras.AnimatedSprite(this.framesArray)
+    this.movie.alpha = 0
+    this.movie.anchor.set(0.5)
+    this.movie.animationSpeed = 0.5
+    TweenLite.to(this.movie, 2, { alpha: 1 })
+    this.movie.play()
+    this.eye.addChild(this.movie)
+  }
+
 
   createPath() {
     this.path.beginFill(0xffffff)
@@ -119,16 +164,28 @@ class FirstChallenge {
     this.FirstChallengeContainer.addChild(this.cursor)
   }
 
-  bind() {
-    let that = this
-    this.cursor.mousedown = function(){
-      that.onCursorMouseDown()
-    }
-    this.cursor.mouseover = function(){
-      that.onCursorMouseOver()
-    }
-    this.cursor.mouseout = function(){
-      that.onCursorMouseOut()
+  displayNextAnimButton() {
+    TweenLite.to(this.nextAnimButton, 1.2, {
+      autoAlpha: 1
+    })
+  }
+
+  undDisplayNextAnimButton() {
+    TweenLite.to(this.nextAnimButton, 1.2, {
+      autoAlpha: 0
+    })
+  }
+
+  handleNextAnimButtonClick() {
+    STORAGE.FirstChallengeClass.undDisplayNextAnimButton()
+    STORAGE.FirstChallengeClass.backToBegining()
+  }
+
+  onWindowMouseUp(that) {
+    if (that.cursor && that.isDragging) {
+      that.isDragging = false
+      that.cursor.mousemove = null
+      document.body.style.cursor = 'auto'
     }
   }
 
@@ -155,12 +212,17 @@ class FirstChallenge {
     })
   }
 
-  onWindowMouseUp(that) {
-    if (that.cursor && that.isDragging) {
-      that.isDragging = false
-      that.cursor.mousemove = null
-      document.body.style.cursor = 'auto'
+  onCursorMouseDown() {
+    this.isDragging = true
+    document.body.style.cursor = '-webkit-grabbing'
+
+    let that = this
+    this.cursor.mousemove = function(mouseData){
+      that.onCursorMouseMove(mouseData)
     }
+    window.addEventListener('mouseup', function(){
+      that.onWindowMouseUp(that)
+    })
   }
 
   onCursorMouseMove(mouseData) {
@@ -178,26 +240,61 @@ class FirstChallenge {
 
   onRotationActivated() {
     // Math.PI * 2 * 0.500 = 3.141592653589793 = 180deg
-
     if (this.cursor.y < this.pathEnd[1] && this.cursor.y > this.pathStart[1]) {
-      this.distanceToPass = (this.cursor.y - this.pathStart[1]) * 3.141592653589793 / (this.pathEnd[1] - this.pathStart[1])
-      this.distancePassed = Math.abs(this.distanceToPass - 3.141592653589793)
+      this.actualCursorDistance = (this.cursor.y - this.pathStart[1]) * 3.141592653589793 / (this.pathEnd[1] - this.pathStart[1])
+      this.rightCursorDistance = Math.abs(this.actualCursorDistance - 3.141592653589793)
     }
     TweenLite.set(this.eye, {
-      rotation: this.distancePassed
+      rotation: this.rightCursorDistance
     })
 
+    // To avoid twisted image
     if (this.eye.rotation < 3.141592653589793 && this.cursor.y < this.pathStart[1] + 30 ) {
-      TweenLite.to(this.eye, 0.3,  {
+      TweenLite.to(this.eye, 0.3, {
         rotation: 3.141592653589793
       })
+      this.displayNextAnimButton()
     }
     if (this.eye.rotation > 0 && this.cursor.y > this.pathEnd[1] - 30) {
-      TweenLite.to(this.eye, 0.3,{
+      TweenLite.to(this.eye, 0.3, {
         rotation: 0
       })
     }
+
   }
+
+  backToBegining() {
+    let that = this
+
+    if (this.movieIndex < 2) {
+      TweenLite.to(this.eye, 0.6, {
+        rotation: 0
+      })
+      TweenLite.to(this.movie, 0.3, {
+        alpha: 0,
+        onComplete: function() {
+          that.eye.removeChild(that.movie)
+          that.movieIndex ++
+          that.createGif(that.movieIndex)
+        }
+      })
+      TweenLite.to(this.cursor, 0.3, {
+        y: this.pathEnd[1]
+      })
+    } else {
+      this.eye.removeChild(that.movie)
+      this.showConclusion()
+    }
+  }
+
+  showConclusion() {
+    TweenLite.to([this.eye, this.cursor, this.path], 0.8, {
+      alpha: 0
+    })
+
+    //TODO : Conclusion text ? To define
+  }
+
 }
 
 export default FirstChallenge

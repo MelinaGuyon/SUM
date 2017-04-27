@@ -5,7 +5,7 @@ class SecondChallenge {
 
   constructor(options) {
     this.SecondChallengeContainer = new PIXI.Container()
-    this.SecondChallengeContainer.alpha = 0
+    //this.SecondChallengeContainer.alpha = 1
     this.SecondChallengeContainer.interactive = true
     STORAGE.SecondChallengeClass = this
     STORAGE.stage.addChild(this.SecondChallengeContainer)
@@ -26,18 +26,18 @@ class SecondChallenge {
       'assets/second-challenge/frite_bleue.png'
     ])
 
-    TweenLite.set(STORAGE.stage, {
+    /*TweenLite.set(STORAGE.stage, {
       alpha: 1
     })
     TweenLite.to(this.SecondChallengeContainer, 0.6, {
       alpha: 1
-    })
+    })*/
   }
 
   setupSecondChallengePicturesLoaded() {
     this.assets.resources = STORAGE.loader.resources
 
-    this.createBackground()
+    //this.createBackground()
     this.createSum()
     this.createMask()
   }
@@ -61,6 +61,7 @@ class SecondChallenge {
     }
 
     this.SecondChallengeContainer.addChild(this.background)
+    console.log(this.SecondChallengeContainer)
   }
 
   createSum() {
@@ -68,11 +69,13 @@ class SecondChallenge {
     this.container.position.x = window.innerWidth / 2
     this.container.position.y = window.innerHeight / 2
 
-    Object.keys(this.assets.resources).map(function(objectKey, index) {
+    /*Object.keys(this.assets.resources).map(function(objectKey, index) {
       if (index == 1) {
         that.sum1 = new PIXI.Sprite(that.assets.resources[objectKey].texture)
       }
-    })
+    })*/
+
+    this.sum1 = PIXI.Sprite.fromImage('../../assets/second-challenge/frite_bleue.png')
     this.sum1.anchor.x = 0.5
     this.sum1.anchor.y = 0.5
     this.SecondChallengeContainer.addChild(this.container)

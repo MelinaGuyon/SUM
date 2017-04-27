@@ -24,7 +24,7 @@ function initCanvas() {
   // new FirstChallenge()
   // new FirstRecompense()
   new SecondChallenge()
-
+  
   render()
 }
 

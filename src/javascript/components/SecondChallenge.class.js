@@ -13,8 +13,10 @@ class SecondChallenge {
     this.assets = {}
 
     this.background
+    this.sum1
     this.container = new PIXI.Container()
 
+    this.createSum()
     this.init()
     this.bind()
   }
@@ -35,7 +37,7 @@ class SecondChallenge {
   }
 
   setupSecondChallengePicturesLoaded() {
-    this.assets.resources = STORAGE.loader.resources
+    //this.assets.resources = STORAGE.loader.resources
 
     //this.createBackground()
     this.createSum()
@@ -65,6 +67,7 @@ class SecondChallenge {
   }
 
   createSum() {
+    console.log("koukou")
     let that = this
     this.container.position.x = window.innerWidth / 2
     this.container.position.y = window.innerHeight / 2
@@ -72,10 +75,14 @@ class SecondChallenge {
     /*Object.keys(this.assets.resources).map(function(objectKey, index) {
       if (index == 1) {
         that.sum1 = new PIXI.Sprite(that.assets.resources[objectKey].texture)
+        console.log(that.sum1)
+
+        jeudi : tenues + lavage cheveux + raz bras + tuch ?
+        vendredi : préparation sac + raz jambes + tuch ?
       }
     })*/
 
-    this.sum1 = PIXI.Sprite.fromImage('../../assets/second-challenge/frite_bleue.png')
+    this.sum1 = new PIXI.Sprite.fromImage('../../assets/second-challenge/frite.png')
     this.sum1.anchor.x = 0.5
     this.sum1.anchor.y = 0.5
     this.SecondChallengeContainer.addChild(this.container)
@@ -107,12 +114,12 @@ class SecondChallenge {
     let that = this
     Object.keys(this.assets.resources).map(function(objectKey, index) {
       if (index == 2) {
-        that.background = new PIXI.Sprite(that.assets.resources[objectKey].texture)
+        that.sum2 = new PIXI.Sprite(that.assets.resources[objectKey].texture)
       }
     })
-    this.background.anchor.x = 0.5
-    this.background.anchor.y = 0.5
-    this.container.addChild(this.background)
+    this.sum2.anchor.x = 0.5
+    this.sum2.anchor.y = 0.5
+    this.container.addChild(this.sum2)
   }
 
   onMouseMove(mouseData) {

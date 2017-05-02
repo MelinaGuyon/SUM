@@ -1,4 +1,4 @@
-import datas from '../datas.js'
+import carouselDatas from '../datas/carouselDatas.js'
 import ImageDeformation from './ImageDeformation.class.js'
 import FirstChallenge from './FirstChallenge.class.js'
 
@@ -17,10 +17,10 @@ class CheckPoint {
 
   init() {
     this.checkPoint.beginFill(0xffffff, 1)
-    this.checkPoint.drawCircle(0, 0, datas.datasBlackboards[this.blackBoardIndex].checkPoints[this.index].rayon)
+    this.checkPoint.drawCircle(0, 0, carouselDatas.datasBlackboards[this.blackBoardIndex].checkPoints[this.index].rayon)
     this.checkPoint.endFill()
-    this.checkPoint.x = datas.datasBlackboards[this.blackBoardIndex].checkPoints[this.index].x * STORAGE.ratioVertical + this.blackboard.graphicsData[0].shape.x
-    this.checkPoint.y = datas.datasBlackboards[this.blackBoardIndex].checkPoints[this.index].y * STORAGE.ratioVertical + this.blackboard.graphicsData[0].shape.y
+    this.checkPoint.x = carouselDatas.datasBlackboards[this.blackBoardIndex].checkPoints[this.index].x * STORAGE.ratioVertical + this.blackboard.graphicsData[0].shape.x
+    this.checkPoint.y = carouselDatas.datasBlackboards[this.blackBoardIndex].checkPoints[this.index].y * STORAGE.ratioVertical + this.blackboard.graphicsData[0].shape.y
     this.checkPoint.interactive = true // pour attribuer événements à this.checkPoint
     this.checkPoint.isChecked = false
 

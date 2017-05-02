@@ -1,6 +1,3 @@
-import Blackboard from './Blackboard.class.js'
-import datas from '../datas.js'
-
 class Loader {
 
   constructor(options) {

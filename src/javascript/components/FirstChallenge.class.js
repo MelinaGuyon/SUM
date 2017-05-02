@@ -1,5 +1,5 @@
-import datas from '../datas.js'
-import frames from '../frames.js'
+import conclusionTextsDatas from '../datas/conclusionTexts.js'
+import frames from '../datas/frames.js'
 import TweenLite from 'gsap'
 
 class FirstChallenge {
@@ -14,20 +14,24 @@ class FirstChallenge {
 
     this.background
     this.eye = new PIXI.Graphics
-    this.path = new PIXI.Graphics
+    this.pathBasic = new PIXI.Graphics
+    this.pathPassed = new PIXI.Graphics
     this.cursor = new PIXI.Graphics
+    this.pupilEmpty = new PIXI.Graphics
     this.eyeIndex = 1
     this.movie
     this.movieIndex = 0
-
-    this.nextAnimButton = document.querySelector('.js-first-challenge-next')
 
     this.actualCursorDistance
     this.rightCursorDistance
     this.isDragging = false
 
-    this.pathStart = [100, window.innerHeight / 2 - 300]
-    this.pathEnd = [100, window.innerHeight / 2 + 300]
+    this.pathStart = [200, window.innerHeight / 2 - 100]
+    this.pathEnd = [200, window.innerHeight / 2 + 100]
+
+    this.nextAnimButton = document.querySelector('.js-first-challenge-next')
+    this.conclusionChallengeText = document.querySelector('.js-conclusion-p')
+
     this.init()
   }
 
@@ -68,6 +72,7 @@ class FirstChallenge {
     this.createGif(this.movieIndex)
     this.createPath()
     this.createCursor()
+    this.createPupilEmpty()
     this.bind()
   }
 
@@ -111,6 +116,20 @@ class FirstChallenge {
     this.FirstChallengeContainer.addChild(this.eye)
   }
 
+  createPupilEmpty() {
+    this.pupilEmpty.beginFill(0x040026, 1)
+    this.pupilEmpty.drawCircle(0, 0, this.eye.height / 1.6)
+    this.pupilEmpty.endFill()
+
+    TweenLite.set([this.pupilEmpty, this.conclusionChallengeText], {
+      alpha: 0
+    })
+
+    this.eye.addChild(this.pupilEmpty)
+
+    let textConclusion = document.createTextNode(conclusionTextsDatas.firstChallenge)
+    this.conclusionChallengeText.appendChild(textConclusion)
+  }
 
   createGif(index) {
     this.framesArray = []
@@ -146,17 +165,24 @@ class FirstChallenge {
 
 
   createPath() {
-    this.path.beginFill(0xffffff)
-    this.path.moveTo(this.pathStart[0], this.pathStart[1])
-    this.path.lineStyle(2, 0xffffff)
-    this.path.lineTo(this.pathEnd[0], this.pathEnd[1])
-    this.path.endFill()
-    this.FirstChallengeContainer.addChild(this.path)
+    this.pathBasic.beginFill(0xffffff)
+    this.pathBasic.moveTo(this.pathStart[0], this.pathStart[1])
+    this.pathBasic.lineStyle(2, 0xffffff)
+    this.pathBasic.lineTo(this.pathEnd[0], this.pathEnd[1])
+    this.pathBasic.endFill()
+    TweenLite.set(this.pathBasic, {
+      alpha: 0.3
+    })
+    this.FirstChallengeContainer.addChild(this.pathBasic)
+
+    this.pathPassed.beginFill(0xFFFFFF);
+    this.pathPassed.drawRect(this.pathEnd[0] - 1, this.pathEnd[1], 2, 1)
+    this.FirstChallengeContainer.addChild(this.pathPassed)
   }
 
   createCursor() {
     this.cursor.beginFill(0xffffff, 1)
-    this.cursor.drawCircle(0, 0, 15)
+    this.cursor.drawCircle(0, 0, 10)
     this.cursor.endFill()
     this.cursor.x = this.pathEnd[0]
     this.cursor.y = this.pathEnd[1]
@@ -247,6 +273,8 @@ class FirstChallenge {
     TweenLite.set(this.eye, {
       rotation: this.rightCursorDistance
     })
+    this.pathPassed.clear()
+    this.pathPassed.drawRect(this.pathEnd[0] - 1, this.pathEnd[1], 2,  this.cursor.y - this.pathEnd[1])
 
     // To avoid twisted image
     if (this.eye.rotation < 3.141592653589793 && this.cursor.y < this.pathStart[1] + 30 ) {
@@ -278,6 +306,7 @@ class FirstChallenge {
           that.createGif(that.movieIndex)
         }
       })
+      this.pathPassed.clear()
       TweenLite.to(this.cursor, 0.3, {
         y: this.pathEnd[1]
       })
@@ -288,11 +317,18 @@ class FirstChallenge {
   }
 
   showConclusion() {
-    TweenLite.to([this.eye, this.cursor, this.path], 0.8, {
+    TweenLite.to([this.cursor, this.pathBasic, this.pathPassed], 0.6, {
       alpha: 0
     })
 
-    //TODO : Conclusion text ? To define
+    TweenLite.to(this.pupilEmpty, 1.2, {
+      alpha: 1
+    })
+
+    TweenLite.to(this.conclusionChallengeText, 2, {
+      autoAlpha: 1,
+      delay: 1
+    })
   }
 
 }

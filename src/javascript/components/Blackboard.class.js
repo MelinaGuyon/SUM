@@ -1,4 +1,4 @@
-import datas from '../datas.js'
+import carouselDatas from '../datas/carouselDatas.js'
 import TweenLite from 'gsap';
 import CheckPointClass from './CheckPoint.class.js'
 
@@ -18,16 +18,16 @@ class Blackboard {
 
     init() {
       this.blackboard.beginFill(0x000000, 0)
-      this.blackboard.drawRect(datas.datasBlackboards[this.index].x * STORAGE.ratioVertical, datas.datasBlackboards[this.index].y * STORAGE.ratioVertical, datas.datasBlackboards[this.index].width * STORAGE.ratioVertical, datas.datasBlackboards[this.index].height * STORAGE.ratioVertical)
+      this.blackboard.drawRect(carouselDatas.datasBlackboards[this.index].x * STORAGE.ratioVertical, carouselDatas.datasBlackboards[this.index].y * STORAGE.ratioVertical, carouselDatas.datasBlackboards[this.index].width * STORAGE.ratioVertical, carouselDatas.datasBlackboards[this.index].height * STORAGE.ratioVertical)
       this.blackboard.interactive = true // pour attribuer événements à this.blackboard
 
       STORAGE.carousel.addChild(this.blackboard)
 
-      if (datas.datasBlackboards[this.index].isTestLaunch) {
+      if (carouselDatas.datasBlackboards[this.index].isTestLaunch) {
         this.blackboard.isTestLaunch = true
       }
 
-      for(let i = 0; i < datas.datasBlackboards[this.index].checkPoints.length; i++) {
+      for(let i = 0; i < carouselDatas.datasBlackboards[this.index].checkPoints.length; i++) {
         this.checkpoints.push(new CheckPointClass({ index : i, blackBoardIndex : this.index, blackboard : this.blackboard }))
       }
     }

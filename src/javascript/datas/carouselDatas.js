@@ -1,4 +1,4 @@
-const datas = {
+const carouselDatas = {
   datasEyes: [
     {
       x: 150,
@@ -84,4 +84,4 @@ const datas = {
   }]
 }
 
-export default datas
+export default carouselDatas

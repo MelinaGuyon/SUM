@@ -122,7 +122,7 @@ class FirstChallenge {
         this.framesArray.push(texture1)
       }
     } else if (index == 1) {
-      for (let i = 1; i < 15; i++) {
+      for (let i = 1; i < 179; i++) {
         let val = i < 10 ? '0' + i : i
         let texture2 = PIXI.Texture.fromImage(frames[1] + val + '.gif')
         this.framesArray.push(texture2)

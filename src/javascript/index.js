@@ -6,6 +6,7 @@ import SoundManager from './components/SoundManager.class.js'
 import Carousel from './components/Carousel.class.js'
 import FirstChallenge from './components/FirstChallenge.class.js'
 import Menu from './components/Menu.class.js'
+import FirstRecompense from './components/FirstRecompense.class.js'
 
 window.STORAGE = {}
 
@@ -15,14 +16,16 @@ window.onload = function() {
 
 function initCanvas() {
 
-  new Renderer()
+  // new Renderer()
   new Loader()
-  new SoundManager()
+  // new SoundManager()
   // new Carousel()
-  new FirstChallenge()
-  new Menu()
+  // new FirstChallenge()
+  // new Menu()
+  // new FirstChallenge()
+  new FirstRecompense()
 
-  render()
+  //render()
 }
 
 function render() {

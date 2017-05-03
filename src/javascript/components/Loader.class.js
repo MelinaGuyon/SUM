@@ -44,6 +44,7 @@ class Loader {
     this.loader
     .load(function(){
       STORAGE.MenuClass.setupMenuPicturesLoaded()
+
     })
   }
 

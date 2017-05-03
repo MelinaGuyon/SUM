@@ -1,5 +1,6 @@
 import conclusionTextsDatas from '../datas/conclusionTexts.js'
 import frames from '../datas/frames.js'
+import soundBank from '../datas/soundBank.js'
 import TweenLite from 'gsap'
 
 class FirstChallenge {
@@ -21,6 +22,7 @@ class FirstChallenge {
     this.eyeIndex = 1
     this.movie
     this.movieIndex = 0
+    this.soundPlaying
 
     this.actualCursorDistance
     this.rightCursorDistance
@@ -67,6 +69,7 @@ class FirstChallenge {
   setupFirstChallengePicturesLoaded() {
     this.assets.resources = STORAGE.loader.resources
 
+    this.manageSounds()
     this.createBackground()
     this.createEye()
     this.createGif(this.movieIndex)
@@ -277,18 +280,33 @@ class FirstChallenge {
     this.pathPassed.drawRect(this.pathEnd[0] - 1, this.pathEnd[1], 2,  this.cursor.y - this.pathEnd[1])
 
     // To avoid twisted image
-    if (this.eye.rotation < 3.141592653589793 && this.cursor.y < this.pathStart[1] + 30 ) {
+    if (this.eye.rotation < 3.141592653589793 && this.cursor.y < this.pathStart[1] + 10 ) {
       TweenLite.to(this.eye, 0.3, {
         rotation: 3.141592653589793
       })
       this.displayNextAnimButton()
     }
-    if (this.eye.rotation > 0 && this.cursor.y > this.pathEnd[1] - 30) {
+    if (this.eye.rotation > 0 && this.cursor.y > this.pathEnd[1] - 10) {
       TweenLite.to(this.eye, 0.3, {
         rotation: 0
       })
     }
 
+    this.manageSounds()
+  }
+
+  manageSounds(kill) {
+    if (kill) {
+      STORAGE.soundManagerClass.pauseAndPlay(true)
+      return
+    }
+    if (this.eye.rotation < 3.141592653589793 / 2 && this.soundPlaying != 0) {
+      STORAGE.soundManagerClass.pauseAndPlay(false, soundBank['firstChallenge'][this.movieIndex][0], soundBank['firstChallenge'][this.movieIndex][1])
+      this.soundPlaying = 0
+    } else if (this.eye.rotation > 3.141592653589793 / 2 && this.soundPlaying != 1) {
+      STORAGE.soundManagerClass.pauseAndPlay(false, soundBank['firstChallenge'][this.movieIndex][1], soundBank['firstChallenge'][this.movieIndex][0])
+      this.soundPlaying = 1
+    }
   }
 
   backToBegining() {
@@ -304,6 +322,7 @@ class FirstChallenge {
           that.eye.removeChild(that.movie)
           that.movieIndex ++
           that.createGif(that.movieIndex)
+          that.manageSounds()
         }
       })
       this.pathPassed.clear()
@@ -311,6 +330,7 @@ class FirstChallenge {
         y: this.pathEnd[1]
       })
     } else {
+      that.manageSounds(true)
       this.eye.removeChild(that.movie)
       this.showConclusion()
     }

@@ -9,9 +9,12 @@ class Menu {
     STORAGE.stage.addChild(this.MenuContainer)
 
     this.icone3 = document.getElementById("icone3")
-    this.timeline = document.getElementById("timeline")
-    this.timeline.state = 0
-    this.menu = document.getElementById("menu")
+    this.path = document.getElementById("path")
+    this.path.state = 0
+    this.epreuves = document.getElementById("epreuves")
+    this.epreuves.x = window.innerWidth
+    this.epreuves.alpha = 0
+    console.log(this.epreuves.x)
 
     this.init()
     this.bind()
@@ -29,24 +32,32 @@ class Menu {
   bind() {
     let that = this
     this.icone3.onclick = function(){
-      if (that.timeline.state == 0) {
+      if (that.path.state == 0) {
         that.onIcone3Click()
-        that.timeline.state = 1
+        that.path.state = 1
       } else {
         that.onIcone3ClickAgain()
-        that.timeline.state = 0
+        that.path.state = 0
       }
     } 
   }
 
   onIcone3Click() {
-    TweenLite.to(this.timeline, 0.6, {
+    TweenLite.to(this.path, 0.6, {
       height: 500
+    })
+    TweenLite.to(this.epreuves, 0.6, {
+      x: -150,
+      alpha: 1
     })  
   }
   onIcone3ClickAgain() {
-    TweenLite.to(this.timeline, 0.6, {
+    TweenLite.to(this.path, 0.6, {
       height: 0
+    })  
+    TweenLite.to(this.epreuves, 0.6, {
+      x: 50,
+      alpha: 0
     })  
   }
 

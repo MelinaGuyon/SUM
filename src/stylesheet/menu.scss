@@ -13,9 +13,27 @@
 	list-style : none;
 }
 
-#timeline {
+#path {
+	position : absolute;
 	background-color : #d3d3d3;
 	width : 1px;
 	height : 0px;
-	margin-left : 15px;
+	right : 15px;
+}
+
+#timeline a {
+	color : #d3d3d3;
+	text-decoration : none;
+	right : 30px;
+}
+
+#epreuves {
+	position : absolute;
+	left : 100%;
+}
+
+#epreuves li {
+	width : 100px;
+	margin-top : 15vh;
+	margin-bottom : 15vh;
 }

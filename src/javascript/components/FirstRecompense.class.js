@@ -5,38 +5,26 @@ import TweenLite from 'gsap'
 class FirstRecompense {
 
   constructor(options) {
-    this.FirstRecompenseContainer = new PIXI.Container()
-    this.FirstRecompenseContainer.alpha = 0
     STORAGE.FirstRecompenseClass = this
-    STORAGE.stage.addChild(this.FirstRecompenseContainer)
 
     this.assets = {}
     this.background
 
+    this.firstRecompense = document.getElementById("first-recompense-pathes")
+
+    this.pathSUM = document.getElementById("path_sum")
+    console.log(this.pathSUM)
+    this.pathSUM.x = 500
+
     this.init()
+    this.bind()
   }
 
   init() {
-    STORAGE.loaderClass.loadFirstRecompensePictures([
-      'assets/first-challenge/fond.png',
-      'assets/first-challenge/oeil.png'
-    ])
 
-    TweenLite.set(STORAGE.stage, {
-      alpha: 1
-    })
-    TweenLite.to(this.FirstRecompenseContainer, 0.6, {
-      alpha: 1
-    })
   }
 
   bind() {
-    //this.nextAnimButton.addEventListener('click', that.handleNextAnimButtonClick)
-  }
-
-  setupFirstRecompensePicturesLoaded() {
-    this.assets.resources = STORAGE.loader.resources
-    this.bind()
   }
 
 }

@@ -17,7 +17,7 @@ class FirstRecompense {
   }
 
   init() {
-    STORAGE.loaderClass.loadFirstChallengePictures([
+    STORAGE.loaderClass.loadFirstRecompensePictures([
       'assets/first-challenge/fond.png',
       'assets/first-challenge/oeil.png'
     ])
@@ -25,7 +25,7 @@ class FirstRecompense {
     TweenLite.set(STORAGE.stage, {
       alpha: 1
     })
-    TweenLite.to(this.FirstChallengeContainer, 0.6, {
+    TweenLite.to(this.FirstRecompenseContainer, 0.6, {
       alpha: 1
     })
   }
@@ -34,24 +34,9 @@ class FirstRecompense {
     //this.nextAnimButton.addEventListener('click', that.handleNextAnimButtonClick)
   }
 
-  setupFirstChallengePicturesLoaded() {
+  setupFirstRecompensePicturesLoaded() {
     this.assets.resources = STORAGE.loader.resources
     this.bind()
-  }
-
-  showConclusion() {
-    TweenLite.to([this.cursor, this.pathBasic, this.pathPassed], 0.6, {
-      alpha: 0
-    })
-
-    TweenLite.to(this.pupilEmpty, 1.2, {
-      alpha: 1
-    })
-
-    TweenLite.to(this.conclusionChallengeText, 2, {
-      autoAlpha: 1,
-      delay: 1
-    })
   }
 
 }

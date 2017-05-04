@@ -33,6 +33,7 @@ class FirstChallenge {
 
     this.nextAnimButton = document.querySelector('.js-first-challenge-next')
     this.conclusionChallengeText = document.querySelector('.js-conclusion-p')
+    this.conclusionChallengeTextContainer = document.querySelector('.js-conclusion-text-container')
 
     this.init()
   }
@@ -121,10 +122,10 @@ class FirstChallenge {
 
   createPupilEmpty() {
     this.pupilEmpty.beginFill(0x040026, 1)
-    this.pupilEmpty.drawCircle(0, 0, this.eye.height / 1.6)
+    this.pupilEmpty.drawCircle(0, 0, this.eye.height / 1.9)
     this.pupilEmpty.endFill()
 
-    TweenLite.set([this.pupilEmpty, this.conclusionChallengeText], {
+    TweenLite.set(this.pupilEmpty, {
       alpha: 0
     })
 
@@ -345,7 +346,7 @@ class FirstChallenge {
       alpha: 1
     })
 
-    TweenLite.to(this.conclusionChallengeText, 2, {
+    TweenLite.to(this.conclusionChallengeTextContainer, 2, {
       autoAlpha: 1,
       delay: 1
     })

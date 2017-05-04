@@ -11,6 +11,8 @@ body {
   transform: translate(-50%, -50%);
   width: 50%;
   height: 500px;
+  visibility: hidden;
+  opacity: 0;
 }
 
 .js-conclusion-p {
@@ -24,6 +26,4 @@ body {
   text-align: center;
   text-transform: uppercase;
   color: white;
-  visibility: hidden;
-  opacity: 0;
 }

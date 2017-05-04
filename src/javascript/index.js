@@ -20,8 +20,8 @@ function initCanvas() {
   new Loader()
   new SoundManager()
   new Carousel()
-  new Menu()
   // new FirstChallenge()
+  new Menu()
   // new FirstRecompense()
 
   render()

@@ -21,12 +21,12 @@ class Menu {
   }
 
   init() {
-    TweenLite.set(STORAGE.stage, {
+/*    TweenLite.set(STORAGE.stage, {
       alpha: 1
     })
     TweenLite.to(this.MenuContainer, 0.6, {
       alpha: 1
-    })
+    })*/
   }
 
   bind() {
@@ -47,18 +47,20 @@ class Menu {
       height: 500
     })
     TweenLite.to(this.epreuves, 0.6, {
-      x: -150,
-      alpha: 1
+      x: -30,
+      opacity: 1,
+      delay: 0.6
     })  
   }
   onIcone3ClickAgain() {
     TweenLite.to(this.path, 0.6, {
-      height: 0
+      height: 0,
+      delay: 0.6
     })  
     TweenLite.to(this.epreuves, 0.6, {
-      x: 50,
-      alpha: 0
-    })  
+      x: 30,
+      opacity: 0
+    }) 
   }
 
 }

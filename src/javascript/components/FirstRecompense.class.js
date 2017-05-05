@@ -10,20 +10,11 @@ class FirstRecompense {
     this.assets = {}
     this.background
 
-    this.firstRecompense = document.getElementById("first-recompense-pathes")
-
-    this.pathSUM = document.getElementById("path_sum")
-    console.log(this.pathSUM)
-    this.pathSUM.x = 500
-
     this.init()
     this.bind()
   }
 
   init() {
-
-    console.log(window.innerWidth)
-
     /*this.getBounds = require('getboundingbox')
  
     this.path = [ M357.6,885.8c-3.5-70.3-6.9-140.8-10.4-211c-2.6-53.2-5.3-106.6-16.5-158.6c-8-37.1-20.6-73.7-39.8-106.5

@@ -23,7 +23,7 @@ function initCanvas() {
   // new FirstChallenge()
   // new Menu()
   // new FirstChallenge()
-  new FirstRecompense()
+  // new FirstRecompense()
   // FirstRecompense()
 
   render()

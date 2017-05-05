@@ -7,6 +7,7 @@ class Carousel {
       this.carousel = new PIXI.Container()
       STORAGE.carouselClass = this
       STORAGE.carousel = this.carousel
+      STORAGE.carousel.numberOfWindow = 11
       STORAGE.stage.addChild(this.carousel)
 
       this.spritesFonds = {}
@@ -23,17 +24,7 @@ class Carousel {
 
     init() {
       STORAGE.loaderClass.loadCarouselPictures([
-        'assets/before-challenge-1/carousel-1.jpg',
-        'assets/before-challenge-1/carousel-2.jpg',
-        'assets/before-challenge-1/carousel-3.jpg',
-        'assets/before-challenge-1/carousel-4.jpg',
-        'assets/before-challenge-1/carousel-5.jpg',
-        'assets/before-challenge-1/carousel-6.jpg',
-        'assets/before-challenge-1/carousel-7.jpg',
-        'assets/before-challenge-1/carousel-8.jpg',
-        'assets/before-challenge-1/carousel-9.jpg',
-        'assets/before-challenge-1/carousel-10.jpg',
-        'assets/before-challenge-1/carousel-11.jpg',
+        'assets/before-challenge-1/carousel-test.jpg',
         'assets/before-challenge-1/0-forme-1.png',
         'assets/before-challenge-1/0-forme-2.png',
         'assets/before-challenge-1/0-forme-3.png',
@@ -119,22 +110,24 @@ class Carousel {
     makeCarousel() {
       let that = this
       Object.keys(that.spritesFonds).map(function(objectKey, index) {
-          STORAGE.ratioHorizontal = window.innerWidth / that.spritesFonds[objectKey].texture.width
-          that.spritesFonds[objectKey].scale = new PIXI.Point(STORAGE.ratioHorizontal, STORAGE.ratioHorizontal)
-          that.spritesFonds[objectKey].y = that.totalHeightSteps[that.totalHeightSteps.length -1]
-          that.totalHeightSteps.push(that.totalHeightSteps[that.totalHeightSteps.length -1] + that.spritesFonds[objectKey].height)
+          STORAGE.ratioVertical = window.innerHeight * STORAGE.carousel.numberOfWindow / that.spritesFonds[objectKey].texture.height
+          that.spritesFonds[objectKey].height = window.innerHeight * STORAGE.carousel.numberOfWindow
+          that.spritesFonds[objectKey].width = window.innerWidth
+
+          let stepsNumber = that.spritesFonds[objectKey].height / window.innerHeight
+          for (var i = 0; i < Math.floor(stepsNumber); i++) {
+            that.totalHeightSteps.push(that.totalHeightSteps[that.totalHeightSteps.length -1] + that.spritesFonds[objectKey].height / Math.floor(stepsNumber))
+          }
           that.spritesFonds[objectKey].zIndex = 1
       })
 
       Object.keys(that.spritesForms).map(function(objectKey, index) {
-        STORAGE.ratioHorizontal = window.innerWidth / that.spritesForms[objectKey].texture.width
-        that.spritesForms[objectKey].scale = new PIXI.Point(STORAGE.ratioHorizontal, STORAGE.ratioHorizontal)
-        // that.spritesForms[objectKey].x = window.innerWidth / 2 - that.spritesForms[objectKey].width / 2
-        // console.log( window.innerWidth / 2 - that.spritesForms[objectKey].width / 2)
+        STORAGE.ratioVertical = window.innerHeight / that.spritesForms[objectKey].texture.height
+        that.spritesForms[objectKey].scale = new PIXI.Point(STORAGE.ratioVertical, STORAGE.ratioVertical)
+        that.spritesForms[objectKey].x = window.innerWidth / 2 - that.spritesForms[objectKey].width / 2
         let position = objectKey.split('.')[0].split('/')[2].split('-')[0]
         that.spritesForms[objectKey].y = that.totalHeightSteps[position]
         that.spritesForms[objectKey].zIndex = 2
-        console.log(that.spritesForms[objectKey].zIndex)
       })
 
       that.totalHeightSteps = [0]
@@ -154,7 +147,7 @@ class Carousel {
     }
 
     handleScroll(e) {
-      if (Math.abs(STORAGE.carousel.y - window.innerHeight) < STORAGE.carousel.height - 45 && e.deltaY > 0 ) { // stop le défilement au dernier sprite (défile tant que x abs < à largeur totale de tous les spritesFonds-1)
+      if (Math.abs(STORAGE.carousel.y - window.innerHeight) < window.innerHeight * STORAGE.carousel.numberOfWindow - 45 && e.deltaY > 0 ) { // stop le défilement au dernier sprite (défile tant que x abs < à largeur totale de tous les spritesFonds-1)
         STORAGE.carousel.y -= Math.abs(e.deltaY) / 3
       } else if (STORAGE.carousel.y > -45) {
         return

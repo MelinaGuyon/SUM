@@ -10,8 +10,9 @@ class Carousel {
       STORAGE.stage.addChild(this.carousel)
 
       this.spritesFonds = {}
+      this.spritesForms = {}
       this.assets = {}
-      this.totalCarouselHeight = 0
+      this.totalHeightSteps = [0]
       STORAGE.ratioVertical = 1
 
       this.blackboards = []
@@ -25,7 +26,59 @@ class Carousel {
         'assets/before-challenge-1/carousel-1.jpg',
         'assets/before-challenge-1/carousel-2.jpg',
         'assets/before-challenge-1/carousel-3.jpg',
+        'assets/before-challenge-1/carousel-4.jpg',
+        'assets/before-challenge-1/carousel-5.jpg',
+        'assets/before-challenge-1/carousel-6.jpg',
+        'assets/before-challenge-1/carousel-7.jpg',
+        'assets/before-challenge-1/carousel-8.jpg',
+        'assets/before-challenge-1/carousel-9.jpg',
+        'assets/before-challenge-1/carousel-10.jpg',
+        'assets/before-challenge-1/carousel-11.jpg',
+        'assets/before-challenge-1/0-forme-1.png',
+        'assets/before-challenge-1/0-forme-2.png',
+        'assets/before-challenge-1/0-forme-3.png',
         'assets/before-challenge-1/1-forme-1.png',
+        'assets/before-challenge-1/1-forme-2.png',
+        'assets/before-challenge-1/1-forme-3.png',
+        'assets/before-challenge-1/1-forme-4.png',
+        'assets/before-challenge-1/2-forme-1.png',
+        'assets/before-challenge-1/2-forme-2.png',
+        'assets/before-challenge-1/2-forme-3.png',
+        'assets/before-challenge-1/2-forme-4.png',
+        'assets/before-challenge-1/3-forme-1.png',
+        'assets/before-challenge-1/3-forme-2.png',
+        'assets/before-challenge-1/3-forme-3.png',
+        'assets/before-challenge-1/3-forme-4.png',
+        'assets/before-challenge-1/4-forme-1.png',
+        'assets/before-challenge-1/4-forme-2.png',
+        'assets/before-challenge-1/4-forme-3.png',
+        'assets/before-challenge-1/4-forme-4.png',
+        'assets/before-challenge-1/4-forme-5.png',
+        'assets/before-challenge-1/4-forme-6.png',
+        'assets/before-challenge-1/4-forme-7.png',
+        'assets/before-challenge-1/5-forme-1.png',
+        'assets/before-challenge-1/5-forme-2.png',
+        'assets/before-challenge-1/5-forme-3.png',
+        'assets/before-challenge-1/5-forme-4.png',
+        'assets/before-challenge-1/6-forme-1.png',
+        'assets/before-challenge-1/6-forme-2.png',
+        'assets/before-challenge-1/6-forme-3.png',
+        'assets/before-challenge-1/6-forme-4.png',
+        'assets/before-challenge-1/7-forme-1.png',
+        'assets/before-challenge-1/7-forme-2.png',
+        'assets/before-challenge-1/7-forme-3.png',
+        'assets/before-challenge-1/7-forme-4.png',
+        'assets/before-challenge-1/7-forme-5.png',
+        'assets/before-challenge-1/8-forme-1.png',
+        'assets/before-challenge-1/8-forme-2.png',
+        'assets/before-challenge-1/8-forme-3.png',
+        'assets/before-challenge-1/8-forme-4.png',
+        'assets/before-challenge-1/8-forme-5.png',
+        'assets/before-challenge-1/8-forme-6.png',
+        'assets/before-challenge-1/9-forme-1.png',
+        'assets/before-challenge-1/9-forme-2.png',
+        'assets/before-challenge-1/9-forme-3.png',
+        'assets/before-challenge-1/10-forme-1.png',
       ])
     }
 
@@ -51,7 +104,13 @@ class Carousel {
 
       Object.keys(this.assets.resources).map(function(objectKey, index) {
         const sprite = new PIXI.Sprite(that.assets.resources[objectKey].texture)
-        that.spritesFonds[objectKey] = sprite
+
+        if (objectKey.split('.')[1] == 'jpg') {
+          that.spritesFonds[objectKey] = sprite
+        } else if (objectKey.split('.')[1] == 'png') {
+          that.spritesForms[objectKey] = sprite
+        }
+
         that.carousel.addChild(sprite)
       })
       this.makeCarousel()
@@ -60,12 +119,25 @@ class Carousel {
     makeCarousel() {
       let that = this
       Object.keys(that.spritesFonds).map(function(objectKey, index) {
-        STORAGE.ratioHorizontal= window.innerWidth / that.spritesFonds[objectKey].texture.width // calcul ratio vetical
-        that.spritesFonds[objectKey].scale = new PIXI.Point(STORAGE.ratioHorizontal, STORAGE.ratioHorizontal) // redimensionnement : img = taille fenêtre
-        that.spritesFonds[objectKey].y = that.totalCarouselHeight
-        that.totalCarouselHeight += that.spritesFonds[objectKey].height
+          STORAGE.ratioHorizontal = window.innerWidth / that.spritesFonds[objectKey].texture.width
+          that.spritesFonds[objectKey].scale = new PIXI.Point(STORAGE.ratioHorizontal, STORAGE.ratioHorizontal)
+          that.spritesFonds[objectKey].y = that.totalHeightSteps[that.totalHeightSteps.length -1]
+          that.totalHeightSteps.push(that.totalHeightSteps[that.totalHeightSteps.length -1] + that.spritesFonds[objectKey].height)
+          that.spritesFonds[objectKey].zIndex = 1
       })
-      that.totalCarouselHeight = 0
+
+      Object.keys(that.spritesForms).map(function(objectKey, index) {
+        STORAGE.ratioHorizontal = window.innerWidth / that.spritesForms[objectKey].texture.width
+        that.spritesForms[objectKey].scale = new PIXI.Point(STORAGE.ratioHorizontal, STORAGE.ratioHorizontal)
+        // that.spritesForms[objectKey].x = window.innerWidth / 2 - that.spritesForms[objectKey].width / 2
+        // console.log( window.innerWidth / 2 - that.spritesForms[objectKey].width / 2)
+        let position = objectKey.split('.')[0].split('/')[2].split('-')[0]
+        that.spritesForms[objectKey].y = that.totalHeightSteps[position]
+        that.spritesForms[objectKey].zIndex = 2
+        console.log(that.spritesForms[objectKey].zIndex)
+      })
+
+      that.totalHeightSteps = [0]
 
       for (var i = 0; i < this.blackboards.length; i++) {
         this.blackboards[i].blackboard.destroy()

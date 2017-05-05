@@ -7,7 +7,7 @@ class Carousel {
       this.carousel = new PIXI.Container()
       STORAGE.carouselClass = this
       STORAGE.carousel = this.carousel
-      STORAGE.carousel.numberOfWindow = 11
+      STORAGE.carousel.numberOfWindow = 8
       STORAGE.stage.addChild(this.carousel)
 
       this.spritesFonds = {}
@@ -24,7 +24,7 @@ class Carousel {
 
     init() {
       STORAGE.loaderClass.loadCarouselPictures([
-        'assets/before-challenge-1/carousel-test.jpg',
+        'assets/before-challenge-1/carousel-test-3.jpg',
         'assets/before-challenge-1/0-forme-1.png',
         'assets/before-challenge-1/0-forme-2.png',
         'assets/before-challenge-1/0-forme-3.png',
@@ -32,10 +32,11 @@ class Carousel {
         'assets/before-challenge-1/1-forme-2.png',
         'assets/before-challenge-1/1-forme-3.png',
         'assets/before-challenge-1/1-forme-4.png',
+        'assets/before-challenge-1/1-forme-5.png',
+        'assets/before-challenge-1/1-forme-6.png',
         'assets/before-challenge-1/2-forme-1.png',
         'assets/before-challenge-1/2-forme-2.png',
         'assets/before-challenge-1/2-forme-3.png',
-        'assets/before-challenge-1/2-forme-4.png',
         'assets/before-challenge-1/3-forme-1.png',
         'assets/before-challenge-1/3-forme-2.png',
         'assets/before-challenge-1/3-forme-3.png',
@@ -45,31 +46,14 @@ class Carousel {
         'assets/before-challenge-1/4-forme-3.png',
         'assets/before-challenge-1/4-forme-4.png',
         'assets/before-challenge-1/4-forme-5.png',
-        'assets/before-challenge-1/4-forme-6.png',
-        'assets/before-challenge-1/4-forme-7.png',
         'assets/before-challenge-1/5-forme-1.png',
         'assets/before-challenge-1/5-forme-2.png',
         'assets/before-challenge-1/5-forme-3.png',
         'assets/before-challenge-1/5-forme-4.png',
+        'assets/before-challenge-1/5-forme-5.png',
         'assets/before-challenge-1/6-forme-1.png',
         'assets/before-challenge-1/6-forme-2.png',
-        'assets/before-challenge-1/6-forme-3.png',
-        'assets/before-challenge-1/6-forme-4.png',
-        'assets/before-challenge-1/7-forme-1.png',
-        'assets/before-challenge-1/7-forme-2.png',
-        'assets/before-challenge-1/7-forme-3.png',
-        'assets/before-challenge-1/7-forme-4.png',
-        'assets/before-challenge-1/7-forme-5.png',
-        'assets/before-challenge-1/8-forme-1.png',
-        'assets/before-challenge-1/8-forme-2.png',
-        'assets/before-challenge-1/8-forme-3.png',
-        'assets/before-challenge-1/8-forme-4.png',
-        'assets/before-challenge-1/8-forme-5.png',
-        'assets/before-challenge-1/8-forme-6.png',
-        'assets/before-challenge-1/9-forme-1.png',
-        'assets/before-challenge-1/9-forme-2.png',
-        'assets/before-challenge-1/9-forme-3.png',
-        'assets/before-challenge-1/10-forme-1.png',
+        'assets/before-challenge-1/7-forme-1.png'
       ])
     }
 
@@ -121,13 +105,21 @@ class Carousel {
           that.spritesFonds[objectKey].zIndex = 1
       })
 
+      let keysForms = Object.keys(that.spritesForms);
+      let lastForm = keysForms[keysForms.length-1];
       Object.keys(that.spritesForms).map(function(objectKey, index) {
         STORAGE.ratioVertical = window.innerHeight / that.spritesForms[objectKey].texture.height
-        that.spritesForms[objectKey].scale = new PIXI.Point(STORAGE.ratioVertical, STORAGE.ratioVertical)
+        that.spritesForms[objectKey].scale = new PIXI.Point(STORAGE.ratioVertical + 0.04, STORAGE.ratioVertical + 0.04)
         that.spritesForms[objectKey].x = window.innerWidth / 2 - that.spritesForms[objectKey].width / 2
         let position = objectKey.split('.')[0].split('/')[2].split('-')[0]
         that.spritesForms[objectKey].y = that.totalHeightSteps[position]
         that.spritesForms[objectKey].zIndex = 2
+
+        if (objectKey == lastForm) {
+          that.spritesForms[objectKey].rapidity = 0
+        } else {
+          that.spritesForms[objectKey].rapidity = Math.random() * (2 - 0.7) + 0.7
+        }
       })
 
       that.totalHeightSteps = [0]
@@ -149,10 +141,12 @@ class Carousel {
     handleScroll(e) {
       if (Math.abs(STORAGE.carousel.y - window.innerHeight) < window.innerHeight * STORAGE.carousel.numberOfWindow - 45 && e.deltaY > 0 ) { // stop le défilement au dernier sprite (défile tant que x abs < à largeur totale de tous les spritesFonds-1)
         STORAGE.carousel.y -= Math.abs(e.deltaY) / 3
+        STORAGE.carouselClass.doParallax('down')
       } else if (STORAGE.carousel.y > -45) {
         return
       } else if (e.deltaY < 0) {
         STORAGE.carousel.y += Math.abs(e.deltaY) / 3
+        STORAGE.carouselClass.doParallax('up')
       }
     }
 
@@ -165,6 +159,23 @@ class Carousel {
       }, 200)
     }
 
+    doParallax(direction) {
+      let that = this
+
+      if (direction == 'down') {
+        Object.keys(that.spritesForms).map(function(objectKey, index) {
+          if (Math.abs(that.carousel.y + that.spritesForms[objectKey].y) < 1000) {
+            that.spritesForms[objectKey].y -= that.spritesForms[objectKey].rapidity
+          }
+        })
+      } else if (direction == 'up') {
+        Object.keys(that.spritesForms).map(function(objectKey, index) {
+          if (Math.abs(that.carousel.y + that.spritesForms[objectKey].y) < 1000) {
+            that.spritesForms[objectKey].y += that.spritesForms[objectKey].rapidity
+          }
+        })
+      }
+    }
 }
 
 export default Carousel

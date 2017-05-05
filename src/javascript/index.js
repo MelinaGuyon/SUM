@@ -16,16 +16,17 @@ window.onload = function() {
 
 function initCanvas() {
 
-  // new Renderer()
+  new Renderer()
   new Loader()
   // new SoundManager()
-  // new Carousel()
+  new Carousel()
   // new FirstChallenge()
   // new Menu()
   // new FirstChallenge()
   new FirstRecompense()
+  // FirstRecompense()
 
-  //render()
+  render()
 }
 
 function render() {

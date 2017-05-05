@@ -1,12 +1,23 @@
 .first-recompense {
 	background-color : black;
+	width: 100vw;
+	height: 100vh;
+	position: relative;
+}
+
+.first-recompense-scale {
+	position: absolute;
+	transform: scale(0.7);
+	left: 50%;
+	top: 50%;
 }
 
 .first-recompense-path {
 	display: block;
-	margin: auto;
-	width: 100%;
-	height: 100%;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
 }
 
 #path_sum, #path_cercle1, #path_cercle2, #path_cercle3, #path_cercle4 {

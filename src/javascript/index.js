@@ -19,12 +19,10 @@ function initCanvas() {
   new Renderer()
   new Loader()
   new SoundManager()
-  new Carousel()
-  // new FirstChallenge()
-  // new Menu()
-  // new FirstChallenge()
+  // new Carousel()
+  new Menu()
+  new FirstChallenge()
   // new FirstRecompense()
-  // FirstRecompense()
 
   render()
 }

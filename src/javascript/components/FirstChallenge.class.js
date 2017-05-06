@@ -9,6 +9,7 @@ class FirstChallenge {
     this.FirstChallengeContainer = new PIXI.Container()
     this.FirstChallengeContainer.alpha = 0
     STORAGE.FirstChallengeClass = this
+    STORAGE.FirstChallengeContainer = this.FirstChallengeContainer
     STORAGE.stage.addChild(this.FirstChallengeContainer)
 
     this.assets = {}
@@ -32,8 +33,10 @@ class FirstChallenge {
     this.pathEnd = [200, window.innerHeight / 2 + 100]
 
     this.nextAnimButton = document.querySelector('.js-first-challenge-next')
+    this.recompenseButton = document.querySelector('.js-first-recompense-button')
     this.conclusionChallengeText = document.querySelector('.js-conclusion-p')
     this.conclusionChallengeTextContainer = document.querySelector('.js-conclusion-text-container')
+    STORAGE.conclusionChallengeTextContainer = this.conclusionChallengeTextContainer
 
     this.init()
   }
@@ -65,6 +68,7 @@ class FirstChallenge {
     }
 
     this.nextAnimButton.addEventListener('click', that.handleNextAnimButtonClick)
+    this.recompenseButton.addEventListener('click', that.handleRecompenseButtonClick)
   }
 
   setupFirstChallengePicturesLoaded() {
@@ -206,9 +210,46 @@ class FirstChallenge {
     })
   }
 
+  displayRecompenseButton() {
+    TweenLite.to(this.recompenseButton, 1.2, {
+      autoAlpha: 1
+    })
+  }
+
+  undDisplayRecompenseButton() {
+    TweenLite.to(this.recompenseButton, 1.2, {
+      autoAlpha: 0
+    })
+  }
+
   handleNextAnimButtonClick() {
     STORAGE.FirstChallengeClass.undDisplayNextAnimButton()
     STORAGE.FirstChallengeClass.backToBegining()
+  }
+
+  handleRecompenseButtonClick() {
+    STORAGE.FirstChallengeClass.undDisplayRecompenseButton()
+
+    TweenLite.to([STORAGE.FirstChallengeContainer, STORAGE.conclusionChallengeTextContainer], 0.5, {
+      alpha: 0,
+      delay: 1
+    })
+    TweenLite.to([STORAGE.stage], 0.4, {
+      alpha: 0,
+      onComplete: function() {
+        setTimeout(function(){
+          STORAGE.FirstChallengeContainer.destroy()
+          STORAGE.conclusionChallengeTextContainer.destroy()
+          STORAGE.FirstChallengeClass.unbind()
+          STORAGE.FirstChallengeContainer = null
+          STORAGE.conclusionChallengeTextContainer = null
+          STORAGE.FirstChallengeClass = null
+          new FirstRecompense()
+        }, 1000)
+      },
+      delay: 6.5
+    })
+
   }
 
   onWindowMouseUp(that) {
@@ -350,6 +391,7 @@ class FirstChallenge {
       autoAlpha: 1,
       delay: 1
     })
+    this.displayRecompenseButton()
   }
 
 }

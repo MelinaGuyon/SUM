@@ -1,6 +1,7 @@
 import conclusionTextsDatas from '../datas/conclusionTexts.js'
 import frames from '../datas/frames.js'
 import soundBank from '../datas/soundBank.js'
+import FirstRecompense from './FirstRecompense.class.js'
 import TweenLite from 'gsap'
 
 class FirstChallenge {
@@ -70,6 +71,15 @@ class FirstChallenge {
     this.nextAnimButton.addEventListener('click', that.handleNextAnimButtonClick)
     this.recompenseButton.addEventListener('click', that.handleRecompenseButtonClick)
   }
+
+  unbind() {
+      let that = this
+      this.cursor.mousedown = null
+      this.cursor.mouseover = null
+      this.cursor.mouseout = null
+      window.removeEventListener('click', that.handleNextAnimButtonClick)
+      window.removeEventListener('click', that.handleRecompenseButtonClick)
+    }
 
   setupFirstChallengePicturesLoaded() {
     this.assets.resources = STORAGE.loader.resources
@@ -232,6 +242,7 @@ class FirstChallenge {
 
     TweenLite.to([STORAGE.FirstChallengeContainer, STORAGE.conclusionChallengeTextContainer], 0.5, {
       alpha: 0,
+      display:'none',
       delay: 1
     })
     TweenLite.to([STORAGE.stage], 0.4, {
@@ -239,7 +250,6 @@ class FirstChallenge {
       onComplete: function() {
         setTimeout(function(){
           STORAGE.FirstChallengeContainer.destroy()
-          STORAGE.conclusionChallengeTextContainer.destroy()
           STORAGE.FirstChallengeClass.unbind()
           STORAGE.FirstChallengeContainer = null
           STORAGE.conclusionChallengeTextContainer = null
@@ -247,7 +257,7 @@ class FirstChallenge {
           new FirstRecompense()
         }, 1000)
       },
-      delay: 6.5
+      delay: 2
     })
 
   }

@@ -152,30 +152,36 @@ class FirstChallenge {
   createGif(index) {
     this.framesArray = []
 
-    if (index == 0) {
-      for (let i = 1; i < 62; i++) {
+    for (let i = 1; i < 35; i++) {
+      let val = i < 10 ? '0' + i : i
+        let texture = PIXI.Texture.fromImage(frames[index] + val + '.png')
+        this.framesArray.push(texture)
+    }
+
+    /*if (index == 0) {
+      for (let i = 1; i < 35; i++) {
         let val = i < 10 ? '0' + i : i
-        let texture1 = PIXI.Texture.fromImage(frames[0] + val + '.gif')
+        let texture1 = PIXI.Texture.fromImage(frames[0] + val + '.png')
         this.framesArray.push(texture1)
       }
     } else if (index == 1) {
-      for (let i = 1; i < 179; i++) {
+      for (let i = 1; i < 35; i++) {
         let val = i < 10 ? '0' + i : i
-        let texture2 = PIXI.Texture.fromImage(frames[1] + val + '.gif')
+        let texture2 = PIXI.Texture.fromImage(frames[1] + val + '.png')
         this.framesArray.push(texture2)
       }
     } else if (index == 2) {
-      for (let i = 1; i < 20; i++) {
+      for (let i = 1; i < 35; i++) {
         let val = i < 10 ? '0' + i : i
-        let texture3 = PIXI.Texture.fromImage(frames[2] + val + '.gif')
+        let texture3 = PIXI.Texture.fromImage(frames[2] + val + '.png')
         this.framesArray.push(texture3)
       }
-    }
+    }*/
 
     this.movie = new PIXI.extras.AnimatedSprite(this.framesArray)
     this.movie.alpha = 0
     this.movie.anchor.set(0.5)
-    this.movie.animationSpeed = 0.5
+    this.movie.animationSpeed = 0.25
     TweenLite.to(this.movie, 2, { alpha: 1 })
     this.movie.play()
     this.eye.addChild(this.movie)

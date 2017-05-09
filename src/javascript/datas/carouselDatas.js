@@ -15,31 +15,31 @@ const carouselDatas = {
     }
   ],
   datasBlackboards: [
-    //   {
-    //     width: 300,
-    //     height: 300,
-    //     x: 150,
-    //     y: 100,
-    //     checkPoints : [{
-    //       rayon: 10,
-    //       x: 40,
-    //       y: 120
-    //     }, {
-    //       rayon: 10,
-    //       x: 180,
-    //       y: 125
-    //     }, {
-    //       rayon: 10,
-    //       x: 260,
-    //       y: 210
-    //     }, {
-    //       rayon: 10,
-    //       x: 150,
-    //       y: 235
-    //     }
-    //   ],
-    //   isTestLaunch: true
-    // }
+      {
+        width: 1000,
+        height: 800,
+        x: 440,
+        y: 7700,
+        checkPoints : [{
+          rayon: 20,
+          x: 500,
+          y: 50
+        }, {
+          rayon: 20,
+          x: 50,
+          y: 400
+        }, {
+          rayon: 20,
+          x: 950,
+          y: 400
+        }, {
+          rayon: 20,
+          x: 500,
+          y: 750
+        }
+      ],
+      isTestLaunch: true
+    }
   ]
 }
 

@@ -94,7 +94,6 @@ class Carousel {
     makeCarousel() {
       let that = this
       Object.keys(that.spritesFonds).map(function(objectKey, index) {
-          STORAGE.ratioVertical = window.innerHeight * STORAGE.carousel.numberOfWindow / that.spritesFonds[objectKey].texture.height
           that.spritesFonds[objectKey].height = window.innerHeight * STORAGE.carousel.numberOfWindow
           that.spritesFonds[objectKey].width = window.innerWidth
 
@@ -105,12 +104,18 @@ class Carousel {
           that.spritesFonds[objectKey].zIndex = 1
       })
 
-      let keysForms = Object.keys(that.spritesForms);
-      let lastForm = keysForms[keysForms.length-1];
+      let keysForms = Object.keys(that.spritesForms)
+      let lastForm = keysForms[keysForms.length-1]
+      
       Object.keys(that.spritesForms).map(function(objectKey, index) {
+
+        // pour que chaque image fasse 100% de hauteur
         STORAGE.ratioVertical = window.innerHeight / that.spritesForms[objectKey].texture.height
-        that.spritesForms[objectKey].scale = new PIXI.Point(STORAGE.ratioVertical + 0.04, STORAGE.ratioVertical + 0.04)
-        that.spritesForms[objectKey].x = window.innerWidth / 2 - that.spritesForms[objectKey].width / 2
+        that.spritesForms[objectKey].scale = new PIXI.Point(STORAGE.ratioVertical , STORAGE.ratioVertical)
+
+        // pour centrer verticalement
+        STORAGE.positionHorizontal = window.innerWidth / 2 - that.spritesForms[objectKey].width / 2
+        that.spritesForms[objectKey].x = STORAGE.positionHorizontal
         let position = objectKey.split('.')[0].split('/')[2].split('-')[0]
         that.spritesForms[objectKey].y = that.totalHeightSteps[position]
         that.spritesForms[objectKey].zIndex = 2

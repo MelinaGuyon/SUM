@@ -17,7 +17,6 @@ class SoundManager {
 
     // the end of chellenge one, kill all sounds
     if (kill) {
-      console.log('tes')
       TweenLite.to([this.toStop, this.toPlay], 3, {
         volume: 0,
         onComplete: function(){

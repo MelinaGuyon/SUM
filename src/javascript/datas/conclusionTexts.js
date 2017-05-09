@@ -1,6 +1,8 @@
 const conclusionTextsDatas = {
-  firstChallenge : "Tu peux voir les choses de plusieurs façons, utilise le recto et le verso de ton cerveau",
+  firstChallenge : "Je vois les choses autrement, j\’ai le choix entre le recto-verso de mes pensées.",
   secondChallenge : "HOLA JE SUIS CCL SCD",
 }
 
 export default conclusionTextsDatas
+
+

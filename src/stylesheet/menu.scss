@@ -1,3 +1,15 @@
+@font-face {
+  font-family: "westeindeCaptionThin";
+  src: url('http://localhost:8080/fonts/westeindeCaptionThin.otf');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "westeindeCaptionBold";
+  src: url('http://localhost:8080/fonts/westeindeCaptionBold.otf');
+  font-style: normal;
+}
+
 .js-menu {
     position : absolute;
     right : 2vw;
@@ -15,26 +27,33 @@
 
 #path {
 	position : absolute;
-	background-color : #d3d3d3;
-	width : 1px;
+	background-color : white;
+	width : 1.35px;
 	height : 0px;
 	right : 15px;
 }
 
 #timeline a {
-	color : #d3d3d3;
+	color : white;
 	text-decoration : none;
-	right : 30px;
+	right : 40px;
+	font-size : 0.8vw;
+	font-family : westeindeCaptionThin;
+}
+
+.epreuveID {
+	font-family : westeindeCaptionBold;
 }
 
 #epreuves {
 	right : 0;
 	opacity : 0;
 	position : absolute;
+	text-align : right;
 }
 
 #epreuves li {
-	width : 100px;
-	margin-top : 15vh;
-	margin-bottom : 15vh;
+	width : 160px;
+	margin-top : 8vh;
+	margin-bottom : 8vh;
 }

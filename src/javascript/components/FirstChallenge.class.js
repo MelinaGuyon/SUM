@@ -36,6 +36,7 @@ class FirstChallenge {
     this.nextAnimButton = document.querySelector('.js-first-challenge-next')
     this.recompenseButton = document.querySelector('.js-first-recompense-button')
     this.conclusionChallengeText = document.querySelector('.js-conclusion-p')
+    this.conclusionChallengeButton = document.querySelector('.js-first-recompense-button')
     this.conclusionChallengeTextContainer = document.querySelector('.js-conclusion-text-container')
     this.firstChallengeNextButton = document.querySelector('.nextImg')
     STORAGE.conclusionChallengeTextContainer = this.conclusionChallengeTextContainer
@@ -44,6 +45,9 @@ class FirstChallenge {
   }
 
   init() {
+
+    console.log(window.innerWidth)
+    
     STORAGE.loaderClass.loadFirstChallengePictures([
       'assets/first-challenge/fond.png',
       'assets/first-challenge/oeil.png',
@@ -152,7 +156,9 @@ class FirstChallenge {
     this.eye.addChild(this.pupilEmpty)
 
     let textConclusion = document.createTextNode(conclusionTextsDatas.firstChallenge)
+    let buttonConclusion = document.createTextNode(conclusionTextsDatas.firstChallengeButton)
     this.conclusionChallengeText.appendChild(textConclusion)
+    this.conclusionChallengeButton.appendChild(buttonConclusion)
   }
 
   createGif(index) {
@@ -430,12 +436,8 @@ class FirstChallenge {
   }
 
   showConclusion() {
-    TweenLite.to([this.cursor, this.pathBasic, this.pathPassed], 0.6, {
+    TweenLite.to([this.cursor, this.pathBasic, this.pathPassed, this.pupilEmpty, this.eye], 0.6, {
       alpha: 0
-    })
-
-    TweenLite.to(this.pupilEmpty, 1.2, {
-      alpha: 1
     })
 
     TweenLite.to(this.conclusionChallengeTextContainer, 2, {

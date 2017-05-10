@@ -211,10 +211,15 @@ class FirstChallenge {
   }
 
   createCursor() {
-    this.cursor.beginFill(0xffffff, 1)
-    this.cursor.drawCircle(0, 0, 10)
-    this.cursor.endFill()
-    this.cursor.x = this.pathEnd[0]
+    let that = this
+    Object.keys(this.assets.resources).map(function(objectKey, index) {
+      if (index == 2) {
+        that.cursor = new PIXI.Sprite(that.assets.resources[objectKey].texture)
+      }
+    })
+    this.cursor.width = 126/2
+    this.cursor.height = 68/2
+    this.cursor.x = this.pathEnd[0] - this.cursor.width/2
     this.cursor.y = this.pathEnd[1]
     this.cursor.interactive = true // pour attribuer événements à this.cursor
     this.FirstChallengeContainer.addChild(this.cursor)

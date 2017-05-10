@@ -1,15 +1,3 @@
-@font-face {
-  font-family: "westeindeCaptionThin";
-  src: url('http://localhost:8080/fonts/westeindeCaptionThin.otf');
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "westeindeCaptionBold";
-  src: url('http://localhost:8080/fonts/westeindeCaptionBold.otf');
-  font-style: normal;
-}
-
 .js-menu {
     position : absolute;
     right : 2vw;
@@ -21,8 +9,13 @@
 	margin-bottom : 10px;
 }
 
+#icone2 img {
+	width : 25px;
+}
+
 .js-menu ul {
 	list-style : none;
+	text-align : center;
 }
 
 #path {

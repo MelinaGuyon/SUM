@@ -14,7 +14,6 @@ class Menu {
     this.epreuves = document.getElementById("epreuves")
     this.epreuves.x = window.innerWidth
     this.epreuves.alpha = 0
-    console.log(this.epreuves.x)
 
     this.init()
     this.bind()

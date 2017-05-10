@@ -1,5 +1,6 @@
 .js-first-challenge-next {
     position: absolute;
+    z-index: 5;
     margin-top: 50vh; 
     transform: translateY(-50%);
     right: 10%;
@@ -20,12 +21,3 @@
     margin-top: 5%;
 }
 
-.js-first-recompense-button {
-	position: absolute;
-    bottom: 70px;
-    right: 350px;
-    border-radius: 50%;
-    background-color: white;
-    opacity: 0;
-    visibility: hidden;
-}

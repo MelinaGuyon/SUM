@@ -39,6 +39,7 @@ class FirstChallenge {
     this.conclusionChallengeButton = document.querySelector('.js-first-recompense-button')
     this.conclusionChallengeTextContainer = document.querySelector('.js-conclusion-text-container')
     this.firstChallengeNextButton = document.querySelector('.nextImg')
+    this.firstChallengeNextText = document.querySelector('.nextText')
     STORAGE.conclusionChallengeTextContainer = this.conclusionChallengeTextContainer
 
     this.init()
@@ -404,6 +405,12 @@ class FirstChallenge {
       TweenLite.to(this.cursor, 0.3, {
         y: this.pathEnd[1]
       })
+
+      if (this.movieIndex == 1) {
+        TweenLite.set(that.firstChallengeNextText, {
+          display: 'none'
+        })
+      }
     } else {
       that.manageSounds(true)
       this.eye.removeChild(that.movie)

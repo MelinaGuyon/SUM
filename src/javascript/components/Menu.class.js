@@ -14,7 +14,6 @@ class Menu {
     this.epreuves = document.getElementById("epreuves")
     this.epreuves.x = window.innerWidth
     this.epreuves.alpha = 0
-    console.log(this.epreuves.x)
 
     this.init()
     this.bind()
@@ -39,7 +38,7 @@ class Menu {
         that.onIcone3ClickAgain()
         that.path.state = 0
       }
-    } 
+    }
   }
 
   onIcone3Click() {
@@ -50,17 +49,17 @@ class Menu {
       x: -30,
       opacity: 1,
       delay: 0.6
-    })  
+    })
   }
   onIcone3ClickAgain() {
     TweenLite.to(this.path, 0.6, {
       height: 0,
       delay: 0.6
-    })  
+    })
     TweenLite.to(this.epreuves, 0.6, {
       x: 30,
       opacity: 0
-    }) 
+    })
   }
 
 }

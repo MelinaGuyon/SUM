@@ -21,21 +21,21 @@ const carouselDatas = {
         x: 440,
         y: 7700,
         checkPoints : [{
-          rayon: 20,
+          rayon: 30,
           x: 500,
-          y: 50
+          y: 30
         }, {
-          rayon: 20,
-          x: 50,
+          rayon: 30,
+          x: 30,
           y: 400
         }, {
-          rayon: 20,
-          x: 950,
+          rayon: 30,
+          x: 980,
           y: 400
         }, {
-          rayon: 20,
+          rayon: 30,
           x: 500,
-          y: 750
+          y: 780
         }
       ],
       isTestLaunch: true

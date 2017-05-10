@@ -16,7 +16,7 @@ class CheckPoint {
   }
 
   init() {
-    this.checkPoint.beginFill(0xffffff, 0)
+    this.checkPoint.beginFill(0xffffff, 1)
     this.checkPoint.drawCircle(0, 0, carouselDatas.datasBlackboards[this.blackBoardIndex].checkPoints[this.index].rayon)
     this.checkPoint.endFill()
     this.checkPoint.x = carouselDatas.datasBlackboards[this.blackBoardIndex].checkPoints[this.index].x * STORAGE.ratioVertical + this.blackboard.graphicsData[0].shape.x

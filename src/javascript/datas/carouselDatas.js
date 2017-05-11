@@ -15,73 +15,32 @@ const carouselDatas = {
     }
   ],
   datasBlackboards: [
-    {
-      width: 250,
-      height: 130,
-      x: 150,
-      y: 150,
-      checkPoints: [
-        {
-          rayon: 10,
-          x: 25,
-          y: 55
+      {
+        width: 400,
+        height: 400,
+        x: 740,
+        y: 7900,
+        checkPoints : [{
+          rayon: 30,
+          x: 200,
+          y: 30
         }, {
-          rayon: 10,
-          x: 120,
-          y: 80
-        }, {
-          rayon: 10,
-          x: 220,
-          y: 55
-        }
-      ]
-    },
-    {
-      width: 520,
-      height: 200,
-      x: 760,
-      y: 50,
-      checkPoints : [
-        {
-          rayon: 10,
+          rayon: 30,
           x: 40,
-          y: 70
+          y: 200
         }, {
-          rayon: 10,
-          x: 250,
-          y: 125
+          rayon: 30,
+          x: 370,
+          y: 200
         }, {
-          rayon: 10,
-          x: 465,
-          y: 60
+          rayon: 30,
+          x: 200,
+          y: 360
         }
-      ]
-    },
-    {
-      width: 300,
-      height: 300,
-      x: 3150,
-      y: 480,
-      checkPoints : [{
-        rayon: 10,
-        x: 40,
-        y: 120
-      }, {
-        rayon: 10,
-        x: 180,
-        y: 125
-      }, {
-        rayon: 10,
-        x: 260,
-        y: 210
-      }, {
-        rayon: 10,
-        x: 150,
-        y: 235
-      }
-    ],
-    isTestLaunch: true
-  }]
+      ],
+      isTestLaunch: true
+    }
+  ]
 }
 
 export default carouselDatas

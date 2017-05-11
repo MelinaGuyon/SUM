@@ -27,7 +27,7 @@ class ImageDeformation {
 
   init() {
     STORAGE.loaderClass.loadDeformationPictures([
-      'assets/deformation-eye.jpg',
+      'assets/deformation-eye2.jpg',
       'assets/displacement_map.png'
     ])
   }
@@ -61,26 +61,19 @@ class ImageDeformation {
     })
 
     this.image.scale = new PIXI.Point(STORAGE.ratioVertical, STORAGE.ratioVertical)
+
     this.deformationContainer.addChild(this.image)
+
 
     STORAGE.stage.addChild(this.deformationContainer)
 
-    let initialDiff = this.image.width / 2 - window.innerWidth
-
-    if (initialDiff > 0) {
-      this.deformationContainer.position.x -= this.image.width / 2 + Math.abs(initialDiff)
-      this.deformationContainer.position.x += this.image.width / 16
-    } else {
-      this.deformationContainer.position.x -= this.image.width / 2
-      this.deformationContainer.position.x += Math.abs(initialDiff) + this.image.width / 16
-    }
-
-    this.deformationContainer.position.y -= this.image.height / 8
+    this.deformationContainer.position.x -=  this.image.width / 4
+    this.deformationContainer.position.y -=  this.image.height / 4
   }
 
   doBlurFilter() {
     this.blurFilter = new PIXI.filters.BlurFilter()
-    this.blurFilter.blur = 2
+    this.blurFilter.blur = 0
   }
 
   doTwistFilter() {
@@ -97,13 +90,14 @@ class ImageDeformation {
         that.displacementSprite = new PIXI.Sprite(that.assets.resources[objectKey].texture)
       }
     })
-    this.displacementSprite.scale = new PIXI.Point(6, 6)
-    this.displacementSprite.position.y -= this.displacementSprite.height / 12
+    this.displacementSprite.scale = new PIXI.Point(2, 2)
+    this.displacementSprite.position.y -= this.displacementSprite.height / 4
+    this.displacementSprite.position.x -= this.displacementSprite.width / 4
 		this.deformationContainer.addChild(this.displacementSprite)
 
     this.displacementFilter = new PIXI.filters.DisplacementFilter(this.displacementSprite)
-    this.displacementFilter.scale.x = 60
-    this.displacementFilter.scale.y = 60
+    this.displacementFilter.scale.x = 160
+    this.displacementFilter.scale.y = 160
   }
 
   animate(that) {
@@ -125,9 +119,9 @@ class ImageDeformation {
       that.animateBool = true
     }
 
-    if (this.twist.angle < -4.5) {
+    if (this.twist.angle < -10) {
       this.angle = 'up'
-    } else if (this.twist.angle > 4.5){
+    } else if (this.twist.angle > 10){
       this.angle = 'low'
     }
 
@@ -137,23 +131,23 @@ class ImageDeformation {
       this.twist.angle += 0.01
     }
 
-    if (this.displacementSprite.x < -400) {
+    if (this.displacementSprite.x < -700) {
       this.displacement = 'up'
-    } else if (this.displacementSprite.x > 400){
+    } else if (this.displacementSprite.x > 700){
       this.displacement = 'low'
     }
 
     if (this.displacement == 'low') {
-      this.displacementSprite.x -= 25
-      this.displacementSprite.y -= 25
+      this.displacementSprite.x -= 15
+      this.displacementSprite.y -= 15
     } else {
-      this.displacementSprite.x += 25
-      this.displacementSprite.y += 25
+      this.displacementSprite.x += 15
+      this.displacementSprite.y += 15
     }
 
    if (this.displacementFilter.scale.x < 600) {
-      this.displacementFilter.scale.x += 25
-      this.displacementFilter.scale.y += 25
+      this.displacementFilter.scale.x += 0.5
+      this.displacementFilter.scale.y += 0.5
     }
 
     this.image.filters = [

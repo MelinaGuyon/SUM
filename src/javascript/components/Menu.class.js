@@ -33,7 +33,7 @@ class Menu {
         that.onIcone3ClickAgain()
         that.path.state = 0
       }
-    } 
+    }
   }
 
   onIcone3Click() {
@@ -44,17 +44,17 @@ class Menu {
       x: -50,
       opacity: 1,
       delay: 0.6
-    })  
+    })
   }
   onIcone3ClickAgain() {
     TweenLite.to(this.path, 0.6, {
       height: 0,
       delay: 0.6
-    })  
+    })
     TweenLite.to(this.epreuves, 0.6, {
       x: 0,
       opacity: 0
-    }) 
+    })
   }
 
 }

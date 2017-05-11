@@ -75,6 +75,47 @@ body {
   -moz-transition: all 0.6s;
 }
 
+.js-introduction-challenge-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 75%;
+  height:75%;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.js-introduction-challenge-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.js-introduction-challenge-text {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  font-family: 'Westeinde Caption';
+  text-align: center;
+  color: #FFFFFF;
+
+  .test1 {
+    font-size: 34px;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 15px;
+  }
+
+  .test2, .test3 {
+    font-size: 70px;
+    font-weight: lighter;
+    display: block;
+  }
+}
+
 .js-first-recompense-button:hover {
   border: solid #BBBEE2 0.7px;
   background-color: white;
@@ -83,3 +124,4 @@ body {
   -webkit-transition: all 0.6s;
   -moz-transition: all 0.6s;
 }
+

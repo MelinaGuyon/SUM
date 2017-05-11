@@ -16,26 +16,26 @@ const carouselDatas = {
   ],
   datasBlackboards: [
       {
-        width: 1000,
-        height: 800,
-        x: 440,
-        y: 7700,
+        width: 400,
+        height: 400,
+        x: 740,
+        y: 7900,
         checkPoints : [{
           rayon: 30,
-          x: 500,
+          x: 200,
           y: 30
         }, {
           rayon: 30,
-          x: 30,
-          y: 400
+          x: 40,
+          y: 200
         }, {
           rayon: 30,
-          x: 980,
-          y: 400
+          x: 370,
+          y: 200
         }, {
           rayon: 30,
-          x: 500,
-          y: 780
+          x: 200,
+          y: 360
         }
       ],
       isTestLaunch: true

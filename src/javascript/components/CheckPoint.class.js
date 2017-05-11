@@ -16,7 +16,7 @@ class CheckPoint {
   }
 
   init() {
-    this.checkPoint.beginFill(0xffffff, 1)
+    this.checkPoint.beginFill(0xffffff, 0)
     this.checkPoint.drawCircle(0, 0, carouselDatas.datasBlackboards[this.blackBoardIndex].checkPoints[this.index].rayon)
     this.checkPoint.endFill()
     this.checkPoint.x = carouselDatas.datasBlackboards[this.blackBoardIndex].checkPoints[this.index].x * STORAGE.ratioVertical + this.blackboard.graphicsData[0].shape.x
@@ -54,7 +54,7 @@ class CheckPoint {
 
       if (this.blackboard.isTestLaunch) {
         new ImageDeformation()
-        this.animateSectionTransition()
+        this.animateSectionTransition(1)
       }
     }
   }
@@ -65,7 +65,17 @@ class CheckPoint {
     }
   }
 
-  animateSectionTransition() {
+  animateSectionTransition(numberOfChallenge) {
+    let textContainer = document.querySelector('.js-introduction-challenge-container')
+    let textIntro = textContainer.querySelector('.js-introduction-challenge-text')
+    if (numberOfChallenge =! null) {
+      console.log(textIntro)
+      TweenLite.to(textContainer, 2, {
+        autoAlpha: 1,
+        delay: 4
+      })
+    }
+
     TweenLite.to(STORAGE.carousel, 0.5, {
       alpha: 0,
       delay: 1
@@ -73,6 +83,9 @@ class CheckPoint {
     TweenLite.to([STORAGE.stage], 0.4, {
       alpha: 0,
       onComplete: function() {
+        TweenLite.to(textContainer, 0.2, {
+          autoAlpha: 0
+        })
         setTimeout(function(){
           STORAGE.deformation.destroy()
           STORAGE.carousel.destroy()

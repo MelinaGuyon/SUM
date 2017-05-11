@@ -36,16 +36,23 @@ class FirstChallenge {
     this.nextAnimButton = document.querySelector('.js-first-challenge-next')
     this.recompenseButton = document.querySelector('.js-first-recompense-button')
     this.conclusionChallengeText = document.querySelector('.js-conclusion-p')
+    this.conclusionChallengeButton = document.querySelector('.js-first-recompense-button')
     this.conclusionChallengeTextContainer = document.querySelector('.js-conclusion-text-container')
+    this.firstChallengeNextButton = document.querySelector('.nextImg')
+    this.firstChallengeNextText = document.querySelector('.nextText')
     STORAGE.conclusionChallengeTextContainer = this.conclusionChallengeTextContainer
 
     this.init()
   }
 
   init() {
+
+    console.log(window.innerWidth)
+    
     STORAGE.loaderClass.loadFirstChallengePictures([
       'assets/first-challenge/fond.png',
-      'assets/first-challenge/oeil.png'
+      'assets/first-challenge/oeil.png',
+      'assets/first-challenge/eye-cursor.png'
     ])
 
     TweenLite.set(STORAGE.stage, {
@@ -70,6 +77,8 @@ class FirstChallenge {
 
     this.nextAnimButton.addEventListener('click', that.handleNextAnimButtonClick)
     this.recompenseButton.addEventListener('click', that.handleRecompenseButtonClick)
+    this.firstChallengeNextButton.addEventListener('mouseover', that.firstChallengeNextButtonMouseOver)
+    this.firstChallengeNextButton.addEventListener('mouseout', that.firstChallengeNextButtonMouseOut)
   }
 
   unbind() {
@@ -79,6 +88,8 @@ class FirstChallenge {
       this.cursor.mouseout = null
       window.removeEventListener('click', that.handleNextAnimButtonClick)
       window.removeEventListener('click', that.handleRecompenseButtonClick)
+      window.removeEventListener('mouseover', that.firstChallengeNextButtonMouseOver)
+      window.removeEventListener('mouseout', that.firstChallengeNextButtonMouseOut)
     }
 
   setupFirstChallengePicturesLoaded() {
@@ -146,7 +157,9 @@ class FirstChallenge {
     this.eye.addChild(this.pupilEmpty)
 
     let textConclusion = document.createTextNode(conclusionTextsDatas.firstChallenge)
+    let buttonConclusion = document.createTextNode(conclusionTextsDatas.firstChallengeButton)
     this.conclusionChallengeText.appendChild(textConclusion)
+    this.conclusionChallengeButton.appendChild(buttonConclusion)
   }
 
   createGif(index) {
@@ -205,10 +218,15 @@ class FirstChallenge {
   }
 
   createCursor() {
-    this.cursor.beginFill(0xffffff, 1)
-    this.cursor.drawCircle(0, 0, 10)
-    this.cursor.endFill()
-    this.cursor.x = this.pathEnd[0]
+    let that = this
+    Object.keys(this.assets.resources).map(function(objectKey, index) {
+      if (index == 2) {
+        that.cursor = new PIXI.Sprite(that.assets.resources[objectKey].texture)
+      }
+    })
+    this.cursor.width = 126/2
+    this.cursor.height = 68/2
+    this.cursor.x = this.pathEnd[0] - this.cursor.width/2
     this.cursor.y = this.pathEnd[1]
     this.cursor.interactive = true // pour attribuer événements à this.cursor
     this.FirstChallengeContainer.addChild(this.cursor)
@@ -387,6 +405,12 @@ class FirstChallenge {
       TweenLite.to(this.cursor, 0.3, {
         y: this.pathEnd[1]
       })
+
+      if (this.movieIndex == 1) {
+        TweenLite.set(that.firstChallengeNextText, {
+          display: 'none'
+        })
+      }
     } else {
       that.manageSounds(true)
       this.eye.removeChild(that.movie)
@@ -394,13 +418,33 @@ class FirstChallenge {
     }
   }
 
-  showConclusion() {
-    TweenLite.to([this.cursor, this.pathBasic, this.pathPassed], 0.6, {
-      alpha: 0
-    })
+  firstChallengeNextButtonMouseOver() {
+    let nextButtonCircle = this.querySelector('.buttonCircle')
+    let nextButtonArrow = this.querySelector('.buttonArrow')
 
-    TweenLite.to(this.pupilEmpty, 1.2, {
-      alpha: 1
+    TweenLite.to([nextButtonCircle], 0.3, {
+      fill: "#BBBEE2",
+    })
+    TweenLite.to([nextButtonArrow], 0.3, {
+      stroke: "white"
+    })
+  }
+
+  firstChallengeNextButtonMouseOut() {
+    let nextButtonCircle = this.querySelector('.buttonCircle')
+    let nextButtonArrow = this.querySelector('.buttonArrow')
+
+    TweenLite.to([nextButtonCircle], 0.3, {
+      fill: "transparent",
+    })
+    TweenLite.to([nextButtonArrow], 0.3, {
+      stroke: "#BBBEE2"
+    })
+  }
+
+  showConclusion() {
+    TweenLite.to([this.cursor, this.pathBasic, this.pathPassed, this.pupilEmpty, this.eye], 0.6, {
+      alpha: 0
     })
 
     TweenLite.to(this.conclusionChallengeTextContainer, 2, {

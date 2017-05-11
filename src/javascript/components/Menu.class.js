@@ -20,12 +20,7 @@ class Menu {
   }
 
   init() {
-/*    TweenLite.set(STORAGE.stage, {
-      alpha: 1
-    })
-    TweenLite.to(this.MenuContainer, 0.6, {
-      alpha: 1
-    })*/
+
   }
 
   bind() {
@@ -43,10 +38,10 @@ class Menu {
 
   onIcone3Click() {
     TweenLite.to(this.path, 0.6, {
-      height: 500
+      height: '55vh'
     })
     TweenLite.to(this.epreuves, 0.6, {
-      x: -30,
+      x: -50,
       opacity: 1,
       delay: 0.6
     })
@@ -57,7 +52,7 @@ class Menu {
       delay: 0.6
     })
     TweenLite.to(this.epreuves, 0.6, {
-      x: 30,
+      x: 0,
       opacity: 0
     })
   }

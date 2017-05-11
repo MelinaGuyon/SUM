@@ -1,7 +1,20 @@
+@font-face {
+  font-family: "westeindeCaptionThin";
+  src: url('http://localhost:8080/assets/fonts/westeindeCaptionThin.otf');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "westeindeCaptionBold";
+  src: url('http://localhost:8080/assets/fonts/westeindeCaptionBold.otf');
+  font-style: normal;
+}
+
+
 body {
-    background-color: black;
-    margin: 0;
-    overflow: hidden;
+  background-color: #030225;
+  margin: 0;
+  overflow: hidden;
  }
 
 .js-conclusion-text-container {
@@ -9,23 +22,57 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 50%;
-  height: 500px;
+  width: 40vw;
+  height: 85vh;
   visibility: hidden;
   opacity: 0;
+  oadding-top:0;
 }
 
 .js-conclusion-p {
   position: absolute;
   top: 50%;
   left: 50%;
+  width: 90%;
   transform: translate(-50%, -50%);
   margin: 0;
-  font-size: 24px;
-  font-family: Amiko;
+  font-size: 36px;
+  font-family: westeindeCaptionThin;
   text-align: center;
-  text-transform: uppercase;
+  line-height: 3.1vw;
+  color: #A7A6F0;
+  background-color: #030225;
+  padding: 25px 0;
+}
+
+.js-conclusion-line {
+  position : absolute;
+  background-color : white;
+  width : 1.3px;
+  height : 70%;
+  left : 50%;
+  top : 50%;
+  transform : translate(-50%, -50%) rotate(30deg);
+}
+
+.js-first-recompense-button {
+  position: absolute;
+  left : 50%;
+  bottom : 0;
+  transform : translate(-50%, 0);
+  border-radius: 30px;
+  width: 35%;
+  opacity: 0;
+  visibility: hidden;
   color: white;
+  border: solid white 0.7px;
+  text-align : center;
+  font-family : westeindeCaptionThin;
+  font-size : 18px;
+  padding : 10px 15px;
+  transition: all 0.6s;
+  -webkit-transition: all 0.6s;
+  -moz-transition: all 0.6s;
 }
 
 .js-introduction-challenge-container {
@@ -68,3 +115,13 @@ body {
     display: block;
   }
 }
+
+.js-first-recompense-button:hover {
+  border: solid #BBBEE2 0.7px;
+  background-color: white;
+  color: #BBBEE2;
+  transition: all 0.6s;
+  -webkit-transition: all 0.6s;
+  -moz-transition: all 0.6s;
+}
+

@@ -24,7 +24,7 @@ class Carousel {
 
     init() {
       STORAGE.loaderClass.loadCarouselPictures([
-        'assets/before-challenge-1/carousel-test-3.jpg',
+        'assets/before-challenge-1/carousel-fond.jpg',
         'assets/before-challenge-1/0-forme-1.png',
         'assets/before-challenge-1/0-forme-2.png',
         'assets/before-challenge-1/0-forme-3.png',
@@ -106,7 +106,7 @@ class Carousel {
 
       let keysForms = Object.keys(that.spritesForms)
       let lastForm = keysForms[keysForms.length-1]
-      
+
       Object.keys(that.spritesForms).map(function(objectKey, index) {
 
         // pour que chaque image fasse 100% de hauteur

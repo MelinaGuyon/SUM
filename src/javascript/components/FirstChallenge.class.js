@@ -39,6 +39,8 @@ class FirstChallenge {
     this.conclusionChallengeTextContainer = document.querySelector('.js-conclusion-text-container')
     STORAGE.conclusionChallengeTextContainer = this.conclusionChallengeTextContainer
 
+    this.entrance = true
+
     this.init()
   }
 
@@ -88,8 +90,6 @@ class FirstChallenge {
     this.createBackground()
     this.createEye()
     this.createGif(this.movieIndex)
-    this.createPath()
-    this.createCursor()
     this.createPupilEmpty()
     this.bind()
   }
@@ -158,26 +158,6 @@ class FirstChallenge {
         this.framesArray.push(texture)
     }
 
-    /*if (index == 0) {
-      for (let i = 1; i < 35; i++) {
-        let val = i < 10 ? '0' + i : i
-        let texture1 = PIXI.Texture.fromImage(frames[0] + val + '.png')
-        this.framesArray.push(texture1)
-      }
-    } else if (index == 1) {
-      for (let i = 1; i < 35; i++) {
-        let val = i < 10 ? '0' + i : i
-        let texture2 = PIXI.Texture.fromImage(frames[1] + val + '.png')
-        this.framesArray.push(texture2)
-      }
-    } else if (index == 2) {
-      for (let i = 1; i < 35; i++) {
-        let val = i < 10 ? '0' + i : i
-        let texture3 = PIXI.Texture.fromImage(frames[2] + val + '.png')
-        this.framesArray.push(texture3)
-      }
-    }*/
-
     this.movie = new PIXI.extras.AnimatedSprite(this.framesArray)
     this.movie.alpha = 0
     this.movie.anchor.set(0.5)
@@ -194,23 +174,35 @@ class FirstChallenge {
     this.pathBasic.lineStyle(2, 0xffffff)
     this.pathBasic.lineTo(this.pathEnd[0], this.pathEnd[1])
     this.pathBasic.endFill()
-    TweenLite.set(this.pathBasic, {
-      alpha: 0.3
-    })
     this.FirstChallengeContainer.addChild(this.pathBasic)
 
     this.pathPassed.beginFill(0xFFFFFF);
     this.pathPassed.drawRect(this.pathEnd[0] - 1, this.pathEnd[1], 2, 1)
     this.FirstChallengeContainer.addChild(this.pathPassed)
+
+    TweenLite.set([this.pathBasic, this.pathPassed], {
+      alpha: 0
+    })
+    TweenLite.to(this.pathBasic, 0.6, {
+      alpha: 0.3
+    })
+    TweenLite.to(this.pathPassed, 0.6, {
+      alpha: 1
+    })
   }
 
   createCursor() {
-    this.cursor.beginFill(0xffffff, 1)
+    this.cursor.beginFill(0xffffff)
     this.cursor.drawCircle(0, 0, 10)
-    this.cursor.endFill()
     this.cursor.x = this.pathEnd[0]
     this.cursor.y = this.pathEnd[1]
     this.cursor.interactive = true // pour attribuer événements à this.cursor
+    TweenLite.set(this.cursor, {
+      alpha: 0
+    })
+    TweenLite.to(this.cursor, 0.6, {
+      alpha: 1
+    })
     this.FirstChallengeContainer.addChild(this.cursor)
   }
 
@@ -354,6 +346,17 @@ class FirstChallenge {
   }
 
   manageSounds(kill) {
+    let that = this
+    if (this.entrance) {
+      STORAGE.soundManagerClass.launchVoiceOver(soundBank.voiceOver.firstChallenge)
+      setTimeout(function(){
+        STORAGE.soundManagerClass.pauseAndPlay(false, soundBank['firstChallenge'][that.movieIndex][0], soundBank['firstChallenge'][that.movieIndex][1])
+        that.createCursor()
+        that.createPath()
+      }, 10000)
+      this.entrance = false
+      return
+    }
     if (kill) {
       STORAGE.soundManagerClass.pauseAndPlay(true)
       return

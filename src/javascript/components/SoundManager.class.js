@@ -12,6 +12,11 @@ class SoundManager {
     this.toPlay
   }
 
+  launchVoiceOver(track) {
+    this.voiceOver = PIXI.sound.Sound.from(track)
+    this.voiceOver.play()
+  }
+
   pauseAndPlay(kill, soundToPlay, soundToStop) {
     let that = this
 

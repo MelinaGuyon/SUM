@@ -79,7 +79,6 @@ class SecondChallenge {
       }
     })
 
-    //this.sum1 = new PIXI.Sprite.fromImage('../../assets/second-challenge/frite.png')
     this.sum1.anchor.x = 0.5
     this.sum1.anchor.y = 0.5
     this.SecondChallengeContainer.addChild(this.container)
@@ -89,10 +88,8 @@ class SecondChallenge {
   createMask() {
     this.mask = new PIXI.Graphics()
     this.mask.beginFill(0)
-    this.mask.drawCircle(100,100,30)
+    this.mask.moveTo(100, 100)
     this.SecondChallengeContainer.addChild(this.mask)
-    this.mask.position.x = window.innerWidth / 2 - 100
-    this.mask.position.y = window.innerHeight / 2 - 100
     this.container.mask = this.mask
   }
 
@@ -108,6 +105,13 @@ class SecondChallenge {
 
   onMouseDown() {
     console.log("click")
+
+    if (this.mask) {
+      TweenLite.to(this.mask, 0, {
+        alpha: 0, onComplete: () => { this.mask.clear(); this.createMask() }
+      })
+    }
+
     let that = this
     Object.keys(this.assets.resources).map(function(objectKey, index) {
       if (index == 2) {
@@ -120,9 +124,9 @@ class SecondChallenge {
   }
 
   onMouseMove(mouseData) {
-    console.log("over")
-    this.mask.position.x = mouseData.data.global.x - 100
-    this.mask.position.y = mouseData.data.global.y - 100
+    //console.log("over")
+    this.mask.lineStyle(50, 0)
+    this.mask.lineTo(mouseData.data.global.x, mouseData.data.global.y)
   }
 
 }

@@ -1,13 +1,13 @@
-import datas from '../datas.js'
 import TweenLite from 'gsap'
 
 class SecondChallenge {
 
   constructor(options) {
     this.SecondChallengeContainer = new PIXI.Container()
-    //this.SecondChallengeContainer.alpha = 1
+    this.SecondChallengeContainer.alpha = 1
     this.SecondChallengeContainer.interactive = true
     STORAGE.SecondChallengeClass = this
+    STORAGE.SecondChallengeContainer = this.SecondChallengeContainer
     STORAGE.stage.addChild(this.SecondChallengeContainer)
 
     this.assets = {}
@@ -16,7 +16,6 @@ class SecondChallenge {
     this.sum1
     this.container = new PIXI.Container()
 
-    this.createSum()
     this.init()
     this.bind()
   }
@@ -28,18 +27,18 @@ class SecondChallenge {
       'assets/second-challenge/frite_bleue.png'
     ])
 
-    /*TweenLite.set(STORAGE.stage, {
+    TweenLite.set(STORAGE.stage, {
       alpha: 1
     })
     TweenLite.to(this.SecondChallengeContainer, 0.6, {
       alpha: 1
-    })*/
+    })
   }
 
   setupSecondChallengePicturesLoaded() {
-    //this.assets.resources = STORAGE.loader.resources
+    this.assets.resources = STORAGE.loader.resources
 
-    //this.createBackground()
+    this.createBackground()
     this.createSum()
     this.createMask()
   }
@@ -67,22 +66,20 @@ class SecondChallenge {
   }
 
   createSum() {
-    console.log("koukou")
     let that = this
     this.container.position.x = window.innerWidth / 2
     this.container.position.y = window.innerHeight / 2
 
-    /*Object.keys(this.assets.resources).map(function(objectKey, index) {
+    Object.keys(this.assets.resources).map(function(objectKey, index) {
+          console.log("sum creation")
+
       if (index == 1) {
         that.sum1 = new PIXI.Sprite(that.assets.resources[objectKey].texture)
         console.log(that.sum1)
-
-        jeudi : tenues + lavage cheveux + raz bras + tuch ?
-        vendredi : préparation sac + raz jambes + tuch ?
       }
-    })*/
+    })
 
-    this.sum1 = new PIXI.Sprite.fromImage('../../assets/second-challenge/frite.png')
+    //this.sum1 = new PIXI.Sprite.fromImage('../../assets/second-challenge/frite.png')
     this.sum1.anchor.x = 0.5
     this.sum1.anchor.y = 0.5
     this.SecondChallengeContainer.addChild(this.container)

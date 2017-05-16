@@ -4,8 +4,8 @@ import Renderer from './components/Renderer.class.js'
 import Loader from './components/Loader.class.js'
 import SoundManager from './components/SoundManager.class.js'
 import Carousel from './components/Carousel.class.js'
-import FirstChallenge from './components/FirstChallenge.class.js'
 import Menu from './components/Menu.class.js'
+import FirstChallenge from './components/FirstChallenge.class.js'
 import FirstRecompense from './components/FirstRecompense.class.js'
 import SecondChallenge from './components/SecondChallenge.class.js'
 
@@ -20,11 +20,11 @@ function initCanvas() {
   new Loader()
   new SoundManager()
   new Menu()
-  new Carousel()
+  // new Carousel()
   // new FirstChallenge()
   // new FirstRecompense()
   new SecondChallenge()
-  
+
   render()
 }
 

@@ -19,20 +19,6 @@ class Loader {
     })
   }
 
-  loadFirstChallengePictures(pictures) {
-    this.loader.resources = {}
-
-    for (var i = 0; i < pictures.length; i++) {
-      this.loader
-      .add([pictures[i]])
-    }
-
-    this.loader
-    .load(function(){
-      STORAGE.FirstChallengeClass.setupFirstChallengePicturesLoaded()
-    })
-  }
-
   loadMenuPictures(pictures) {
     this.loader.resources = {}
 
@@ -44,6 +30,20 @@ class Loader {
     this.loader
     .load(function(){
       STORAGE.MenuClass.setupMenuPicturesLoaded()
+    })
+  }
+
+  loadFirstChallengePictures(pictures) {
+    this.loader.resources = {}
+
+    for (var i = 0; i < pictures.length; i++) {
+      this.loader
+      .add([pictures[i]])
+    }
+
+    this.loader
+    .load(function(){
+      STORAGE.FirstChallengeClass.setupFirstChallengePicturesLoaded()
     })
   }
 

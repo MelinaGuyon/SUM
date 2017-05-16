@@ -131,15 +131,15 @@ class SecondChallenge {
 
   bind() {
     let that = this
-    this.SecondChallengeContainer.mousedown = function(mouseData){
+    /*this.SecondChallengeContainer.mousedown = function(mouseData){
       that.onMouseDown(mouseData)
-    }
+    }*/
     this.SecondChallengeContainer.mousemove = function(mouseData){
       that.onMouseMove(mouseData)
     }
   }
 
-  onMouseDown(mouseData) {
+  allCheckpointsChecked() {
     this.stepIndex++
     console.log(this.stepIndex)
 
@@ -160,14 +160,29 @@ class SecondChallenge {
   }
 
   onMouseMove(mouseData) {
-    // mouseData.data.global.x -= 50
-    // mouseData.data.global.y = 500
-    this.mask.lineStyle(500, 0, 1) // ou lineWidth = window.innerHeight
+    mouseData.data.global.x -= 50
+    mouseData.data.global.y = 500
+    this.mask.lineStyle(window.innerWidth, 0, 1) // ou lineWidth = window.innerWidth
     this.mask.lineTo(mouseData.data.global.x, mouseData.data.global.y)
+
+    this.isWellErased(mouseData)
   }
 
-  isWellErased() {
-    
+  isWellErased(mouseData) {
+    if (mouseData.data.global.x <= window.innerWidth/4) {
+      this.firstCheckpointChecked = true
+      console.log("first checkpoint checked")
+    }
+    if (mouseData.data.global.x >= window.innerWidth-window.innerWidth/4) {
+      this.secondCheckpointChecked = true
+      console.log("second checkpoint checked")
+    }
+
+    if (this.firstCheckpointChecked == true && this.secondCheckpointChecked == true) {
+      this.allCheckpointsChecked()
+      this.firstCheckpointChecked = false
+      this.secondCheckpointChecked = false
+    }
   }
 
 }

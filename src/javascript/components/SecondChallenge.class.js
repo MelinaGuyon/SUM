@@ -15,6 +15,7 @@ class SecondChallenge {
     this.background
     this.sum1
     this.container = new PIXI.Container()
+    this.stepIndex = 0
 
     this.init()
     this.bind()
@@ -22,9 +23,13 @@ class SecondChallenge {
 
   init() {
     STORAGE.loaderClass.loadSecondChallengePictures([
-      'assets/second-challenge/fond.png',
-      'assets/second-challenge/frite.png',
-      'assets/second-challenge/frite_bleue.png'
+      'assets/second-challenge/step_1.png',
+      'assets/second-challenge/step_2.png',
+      'assets/second-challenge/step_3.png',
+      'assets/second-challenge/step_4.png',
+      'assets/second-challenge/step_5.png',
+      'assets/second-challenge/step_6.png',
+      'assets/second-challenge/step_7.png'
     ])
 
     TweenLite.set(STORAGE.stage, {
@@ -104,7 +109,8 @@ class SecondChallenge {
   }
 
   onMouseDown() {
-    console.log("click")
+    this.stepIndex++
+    console.log(this.stepIndex)
 
     if (this.mask) {
       TweenLite.to(this.mask, 0, {
@@ -114,18 +120,33 @@ class SecondChallenge {
 
     let that = this
     Object.keys(this.assets.resources).map(function(objectKey, index) {
-      if (index == 2) {
-        that.sum2 = new PIXI.Sprite(that.assets.resources[objectKey].texture)
+      if (that.stepIndex == 1 && index == 2) {
+        that.new_sum = new PIXI.Sprite(that.assets.resources[objectKey].texture)
+      }
+      if (that.stepIndex == 2 && index == 3) {
+        that.new_sum = new PIXI.Sprite(that.assets.resources[objectKey].texture)
+      }
+      if (that.stepIndex == 3 && index == 4) {
+        that.new_sum = new PIXI.Sprite(that.assets.resources[objectKey].texture)
+      }
+      if (that.stepIndex == 4 && index == 5) {
+        that.new_sum = new PIXI.Sprite(that.assets.resources[objectKey].texture)
+      }
+      if (that.stepIndex == 5 && index == 6) {
+        that.new_sum = new PIXI.Sprite(that.assets.resources[objectKey].texture)
+      }
+      if (that.stepIndex > 5) {
+        // phrase de conclu + recompense
       }
     })
-    this.sum2.anchor.x = 0.5
-    this.sum2.anchor.y = 0.5
-    this.container.addChild(this.sum2)
+    this.new_sum.anchor.x = 0.5
+    this.new_sum.anchor.y = 0.5
+    this.container.addChild(this.new_sum)
   }
 
   onMouseMove(mouseData) {
     //console.log("over")
-    this.mask.lineStyle(50, 0)
+    this.mask.lineStyle(100, 0)
     this.mask.lineTo(mouseData.data.global.x, mouseData.data.global.y)
   }
 

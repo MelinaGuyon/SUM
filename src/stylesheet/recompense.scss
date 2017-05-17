@@ -1,0 +1,44 @@
+.first-recompense, .second-recompense { display : none; opacity : 0; width: 100vw; height: 100vh; position: relative; }
+.first-recompense { background-color : #030225; }
+.second-recompense { background-color : black; }
+
+.first-recompense-scale, .second-recompense-scale { position: absolute; transform: scale(0.9); left: 50%; top: 50%; }
+
+.first-recompense-path, .second-recompense-path { display: block; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+
+.path { fill: none; stroke: #FFFFFF; stroke-width: 2; }
+
+.first_path_sum, .first_path_cercle1, .first_path_cercle2, .first_path_cercle3, .first_path_cercle4 { stroke-dasharray: 4.98,39.85; stroke-dashoffset: 1000; animation: dash 10s linear infinite; }
+.first_path_sumEye { stroke-dasharray: 1,12; stroke-dashoffset: 1000; stroke-width: 3.3; }
+
+.second_path_sum, .second_path_cercle1, .second_path_cercle2, .second_path_cercle3, .second_path_cercle4 { stroke-dasharray: 4.98,39.85; stroke-dashoffset: 1000; animation: dash 10s linear infinite; }
+.second_path_sumEye { stroke-dasharray: 1,12; stroke-dashoffset: 1000; stroke-width: 3.3; }
+
+.path_sumPupille { fill: #FFFFFF; }
+
+@keyframes dash {
+  from { stroke-dashoffset: 1000; }
+  to { stroke-dashoffset: 0; }
+}
+
+
+/*---------------MEDIA QUERIES----------------------*/
+
+/*svg { transition: fill .1s ease-out, opacity .1s ease-out; }*/
+ 
+
+@media all and (max-width: 1600px) { 
+	.first-recompense-scale, .second-recompense-scale { transform: scale(0.7); }
+}
+
+@media all and (max-width: 1200px) { 
+	.first-recompense-scale, .second-recompense-scale { transform: scale(0.5); }
+}
+
+@media all and (max-width: 1024px) {
+    .first-recompense-scale, .second-recompense-scale { transform: scale(0.4); }
+}
+
+@media all and (max-width: 768px) {
+    .first-recompense-scale, .second-recompense-scale { transform: scale(0.3); }
+}

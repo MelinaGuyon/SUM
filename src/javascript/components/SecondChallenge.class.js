@@ -1,3 +1,5 @@
+import conclusionTextsDatas from '../datas/conclusionTexts.js'
+import SecondRecompense from './SecondRecompense.class.js'
 import TweenLite from 'gsap'
 
 class SecondChallenge {
@@ -16,6 +18,17 @@ class SecondChallenge {
     this.sum
     this.container = new PIXI.Container()
     this.stepIndex = 0
+
+    this.recompenseButton = document.querySelector('.js-first-recompense-button')
+    this.conclusionChallengeText = document.querySelector('.js-conclusion-p')
+    this.conclusionChallengeButton = document.querySelector('.js-first-recompense-button')
+    this.conclusionChallengeTextContainer = document.querySelector('.js-conclusion-text-container')
+    STORAGE.conclusionChallengeTextContainer = this.conclusionChallengeTextContainer
+
+    let textConclusion = document.createTextNode(conclusionTextsDatas.secondChallenge)
+    let buttonConclusion = document.createTextNode(conclusionTextsDatas.secondChallengeButton)
+    this.conclusionChallengeText.appendChild(textConclusion)
+    this.conclusionChallengeButton.appendChild(buttonConclusion)
 
     this.init()
     this.bind()
@@ -69,6 +82,10 @@ class SecondChallenge {
       if (that.stepIndex == 5 && index == 5) {
         that.background = new PIXI.Sprite(that.assets.resources[objectKey].texture)
       }
+      if (that.stepIndex == 6 && index == 6) {
+        that.background = new PIXI.Sprite(that.assets.resources[objectKey].texture)
+        that.showConclusion()
+      }
     })
 
     let ratioVertical = window.innerHeight / this.background.texture.height
@@ -82,7 +99,6 @@ class SecondChallenge {
     }
 
     this.SecondChallengeContainer.addChild(this.background)
-    console.log(this.SecondChallengeContainer)
   }
 
   createSum(stepIndex) {
@@ -131,19 +147,23 @@ class SecondChallenge {
 
   bind() {
     let that = this
-    /*this.SecondChallengeContainer.mousedown = function(mouseData){
-      that.onMouseDown(mouseData)
-    }*/
     this.SecondChallengeContainer.mousemove = function(mouseData){
       that.onMouseMove(mouseData)
     }
+    this.recompenseButton.addEventListener('click', that.handleRecompenseButtonClick)
+  }
+
+  unbind() {
+    let that = this
+    this.SecondChallengeContainer.mousemove = null
+    window.removeEventListener('click', that.handleRecompenseButtonClick)
   }
 
   allCheckpointsChecked() {
     this.stepIndex++
     console.log(this.stepIndex)
 
-    if (this.mask) {
+    if (this.stepIndex <= 6) {
       TweenLite.to([this.background, this.sum, this.mask], 0, { // augmenter delta pour transi
         alpha: 0, onComplete: () => { 
           //this.background.clear()
@@ -151,29 +171,26 @@ class SecondChallenge {
           this.createBackground(this.stepIndex)
           this.createSum(this.stepIndex)
           this.createMask() 
-          /*TweenLite.to([this.background, this.sum, this.mask], 0.4, {
-            alpha: 1
-          })*/
         }
       })
     }
   }
 
   onMouseMove(mouseData) {
-    mouseData.data.global.x -= 50
-    mouseData.data.global.y = 500
-    this.mask.lineStyle(window.innerWidth, 0, 1) // ou lineWidth = window.innerWidth
+    //mouseData.data.global.x -= 50
+    //mouseData.data.global.y = 500
+    this.mask.lineStyle(600, 0, 1) // ou lineWidth = window.innerWidth
     this.mask.lineTo(mouseData.data.global.x, mouseData.data.global.y)
 
     this.isWellErased(mouseData)
   }
 
   isWellErased(mouseData) {
-    if (mouseData.data.global.x <= window.innerWidth/4) {
+    if (mouseData.data.global.x <= window.innerWidth/3.5) {
       this.firstCheckpointChecked = true
       console.log("first checkpoint checked")
     }
-    if (mouseData.data.global.x >= window.innerWidth-window.innerWidth/4) {
+    if (mouseData.data.global.x >= window.innerWidth-window.innerWidth/3.5) {
       this.secondCheckpointChecked = true
       console.log("second checkpoint checked")
     }
@@ -183,6 +200,50 @@ class SecondChallenge {
       this.firstCheckpointChecked = false
       this.secondCheckpointChecked = false
     }
+  }
+
+  showConclusion() {
+    TweenLite.to(this.conclusionChallengeTextContainer, 2, {
+      autoAlpha: 1,
+      delay: 1
+    })
+    this.displayRecompenseButton()
+  }
+
+  displayRecompenseButton() {
+    TweenLite.to(this.recompenseButton, 1.2, {
+      autoAlpha: 1
+    })
+  }
+
+  handleRecompenseButtonClick() {
+    STORAGE.SecondChallengeClass.undDisplayRecompenseButton()
+
+    TweenLite.to([STORAGE.SecondChallengeContainer, STORAGE.conclusionChallengeTextContainer], 0.5, {
+      alpha: 0,
+      display:'none',
+      delay: 1
+    })
+    TweenLite.to([STORAGE.stage], 0.4, {
+      alpha: 0,
+      onComplete: function() {
+        setTimeout(function(){
+          STORAGE.SecondChallengeContainer.destroy()
+          STORAGE.SecondChallengeClass.unbind()
+          STORAGE.SecondChallengeContainer = null
+          STORAGE.conclusionChallengeTextContainer = null
+          STORAGE.SecondChallengeClass = null
+          new SecondRecompense()
+        }, 1000)
+      },
+      delay: 2
+    })
+  }
+
+  undDisplayRecompenseButton() {
+    TweenLite.to(this.recompenseButton, 1.2, {
+      autoAlpha: 0
+    })
   }
 
 }

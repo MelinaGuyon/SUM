@@ -16,6 +16,7 @@ class ThirdChallenge {
     this.rectangle = new PIXI.Graphics()
     this.circle = new PIXI.Graphics()
     this.triangle = new PIXI.Graphics()
+    this.checkpoint = new PIXI.Graphics()
     this.shape
     this.isDragging = false
 
@@ -55,6 +56,7 @@ class ThirdChallenge {
     this.rectangle.mousedown = function(mouseData){ that.onShapeMouseDown(mouseData, this) }
     this.circle.mousedown = function(mouseData){ that.onShapeMouseDown(mouseData, this) }
     this.triangle.mousedown = function(mouseData){ that.onShapeMouseDown(mouseData, this) }
+    this.checkpoint.mousedown = function() { that.onCheckpointMouseDown() }
   }
 
   unbind() {
@@ -106,12 +108,22 @@ class ThirdChallenge {
     }
   }
 
+  onCheckpointMouseDown() {
+    let that = this
+    for(this.i=0; this.i<10; this.i++){
+      setTimeout(function(){
+        that.drawRandomCircle()
+      }, 1000)
+    }
+  }
+
   setupThirdChallengePicturesLoaded() {
     this.assets.resources = STORAGE.loader.resources
 
     this.drawRectangle()
     this.drawCircle()
     this.drawTriangle()
+    this.drawCheckpoint()
     this.bind()
   }
 
@@ -133,6 +145,16 @@ class ThirdChallenge {
     this.ThirdChallengeContainer.addChild(this.circle) 
   }
 
+  drawRandomCircle() {
+    this.randomCircle = new PIXI.Graphics()
+    this.randomCircle.beginFill()
+    this.randomCircle.lineStyle(2, 0xFFFFFF)
+    this.randomCircle.drawCircle(window.innerWidth/(Math.random()*5), window.innerHeight/(Math.random()*5), Math.random()*100)
+    this.randomCircle.endFill()
+    this.randomCircle.interactive = true
+    this.ThirdChallengeContainer.addChild(this.randomCircle) 
+  }
+
   drawTriangle() {
     this.triangle.beginFill()
     this.triangle.lineStyle(2, 0xFFFFFF)
@@ -143,6 +165,15 @@ class ThirdChallenge {
     this.triangle.endFill()
     this.triangle.interactive = true
     this.ThirdChallengeContainer.addChild(this.triangle)
+  }
+
+  drawCheckpoint() {
+    this.checkpoint.beginFill(0xFFFFFF)
+    this.checkpoint.lineStyle(2, 0xFFFFFF)
+    this.checkpoint.drawCircle(50, 50, 10)
+    this.checkpoint.endFill()
+    this.checkpoint.interactive = true
+    this.ThirdChallengeContainer.addChild(this.checkpoint) 
   }
 
   displayRecompenseButton() {

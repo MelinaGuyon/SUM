@@ -52,9 +52,9 @@ class ThirdChallenge {
     this.circle.mouseout = function(){ that.onShapeMouseOut() }
     this.triangle.mouseover = function(){ that.onShapeMouseOver() }
     this.triangle.mouseout = function(){ that.onShapeMouseOut() }
-    this.rectangle.mousedown = function(){ that.onShapeMouseDown(this) }
-    this.circle.mousedown = function(){ that.onShapeMouseDown(this) }
-    this.triangle.mousedown = function(){ that.onShapeMouseDown(this) }
+    this.rectangle.mousedown = function(mouseData){ that.onShapeMouseDown(mouseData, this) }
+    this.circle.mousedown = function(mouseData){ that.onShapeMouseDown(mouseData, this) }
+    this.triangle.mousedown = function(mouseData){ that.onShapeMouseDown(mouseData, this) }
   }
 
   unbind() {
@@ -71,11 +71,14 @@ class ThirdChallenge {
     }
   }
 
-  onShapeMouseDown(shape) {
+  onShapeMouseDown(mouseData, shape) {
     let that = this
     this.shape = shape
 
     this.isDragging = true
+    this.mouseX = mouseData.data.global.x
+    this.mouseY = mouseData.data.global.y
+
     document.body.style.cursor = '-webkit-grabbing'
     
     this.shape.mousemove = function(mouseData){
@@ -87,12 +90,12 @@ class ThirdChallenge {
   }
 
   onShapeMouseMove(mouseData) {
-    console.log(this.shape.mousemove)
-    this.shape.x = mouseData.data.global.x
-    this.shape.y = mouseData.data.global.y
-
-    console.log("SHAPE X", this.shape.x)
-    console.log("MOUSE X", mouseData.data.global.x)
+    this.newMouseX = mouseData.data.global.x
+    this.newMouseY = mouseData.data.global.y
+    this.shape.x += this.newMouseX - this.mouseX
+    this.shape.y += this.newMouseY - this.mouseY
+    this.mouseX = this.newMouseX
+    this.mouseY = this.newMouseY
   }
 
   onWindowMouseUp(that) {
@@ -116,12 +119,12 @@ class ThirdChallenge {
     this.rectangle.beginFill()
     this.rectangle.lineStyle(2, 0xFFFFFF)
     this.rectangle.drawRect(window.innerWidth-window.innerWidth/4*3-150, window.innerHeight-200, 150, 100)
+    this.rectangle.endFill()
     this.rectangle.interactive = true
     this.ThirdChallengeContainer.addChild(this.rectangle)
   }
 
   drawCircle() {
-    this.circle = new PIXI.Graphics()
     this.circle.beginFill()
     this.circle.lineStyle(2, 0xFFFFFF)
     this.circle.drawCircle(window.innerWidth/2, window.innerHeight-150, 50)
@@ -131,7 +134,6 @@ class ThirdChallenge {
   }
 
   drawTriangle() {
-    this.triangle = new PIXI.Graphics()
     this.triangle.beginFill()
     this.triangle.lineStyle(2, 0xFFFFFF)
     this.triangle.moveTo(window.innerWidth-window.innerWidth/4, window.innerHeight-100)

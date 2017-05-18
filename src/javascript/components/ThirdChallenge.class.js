@@ -13,6 +13,11 @@ class ThirdChallenge {
     this.assets = {}
 
     this.background
+    this.rectangle = new PIXI.Graphics()
+    this.circle = new PIXI.Graphics()
+    this.triangle = new PIXI.Graphics()
+    this.shape
+    this.isDragging = false
 
     this.recompenseButton = document.querySelector('.js-first-recompense-button')
     this.conclusionChallengeText = document.querySelector('.js-conclusion-p')
@@ -41,40 +46,101 @@ class ThirdChallenge {
 
   bind() {
     let that = this
-
+    this.rectangle.mouseover = function(){ that.onShapeMouseOver() }
+    this.rectangle.mouseout = function(){ that.onShapeMouseOut() }
+    this.circle.mouseover = function(){ that.onShapeMouseOver() }
+    this.circle.mouseout = function(){ that.onShapeMouseOut() }
+    this.triangle.mouseover = function(){ that.onShapeMouseOver() }
+    this.triangle.mouseout = function(){ that.onShapeMouseOut() }
+    this.rectangle.mousedown = function(){ that.onShapeMouseDown(this) }
+    this.circle.mousedown = function(){ that.onShapeMouseDown(this) }
+    this.triangle.mousedown = function(){ that.onShapeMouseDown(this) }
   }
 
   unbind() {
-      let that = this
-      
+    let that = this
+  }
+
+  onShapeMouseOver() {
+    document.body.style.cursor = '-webkit-grabbing'
+  }
+
+  onShapeMouseOut() {
+    if (!this.isDragging) {
+      document.body.style.cursor = 'auto'
+    }
+  }
+
+  onShapeMouseDown(shape) {
+    let that = this
+    this.shape = shape
+
+    this.isDragging = true
+    document.body.style.cursor = '-webkit-grabbing'
+    
+    this.shape.mousemove = function(mouseData){
+      that.onShapeMouseMove(mouseData)
+    }
+    window.addEventListener('mouseup', function(){
+      that.onWindowMouseUp(that)
+    })
+  }
+
+  onShapeMouseMove(mouseData) {
+    console.log(this.shape.mousemove)
+    this.shape.x = mouseData.data.global.x
+    this.shape.y = mouseData.data.global.y
+
+    console.log("SHAPE X", this.shape.x)
+    console.log("MOUSE X", mouseData.data.global.x)
+  }
+
+  onWindowMouseUp(that) {
+    if (that.shape && that.isDragging) {
+      that.isDragging = false
+      that.shape.mousemove = null
+      document.body.style.cursor = 'auto'
+    }
   }
 
   setupThirdChallengePicturesLoaded() {
     this.assets.resources = STORAGE.loader.resources
 
-    this.drawCircle()
     this.drawRectangle()
+    this.drawCircle()
+    this.drawTriangle()
     this.bind()
   }
 
+  drawRectangle() {
+    this.rectangle.beginFill()
+    this.rectangle.lineStyle(2, 0xFFFFFF)
+    this.rectangle.drawRect(window.innerWidth-window.innerWidth/4*3-150, window.innerHeight-200, 150, 100)
+    this.rectangle.interactive = true
+    this.ThirdChallengeContainer.addChild(this.rectangle)
+  }
 
   drawCircle() {
     this.circle = new PIXI.Graphics()
+    this.circle.beginFill()
     this.circle.lineStyle(2, 0xFFFFFF)
-    this.circle.drawCircle(800, window.innerHeight-150, 50)
+    this.circle.drawCircle(window.innerWidth/2, window.innerHeight-150, 50)
     this.circle.endFill()
+    this.circle.interactive = true
     this.ThirdChallengeContainer.addChild(this.circle) 
   }
 
   drawTriangle() {
-    
-  }
-
-  drawRectangle() {
-    this.rectangle = new PIXI.Graphics()
-    this.rectangle.lineStyle(2, 0xFFFFFF)
-    this.rectangle.drawRect(400, window.innerHeight-200, 150, 100)
-    this.ThirdChallengeContainer.addChild(this.rectangle)
+    this.triangle = new PIXI.Graphics()
+    this.triangle.beginFill()
+    this.triangle.lineStyle(2, 0xFFFFFF)
+    this.triangle.moveTo(window.innerWidth-window.innerWidth/4, window.innerHeight-100)
+    this.triangle.lineTo(window.innerWidth-window.innerWidth/4+150, window.innerHeight-100)
+    this.triangle.lineTo(window.innerWidth-window.innerWidth/4+75, window.innerHeight-200)
+    this.triangle.lineTo(window.innerWidth-window.innerWidth/4, window.innerHeight-100)
+    this.triangle.endFill()
+    this.triangle.interactive = true
+    this.ThirdChallengeContainer.addChild(this.triangle)
   }
 
   displayRecompenseButton() {

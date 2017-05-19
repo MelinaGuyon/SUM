@@ -13,9 +13,6 @@ class ThirdChallenge {
     this.assets = {}
 
     this.background
-    this.rectangle = new PIXI.Graphics()
-    this.circle = new PIXI.Graphics()
-    this.triangle = new PIXI.Graphics()
     this.checkpoint = new PIXI.Graphics()
     this.shape
     this.isDragging = false
@@ -82,13 +79,15 @@ class ThirdChallenge {
     this.mouseY = mouseData.data.global.y
 
     document.body.style.cursor = '-webkit-grabbing'
-    
+
     this.shape.mousemove = function(mouseData){
       that.onShapeMouseMove(mouseData)
     }
     window.addEventListener('mouseup', function(){
       that.onWindowMouseUp(that)
     })
+
+    this.backtoBeginning(that.shape)
   }
 
   onShapeMouseMove(mouseData) {
@@ -98,6 +97,7 @@ class ThirdChallenge {
     this.shape.y += this.newMouseY - this.mouseY
     this.mouseX = this.newMouseX
     this.mouseY = this.newMouseY
+
   }
 
   onWindowMouseUp(that) {
@@ -108,12 +108,25 @@ class ThirdChallenge {
     }
   }
 
+  backtoBeginning(shape) {
+    let that = this
+
+    if (shape.graphicsData[0].shape.constructor.name == 'Circle') { that.drawCircle() } 
+    else if (shape.graphicsData[0].shape.constructor.name == 'Rectangle') { that.drawRectangle() } 
+    else if (shape.graphicsData[0].shape.constructor.name == 'Polygon') { that.drawTriangle() }
+    this.rectangle.mousedown = function(mouseData){ that.onShapeMouseDown(mouseData, this) }
+    this.circle.mousedown = function(mouseData){ that.onShapeMouseDown(mouseData, this) }
+    this.triangle.mousedown = function(mouseData){ that.onShapeMouseDown(mouseData, this) }
+  }
+
   onCheckpointMouseDown() {
     let that = this
     for(this.i=0; this.i<10; this.i++){
-      setTimeout(function(){
+      //setTimeout(function(){
         that.drawRandomCircle()
-      }, 1000)
+        that.drawRandomRectangle()
+        that.drawRandomTriangle()
+      //}, 1000)
     }
   }
 
@@ -128,15 +141,27 @@ class ThirdChallenge {
   }
 
   drawRectangle() {
+    this.rectangle = new PIXI.Graphics()
     this.rectangle.beginFill()
     this.rectangle.lineStyle(2, 0xFFFFFF)
     this.rectangle.drawRect(window.innerWidth-window.innerWidth/4*3-150, window.innerHeight-200, 150, 100)
     this.rectangle.endFill()
     this.rectangle.interactive = true
     this.ThirdChallengeContainer.addChild(this.rectangle)
+  }  
+
+  drawRandomRectangle() {
+    this.randomRectangle = new PIXI.Graphics()
+    this.randomRectangle.beginFill()
+    this.randomRectangle.lineStyle(2, 0xFFFFFF)
+    this.randomRectangle.drawRect(window.innerWidth/(Math.random()*5), window.innerHeight/(Math.random()*5), Math.random()*100, Math.random()*100)
+    this.randomRectangle.endFill()
+    this.randomRectangle.interactive = true
+    this.ThirdChallengeContainer.addChild(this.randomRectangle)
   }
 
   drawCircle() {
+    this.circle = new PIXI.Graphics()
     this.circle.beginFill()
     this.circle.lineStyle(2, 0xFFFFFF)
     this.circle.drawCircle(window.innerWidth/2, window.innerHeight-150, 50)
@@ -156,6 +181,7 @@ class ThirdChallenge {
   }
 
   drawTriangle() {
+    this.triangle = new PIXI.Graphics()
     this.triangle.beginFill()
     this.triangle.lineStyle(2, 0xFFFFFF)
     this.triangle.moveTo(window.innerWidth-window.innerWidth/4, window.innerHeight-100)
@@ -166,6 +192,11 @@ class ThirdChallenge {
     this.triangle.interactive = true
     this.ThirdChallengeContainer.addChild(this.triangle)
   }
+
+  drawRandomTriangle() {
+   
+  }
+
 
   drawCheckpoint() {
     this.checkpoint.beginFill(0xFFFFFF)

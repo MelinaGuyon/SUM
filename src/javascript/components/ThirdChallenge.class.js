@@ -16,6 +16,7 @@ class ThirdChallenge {
     this.checkpoint = new PIXI.Graphics()
     this.shape
     this.isDragging = false
+    this.keepDoing = true
 
     this.recompenseButton = document.querySelector('.js-first-recompense-button')
     this.conclusionChallengeText = document.querySelector('.js-conclusion-p')
@@ -121,13 +122,20 @@ class ThirdChallenge {
 
   onCheckpointMouseDown() {
     let that = this
-    for(this.i=0; this.i<10; this.i++){
-      //setTimeout(function(){
-        that.drawRandomCircle()
-        that.drawRandomRectangle()
-        that.drawRandomTriangle()
-      //}, 1000)
+    that.drawRandomCircle()
+    that.drawRandomRectangle()
+    that.drawRandomTriangle()
+
+    if(this.keepDoing == true) {
+      setTimeout(function(){ 
+        that.onCheckpointMouseDown() 
+      }, 100)
     }
+
+    setTimeout(function(){ 
+      this.keepDoing = false
+    }, 1000)
+
   }
 
   setupThirdChallengePicturesLoaded() {

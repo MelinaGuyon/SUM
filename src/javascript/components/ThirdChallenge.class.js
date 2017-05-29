@@ -32,7 +32,10 @@ class ThirdChallenge {
     console.log(window.innerWidth)
     
     STORAGE.loaderClass.loadThirdChallengePictures([
-      'assets/first-challenge/fond.png'
+      'assets/first-challenge/fond.png',
+      'assets/third-challenge/rectangle.png',
+      'assets/third-challenge/circle.png',
+      'assets/third-challenge/triangle.png'
     ])
 
     TweenLite.set(STORAGE.stage, {
@@ -110,11 +113,24 @@ class ThirdChallenge {
   }
 
   backtoBeginning(shape) {
-    let that = this
 
-    if (shape.graphicsData[0].shape.constructor.name == 'Circle') { that.drawCircle() } 
+    let that = this
+    Object.keys(this.assets.resources).map(function(objectKey, index) {
+      if (index == 1) {
+        that.drawRectangle()      
+      }
+      else if (index == 2) {
+        that.drawCircle()
+      }
+      else if (index == 3) {
+        that.drawTriangle()
+      }
+    })
+
+/*  if (shape.graphicsData[0].shape.constructor.name == 'Circle') { that.drawCircle() } 
     else if (shape.graphicsData[0].shape.constructor.name == 'Rectangle') { that.drawRectangle() } 
     else if (shape.graphicsData[0].shape.constructor.name == 'Polygon') { that.drawTriangle() }
+*/
     this.rectangle.mousedown = function(mouseData){ that.onShapeMouseDown(mouseData, this) }
     this.circle.mousedown = function(mouseData){ that.onShapeMouseDown(mouseData, this) }
     this.triangle.mousedown = function(mouseData){ that.onShapeMouseDown(mouseData, this) }
@@ -133,16 +149,11 @@ class ThirdChallenge {
     that.drawRandomRectangle()
     that.drawRandomTriangle()
 
-
-
     if(this.keepDoing == true) {
       setTimeout(function(){ 
         that.onCheckpointMouseDown() 
       }, 100)
     }
-
-
-
   }
 
   setupThirdChallengePicturesLoaded() {
@@ -156,60 +167,95 @@ class ThirdChallenge {
   }
 
   drawRectangle() {
-    this.rectangle = new PIXI.Graphics()
-    this.rectangle.beginFill()
-    this.rectangle.lineStyle(2, 0xFFFFFF)
-    this.rectangle.drawRect(window.innerWidth-window.innerWidth/4*3-150, window.innerHeight-200, 150, 100)
-    this.rectangle.endFill()
+    let that = this
+    Object.keys(this.assets.resources).map(function(objectKey, index) {
+      if (index == 1) {
+        that.rectangle = new PIXI.Sprite(that.assets.resources[objectKey].texture)
+      }
+    })
+    this.rectangle.width = 715/10
+    this.rectangle.height = 1063/10
+    this.rectangle.x = window.innerWidth-window.innerWidth/4*3-this.rectangle.width
+    this.rectangle.y = window.innerHeight/2-this.rectangle.height/2
     this.rectangle.interactive = true
     this.ThirdChallengeContainer.addChild(this.rectangle)
   }  
 
   drawRandomRectangle() {
-    this.randomRectangle = new PIXI.Graphics()
-    this.randomRectangle.beginFill()
-    this.randomRectangle.lineStyle(2, 0xFFFFFF)
-    this.randomRectangle.drawRect(window.innerWidth/(Math.random()*5), window.innerHeight/(Math.random()*5), Math.random()*100, Math.random()*100)
-    this.randomRectangle.endFill()
+    let that = this
+    Object.keys(this.assets.resources).map(function(objectKey, index) {
+      if (index == 1) {
+        that.randomRectangle = new PIXI.Sprite(that.assets.resources[objectKey].texture)
+      }
+    })
+    this.randomNumber = Math.random()
+    this.randomRectangle.width = 715/10*this.randomNumber
+    this.randomRectangle.height = 1063/10*this.randomNumber
+    this.randomRectangle.x = window.innerWidth/(Math.random()*5)
+    this.randomRectangle.y = window.innerHeight/(Math.random()*5)
     this.randomRectangle.interactive = true
     this.ThirdChallengeContainer.addChild(this.randomRectangle)
   }
 
   drawCircle() {
-    this.circle = new PIXI.Graphics()
-    this.circle.beginFill()
-    this.circle.lineStyle(2, 0xFFFFFF)
-    this.circle.drawCircle(window.innerWidth/2, window.innerHeight-150, 50)
-    this.circle.endFill()
+    let that = this
+    Object.keys(this.assets.resources).map(function(objectKey, index) {
+      if (index == 2) {
+        that.circle = new PIXI.Sprite(that.assets.resources[objectKey].texture)
+      }
+    })
+    this.circle.width = 1069/10
+    this.circle.height = 1069/10
+    this.circle.x = window.innerWidth-window.innerWidth/4*2-this.circle.width
+    this.circle.y = window.innerHeight/2-this.circle.height/2
     this.circle.interactive = true
     this.ThirdChallengeContainer.addChild(this.circle) 
   }
 
   drawRandomCircle() {
-    this.randomCircle = new PIXI.Graphics()
-    this.randomCircle.beginFill()
-    this.randomCircle.lineStyle(2, 0xFFFFFF)
-    this.randomCircle.drawCircle(window.innerWidth/(Math.random()*5), window.innerHeight/(Math.random()*5), Math.random()*100)
-    this.randomCircle.endFill()
+    let that = this
+    Object.keys(this.assets.resources).map(function(objectKey, index) {
+      if (index == 2) {
+        that.randomCircle = new PIXI.Sprite(that.assets.resources[objectKey].texture)
+      }
+    })
+    this.randomCircle.width = Math.random()*100
+    this.randomCircle.height = this.randomCircle.width
+    this.randomCircle.x = window.innerWidth/(Math.random()*5)
+    this.randomCircle.y = window.innerHeight/(Math.random()*5)
     this.randomCircle.interactive = true
     this.ThirdChallengeContainer.addChild(this.randomCircle) 
   }
 
   drawTriangle() {
-    this.triangle = new PIXI.Graphics()
-    this.triangle.beginFill()
-    this.triangle.lineStyle(2, 0xFFFFFF)
-    this.triangle.moveTo(window.innerWidth-window.innerWidth/4, window.innerHeight-100)
-    this.triangle.lineTo(window.innerWidth-window.innerWidth/4+150, window.innerHeight-100)
-    this.triangle.lineTo(window.innerWidth-window.innerWidth/4+75, window.innerHeight-200)
-    this.triangle.lineTo(window.innerWidth-window.innerWidth/4, window.innerHeight-100)
-    this.triangle.endFill()
+    let that = this
+    Object.keys(this.assets.resources).map(function(objectKey, index) {
+      if (index == 3) {
+        that.triangle = new PIXI.Sprite(that.assets.resources[objectKey].texture)
+      }
+    })
+    this.triangle.width = 1920/10
+    this.triangle.height = 962/10
+    this.triangle.x = window.innerWidth-window.innerWidth/4-this.triangle.width
+    this.triangle.y = window.innerHeight/2-this.triangle.height/2
     this.triangle.interactive = true
-    this.ThirdChallengeContainer.addChild(this.triangle)
+    this.ThirdChallengeContainer.addChild(this.triangle) 
   }
 
   drawRandomTriangle() {
-   
+    let that = this
+    Object.keys(this.assets.resources).map(function(objectKey, index) {
+      if (index == 3) {
+        that.randomTriangle = new PIXI.Sprite(that.assets.resources[objectKey].texture)
+      }
+    })
+    this.randomNumber = Math.random()
+    this.randomTriangle.width = 1920/10*this.randomNumber
+    this.randomTriangle.height = 962/10*this.randomNumber
+    this.randomTriangle.x = window.innerWidth/(Math.random()*5)
+    this.randomTriangle.y = window.innerHeight/(Math.random()*5)
+    this.randomTriangle.interactive = true
+    this.ThirdChallengeContainer.addChild(this.randomTriangle) 
   }
 
 

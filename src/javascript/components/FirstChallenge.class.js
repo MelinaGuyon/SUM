@@ -19,7 +19,7 @@ class FirstChallenge {
     this.eye = new PIXI.Graphics
     this.pathBasic = new PIXI.Graphics
     this.pathPassed = new PIXI.Graphics
-    this.cursor = new PIXI.Graphics
+    this.cursor = new PIXI.Sprite()
     this.pupilEmpty = new PIXI.Graphics
     this.eyeIndex = 1
     this.movie
@@ -50,7 +50,7 @@ class FirstChallenge {
   init() {
 
     console.log(window.innerWidth)
-    
+
     STORAGE.loaderClass.loadFirstChallengePictures([
       'assets/first-challenge/fond.png',
       'assets/first-challenge/oeil.png',
@@ -191,6 +191,10 @@ class FirstChallenge {
 
     this.pathPassed.beginFill(0xFFFFFF);
     this.pathPassed.drawRect(this.pathEnd[0] - 1, this.pathEnd[1], 2, 1)
+
+    this.cursor.pathPassed = 1
+    this.cursor.pathBasic = 1
+
     this.FirstChallengeContainer.addChild(this.pathPassed)
 
     TweenLite.set([this.pathBasic, this.pathPassed], {
@@ -208,7 +212,7 @@ class FirstChallenge {
     let that = this
     Object.keys(this.assets.resources).map(function(objectKey, index) {
       if (index == 2) {
-        that.cursor = new PIXI.Sprite(that.assets.resources[objectKey].texture)
+        that.cursor.texture = that.assets.resources[objectKey].texture
       }
     })
     this.cursor.width = 126/2
@@ -216,6 +220,7 @@ class FirstChallenge {
     this.cursor.x = this.pathEnd[0] - this.cursor.width/2
     this.cursor.y = this.pathEnd[1]
     this.cursor.interactive = true // pour attribuer événements à this.cursor
+    
     TweenLite.set(this.cursor, {
       alpha: 0
     })
@@ -370,8 +375,8 @@ class FirstChallenge {
       STORAGE.soundManagerClass.launchVoiceOver(soundBank.voiceOver.firstChallenge)
       setTimeout(function(){
         STORAGE.soundManagerClass.pauseAndPlay(false, soundBank['firstChallenge'][that.movieIndex][0], soundBank['firstChallenge'][that.movieIndex][1])
-        that.createCursor()
         that.createPath()
+        that.createCursor()
       }, 10000)
       this.entrance = false
       return

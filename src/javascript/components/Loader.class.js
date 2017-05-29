@@ -19,6 +19,20 @@ class Loader {
     })
   }
 
+  loadMenuPictures(pictures) {
+    this.loader.resources = {}
+
+    for (var i = 0; i < pictures.length; i++) {
+      this.loader
+      .add([pictures[i]])
+    }
+
+    this.loader
+    .load(function(){
+      STORAGE.MenuClass.setupMenuPicturesLoaded()
+    })
+  }
+
   loadFirstChallengePictures(pictures) {
     this.loader.resources = {}
 
@@ -33,7 +47,7 @@ class Loader {
     })
   }
 
-  loadMenuPictures(pictures) {
+  loadSecondChallengePictures(pictures) {
     this.loader.resources = {}
 
     for (var i = 0; i < pictures.length; i++) {
@@ -43,8 +57,7 @@ class Loader {
 
     this.loader
     .load(function(){
-      STORAGE.MenuClass.setupMenuPicturesLoaded()
-
+      STORAGE.SecondChallengeClass.setupSecondChallengePicturesLoaded()
     })
   }
 

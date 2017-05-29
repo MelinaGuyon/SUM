@@ -1,5 +1,6 @@
 import Blackboard from './Blackboard.class.js'
 import carouselDatas from '../datas/carouselDatas.js'
+import soundBank from '../datas/soundBank.js'
 
 class Carousel {
 
@@ -17,6 +18,8 @@ class Carousel {
       STORAGE.ratioVertical = 1
 
       this.blackboards = []
+
+      this.voiceOverLaunch = false
 
       this.init()
       this.bind()
@@ -152,6 +155,11 @@ class Carousel {
       } else if (e.deltaY < 0) {
         STORAGE.carousel.y += Math.abs(e.deltaY) / 3
         STORAGE.carouselClass.doParallax('up')
+      }
+
+      if (STORAGE.carouselClass.voiceOverLaunch != true && STORAGE.carousel.y < -4000) {
+        STORAGE.soundManagerClass.launchVoiceOver(soundBank.voiceOver.firstChallengeCarousel)
+        STORAGE.carouselClass.voiceOverLaunch = true
       }
     }
 

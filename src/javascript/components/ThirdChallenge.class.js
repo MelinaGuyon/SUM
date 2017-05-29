@@ -32,10 +32,12 @@ class ThirdChallenge {
     console.log(window.innerWidth)
     
     STORAGE.loaderClass.loadThirdChallengePictures([
-      'assets/first-challenge/fond.png',
+      'assets/third-challenge/fond.jpg',
       'assets/third-challenge/rectangle.png',
       'assets/third-challenge/circle.png',
-      'assets/third-challenge/triangle.png'
+      'assets/third-challenge/triangle.png',
+      'assets/third-challenge/zoom.svg',
+      'assets/third-challenge/rotation.svg'
     ])
 
     TweenLite.set(STORAGE.stage, {
@@ -101,7 +103,6 @@ class ThirdChallenge {
     this.shape.y += this.newMouseY - this.mouseY
     this.mouseX = this.newMouseX
     this.mouseY = this.newMouseY
-
   }
 
   onWindowMouseUp(that) {
@@ -159,11 +160,36 @@ class ThirdChallenge {
   setupThirdChallengePicturesLoaded() {
     this.assets.resources = STORAGE.loader.resources
 
+    this.createBackground()
     this.drawRectangle()
     this.drawCircle()
     this.drawTriangle()
+    this.drawZoomIcon()
+    this.drawDezoomIcon()
+    this.drawRotationIcon()
     this.drawCheckpoint()
     this.bind()
+  }
+
+  createBackground() {
+    let that = this
+    Object.keys(this.assets.resources).map(function(objectKey, index) {
+      if (index == 0) {
+        that.background = new PIXI.Sprite(that.assets.resources[objectKey].texture)
+      }
+    })
+
+    let ratioVertical = window.innerHeight / this.background.texture.height
+    let ratioHorizontal = window.innerWidth / this.background.texture.width
+    if (ratioHorizontal < ratioVertical) {
+      this.background.scale = new PIXI.Point(ratioVertical, ratioVertical)
+      this.background.x = - (this.background.texture.width * this.background.scale.x - window.innerWidth) / 2
+    } else {
+      this.background.scale = new PIXI.Point(ratioHorizontal, ratioHorizontal)
+      this.background.y = - (this.background.texture.height * this.background.scale.x - window.innerHeight) / 2
+    }
+
+    this.ThirdChallengeContainer.addChild(this.background)
   }
 
   drawRectangle() {
@@ -258,6 +284,50 @@ class ThirdChallenge {
     this.ThirdChallengeContainer.addChild(this.randomTriangle) 
   }
 
+  drawZoomIcon() {
+    let that = this
+    Object.keys(this.assets.resources).map(function(objectKey, index) {
+      if (index == 4) {
+        that.zoomIcon = new PIXI.Sprite(that.assets.resources[objectKey].texture)
+      }
+    })
+    this.zoomIcon.width = 30
+    this.zoomIcon.height = 30
+    this.zoomIcon.x = window.innerWidth/10*4-this.zoomIcon.width
+    this.zoomIcon.y = window.innerHeight-this.zoomIcon.height-50
+    this.zoomIcon.interactive = true
+    this.ThirdChallengeContainer.addChild(this.zoomIcon) 
+  }
+
+  drawDezoomIcon() {
+    let that = this
+    Object.keys(this.assets.resources).map(function(objectKey, index) {
+      if (index == 4) {
+        that.dezoomIcon = new PIXI.Sprite(that.assets.resources[objectKey].texture)
+      }
+    })
+    this.dezoomIcon.width = 30
+    this.dezoomIcon.height = 30
+    this.dezoomIcon.x = window.innerWidth/10*5-this.dezoomIcon.width
+    this.dezoomIcon.y = window.innerHeight-this.dezoomIcon.height-50
+    this.dezoomIcon.interactive = true
+    this.ThirdChallengeContainer.addChild(this.dezoomIcon) 
+  }
+
+  drawRotationIcon() {
+    let that = this
+    Object.keys(this.assets.resources).map(function(objectKey, index) {
+      if (index == 5) {
+        that.rotationIcon = new PIXI.Sprite(that.assets.resources[objectKey].texture)
+      }
+    })
+    this.rotationIcon.width = 30
+    this.rotationIcon.height = 30
+    this.rotationIcon.x = window.innerWidth/10*6-this.rotationIcon.width
+    this.rotationIcon.y = window.innerHeight-this.rotationIcon.height-50
+    this.rotationIcon.interactive = true
+    this.ThirdChallengeContainer.addChild(this.rotationIcon) 
+  }
 
   drawCheckpoint() {
     this.checkpoint.beginFill(0xFFFFFF)

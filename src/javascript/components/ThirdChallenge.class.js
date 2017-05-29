@@ -122,9 +122,18 @@ class ThirdChallenge {
 
   onCheckpointMouseDown() {
     let that = this
+
+    setTimeout(function(){ 
+      this.keepDoing = false
+    }, 500)
+
+    console.log(this.keepDoing)
+
     that.drawRandomCircle()
     that.drawRandomRectangle()
     that.drawRandomTriangle()
+
+
 
     if(this.keepDoing == true) {
       setTimeout(function(){ 
@@ -132,9 +141,7 @@ class ThirdChallenge {
       }, 100)
     }
 
-    setTimeout(function(){ 
-      this.keepDoing = false
-    }, 1000)
+
 
   }
 

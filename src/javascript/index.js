@@ -7,6 +7,7 @@ import Carousel from './components/Carousel.class.js'
 import Menu from './components/Menu.class.js'
 import FirstChallenge from './components/FirstChallenge.class.js'
 import FirstRecompense from './components/FirstRecompense.class.js'
+import ThirdChallenge from './components/ThirdChallenge.class.js'
 import SecondChallenge from './components/SecondChallenge.class.js'
 
 window.STORAGE = {}
@@ -19,11 +20,13 @@ function initCanvas() {
   new Renderer()
   new Loader()
   new SoundManager()
-  new Menu()
   // new Carousel()
+  new Menu()
   // new FirstChallenge()
   // new FirstRecompense()
-  new SecondChallenge()
+  new ThirdChallenge()
+  new Menu()
+  // new SecondChallenge()
 
   render()
 }

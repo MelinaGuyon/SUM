@@ -47,6 +47,20 @@ class Loader {
     })
   }
 
+  loadThirdChallengePictures(pictures) {
+    this.loader.resources = {}
+
+    for (var i = 0; i < pictures.length; i++) {
+      this.loader
+      .add([pictures[i]])
+    }
+
+    this.loader
+    .load(function(){
+      STORAGE.ThirdChallengeClass.setupThirdChallengePicturesLoaded()
+    })
+  }
+
   loadSecondChallengePictures(pictures) {
     this.loader.resources = {}
 

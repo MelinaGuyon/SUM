@@ -220,7 +220,7 @@ class FirstChallenge {
     this.cursor.x = this.pathEnd[0] - this.cursor.width/2
     this.cursor.y = this.pathEnd[1]
     this.cursor.interactive = true // pour attribuer événements à this.cursor
-    this.cursor.zIndex = 2
+    
     TweenLite.set(this.cursor, {
       alpha: 0
     })

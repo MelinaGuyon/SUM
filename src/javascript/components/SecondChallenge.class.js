@@ -195,14 +195,21 @@ class SecondChallenge {
 
     STORAGE.SecondChallengeClass.time = setTimeout(function() {
       STORAGE.SecondChallengeClass.coolTexture.texture = new PIXI.Texture(myBaseTexture)
-    }, 15)
+    }, 20)
   }
 
   allCheckpointsChecked() {
     this.stepIndex++
 
     if (this.stepIndex <= 6) {
-      TweenLite.to([this.background, this.sum], 0, {
+      this.sum.mask = null
+      TweenLite.set( this.sum, {
+        alpha: 0.2
+      })
+      TweenLite.to( this.sum, 0.8, {
+        alpha: 1
+      })
+      TweenLite.to( this.background, 0.8, {
         alpha: 0, onComplete: () => {
           this.createBackground(this.stepIndex)
           this.createSum(this.stepIndex)
@@ -212,14 +219,14 @@ class SecondChallenge {
   }
 
   onMouseMove(mouseData) {
-    // this.isWellErased(mouseData)
+    this.isWellErased(mouseData)
   }
 
   isWellErased(mouseData) {
-    if (mouseData.data.global.x <= window.innerWidth/3.5) {
+    if (mouseData.data.global.x <= window.innerWidth/5) {
       this.firstCheckpointChecked = true
     }
-    if (mouseData.data.global.x >= window.innerWidth-window.innerWidth/3.5) {
+    if (mouseData.data.global.x >= window.innerWidth-window.innerWidth/5) {
       this.secondCheckpointChecked = true
     }
 
@@ -227,6 +234,7 @@ class SecondChallenge {
       this.allCheckpointsChecked()
       this.firstCheckpointChecked = false
       this.secondCheckpointChecked = false
+      this.externalCanvasCTX.clearRect(0, 0, this.externalCanvas.width, this.externalCanvas.height);
     }
   }
 

@@ -12,6 +12,15 @@ class SecondChallenge {
     STORAGE.SecondChallengeContainer = this.SecondChallengeContainer
     STORAGE.stage.addChild(this.SecondChallengeContainer)
 
+    this.externalCanvas = document.getElementById('canvas')
+    this.externalCanvasCTX
+    this.imageMask
+    this.imagePixi
+    this.texture
+    this.coolTexture
+
+    this.time
+
     this.assets = {}
 
     this.background
@@ -34,7 +43,27 @@ class SecondChallenge {
     this.bind()
   }
 
+  bind() {
+    let that = this
+    this.SecondChallengeContainer.mousemove = function(mouseData){
+      that.onMouseMove(mouseData)
+    }
+    this.recompenseButton.addEventListener('click', that.handleRecompenseButtonClick)
+
+    window.addEventListener("mousemove", that.handleMove)
+  }
+
+  unbind() {
+    let that = this
+    this.SecondChallengeContainer.mousemove = null
+    window.removeEventListener('click', that.handleRecompenseButtonClick)
+
+    window.removeEventListener("mousemove", that.handleMove)
+  }
+
   init() {
+    this.setUpExternalCanvas()
+
     STORAGE.loaderClass.loadSecondChallengePictures([
       'assets/second-challenge/step_0.png',
       'assets/second-challenge/step_1.png',
@@ -53,12 +82,22 @@ class SecondChallenge {
     })
   }
 
+  setUpExternalCanvas() {
+    this.externalCanvas.width = window.innerWidth
+    this.externalCanvas.height = window.innerHeight
+
+    this.externalCanvasCTX = this.externalCanvas.getContext('2d')
+
+    this.imagePixi = new Image()
+    this.texture = PIXI.Texture.fromCanvas(this.externalCanvas)
+    this.coolTexture = new PIXI.Sprite( this.texture )
+  }
+
   setupSecondChallengePicturesLoaded() {
     this.assets.resources = STORAGE.loader.resources
 
     this.createBackground(this.stepIndex)
     this.createSum(this.stepIndex)
-    this.createMask()
   }
 
   createBackground(stepIndex) {
@@ -133,66 +172,55 @@ class SecondChallenge {
 
     this.sum.anchor.x = 0.5
     this.sum.anchor.y = 0.5
-    this.SecondChallengeContainer.addChild(this.container)
     this.container.addChild(this.sum)
+    this.SecondChallengeContainer.addChild(this.container)
+    this.sum.mask = this.coolTexture
   }
 
-  createMask() {
-    this.mask = new PIXI.Graphics()
-    this.mask.beginFill(0)
-    this.mask.moveTo(window.innerWidth/2, window.innerHeight/2)
-    this.SecondChallengeContainer.addChild(this.mask)
-    this.container.mask = this.mask
-  }
+  handleMove(e) {
+    window.clearTimeout(STORAGE.SecondChallengeClass.time)
 
-  bind() {
-    let that = this
-    this.SecondChallengeContainer.mousemove = function(mouseData){
-      that.onMouseMove(mouseData)
-    }
-    this.recompenseButton.addEventListener('click', that.handleRecompenseButtonClick)
-  }
+    STORAGE.SecondChallengeClass.externalCanvasCTX.save()
+    STORAGE.SecondChallengeClass.externalCanvasCTX.beginPath()
 
-  unbind() {
-    let that = this
-    this.SecondChallengeContainer.mousemove = null
-    window.removeEventListener('click', that.handleRecompenseButtonClick)
+    STORAGE.SecondChallengeClass.externalCanvasCTX.arc(e.x, e.y, 80, 0, 2 * Math.PI, false)
+
+    STORAGE.SecondChallengeClass.externalCanvasCTX.fillStyle = "rgba(255, 255, 255, 1)"
+    STORAGE.SecondChallengeClass.externalCanvasCTX.fill()
+    STORAGE.SecondChallengeClass.externalCanvasCTX.restore()
+
+    STORAGE.SecondChallengeClass.imageMask = STORAGE.SecondChallengeClass.externalCanvas.toDataURL("image/png")
+    STORAGE.SecondChallengeClass.imagePixi.src = STORAGE.SecondChallengeClass.imageMask
+    var myBaseTexture = new PIXI.BaseTexture(STORAGE.SecondChallengeClass.imagePixi)
+
+    STORAGE.SecondChallengeClass.time = setTimeout(function() {
+      STORAGE.SecondChallengeClass.coolTexture.texture = new PIXI.Texture(myBaseTexture)
+    }, 15)
   }
 
   allCheckpointsChecked() {
     this.stepIndex++
-    console.log(this.stepIndex)
 
     if (this.stepIndex <= 6) {
-      TweenLite.to([this.background, this.sum, this.mask], 0, { // augmenter delta pour transi
-        alpha: 0, onComplete: () => { 
-          //this.background.clear()
-          //this.sum.clear()
+      TweenLite.to([this.background, this.sum], 0, {
+        alpha: 0, onComplete: () => {
           this.createBackground(this.stepIndex)
           this.createSum(this.stepIndex)
-          this.createMask() 
         }
       })
     }
   }
 
   onMouseMove(mouseData) {
-    //mouseData.data.global.x -= 50
-    //mouseData.data.global.y = 500
-    this.mask.lineStyle(600, 0, 1) // ou lineWidth = window.innerWidth
-    this.mask.lineTo(mouseData.data.global.x, mouseData.data.global.y)
-
-    this.isWellErased(mouseData)
+    // this.isWellErased(mouseData)
   }
 
   isWellErased(mouseData) {
     if (mouseData.data.global.x <= window.innerWidth/3.5) {
       this.firstCheckpointChecked = true
-      console.log("first checkpoint checked")
     }
     if (mouseData.data.global.x >= window.innerWidth-window.innerWidth/3.5) {
       this.secondCheckpointChecked = true
-      console.log("second checkpoint checked")
     }
 
     if (this.firstCheckpointChecked == true && this.secondCheckpointChecked == true) {

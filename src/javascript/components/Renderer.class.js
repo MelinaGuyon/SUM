@@ -1,7 +1,7 @@
 class Renderer {
 
     constructor(options) {
-      this.renderer = new PIXI.WebGLRenderer(window.innerWidth, window.innerHeight, { antialias: true, clearBeforeRender: false })
+      this.renderer = new PIXI.WebGLRenderer(window.innerWidth, window.innerHeight)
       this.stage = new PIXI.Container()
 
       STORAGE.renderer = this.renderer
@@ -13,7 +13,7 @@ class Renderer {
     init() {
       this.renderer.backgroundColor = 0x000000
       this.renderer.autoResize = true
-      document.body.appendChild(this.renderer.view)
+      document.body.insertBefore(this.renderer.view , document.getElementById("canvas"))
     }
 }
 

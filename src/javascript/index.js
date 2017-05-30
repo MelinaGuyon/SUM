@@ -24,9 +24,9 @@ function initCanvas() {
   new Menu()
   // new FirstChallenge()
   // new FirstRecompense()
-  new ThirdChallenge()
+  // new ThirdChallenge()
   new Menu()
-  // new SecondChallenge()
+  new SecondChallenge()
 
   render()
 }

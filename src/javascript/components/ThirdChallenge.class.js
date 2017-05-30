@@ -184,12 +184,6 @@ class ThirdChallenge {
     else if (shape.graphicsData[0].shape.constructor.name == 'Rectangle') { that.drawRectangle() } 
     else if (shape.graphicsData[0].shape.constructor.name == 'Polygon') { that.drawTriangle() }
 */
-    /*this.rectangle.mousedown = function(mouseData){ that.onShapeMouseDown(mouseData, this) }
-    this.circle.mousedown = function(mouseData){ that.onShapeMouseDown(mouseData, this) }
-    this.triangle.mousedown = function(mouseData){ that.onShapeMouseDown(mouseData, this) }
-    this.line.mousedown = function(mouseData){ that.onShapeMouseDown(mouseData, this) }
-    this.halfcircle.mousedown = function(mouseData){ that.onShapeMouseDown(mouseData, this) }*/
-
     this.bind()
   }
 

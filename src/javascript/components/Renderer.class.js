@@ -1,7 +1,7 @@
 class Renderer {
 
     constructor(options) {
-      this.renderer = new PIXI.WebGLRenderer(window.innerWidth, window.innerHeight)
+      this.renderer = new PIXI.WebGLRenderer(window.innerWidth, window.innerHeight, {antialias: false, transparent: false, resolution: 1})
       this.stage = new PIXI.Container()
 
       STORAGE.renderer = this.renderer

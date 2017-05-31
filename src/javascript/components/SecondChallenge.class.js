@@ -50,7 +50,7 @@ class SecondChallenge {
     }
     this.recompenseButton.addEventListener('click', that.handleRecompenseButtonClick)
 
-    window.addEventListener("mousemove", that.handleMove)
+    document.addEventListener("mousemove", that.handleMove)
   }
 
   unbind() {
@@ -58,7 +58,7 @@ class SecondChallenge {
     this.SecondChallengeContainer.mousemove = null
     window.removeEventListener('click', that.handleRecompenseButtonClick)
 
-    window.removeEventListener("mousemove", that.handleMove)
+    document.removeEventListener("mousemove", that.handleMove)
   }
 
   init() {
@@ -90,17 +90,36 @@ class SecondChallenge {
 
     this.imagePixi = new Image()
     this.texture = PIXI.Texture.fromCanvas(this.externalCanvas)
-    this.coolTexture = new PIXI.Sprite( this.texture )
+    this.coolTexture = new PIXI.Sprite(this.texture)
   }
 
   setupSecondChallengePicturesLoaded() {
     this.assets.resources = STORAGE.loader.resources
 
-    this.createBackground(this.stepIndex)
-    this.createSum(this.stepIndex)
+    this.createGlobalBackground()
+    this.createBackground()
+    this.createSum()
   }
 
-  createBackground(stepIndex) {
+  createGlobalBackground() {
+
+    this.gobalBackground = new PIXI.Sprite(this.assets.resources['assets/second-challenge/step_6.png'].texture)
+
+    let ratioVertical = window.innerHeight / this.gobalBackground.texture.height
+    let ratioHorizontal = window.innerWidth / this.gobalBackground.texture.width
+    if (ratioHorizontal < ratioVertical) {
+      this.gobalBackground.scale = new PIXI.Point(ratioVertical, ratioVertical)
+      this.gobalBackground.x = - (this.gobalBackground.texture.width * this.gobalBackground.scale.x - window.innerWidth) / 2
+    } else {
+      this.gobalBackground.scale = new PIXI.Point(ratioHorizontal, ratioHorizontal)
+      this.gobalBackground.y = - (this.gobalBackground.texture.height * this.gobalBackground.scale.x - window.innerHeight) / 2
+    }
+
+    this.SecondChallengeContainer.addChild(this.gobalBackground)
+  }
+
+  createBackground() {
+
     let that = this
     Object.keys(this.assets.resources).map(function(objectKey, index) {
       if (that.stepIndex == 0 && index == 0) {
@@ -120,10 +139,6 @@ class SecondChallenge {
       }
       if (that.stepIndex == 5 && index == 5) {
         that.background = new PIXI.Sprite(that.assets.resources[objectKey].texture)
-      }
-      if (that.stepIndex == 6 && index == 6) {
-        that.background = new PIXI.Sprite(that.assets.resources[objectKey].texture)
-        that.showConclusion()
       }
     })
 
@@ -173,8 +188,8 @@ class SecondChallenge {
     this.sum.anchor.x = 0.5
     this.sum.anchor.y = 0.5
     this.container.addChild(this.sum)
+    this.container.mask = this.coolTexture
     this.SecondChallengeContainer.addChild(this.container)
-    this.sum.mask = this.coolTexture
   }
 
   handleMove(e) {
@@ -183,25 +198,28 @@ class SecondChallenge {
     STORAGE.SecondChallengeClass.externalCanvasCTX.save()
     STORAGE.SecondChallengeClass.externalCanvasCTX.beginPath()
 
-    STORAGE.SecondChallengeClass.externalCanvasCTX.arc(e.x, e.y, 80, 0, 2 * Math.PI, false)
+    STORAGE.SecondChallengeClass.externalCanvasCTX.arc(e.x, e.y, 150, 0, 2 * Math.PI, false)
 
-    STORAGE.SecondChallengeClass.externalCanvasCTX.fillStyle = "rgba(255, 255, 255, 1)"
+    STORAGE.SecondChallengeClass.externalCanvasCTX.fillStyle = "white"
     STORAGE.SecondChallengeClass.externalCanvasCTX.fill()
     STORAGE.SecondChallengeClass.externalCanvasCTX.restore()
 
-    STORAGE.SecondChallengeClass.imageMask = STORAGE.SecondChallengeClass.externalCanvas.toDataURL("image/png")
-    STORAGE.SecondChallengeClass.imagePixi.src = STORAGE.SecondChallengeClass.imageMask
+    let imageMask = STORAGE.SecondChallengeClass.externalCanvas.toDataURL("image/png")
+
+    STORAGE.SecondChallengeClass.imagePixi.src = imageMask
     var myBaseTexture = new PIXI.BaseTexture(STORAGE.SecondChallengeClass.imagePixi)
+
+    // STORAGE.SecondChallengeClass.coolTexture.texture = new PIXI.Texture(myBaseTexture)
 
     STORAGE.SecondChallengeClass.time = setTimeout(function() {
       STORAGE.SecondChallengeClass.coolTexture.texture = new PIXI.Texture(myBaseTexture)
-    }, 20)
+    }, 15)
   }
 
   allCheckpointsChecked() {
     this.stepIndex++
 
-    if (this.stepIndex <= 6) {
+    if (this.stepIndex <= 5) {
       this.sum.mask = null
       TweenLite.set( this.sum, {
         alpha: 0.2
@@ -210,11 +228,26 @@ class SecondChallenge {
         alpha: 1
       })
       TweenLite.to( this.background, 0.8, {
-        alpha: 0, onComplete: () => {
+        alpha: 0,
+        onComplete: () => {
           this.createBackground(this.stepIndex)
           this.createSum(this.stepIndex)
         }
       })
+
+      let that = this
+      if (this.stepIndex == 5) {
+        setTimeout(function() {
+          TweenLite.to([that.sum, that.background, that.container], 0.8, {
+            alpha: 0,
+            onComplete: () => {
+              that.container.destroy()
+              that.background.destroy()
+              that.showConclusion()
+            }
+          })
+        }, 2000)
+      }
     }
   }
 
@@ -223,17 +256,86 @@ class SecondChallenge {
   }
 
   isWellErased(mouseData) {
-    if (mouseData.data.global.x <= window.innerWidth/5) {
+    if (mouseData.data.global.x <= window.innerWidth / 5 && mouseData.data.global.y <= window.innerHeight / 10  && this.stepIndex == 0) {
       this.firstCheckpointChecked = true
     }
-    if (mouseData.data.global.x >= window.innerWidth-window.innerWidth/5) {
+
+    if (mouseData.data.global.x <= window.innerWidth / 3 && mouseData.data.global.y <= window.innerHeight / 10  && this.stepIndex == 1) {
+      this.firstCheckpointChecked = true
+    }
+
+    if (mouseData.data.global.x <= window.innerWidth / 2.5 && mouseData.data.global.y <= window.innerHeight / 10  && this.stepIndex == 2) {
+      this.firstCheckpointChecked = true
+    }
+
+    if (mouseData.data.global.x <= window.innerWidth / 2.1 && mouseData.data.global.y <= window.innerHeight / 5  && this.stepIndex > 2) {
+      this.firstCheckpointChecked = true
+    }
+
+    if (mouseData.data.global.x >= window.innerWidth / 2 - 100 && mouseData.data.global.x <= window.innerWidth / 2 + 100 && mouseData.data.global.y <= window.innerHeight / 5) {
       this.secondCheckpointChecked = true
     }
 
-    if (this.firstCheckpointChecked == true && this.secondCheckpointChecked == true) {
+    if (mouseData.data.global.x >= window.innerWidth - window.innerWidth / 5 && mouseData.data.global.y <= window.innerHeight / 10 && this.stepIndex == 0) {
+      this.thirdCheckpointChecked = true
+    }
+
+    if (mouseData.data.global.x >= window.innerWidth - window.innerWidth / 3 && mouseData.data.global.y <= window.innerHeight / 10 && this.stepIndex == 1) {
+      this.thirdCheckpointChecked = true
+    }
+
+    if (mouseData.data.global.x >= window.innerWidth - window.innerWidth / 2.5 && mouseData.data.global.y <= window.innerHeight / 10 && this.stepIndex == 2) {
+      this.thirdCheckpointChecked = true
+    }
+
+    if (mouseData.data.global.x >= window.innerWidth - window.innerWidth / 2.1 && mouseData.data.global.y <= window.innerHeight / 10 && this.stepIndex > 2) {
+      this.thirdCheckpointChecked = true
+    }
+
+    if (mouseData.data.global.y >= window.innerHeight / 2 - 100 && mouseData.data.global.y <= window.innerHeight / 2 + 100 && mouseData.data.global.x <= window.innerWidth / 5 && this.stepIndex == 0) {
+      this.fourthCheckpointChecked = true
+    }
+
+    if (mouseData.data.global.y >= window.innerHeight / 2 - 100 && mouseData.data.global.y <= window.innerHeight / 2 + 100 && mouseData.data.global.x <= window.innerWidth / 3 && this.stepIndex == 1) {
+      this.fourthCheckpointChecked = true
+    }
+
+    if (mouseData.data.global.y >= window.innerHeight / 2 - 100 && mouseData.data.global.y <= window.innerHeight / 2 + 100 && mouseData.data.global.x <= window.innerWidth / 2.5 && this.stepIndex == 2) {
+      this.fourthCheckpointChecked = true
+    }
+
+    if (mouseData.data.global.y >= window.innerHeight / 2 - 100 && mouseData.data.global.y <= window.innerHeight / 2 + 100 && mouseData.data.global.x <= window.innerWidth / 2.1 && this.stepIndex > 2) {
+      this.fourthCheckpointChecked = true
+    }
+
+    if (mouseData.data.global.y >= window.innerHeight / 2 - 100 && mouseData.data.global.y <= window.innerHeight / 2 + 100 && mouseData.data.global.x >= window.innerWidth - window.innerWidth / 5 && this.stepIndex == 0) {
+      this.fifthCheckpointChecked = true
+    }
+
+    if (mouseData.data.global.y >= window.innerHeight / 2 - 100 && mouseData.data.global.y <= window.innerHeight / 2 + 100 && mouseData.data.global.x >= window.innerWidth - window.innerWidth / 4 && this.stepIndex == 1) {
+      this.fifthCheckpointChecked = true
+    }
+
+    if (mouseData.data.global.y >= window.innerHeight / 2 - 100 && mouseData.data.global.y <= window.innerHeight / 2 + 100 && mouseData.data.global.x >= window.innerWidth - window.innerWidth / 2.5 && this.stepIndex == 2) {
+      this.fifthCheckpointChecked = true
+    }
+
+    if (mouseData.data.global.y >= window.innerHeight / 2 - 100 && mouseData.data.global.y <= window.innerHeight / 2 + 100 && mouseData.data.global.x >= window.innerWidth - window.innerWidth / 2.1 && this.stepIndex > 2) {
+      this.fifthCheckpointChecked = true
+    }
+
+    if (mouseData.data.global.x >= window.innerWidth / 2 - 100 && mouseData.data.global.x <= window.innerWidth / 2 + 100 && mouseData.data.global.y >= window.innerHeight - window.innerHeight / 8) {
+      this.sixthCheckpointChecked = true
+    }
+
+    if (this.firstCheckpointChecked == true && this.secondCheckpointChecked == true && this.thirdCheckpointChecked == true && this.fourthCheckpointChecked == true && this.fifthCheckpointChecked == true && this.sixthCheckpointChecked == true) {
       this.allCheckpointsChecked()
       this.firstCheckpointChecked = false
       this.secondCheckpointChecked = false
+      this.thirdCheckpointChecked = false
+      this.fourthCheckpointChecked = false
+      this.fifthCheckpointChecked = false
+      this.sixthCheckpointChecked = false
       this.externalCanvasCTX.clearRect(0, 0, this.externalCanvas.width, this.externalCanvas.height);
     }
   }

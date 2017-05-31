@@ -41,18 +41,39 @@ body {
   text-align: center;
   line-height: 3.1vw;
   color: #A7A6F0;
-  background-color: #030225;
   padding: 25px 0;
+
+  &:after {
+    content: '';
+    position : absolute;
+    background-color : #A7A6F0;
+    width : 2px;
+    height : 90%;
+    left : 62%;
+    top : -45px;
+    transform : translate(-50%, -55%) rotate(30deg);
+  }
+
+  &:before {
+    content: '';
+    position : absolute;
+    background-color : #A7A6F0;
+    width : 2px;
+    height : 90%;
+    left : 35%;
+    top : 193px;
+    transform : translate(-50%, -55%) rotate(30deg);
+  }
 }
 
 .js-conclusion-line {
-  position : absolute;
-  background-color : #A7A6F0;
-  width : 1.5px;
-  height : 60%;
-  left : 50%;
-  top : 50%;
-  transform : translate(-50%, -55%) rotate(30deg);
+  // position : absolute;
+  // background-color : #A7A6F0;
+  // width : 1.5px;
+  // height : 60%;
+  // left : 50%;
+  // top : 50%;
+  // transform : translate(-50%, -55%) rotate(30deg);
 }
 
 .js-first-recompense-button {

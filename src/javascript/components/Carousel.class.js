@@ -142,7 +142,7 @@ class Carousel {
 
     initBlackboards() {
       for(let i = 0; i < carouselDatas.datasBlackboards.length; i++) {
-        this.blackboards.push(new Blackboard({ index : i }))
+        this.blackboards.push(new Blackboard({ index : i, context : "Carousel1" }))
       }
     }
 

@@ -1,4 +1,5 @@
 import carouselDatas from '../datas/carouselDatas.js'
+import videoDatas from '../datas/videoDatas.js'
 import ImageDeformation from './ImageDeformation.class.js'
 import FirstChallenge from './FirstChallenge.class.js'
 
@@ -10,21 +11,35 @@ class CheckPoint {
     this.blackboard = options.blackboard
     this.blackBoardIndex = options.blackBoardIndex
     this.index = options.index
+    this.context = options.context
 
     this.init()
     this.bind()
   }
 
   init() {
-    this.checkPoint.beginFill(0xffffff, 0)
-    this.checkPoint.drawCircle(0, 0, carouselDatas.datasBlackboards[this.blackBoardIndex].checkPoints[this.index].rayon)
-    this.checkPoint.endFill()
-    this.checkPoint.x = carouselDatas.datasBlackboards[this.blackBoardIndex].checkPoints[this.index].x * STORAGE.ratioVertical + this.blackboard.graphicsData[0].shape.x
-    this.checkPoint.y = carouselDatas.datasBlackboards[this.blackBoardIndex].checkPoints[this.index].y * STORAGE.ratioVertical + this.blackboard.graphicsData[0].shape.y
-    this.checkPoint.interactive = true // pour attribuer événements à this.checkPoint
-    this.checkPoint.isChecked = false
 
-    this.blackboard.addChild(this.checkPoint)
+    if (this.context == "Carousel1") {
+      this.checkPoint.beginFill(0xffffff, 1)
+      this.checkPoint.drawCircle(0, 0, carouselDatas.datasBlackboards[this.blackBoardIndex].checkPoints[this.index].rayon)
+      this.checkPoint.endFill()
+      this.checkPoint.x = carouselDatas.datasBlackboards[this.blackBoardIndex].checkPoints[this.index].x * STORAGE.ratioVertical + this.blackboard.graphicsData[0].shape.x
+      this.checkPoint.y = carouselDatas.datasBlackboards[this.blackBoardIndex].checkPoints[this.index].y * STORAGE.ratioVertical + this.blackboard.graphicsData[0].shape.y
+      this.checkPoint.interactive = true // pour attribuer événements à this.checkPoint
+      this.checkPoint.isChecked = false
+      this.blackboard.addChild(this.checkPoint)
+    }
+    else if(this.context == "VideoIntro") {
+      this.checkPoint.beginFill(0xffffff, 1)
+      this.checkPoint.drawCircle(0, 0, videoDatas.datasBlackboards[this.blackBoardIndex].checkPoints[this.index].rayon)
+      this.checkPoint.endFill()
+      this.checkPoint.x = videoDatas.datasBlackboards[this.blackBoardIndex].checkPoints[this.index].x * STORAGE.videoRatioVertical + this.blackboard.graphicsData[0].shape.x
+      this.checkPoint.y = videoDatas.datasBlackboards[this.blackBoardIndex].checkPoints[this.index].y * STORAGE.videoRatioVertical + this.blackboard.graphicsData[0].shape.y
+      this.checkPoint.interactive = true // pour attribuer événements à this.checkPoint
+      this.checkPoint.isChecked = false
+      this.blackboard.addChild(this.checkPoint)
+    }
+
   }
 
   bind() {

@@ -1,4 +1,5 @@
-import soundBank from '../datas/soundBank.js'
+import Blackboard from './Blackboard.class.js'
+import videoDatas from '../datas/videoDatas.js'
 import TweenLite from 'gsap'
 
 class Video {
@@ -13,14 +14,16 @@ class Video {
     //this.button = new PIXI.Graphics()
 
     this.assets = {}
+    this.blackboards = []
+    STORAGE.videoRatioVertical = 1
+
     this.init()
+    this.playVideo()
+    //this.initBlackboards()
+    this.bind()
   }
 
   init() {
-    STORAGE.loaderClass.loadVideoPictures([
-      'assets/video.mp4'
-    ])
-
     TweenLite.set(STORAGE.stage, {
       alpha: 1
     })
@@ -35,14 +38,6 @@ class Video {
 
   unbind() {
     let that = this
-  }
-
-  setupVideoPicturesLoaded() {
-    this.assets.resources = STORAGE.loader.resources
-
-    //this.createButton()
-    this.playVideo()
-    this.bind()
   }
 
   createButton() {
@@ -79,6 +74,7 @@ class Video {
 
     this.videoSprite.width = window.innerWidth
     this.videoSprite.height = window.innerHeight
+
     this.videoSprite.x = 0
     this.videoSprite.y = 0
 
@@ -86,11 +82,22 @@ class Video {
 
     setTimeout(function(){
       that.texture.baseTexture.source.pause()
+      that.initBlackboards()
     }, 5000)
 
     setTimeout(function(){
       that.texture.baseTexture.source.play()
+      //that.blackboard.destroy()    
     }, 10000)
+  }
+
+  initBlackboards() {
+    STORAGE.videoRatioVertical = window.innerHeight / this.videoSprite.height       
+    STORAGE.videoPositionHorizontal = window.innerWidth / 2 - this.videoSprite.width / 2
+
+    for(let i = 0; i < videoDatas.datasBlackboards.length; i++) {
+      this.blackboards.push(new Blackboard({ index : i, context : "VideoIntro" }))
+    }
   }
 
 }

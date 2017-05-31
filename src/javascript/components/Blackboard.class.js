@@ -1,4 +1,5 @@
 import carouselDatas from '../datas/carouselDatas.js'
+import videoDatas from '../datas/videoDatas.js'
 import TweenLite from 'gsap';
 import CheckPointClass from './CheckPoint.class.js'
 
@@ -8,6 +9,7 @@ class Blackboard {
       this.blackboard = new PIXI.Graphics
 
       this.index = options.index
+      this.context = options.context
 
       this.drawnLine
       this.checkpoints = []
@@ -17,20 +19,40 @@ class Blackboard {
     }
 
     init() {
-      this.blackboard.beginFill(0x000000, 0)
-      console.log(STORAGE.ratioVertical, 'in blackboard', carouselDatas.datasBlackboards[this.index].width * STORAGE.ratioVertical )
-      this.blackboard.drawRect(carouselDatas.datasBlackboards[this.index].x * STORAGE.ratioVertical + STORAGE.positionHorizontal, carouselDatas.datasBlackboards[this.index].y * STORAGE.ratioVertical, carouselDatas.datasBlackboards[this.index].width * STORAGE.ratioVertical, carouselDatas.datasBlackboards[this.index].height * STORAGE.ratioVertical)
-      this.blackboard.interactive = true // pour attribuer événements à this.blackboard
+      if (this.context == "Carousel1") {
 
-      STORAGE.carousel.addChild(this.blackboard)
+        this.blackboard.beginFill(0x000000, 0)
+        console.log(STORAGE.ratioVertical, 'in blackboard', carouselDatas.datasBlackboards[this.index].width * STORAGE.ratioVertical )
+        this.blackboard.drawRect(carouselDatas.datasBlackboards[this.index].x * STORAGE.ratioVertical + STORAGE.positionHorizontal, carouselDatas.datasBlackboards[this.index].y * STORAGE.ratioVertical, carouselDatas.datasBlackboards[this.index].width * STORAGE.ratioVertical, carouselDatas.datasBlackboards[this.index].height * STORAGE.ratioVertical)
+        this.blackboard.interactive = true // pour attribuer événements à this.blackboard
 
-      if (carouselDatas.datasBlackboards[this.index].isTestLaunch) {
-        this.blackboard.isTestLaunch = true
-      }
+        STORAGE.carousel.addChild(this.blackboard)
 
-      for(let i = 0; i < carouselDatas.datasBlackboards[this.index].checkPoints.length; i++) {
-        this.checkpoints.push(new CheckPointClass({ index : i, blackBoardIndex : this.index, blackboard : this.blackboard }))
-      }
+        if (carouselDatas.datasBlackboards[this.index].isTestLaunch) {
+          this.blackboard.isTestLaunch = true
+        }
+
+        for(let i = 0; i < carouselDatas.datasBlackboards[this.index].checkPoints.length; i++) {
+          this.checkpoints.push(new CheckPointClass({ index : i, blackBoardIndex : this.index, blackboard : this.blackboard, context : "Carousel1" }))
+        }
+      } 
+      else if (this.context == "VideoIntro") {
+
+        this.blackboard.beginFill(0xff0000, 1)
+        console.log(STORAGE.videoRatioVertical, 'in blackboard', videoDatas.datasBlackboards[this.index].width * STORAGE.videoRatioVertical )
+        this.blackboard.drawRect(videoDatas.datasBlackboards[this.index].x * STORAGE.videoRatioVertical + STORAGE.videoPositionHorizontal, videoDatas.datasBlackboards[this.index].y * STORAGE.videoRatioVertical, videoDatas.datasBlackboards[this.index].width * STORAGE.videoRatioVertical, videoDatas.datasBlackboards[this.index].height * STORAGE.videoRatioVertical)
+        this.blackboard.interactive = true // pour attribuer événements à this.blackboard
+
+        STORAGE.VideoContainer.addChild(this.blackboard)
+
+        if (videoDatas.datasBlackboards[this.index].isTestLaunch) {
+          this.blackboard.isTestLaunch = true
+        }
+
+        for(let i = 0; i < videoDatas.datasBlackboards[this.index].checkPoints.length; i++) {
+          this.checkpoints.push(new CheckPointClass({ index : i, blackBoardIndex : this.index, blackboard : this.blackboard, context : "VideoIntro" }))
+        }
+      }  
     }
 
     bind() {
@@ -38,6 +60,7 @@ class Blackboard {
       this.blackboard.mousedown = function(mouseData){
         that.onBlackboardMouseDown(mouseData)
       }
+
       this.blackboard.mouseover = function(mouseData){
         that.onBlackboardMouseHover(mouseData)
       }
@@ -47,6 +70,7 @@ class Blackboard {
     }
 
     onBlackboardMouseHover() {
+      console.log("kk")
       document.body.style.cursor = 'crosshair'
     }
 

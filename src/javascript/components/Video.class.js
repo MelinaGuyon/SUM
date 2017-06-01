@@ -74,19 +74,12 @@ class Video {
 
     this.VideoContainer.addChild(this.videoSprite)
 
-    this.initBlackboards()
-
     setTimeout(function(){
-      that.texture.baseTexture.source.pause()
+      STORAGE.videoIntro = that.texture.baseTexture.source
+      STORAGE.videoIntro.pause()
       that.initBlackboards()
     }, 1000)
 
-/*    setTimeout(function(){
-      that.texture.baseTexture.source.play()
-      for (var i = 0; i < that.blackboards.length; i++) {
-        that.blackboards[i].blackboard.destroy()
-      }    
-    }, 10000)*/
   }
 
   resize() {
@@ -108,6 +101,8 @@ class Video {
     for(let i = 0; i < videoDatas.datasBlackboards.length; i++) {
       this.blackboards.push(new Blackboard({ index : i, context : "VideoIntro" }))
     }
+
+    STORAGE.blackboards = this.blackboards
   }
 
 }

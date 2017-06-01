@@ -53,6 +53,7 @@ class CheckPoint {
   }
 
   drawingDetection() {
+    let that = this
     this.checkPoint.isChecked = true
     let drawValidated = true
 
@@ -68,8 +69,20 @@ class CheckPoint {
       })
 
       if (this.blackboard.isTestLaunch) {
-        new ImageDeformation()
-        this.animateSectionTransition(1)
+
+        if (this.context == "Carousel1") {
+          new ImageDeformation()
+          this.animateSectionTransition(1)
+        }
+        else if (this.context == "VideoIntro") {
+          STORAGE.videoIntro.play()
+          TweenLite.to(STORAGE.blackboards[0].blackboard, 0.5, {
+            alpha: 0,
+            onComplete: function() {
+              STORAGE.blackboards[0].blackboard.destroy()
+            }
+          })
+        }
       }
     }
   }

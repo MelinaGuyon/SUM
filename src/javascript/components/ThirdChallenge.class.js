@@ -256,7 +256,7 @@ class ThirdChallenge {
     this.rectangle.width = 715/12
     this.rectangle.height = 1063/12
     this.rectangle.x = window.innerWidth-window.innerWidth/6*5
-    this.rectangle.y = window.innerHeight/2
+    this.rectangle.y = 70
     this.rectangle.anchor.set(0.5)
     this.rectangle.interactive = true
     this.ThirdChallengeContainer.addChild(this.rectangle)
@@ -272,8 +272,8 @@ class ThirdChallenge {
     this.randomNumber = Math.random()
     this.randomRectangle.width = 715/12*this.randomNumber
     this.randomRectangle.height = 1063/12*this.randomNumber
-    this.randomRectangle.x = window.innerWidth/(Math.random()*5)
-    this.randomRectangle.y = window.innerHeight/(Math.random()*5)
+    this.randomRectangle.x = window.innerWidth-Math.random()*window.innerWidth
+    this.randomRectangle.y = window.innerHeight-Math.random()*window.innerHeight
     this.randomRectangle.anchor.set(0.5)
     TweenLite.to(this.randomRectangle, 0.5, {
       rotation: "+="+3
@@ -291,7 +291,7 @@ class ThirdChallenge {
     this.circle.width = 1069/12
     this.circle.height = 1069/12
     this.circle.x = window.innerWidth-window.innerWidth/6*4
-    this.circle.y = window.innerHeight/2
+    this.circle.y = 70
     this.circle.anchor.set(0.5)
     this.circle.interactive = true
     this.ThirdChallengeContainer.addChild(this.circle) 
@@ -306,8 +306,8 @@ class ThirdChallenge {
     })
     this.randomCircle.width = Math.random()*100
     this.randomCircle.height = this.randomCircle.width
-    this.randomCircle.x = window.innerWidth/(Math.random()*5)
-    this.randomCircle.y = window.innerHeight/(Math.random()*5)
+    this.randomCircle.x = window.innerWidth-Math.random()*window.innerWidth
+    this.randomCircle.y = window.innerHeight-Math.random()*window.innerHeight
     this.randomCircle.anchor.set(0.5)
     TweenLite.to(this.randomCircle, 0.5, {
       rotation: "+="+3
@@ -325,7 +325,7 @@ class ThirdChallenge {
     this.triangle.width = 1920/12
     this.triangle.height = 962/12
     this.triangle.x = window.innerWidth-window.innerWidth/6*3
-    this.triangle.y = window.innerHeight/2
+    this.triangle.y = 70
     this.triangle.anchor.set(0.5)
     this.triangle.interactive = true
     this.ThirdChallengeContainer.addChild(this.triangle) 
@@ -341,8 +341,8 @@ class ThirdChallenge {
     this.randomNumber = Math.random()
     this.randomTriangle.width = 1920/12*this.randomNumber
     this.randomTriangle.height = 962/12*this.randomNumber
-    this.randomTriangle.x = window.innerWidth/(Math.random()*5)
-    this.randomTriangle.y = window.innerHeight/(Math.random()*5)
+    this.randomTriangle.x = window.innerWidth-Math.random()*window.innerWidth
+    this.randomTriangle.y = window.innerHeight-Math.random()*window.innerHeight
     this.randomTriangle.anchor.set(0.5)
     TweenLite.to(this.randomTriangle, 0.5, {
       rotation: "-="+3
@@ -360,7 +360,7 @@ class ThirdChallenge {
     this.line.width = 1056/12
     this.line.height = 1064/12
     this.line.x = window.innerWidth-window.innerWidth/6*2
-    this.line.y = window.innerHeight/2
+    this.line.y = 70
     this.line.anchor.set(0.5)
     this.line.interactive = true
     this.ThirdChallengeContainer.addChild(this.line) 
@@ -376,8 +376,8 @@ class ThirdChallenge {
     this.randomNumber = Math.random()
     this.randomLine.width = 1056/12*this.randomNumber
     this.randomLine.height = 1064/12*this.randomNumber
-    this.randomLine.x = window.innerWidth/(Math.random()*5)
-    this.randomLine.y = window.innerHeight/(Math.random()*5)
+    this.randomLine.x = window.innerWidth-Math.random()*window.innerWidth
+    this.randomLine.y = window.innerHeight-Math.random()*window.innerHeight
     this.randomLine.anchor.set(0.5)
     TweenLite.to(this.randomLine, 0.5, {
       rotation: "-="+3
@@ -395,7 +395,7 @@ class ThirdChallenge {
     this.halfcircle.width = 532/12
     this.halfcircle.height = 1065/12
     this.halfcircle.x = window.innerWidth-window.innerWidth/6
-    this.halfcircle.y = window.innerHeight/2
+    this.halfcircle.y = 70
     this.halfcircle.anchor.set(0.5)
     this.halfcircle.interactive = true
     this.ThirdChallengeContainer.addChild(this.halfcircle) 
@@ -411,8 +411,8 @@ class ThirdChallenge {
     this.randomNumber = Math.random()
     this.randomHalfcircle.width = 532/12*this.randomNumber
     this.randomHalfcircle.height = 1065/12*this.randomNumber
-    this.randomHalfcircle.x = window.innerWidth/(Math.random()*5)
-    this.randomHalfcircle.y = window.innerHeight/(Math.random()*5)
+    this.randomHalfcircle.x = window.innerWidth-Math.random()*window.innerWidth
+    this.randomHalfcircle.y = window.innerHeight-Math.random()*window.innerHeight
     this.randomHalfcircle.anchor.set(0.5)
     TweenLite.to(this.randomHalfcircle, 0.5, {
       rotation: "+="+3

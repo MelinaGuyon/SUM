@@ -1,5 +1,5 @@
 import Blackboard from './Blackboard.class.js'
-import carouselDatas from '../datas/carouselDatas.js'
+import firstCarouselDatas from '../datas/firstCarouselDatas.js'
 import soundBank from '../datas/soundBank.js'
 
 class Carousel {
@@ -10,6 +10,11 @@ class Carousel {
       STORAGE.carousel = this.carousel
       STORAGE.carousel.numberOfWindow = 8
       STORAGE.stage.addChild(this.carousel)
+
+      this.carouselNumber = options.number
+      if (this.carouselNumber == 1) {
+        this.carouselDatas = firstCarouselDatas
+      }
 
       this.spritesFonds = {}
       this.spritesForms = {}
@@ -26,38 +31,7 @@ class Carousel {
     }
 
     init() {
-      STORAGE.loaderClass.loadCarouselPictures([
-        'assets/before-challenge-1/carousel-fond.jpg',
-        'assets/before-challenge-1/0-forme-1.png',
-        'assets/before-challenge-1/0-forme-2.png',
-        'assets/before-challenge-1/0-forme-3.png',
-        'assets/before-challenge-1/1-forme-1.png',
-        'assets/before-challenge-1/1-forme-2.png',
-        'assets/before-challenge-1/1-forme-3.png',
-        'assets/before-challenge-1/1-forme-4.png',
-        'assets/before-challenge-1/1-forme-5.png',
-        'assets/before-challenge-1/1-forme-6.png',
-        'assets/before-challenge-1/2-forme-1.png',
-        'assets/before-challenge-1/2-forme-2.png',
-        'assets/before-challenge-1/2-forme-3.png',
-        'assets/before-challenge-1/3-forme-1.png',
-        'assets/before-challenge-1/3-forme-2.png',
-        'assets/before-challenge-1/3-forme-3.png',
-        'assets/before-challenge-1/3-forme-4.png',
-        'assets/before-challenge-1/4-forme-1.png',
-        'assets/before-challenge-1/4-forme-2.png',
-        'assets/before-challenge-1/4-forme-3.png',
-        'assets/before-challenge-1/4-forme-4.png',
-        'assets/before-challenge-1/4-forme-5.png',
-        'assets/before-challenge-1/5-forme-1.png',
-        'assets/before-challenge-1/5-forme-2.png',
-        'assets/before-challenge-1/5-forme-3.png',
-        'assets/before-challenge-1/5-forme-4.png',
-        'assets/before-challenge-1/5-forme-5.png',
-        'assets/before-challenge-1/6-forme-1.png',
-        'assets/before-challenge-1/6-forme-2.png',
-        'assets/before-challenge-1/7-forme-1.png'
-      ])
+      STORAGE.loaderClass.loadCarouselPictures(this.carouselDatas.datasImages)
     }
 
     bind() {
@@ -141,7 +115,7 @@ class Carousel {
     }
 
     initBlackboards() {
-      for(let i = 0; i < carouselDatas.datasBlackboards.length; i++) {
+      for(let i = 0; i < this.carouselDatas.datasBlackboards.length; i++) {
         this.blackboards.push(new Blackboard({ index : i, context : "Carousel1" }))
       }
     }

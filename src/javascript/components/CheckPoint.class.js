@@ -1,4 +1,4 @@
-import carouselDatas from '../datas/carouselDatas.js'
+import firstCarouselDatas from '../datas/firstCarouselDatas.js'
 import videoDatas from '../datas/videoDatas.js'
 import ImageDeformation from './ImageDeformation.class.js'
 import FirstChallenge from './FirstChallenge.class.js'
@@ -13,6 +13,13 @@ class CheckPoint {
     this.index = options.index
     this.context = options.context
 
+    this.carouselNumber = STORAGE.carouselClass.carouselNumber
+    console.log(this.carouselNumber)
+
+    if (this.carouselNumber == 1) {
+      this.carouselDatas = firstCarouselDatas
+    }
+
     this.init()
     this.bind()
   }
@@ -21,10 +28,10 @@ class CheckPoint {
 
     if (this.context == "Carousel1") {
       this.checkPoint.beginFill(0xffffff, 1)
-      this.checkPoint.drawCircle(0, 0, carouselDatas.datasBlackboards[this.blackBoardIndex].checkPoints[this.index].rayon)
+      this.checkPoint.drawCircle(0, 0, this.carouselDatas.datasBlackboards[this.blackBoardIndex].checkPoints[this.index].rayon)
       this.checkPoint.endFill()
-      this.checkPoint.x = carouselDatas.datasBlackboards[this.blackBoardIndex].checkPoints[this.index].x * STORAGE.ratioVertical + this.blackboard.graphicsData[0].shape.x
-      this.checkPoint.y = carouselDatas.datasBlackboards[this.blackBoardIndex].checkPoints[this.index].y * STORAGE.ratioVertical + this.blackboard.graphicsData[0].shape.y
+      this.checkPoint.x = this.carouselDatas.datasBlackboards[this.blackBoardIndex].checkPoints[this.index].x * STORAGE.ratioVertical + this.blackboard.graphicsData[0].shape.x
+      this.checkPoint.y = this.carouselDatas.datasBlackboards[this.blackBoardIndex].checkPoints[this.index].y * STORAGE.ratioVertical + this.blackboard.graphicsData[0].shape.y
       this.checkPoint.interactive = true // pour attribuer événements à this.checkPoint
       this.checkPoint.isChecked = false
       this.blackboard.addChild(this.checkPoint)

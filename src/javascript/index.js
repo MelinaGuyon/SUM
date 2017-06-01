@@ -22,13 +22,13 @@ function initCanvas() {
   new Renderer()
   new Loader()
   new SoundManager()
-  // new Carousel()
+  new Carousel({ number: 1 })
   new Menu()
   // new FirstChallenge()
   // new FirstRecompense()
   // new SecondChallenge()
   // new ThirdChallenge()
-  new Video()
+  // new Video()
   new Menu()
 
 

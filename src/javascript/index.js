@@ -19,8 +19,8 @@ function initCanvas() {
   new Renderer()
   new Loader()
   new SoundManager()
-  new Carousel()
-  // new FirstChallenge()
+  // new Carousel()
+  new FirstChallenge()
   new Menu()
   // new FirstRecompense()
 

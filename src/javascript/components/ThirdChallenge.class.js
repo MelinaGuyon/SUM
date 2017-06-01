@@ -191,10 +191,9 @@ class ThirdChallenge {
     let that = this
 
     setTimeout(function(){ 
+      //console.log(this.keepDoing)
       this.keepDoing = false
     }, 500)
-
-    //console.log(this.keepDoing)
 
     that.drawRandomCircle()
     that.drawRandomRectangle()
@@ -203,6 +202,7 @@ class ThirdChallenge {
     that.drawRandomHalfcircle()
 
     if(this.keepDoing == true) {
+      console.log(this.keepDoing)
       setTimeout(function(){ 
         that.onCheckpointMouseDown() 
       }, 100)
@@ -253,10 +253,10 @@ class ThirdChallenge {
         that.rectangle = new PIXI.Sprite(that.assets.resources[objectKey].texture)
       }
     })
-    this.rectangle.width = 715/12
-    this.rectangle.height = 1063/12
-    this.rectangle.x = window.innerWidth-window.innerWidth/6*5
-    this.rectangle.y = 70
+    this.rectangle.width = 715/13
+    this.rectangle.height = 1063/13
+    this.rectangle.x = window.innerWidth-window.innerWidth/8*5
+    this.rectangle.y = 100
     this.rectangle.anchor.set(0.5)
     this.rectangle.interactive = true
     this.ThirdChallengeContainer.addChild(this.rectangle)
@@ -270,8 +270,8 @@ class ThirdChallenge {
       }
     })
     this.randomNumber = Math.random()
-    this.randomRectangle.width = 715/12*this.randomNumber
-    this.randomRectangle.height = 1063/12*this.randomNumber
+    this.randomRectangle.width = 715/10*this.randomNumber
+    this.randomRectangle.height = 1063/10*this.randomNumber
     this.randomRectangle.x = window.innerWidth-Math.random()*window.innerWidth
     this.randomRectangle.y = window.innerHeight-Math.random()*window.innerHeight
     this.randomRectangle.anchor.set(0.5)
@@ -288,10 +288,10 @@ class ThirdChallenge {
         that.circle = new PIXI.Sprite(that.assets.resources[objectKey].texture)
       }
     })
-    this.circle.width = 1069/12
-    this.circle.height = 1069/12
-    this.circle.x = window.innerWidth-window.innerWidth/6*4
-    this.circle.y = 70
+    this.circle.width = 1069/13
+    this.circle.height = 1069/13
+    this.circle.x = window.innerWidth-window.innerWidth/8*3
+    this.circle.y = 100
     this.circle.anchor.set(0.5)
     this.circle.interactive = true
     this.ThirdChallengeContainer.addChild(this.circle) 
@@ -322,10 +322,10 @@ class ThirdChallenge {
         that.triangle = new PIXI.Sprite(that.assets.resources[objectKey].texture)
       }
     })
-    this.triangle.width = 1920/12
-    this.triangle.height = 962/12
-    this.triangle.x = window.innerWidth-window.innerWidth/6*3
-    this.triangle.y = 70
+    this.triangle.width = 1920/13
+    this.triangle.height = 962/13
+    this.triangle.x = window.innerWidth-window.innerWidth/8*6
+    this.triangle.y = 100
     this.triangle.anchor.set(0.5)
     this.triangle.interactive = true
     this.ThirdChallengeContainer.addChild(this.triangle) 
@@ -339,8 +339,8 @@ class ThirdChallenge {
       }
     })
     this.randomNumber = Math.random()
-    this.randomTriangle.width = 1920/12*this.randomNumber
-    this.randomTriangle.height = 962/12*this.randomNumber
+    this.randomTriangle.width = 1920/10*this.randomNumber
+    this.randomTriangle.height = 962/10*this.randomNumber
     this.randomTriangle.x = window.innerWidth-Math.random()*window.innerWidth
     this.randomTriangle.y = window.innerHeight-Math.random()*window.innerHeight
     this.randomTriangle.anchor.set(0.5)
@@ -357,10 +357,10 @@ class ThirdChallenge {
         that.line = new PIXI.Sprite(that.assets.resources[objectKey].texture)
       }
     })
-    this.line.width = 1056/12
-    this.line.height = 1064/12
-    this.line.x = window.innerWidth-window.innerWidth/6*2
-    this.line.y = 70
+    this.line.width = 1056/13
+    this.line.height = 1064/13
+    this.line.x = window.innerWidth-window.innerWidth/8*4
+    this.line.y = 100
     this.line.anchor.set(0.5)
     this.line.interactive = true
     this.ThirdChallengeContainer.addChild(this.line) 
@@ -374,8 +374,8 @@ class ThirdChallenge {
       }
     })
     this.randomNumber = Math.random()
-    this.randomLine.width = 1056/12*this.randomNumber
-    this.randomLine.height = 1064/12*this.randomNumber
+    this.randomLine.width = 1056/10*this.randomNumber
+    this.randomLine.height = 1064/10*this.randomNumber
     this.randomLine.x = window.innerWidth-Math.random()*window.innerWidth
     this.randomLine.y = window.innerHeight-Math.random()*window.innerHeight
     this.randomLine.anchor.set(0.5)
@@ -392,10 +392,10 @@ class ThirdChallenge {
         that.halfcircle = new PIXI.Sprite(that.assets.resources[objectKey].texture)
       }
     })
-    this.halfcircle.width = 532/12
-    this.halfcircle.height = 1065/12
-    this.halfcircle.x = window.innerWidth-window.innerWidth/6
-    this.halfcircle.y = 70
+    this.halfcircle.width = 532/13
+    this.halfcircle.height = 1065/13
+    this.halfcircle.x = window.innerWidth-window.innerWidth/8*2
+    this.halfcircle.y = 100
     this.halfcircle.anchor.set(0.5)
     this.halfcircle.interactive = true
     this.ThirdChallengeContainer.addChild(this.halfcircle) 
@@ -409,8 +409,8 @@ class ThirdChallenge {
       }
     })
     this.randomNumber = Math.random()
-    this.randomHalfcircle.width = 532/12*this.randomNumber
-    this.randomHalfcircle.height = 1065/12*this.randomNumber
+    this.randomHalfcircle.width = 532/10*this.randomNumber
+    this.randomHalfcircle.height = 1065/10*this.randomNumber
     this.randomHalfcircle.x = window.innerWidth-Math.random()*window.innerWidth
     this.randomHalfcircle.y = window.innerHeight-Math.random()*window.innerHeight
     this.randomHalfcircle.anchor.set(0.5)

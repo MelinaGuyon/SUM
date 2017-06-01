@@ -1,4 +1,6 @@
 import firstCarouselDatas from '../datas/firstCarouselDatas.js'
+import secondCarouselDatas from '../datas/secondCarouselDatas.js'
+import thirdCarouselDatas from '../datas/thirdCarouselDatas.js'
 import videoDatas from '../datas/videoDatas.js'
 import ImageDeformation from './ImageDeformation.class.js'
 import FirstChallenge from './FirstChallenge.class.js'
@@ -14,10 +16,12 @@ class CheckPoint {
     this.context = options.context
 
     this.carouselNumber = STORAGE.carouselClass.carouselNumber
-    console.log(this.carouselNumber)
-
     if (this.carouselNumber == 1) {
       this.carouselDatas = firstCarouselDatas
+    } else if (this.carouselNumber == 2) {
+      this.carouselDatas = secondCarouselDatas
+    } else if (this.carouselNumber == 3) {
+      this.carouselDatas = thirdCarouselDatas
     }
 
     this.init()
@@ -26,7 +30,7 @@ class CheckPoint {
 
   init() {
 
-    if (this.context == "Carousel1") {
+    if (this.context == "Carousel") {
       this.checkPoint.beginFill(0xffffff, 1)
       this.checkPoint.drawCircle(0, 0, this.carouselDatas.datasBlackboards[this.blackBoardIndex].checkPoints[this.index].rayon)
       this.checkPoint.endFill()
@@ -77,7 +81,7 @@ class CheckPoint {
 
       if (this.blackboard.isTestLaunch) {
 
-        if (this.context == "Carousel1") {
+        if (this.context == "Carousel") {
           new ImageDeformation()
           this.animateSectionTransition(1)
         }

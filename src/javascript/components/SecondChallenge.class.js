@@ -219,19 +219,27 @@ class SecondChallenge {
   allCheckpointsChecked() {
     this.stepIndex++
 
+    document.removeEventListener("mousemove", this.handleMove)
+    this.externalCanvasCTX.clearRect(0, 0, this.externalCanvas.width, this.externalCanvas.height)
+    let imageMask = STORAGE.SecondChallengeClass.externalCanvas.toDataURL("image/png")
+    STORAGE.SecondChallengeClass.imagePixi.src = imageMask
+    var myBaseTexture = new PIXI.BaseTexture(STORAGE.SecondChallengeClass.imagePixi)
+    STORAGE.SecondChallengeClass.coolTexture.texture = new PIXI.Texture(myBaseTexture)
+
+    let that = this
     if (this.stepIndex <= 5) {
-      this.sum.mask = null
-      TweenLite.set( this.sum, {
-        alpha: 0.2
-      })
-      TweenLite.to( this.sum, 0.8, {
-        alpha: 1
-      })
-      TweenLite.to( this.background, 0.8, {
+      TweenLite.to( [this.background, this.container], 0.6, {
         alpha: 0,
         onComplete: () => {
-          this.createBackground(this.stepIndex)
-          this.createSum(this.stepIndex)
+          this.createBackground()
+          this.createSum()
+          this.container.alpha = 1
+          this.background.alpha = 1
+          if (this.stepIndex != 5) {
+            setTimeout(function() {
+              document.addEventListener("mousemove", that.handleMove)
+            }, 500)
+          }
         }
       })
 
@@ -336,7 +344,6 @@ class SecondChallenge {
       this.fourthCheckpointChecked = false
       this.fifthCheckpointChecked = false
       this.sixthCheckpointChecked = false
-      this.externalCanvasCTX.clearRect(0, 0, this.externalCanvas.width, this.externalCanvas.height);
     }
   }
 

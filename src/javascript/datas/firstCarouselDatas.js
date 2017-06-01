@@ -72,6 +72,11 @@ const firstCarouselDatas = {
       ],
       isTestLaunch: true
     }
+  ],
+  textIntroChallenge: [
+    'acte I',
+    'la Métamorphose',
+    'du Regard'
   ]
 }
 

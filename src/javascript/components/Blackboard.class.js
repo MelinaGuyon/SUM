@@ -32,7 +32,7 @@ class Blackboard {
     init() {
       if (this.context == "Carousel") {
 
-        this.blackboard.beginFill(0x000000, 0)
+        this.blackboard.beginFill(0x000000, 0.3)
         console.log(STORAGE.ratioVertical, 'in blackboard', this.carouselDatas.datasBlackboards[this.index].width * STORAGE.ratioVertical )
         this.blackboard.drawRect(this.carouselDatas.datasBlackboards[this.index].x * STORAGE.ratioVertical, this.carouselDatas.datasBlackboards[this.index].y * STORAGE.ratioVertical, this.carouselDatas.datasBlackboards[this.index].width * STORAGE.ratioVertical, this.carouselDatas.datasBlackboards[this.index].height * STORAGE.ratioVertical)
         this.blackboard.interactive = true // pour attribuer événements à this.blackboard

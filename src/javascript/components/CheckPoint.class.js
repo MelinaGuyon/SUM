@@ -4,6 +4,8 @@ import thirdCarouselDatas from '../datas/thirdCarouselDatas.js'
 import videoDatas from '../datas/videoDatas.js'
 import ImageDeformation from './ImageDeformation.class.js'
 import FirstChallenge from './FirstChallenge.class.js'
+import SecondChallenge from './SecondChallenge.class.js'
+import ThirdChallenge from './ThirdChallenge.class.js'
 
 class CheckPoint {
 
@@ -83,7 +85,7 @@ class CheckPoint {
 
         if (this.context == "Carousel") {
           new ImageDeformation()
-          this.animateSectionTransition(1)
+          this.animateSectionTransition()
         }
         else if (this.context == "VideoIntro") {
           STORAGE.videoIntro.play()
@@ -104,17 +106,21 @@ class CheckPoint {
     }
   }
 
-  animateSectionTransition(numberOfChallenge) {
+  animateSectionTransition() {
     let textContainer = document.querySelector('.js-introduction-challenge-container')
     let textIntro = textContainer.querySelector('.js-introduction-challenge-text')
-    if (numberOfChallenge =! null) {
-      console.log(textIntro)
-      TweenLite.to(textContainer, 2, {
-        autoAlpha: 1,
-        delay: 4
-      })
-    }
 
+    textIntro.querySelector('.acte').innerText = this.carouselDatas.textIntroChallenge[0]
+    textIntro.querySelector('.title1').innerText = this.carouselDatas.textIntroChallenge[1]
+    textIntro.querySelector('.title2').innerText = this.carouselDatas.textIntroChallenge[2]
+
+
+    TweenLite.to(textContainer, 2, {
+      autoAlpha: 1,
+      delay: 4
+    })
+
+    let that = this
     TweenLite.to(STORAGE.carousel, 0.5, {
       alpha: 0,
       delay: 1
@@ -133,7 +139,14 @@ class CheckPoint {
           STORAGE.carouselClass = null
           STORAGE.deformation = null
           STORAGE.deformationClass = null
-          new FirstChallenge()
+          if (that.carouselNumber == 1) {
+            new FirstChallenge()
+          } else if (that.carouselNumber == 2) {
+            new SecondChallenge()
+          } else if (that.carouselNumber == 3) {
+            new ThirdChallenge()
+          }
+
         }, 1000)
       },
       delay: 6.5

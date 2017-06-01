@@ -61,6 +61,11 @@ const secondCarouselDatas = {
       ],
       isTestLaunch: true
     }
+  ],
+  textIntroChallenge: [
+    'acte II',
+    'la Traversée',
+    'des Masques'
   ]
 }
 

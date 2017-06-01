@@ -1,35 +1,24 @@
 const thirdCarouselDatas = {
   datasImages: [
-    'assets/before-challenge-1/carousel-fond.jpg',
-    'assets/before-challenge-1/0-forme-1.png',
-    'assets/before-challenge-1/0-forme-2.png',
-    'assets/before-challenge-1/0-forme-3.png',
-    'assets/before-challenge-1/1-forme-1.png',
-    'assets/before-challenge-1/1-forme-2.png',
-    'assets/before-challenge-1/1-forme-3.png',
-    'assets/before-challenge-1/1-forme-4.png',
-    'assets/before-challenge-1/1-forme-5.png',
-    'assets/before-challenge-1/1-forme-6.png',
-    'assets/before-challenge-1/2-forme-1.png',
-    'assets/before-challenge-1/2-forme-2.png',
-    'assets/before-challenge-1/2-forme-3.png',
-    'assets/before-challenge-1/3-forme-1.png',
-    'assets/before-challenge-1/3-forme-2.png',
-    'assets/before-challenge-1/3-forme-3.png',
-    'assets/before-challenge-1/3-forme-4.png',
-    'assets/before-challenge-1/4-forme-1.png',
-    'assets/before-challenge-1/4-forme-2.png',
-    'assets/before-challenge-1/4-forme-3.png',
-    'assets/before-challenge-1/4-forme-4.png',
-    'assets/before-challenge-1/4-forme-5.png',
-    'assets/before-challenge-1/5-forme-1.png',
-    'assets/before-challenge-1/5-forme-2.png',
-    'assets/before-challenge-1/5-forme-3.png',
-    'assets/before-challenge-1/5-forme-4.png',
-    'assets/before-challenge-1/5-forme-5.png',
-    'assets/before-challenge-1/6-forme-1.png',
-    'assets/before-challenge-1/6-forme-2.png',
-    'assets/before-challenge-1/7-forme-1.png'
+    'assets/before-challenge-2/carousel-fond.jpg',
+    'assets/before-challenge-2/0-forme-1.png',
+    'assets/before-challenge-2/0-forme-2.png',
+    'assets/before-challenge-2/0-forme-3.png',
+    'assets/before-challenge-2/0-forme-4.png',
+    'assets/before-challenge-2/0-forme-5.gif',
+    'assets/before-challenge-2/0-forme-6.png',
+    'assets/before-challenge-2/1-forme-1.png',
+    'assets/before-challenge-2/1-forme-2.png',
+    'assets/before-challenge-2/2-forme-1.png',
+    'assets/before-challenge-2/2-forme-2.png',
+    'assets/before-challenge-2/2-forme-3.png',
+    'assets/before-challenge-2/3-forme-1.png',
+    'assets/before-challenge-2/3-forme-2.png',
+    'assets/before-challenge-2/4-forme-1.png',
+    'assets/before-challenge-2/4-forme-2.png',
+    'assets/before-challenge-2/5-forme-1.png',
+    'assets/before-challenge-2/5-forme-2.png',
+    'assets/before-challenge-2/5-forme-3.png'
   ],
   datasEyes: [
     {
@@ -48,30 +37,31 @@ const thirdCarouselDatas = {
   ],
   datasBlackboards: [
       {
-        width: 400,
-        height: 400,
-        x: 740,
-        y: 7900,
+        width: 420,
+        height: 740,
+        x: 600,
+        y: 5680,
         checkPoints : [{
           rayon: 30,
-          x: 200,
+          x: 350,
           y: 30
         }, {
           rayon: 30,
-          x: 40,
-          y: 200
+          x: 50,
+          y: 180
         }, {
           rayon: 30,
-          x: 370,
-          y: 200
-        }, {
-          rayon: 30,
-          x: 200,
-          y: 360
+          x: 235,
+          y: 710
         }
       ],
       isTestLaunch: true
     }
+  ],
+  textIntroChallenge: [
+    'acte III',
+    'les Heureux',
+    'Accidents'
   ]
 }
 

@@ -29,6 +29,9 @@ function initCanvas() {
   // new SecondChallenge()
   // new ThirdChallenge()
   new Video()
+  new Menu()
+
+
 
   render()
 }

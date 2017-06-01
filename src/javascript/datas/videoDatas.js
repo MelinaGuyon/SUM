@@ -3,8 +3,8 @@ const videoDatas = {
       {
         width: 400,
         height: 400,
-        x: 500,
-        y: 300,
+        x: 400,
+        y: 200,
         checkPoints : [{
           rayon: 30,
           x: 200,

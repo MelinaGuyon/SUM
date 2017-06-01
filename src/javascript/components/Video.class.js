@@ -11,15 +11,17 @@ class Video {
     STORAGE.VideoContainer = this.VideoContainer
     STORAGE.stage.addChild(this.VideoContainer)
 
-    //this.button = new PIXI.Graphics()
-
     this.assets = {}
     this.blackboards = []
     STORAGE.videoRatioVertical = 1
 
+    this.largeurVideo = 576
+    this.hauteurVideo = 320
+    this.largeurArdoise = 290
+    this.hauteurArdoise = 160
+
     this.init()
     this.playVideo()
-    //this.initBlackboards()
     this.bind()
   }
 
@@ -30,70 +32,78 @@ class Video {
     TweenLite.to(this.VideoContainer, 0.6, {
       alpha: 1
     })
+
+    //STORAGE.videoRatioWidth = window.innerWidth / videoDatas.datasBlackboards[0].width
+    //STORAGE.videoRatioHeight = window.innerHeight / videoDatas.datasBlackboards[0].height      
+    STORAGE.videoRatioX = window.innerWidth / videoDatas.datasBlackboards[0].x 
+    STORAGE.videoRatioY = window.innerHeight / videoDatas.datasBlackboards[0].y 
   }
 
   bind() {
     let that = this
+    window.addEventListener('resize', that.handleResize)
   }
 
   unbind() {
     let that = this
+    window.removeEventListener('resize', that.handleResize)
   }
 
-  createButton() {
-    this.button.beginFill(0xffffff, 0.5)
-    this.button.drawRoundedRect(0, 0, 100, 100, 10)
-    this.button.endFill()
-    this.button.beginFill(0xffffff)
-    this.button.moveTo(36, 30)
-    this.button.lineTo(36, 70)
-    this.button.lineTo(70, 50)
+  handleResize() {
+    STORAGE.renderer.resize(window.innerWidth, window.innerHeight)
+    let timeOut
+    clearTimeout(timeOut)
 
-    /*    
-    this.button.x = (this.app.renderer.width - this.button.width) / 2
-    this.button.y = (this.app.renderer.height - this.button.height) / 2
-    */
-    this.button.x = 100
-    this.button.y = 100
-
-    this.button.interactive = true
-    this.button.buttonMode = true
-
-    this.VideoContainer.addChild(this.button)
-
-    //this.button.on('pointertap', this.playVideo)
+    timeOut = setTimeout(()=> {
+      STORAGE.VideoClass.resize()
+    }, 200)
   }
 
   playVideo() {
-    //this.button.destroy()
-
     let that = this
 
     this.texture = PIXI.Texture.fromVideo('assets/video.mp4')
     this.videoSprite = new PIXI.Sprite(this.texture)
 
-    this.videoSprite.width = window.innerWidth
-    this.videoSprite.height = window.innerHeight
+    this.ratio = window.innerWidth/this.largeurVideo
+    this.videoSprite.width = this.largeurVideo * this.ratio
+    this.videoSprite.height = this.hauteurVideo * this.ratio
 
     this.videoSprite.x = 0
-    this.videoSprite.y = 0
+    this.videoSprite.y = (window.innerHeight-this.videoSprite.height)/2
 
     this.VideoContainer.addChild(this.videoSprite)
+
+    this.initBlackboards()
 
     setTimeout(function(){
       that.texture.baseTexture.source.pause()
       that.initBlackboards()
-    }, 5000)
+    }, 1000)
 
-    setTimeout(function(){
+/*    setTimeout(function(){
       that.texture.baseTexture.source.play()
-      //that.blackboard.destroy()    
-    }, 10000)
+      for (var i = 0; i < that.blackboards.length; i++) {
+        that.blackboards[i].blackboard.destroy()
+      }    
+    }, 10000)*/
+  }
+
+  resize() {
+    this.ratio = window.innerWidth/this.largeurVideo
+    this.videoSprite.width = this.largeurVideo * this.ratio
+    this.videoSprite.height = this.hauteurVideo * this.ratio
+
+    this.videoSprite.y = (window.innerHeight-this.videoSprite.height)/2
+
+    this.initBlackboards()
   }
 
   initBlackboards() {
-    STORAGE.videoRatioVertical = window.innerHeight / this.videoSprite.height       
-    STORAGE.videoPositionHorizontal = window.innerWidth / 2 - this.videoSprite.width / 2
+    for (var i = 0; i < this.blackboards.length; i++) {
+      this.blackboards[i].blackboard.destroy()
+    }
+    this.blackboards = []
 
     for(let i = 0; i < videoDatas.datasBlackboards.length; i++) {
       this.blackboards.push(new Blackboard({ index : i, context : "VideoIntro" }))

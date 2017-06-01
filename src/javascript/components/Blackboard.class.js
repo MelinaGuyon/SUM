@@ -40,7 +40,7 @@ class Blackboard {
 
         this.blackboard.beginFill(0xff0000, 1)
         console.log(STORAGE.videoRatioVertical, 'in blackboard', videoDatas.datasBlackboards[this.index].width * STORAGE.videoRatioVertical )
-        this.blackboard.drawRect(videoDatas.datasBlackboards[this.index].x * STORAGE.videoRatioVertical + STORAGE.videoPositionHorizontal, videoDatas.datasBlackboards[this.index].y * STORAGE.videoRatioVertical, videoDatas.datasBlackboards[this.index].width * STORAGE.videoRatioVertical, videoDatas.datasBlackboards[this.index].height * STORAGE.videoRatioVertical)
+        this.blackboard.drawRect(window.innerWidth / STORAGE.videoRatioX, window.innerHeight / STORAGE.videoRatioY, videoDatas.datasBlackboards[this.index].width, videoDatas.datasBlackboards[this.index].height)
         this.blackboard.interactive = true // pour attribuer événements à this.blackboard
 
         STORAGE.VideoContainer.addChild(this.blackboard)
@@ -70,7 +70,6 @@ class Blackboard {
     }
 
     onBlackboardMouseHover() {
-      console.log("kk")
       document.body.style.cursor = 'crosshair'
     }
 

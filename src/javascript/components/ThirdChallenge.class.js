@@ -205,7 +205,6 @@ class ThirdChallenge {
   onCheckpointMouseDown() {
     setTimeout(function(){ 
       STORAGE.ThirdChallengeClass.keepDoing = false
-      STORAGE.ThirdChallengeClass.showConclusion()
     }, 5000)
 
     STORAGE.ThirdChallengeClass.drawRandomCircle(STORAGE.ThirdChallengeClass.circle.width)
@@ -219,6 +218,10 @@ class ThirdChallenge {
       setTimeout(function(){ 
         STORAGE.ThirdChallengeClass.onCheckpointMouseDown() 
       }, 100)
+    }
+    else {
+      STORAGE.ThirdChallengeClass.showConclusion()
+      return
     }
   }
 
@@ -470,11 +473,13 @@ class ThirdChallenge {
   }
 
   showConclusion() {
+    for(let i=0; i < this.ThirdChallengeContainer.children.length; i++) {
+      TweenLite.to(this.ThirdChallengeContainer.children[i], 0.6, {
+        alpha: 0
+      })
+    }
     TweenLite.to([this.helpButton, this.rectangle, this.triangle, this.circle, this.halfcircle, this.line, this.thirdChallengeHtmlElements], 0.6, {
-      alpha: 0,
-      /*onComplete: function() {
-        graphics.clear()
-      }*/
+      alpha: 0
     })
 
     TweenLite.to(this.conclusionChallengeTextContainer, 2, {

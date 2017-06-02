@@ -31,10 +31,15 @@ class Blackboard {
 
     init() {
       if (this.context == "Carousel") {
-
         this.blackboard.beginFill(0x000000, 0.3)
-        console.log(STORAGE.ratioVertical, 'in blackboard', this.carouselDatas.datasBlackboards[this.index].width * STORAGE.ratioVertical )
-        this.blackboard.drawRect(this.carouselDatas.datasBlackboards[this.index].x * STORAGE.ratioVertical, this.carouselDatas.datasBlackboards[this.index].y * STORAGE.ratioVertical, this.carouselDatas.datasBlackboards[this.index].width * STORAGE.ratioVertical, this.carouselDatas.datasBlackboards[this.index].height * STORAGE.ratioVertical)
+        if (STORAGE.carousel.widthSup == true) {
+          this.blackboard.drawRect(this.carouselDatas.datasBlackboards[this.index].x * STORAGE.ratioVertical - (STORAGE.carousel.postionHorizontal / 2) , this.carouselDatas.datasBlackboards[this.index].y * STORAGE.ratioVertical,
+          this.carouselDatas.datasBlackboards[this.index].width * STORAGE.ratioVertical, this.carouselDatas.datasBlackboards[this.index].height * STORAGE.ratioVertical)
+        } else if(STORAGE.carousel.widthSup == false) {
+          this.blackboard.drawRect(this.carouselDatas.datasBlackboards[this.index].x * STORAGE.ratioVertical +  (STORAGE.carousel.postionHorizontal / 2) , this.carouselDatas.datasBlackboards[this.index].y * STORAGE.ratioVertical,
+          this.carouselDatas.datasBlackboards[this.index].width * STORAGE.ratioVertical, this.carouselDatas.datasBlackboards[this.index].height * STORAGE.ratioVertical)
+        }
+
         this.blackboard.interactive = true // pour attribuer événements à this.blackboard
 
         STORAGE.carousel.addChild(this.blackboard)
@@ -50,7 +55,6 @@ class Blackboard {
       else if (this.context == "VideoIntro") {
 
         this.blackboard.beginFill(0xff0000, 1)
-        console.log(STORAGE.videoRatioVertical, 'in blackboard', videoDatas.datasBlackboards[this.index].width * STORAGE.videoRatioVertical )
         this.blackboard.drawRect(window.innerWidth / STORAGE.videoRatioX, window.innerHeight / STORAGE.videoRatioY, videoDatas.datasBlackboards[this.index].width, videoDatas.datasBlackboards[this.index].height)
         this.blackboard.interactive = true // pour attribuer événements à this.blackboard
 

@@ -20,15 +20,12 @@ function initCanvas() {
   new Renderer()
   new Loader()
   new SoundManager()
-  new Carousel({ number: 2 })
+  new Carousel({ number: 1 })
   new Menu()
   // new FirstChallenge()
   // new SecondChallenge()
   // new ThirdChallenge()
   // new Video()
-  new Menu()
-
-
 
   render()
 }

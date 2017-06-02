@@ -116,10 +116,11 @@ class ThirdChallenge {
       that.onWindowMouseUp(that)
     })
 
-    this.zoomIcon.mousedown = function(){ that.onShapeZoom(that.shape) }
-    this.dezoomIcon.mousedown = function(){ that.onShapeDezoom(that.shape) }
-    this.rotationIcon.mousedown = function(){ that.onShapeRotation(that.shape) }
-    this.backtoBeginning(that.shape)
+    //this.zoomIcon.mousedown = function(){ that.onShapeZoom(that.shape) }
+    //this.dezoomIcon.mousedown = function(){ that.onShapeDezoom(that.shape) }
+    //this.rotationIcon.mousedown = function(){ that.onShapeRotation(that.shape) }
+    window.addEventListener('keydown', function(key) { that.onKeyDown(key, that.shape)})
+    //this.backtoBeginning(that.shape)
   }
 
   onShapeMouseMove(mouseData) {
@@ -139,6 +140,24 @@ class ThirdChallenge {
     }
   }
 
+  onKeyDown(key, shape) {
+    if (key.keyCode === 82) {
+      this.onShapeRotation(shape)
+    }
+    else if (key.keyCode === 90) {
+      this.onShapeZoom(shape)
+    }
+    else if (key.keyCode === 65) {
+      this.onShapeDezoom(shape)
+    }
+  }
+
+  onShapeRotation(shape) {
+    TweenLite.to(shape, 0.3, {
+      rotation: "+="+1
+    })
+  }
+
   onShapeZoom(shape) {
     TweenLite.to(shape, 0.3, {
       width: "+="+5,
@@ -150,12 +169,6 @@ class ThirdChallenge {
     TweenLite.to(shape, 0.3, {
       width: "-="+5,
       height: "-="+5
-    })
-  }
-
-  onShapeRotation(shape) {
-    TweenLite.to(shape, 0.3, {
-      rotation: "+="+1
     })
   }
 
@@ -253,10 +266,10 @@ class ThirdChallenge {
         that.rectangle = new PIXI.Sprite(that.assets.resources[objectKey].texture)
       }
     })
-    this.rectangle.width = 715/13
-    this.rectangle.height = 1063/13
+    this.rectangle.width = 715/20
+    this.rectangle.height = 1063/20
     this.rectangle.x = window.innerWidth-window.innerWidth/8*5
-    this.rectangle.y = 100
+    this.rectangle.y = window.innerHeight-this.rectangle.height
     this.rectangle.anchor.set(0.5)
     this.rectangle.interactive = true
     this.ThirdChallengeContainer.addChild(this.rectangle)
@@ -288,10 +301,10 @@ class ThirdChallenge {
         that.circle = new PIXI.Sprite(that.assets.resources[objectKey].texture)
       }
     })
-    this.circle.width = 1069/13
-    this.circle.height = 1069/13
+    this.circle.width = 1069/20
+    this.circle.height = 1069/20
     this.circle.x = window.innerWidth-window.innerWidth/8*3
-    this.circle.y = 100
+    this.circle.y = window.innerHeight-this.circle.height
     this.circle.anchor.set(0.5)
     this.circle.interactive = true
     this.ThirdChallengeContainer.addChild(this.circle) 
@@ -322,10 +335,10 @@ class ThirdChallenge {
         that.triangle = new PIXI.Sprite(that.assets.resources[objectKey].texture)
       }
     })
-    this.triangle.width = 1920/13
-    this.triangle.height = 962/13
+    this.triangle.width = 1920/20
+    this.triangle.height = 962/20
     this.triangle.x = window.innerWidth-window.innerWidth/8*6
-    this.triangle.y = 100
+    this.triangle.y = window.innerHeight-this.triangle.height
     this.triangle.anchor.set(0.5)
     this.triangle.interactive = true
     this.ThirdChallengeContainer.addChild(this.triangle) 
@@ -357,10 +370,10 @@ class ThirdChallenge {
         that.line = new PIXI.Sprite(that.assets.resources[objectKey].texture)
       }
     })
-    this.line.width = 1056/13
-    this.line.height = 1064/13
+    this.line.width = 1056/20
+    this.line.height = 1064/20
     this.line.x = window.innerWidth-window.innerWidth/8*4
-    this.line.y = 100
+    this.line.y = window.innerHeight-this.line.height
     this.line.anchor.set(0.5)
     this.line.interactive = true
     this.ThirdChallengeContainer.addChild(this.line) 
@@ -392,10 +405,10 @@ class ThirdChallenge {
         that.halfcircle = new PIXI.Sprite(that.assets.resources[objectKey].texture)
       }
     })
-    this.halfcircle.width = 532/13
-    this.halfcircle.height = 1065/13
+    this.halfcircle.width = 532/20
+    this.halfcircle.height = 1065/20
     this.halfcircle.x = window.innerWidth-window.innerWidth/8*2
-    this.halfcircle.y = 100
+    this.halfcircle.y = window.innerHeight-this.halfcircle.height
     this.halfcircle.anchor.set(0.5)
     this.halfcircle.interactive = true
     this.ThirdChallengeContainer.addChild(this.halfcircle) 
@@ -429,8 +442,8 @@ class ThirdChallenge {
     })
     this.zoomIcon.width = 30
     this.zoomIcon.height = 30
-    this.zoomIcon.x = window.innerWidth/10*4-this.zoomIcon.width
-    this.zoomIcon.y = window.innerHeight-this.zoomIcon.height-50
+    this.zoomIcon.x = window.innerWidth-window.innerWidth*29/30
+    this.zoomIcon.y = window.innerHeight/6*3
     this.zoomIcon.interactive = true
     this.ThirdChallengeContainer.addChild(this.zoomIcon) 
   }
@@ -444,8 +457,8 @@ class ThirdChallenge {
     })
     this.dezoomIcon.width = 30
     this.dezoomIcon.height = 30
-    this.dezoomIcon.x = window.innerWidth/10*5-this.dezoomIcon.width
-    this.dezoomIcon.y = window.innerHeight-this.dezoomIcon.height-50
+    this.dezoomIcon.x = window.innerWidth-window.innerWidth*29/30
+    this.dezoomIcon.y = window.innerHeight/6*4
     this.dezoomIcon.interactive = true
     this.ThirdChallengeContainer.addChild(this.dezoomIcon) 
   }
@@ -459,8 +472,8 @@ class ThirdChallenge {
     })
     this.rotationIcon.width = 30
     this.rotationIcon.height = 30
-    this.rotationIcon.x = window.innerWidth/10*6-this.rotationIcon.width
-    this.rotationIcon.y = window.innerHeight-this.rotationIcon.height-50
+    this.rotationIcon.x = window.innerWidth-window.innerWidth*29/30
+    this.rotationIcon.y = window.innerHeight/6*2
     this.rotationIcon.interactive = true
     this.ThirdChallengeContainer.addChild(this.rotationIcon) 
   }
@@ -468,7 +481,7 @@ class ThirdChallenge {
   drawCheckpoint() {
     this.checkpoint.beginFill(0xFFFFFF)
     this.checkpoint.lineStyle(2, 0xFFFFFF)
-    this.checkpoint.drawCircle(50, 50, 10)
+    this.checkpoint.drawCircle(window.innerWidth-60, window.innerHeight-60, 10)
     this.checkpoint.endFill()
     this.checkpoint.interactive = true
     this.ThirdChallengeContainer.addChild(this.checkpoint) 

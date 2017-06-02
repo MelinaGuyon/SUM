@@ -165,10 +165,20 @@ class FirstChallenge {
   createGif(index) {
     this.framesArray = []
 
-    for (let i = 1; i < 35; i++) {
-      let val = i < 10 ? '0' + i : i
+
+    if (index == 3) {
+      for (let i = 1; i < 28; i++) {
+        let val = i < 10 ? '0' + i : i
+        let texture = PIXI.Texture.fromImage(frames[3] + val + '.png')
+        this.framesArray.push(texture)
+      }
+    }
+    else {
+      for (let i = 1; i < 35; i++) {
+        let val = i < 10 ? '0' + i : i
         let texture = PIXI.Texture.fromImage(frames[index] + val + '.png')
         this.framesArray.push(texture)
+      }
     }
 
     this.movie = new PIXI.extras.AnimatedSprite(this.framesArray)
@@ -366,7 +376,7 @@ class FirstChallenge {
       })
     }
 
-    this.manageSounds()
+    //this.manageSounds()
   }
 
   manageSounds(kill) {
@@ -397,7 +407,7 @@ class FirstChallenge {
   backToBegining() {
     let that = this
 
-    if (this.movieIndex < 2) {
+    if (this.movieIndex < 3) {
       TweenLite.to(this.eye, 0.6, {
         rotation: 0
       })
@@ -415,7 +425,7 @@ class FirstChallenge {
         y: this.pathEnd[1]
       })
 
-      if (this.movieIndex == 1) {
+      if (this.movieIndex == 2) {
         TweenLite.set(that.firstChallengeNextText, {
           display: 'none'
         })

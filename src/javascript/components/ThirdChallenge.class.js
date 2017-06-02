@@ -1,4 +1,5 @@
 import conclusionTextsDatas from '../datas/conclusionTexts.js'
+import ThirdRecompense from './ThirdRecompense.class.js'
 import TweenLite from 'gsap'
 
 class ThirdChallenge {
@@ -13,10 +14,13 @@ class ThirdChallenge {
     this.assets = {}
 
     this.background
-    this.checkpoint = new PIXI.Graphics()
+    this.helpButton = new PIXI.Graphics()
     this.shape
     this.isDragging = false
     this.keepDoing = true
+
+    this.thirdChallengeHtmlElements = document.querySelector('.js-third-challenge')
+    this.checkpoint = document.querySelector('.js-third-challenge-checkpointText')
 
     this.recompenseButton = document.querySelector('.js-first-recompense-button')
     this.conclusionChallengeText = document.querySelector('.js-conclusion-p')
@@ -38,8 +42,7 @@ class ThirdChallenge {
       'assets/third-challenge/triangle.png',
       'assets/third-challenge/line.png',
       'assets/third-challenge/half-circle.png',
-      'assets/third-challenge/zoom.svg',
-      'assets/third-challenge/rotation.svg'
+      'assets/third-challenge/aide.svg'
     ])
 
     TweenLite.set(STORAGE.stage, {
@@ -67,7 +70,8 @@ class ThirdChallenge {
     this.halfcircle.mouseover = function(){ that.onShapeMouseOver() }
     this.halfcircle.mouseout = function(){ that.onShapeMouseOut() }
     this.halfcircle.mousedown = function(mouseData){ that.onShapeMouseDown(mouseData, this) }
-    this.checkpoint.mousedown = function() { that.onCheckpointMouseDown() }
+    this.checkpoint.addEventListener('click', that.onCheckpointMouseDown)
+    this.recompenseButton.addEventListener('click', that.handleRecompenseButtonClick)
   }
 
   unbind() {
@@ -87,7 +91,8 @@ class ThirdChallenge {
     this.halfcircle.mouseover = null
     this.halfcircle.mouseout = null
     this.halfcircle.mousedown = null
-    this.checkpoint.mousedown = null
+    this.checkpoint.removeEventListener('click', that.onCheckpointMouseDown)    
+    this.recompenseButton.removeEventListener('click', that.handleRecompenseButtonClick)
   }
 
   onShapeMouseOver() {
@@ -116,10 +121,8 @@ class ThirdChallenge {
       that.onWindowMouseUp(that)
     })
 
-    this.zoomIcon.mousedown = function(){ that.onShapeZoom(that.shape) }
-    this.dezoomIcon.mousedown = function(){ that.onShapeDezoom(that.shape) }
-    this.rotationIcon.mousedown = function(){ that.onShapeRotation(that.shape) }
-    this.backtoBeginning(that.shape)
+    window.addEventListener('keydown', function(key) { that.onKeyDown(key, that.shape)})
+    //this.backtoBeginning(that.shape)
   }
 
   onShapeMouseMove(mouseData) {
@@ -139,6 +142,24 @@ class ThirdChallenge {
     }
   }
 
+  onKeyDown(key, shape) {
+    if (key.keyCode === 82) {
+      this.onShapeRotation(shape)
+    }
+    else if (key.keyCode === 90) {
+      this.onShapeZoom(shape)
+    }
+    else if (key.keyCode === 65) {
+      this.onShapeDezoom(shape)
+    }
+  }
+
+  onShapeRotation(shape) {
+    TweenLite.to(shape, 0.3, {
+      rotation: "+="+1
+    })
+  }
+
   onShapeZoom(shape) {
     TweenLite.to(shape, 0.3, {
       width: "+="+5,
@@ -150,12 +171,6 @@ class ThirdChallenge {
     TweenLite.to(shape, 0.3, {
       width: "-="+5,
       height: "-="+5
-    })
-  }
-
-  onShapeRotation(shape) {
-    TweenLite.to(shape, 0.3, {
-      rotation: "+="+1
     })
   }
 
@@ -184,34 +199,29 @@ class ThirdChallenge {
     else if (shape.graphicsData[0].shape.constructor.name == 'Rectangle') { that.drawRectangle() } 
     else if (shape.graphicsData[0].shape.constructor.name == 'Polygon') { that.drawTriangle() }
 */
-    /*this.rectangle.mousedown = function(mouseData){ that.onShapeMouseDown(mouseData, this) }
-    this.circle.mousedown = function(mouseData){ that.onShapeMouseDown(mouseData, this) }
-    this.triangle.mousedown = function(mouseData){ that.onShapeMouseDown(mouseData, this) }
-    this.line.mousedown = function(mouseData){ that.onShapeMouseDown(mouseData, this) }
-    this.halfcircle.mousedown = function(mouseData){ that.onShapeMouseDown(mouseData, this) }*/
-
     this.bind()
   }
 
   onCheckpointMouseDown() {
-    let that = this
-
     setTimeout(function(){ 
-      this.keepDoing = false
-    }, 500)
+      STORAGE.ThirdChallengeClass.keepDoing = false
+    }, 5000)
 
-    //console.log(this.keepDoing)
+    STORAGE.ThirdChallengeClass.drawRandomCircle(STORAGE.ThirdChallengeClass.circle.width)
+    STORAGE.ThirdChallengeClass.drawRandomRectangle(STORAGE.ThirdChallengeClass.rectangle.width, STORAGE.ThirdChallengeClass.rectangle.height)
+    STORAGE.ThirdChallengeClass.drawRandomTriangle(STORAGE.ThirdChallengeClass.triangle.width, STORAGE.ThirdChallengeClass.triangle.height)
+    STORAGE.ThirdChallengeClass.drawRandomLine(STORAGE.ThirdChallengeClass.line.width, STORAGE.ThirdChallengeClass.line.height)
+    STORAGE.ThirdChallengeClass.drawRandomHalfcircle(STORAGE.ThirdChallengeClass.halfcircle.width, STORAGE.ThirdChallengeClass.halfcircle.height)
 
-    that.drawRandomCircle()
-    that.drawRandomRectangle()
-    that.drawRandomTriangle()
-    that.drawRandomLine()
-    that.drawRandomHalfcircle()
-
-    if(this.keepDoing == true) {
+    if(STORAGE.ThirdChallengeClass.keepDoing == true) {
+      console.log(this.keepDoing)
       setTimeout(function(){ 
-        that.onCheckpointMouseDown() 
+        STORAGE.ThirdChallengeClass.onCheckpointMouseDown() 
       }, 100)
+    }
+    else {
+      STORAGE.ThirdChallengeClass.showConclusion()
+      return
     }
   }
 
@@ -224,10 +234,7 @@ class ThirdChallenge {
     this.drawTriangle()
     this.drawLine()
     this.drawHalfcircle()
-    this.drawZoomIcon()
-    this.drawDezoomIcon()
-    this.drawRotationIcon()
-    this.drawCheckpoint()
+    this.drawHelpButton()
     this.bind()
   }
 
@@ -239,15 +246,8 @@ class ThirdChallenge {
       }
     })
 
-    let ratioVertical = window.innerHeight / this.background.texture.height
-    let ratioHorizontal = window.innerWidth / this.background.texture.width
-    if (ratioHorizontal < ratioVertical) {
-      this.background.scale = new PIXI.Point(ratioVertical, ratioVertical)
-      this.background.x = - (this.background.texture.width * this.background.scale.x - window.innerWidth) / 2
-    } else {
-      this.background.scale = new PIXI.Point(ratioHorizontal, ratioHorizontal)
-      this.background.y = - (this.background.texture.height * this.background.scale.x - window.innerHeight) / 2
-    }
+    this.background.width = window.innerWidth
+    this.background.height = window.innerHeight
 
     this.ThirdChallengeContainer.addChild(this.background)
   }
@@ -259,27 +259,26 @@ class ThirdChallenge {
         that.rectangle = new PIXI.Sprite(that.assets.resources[objectKey].texture)
       }
     })
-    this.rectangle.width = 715/12
-    this.rectangle.height = 1063/12
-    this.rectangle.x = window.innerWidth-window.innerWidth/6*5
-    this.rectangle.y = window.innerHeight/2
+    this.rectangle.width = 715/20
+    this.rectangle.height = 1063/20
+    this.rectangle.x = window.innerWidth-window.innerWidth/8*5
+    this.rectangle.y = window.innerHeight-this.rectangle.height-30
     this.rectangle.anchor.set(0.5)
     this.rectangle.interactive = true
     this.ThirdChallengeContainer.addChild(this.rectangle)
   }  
 
-  drawRandomRectangle() {
+  drawRandomRectangle(width, height) {
     let that = this
     Object.keys(this.assets.resources).map(function(objectKey, index) {
       if (index == 1) {
         that.randomRectangle = new PIXI.Sprite(that.assets.resources[objectKey].texture)
       }
     })
-    this.randomNumber = Math.random()
-    this.randomRectangle.width = 715/12*this.randomNumber
-    this.randomRectangle.height = 1063/12*this.randomNumber
-    this.randomRectangle.x = window.innerWidth/(Math.random()*5)
-    this.randomRectangle.y = window.innerHeight/(Math.random()*5)
+    this.randomRectangle.width = width
+    this.randomRectangle.height = height
+    this.randomRectangle.x = window.innerWidth-Math.random()*window.innerWidth
+    this.randomRectangle.y = window.innerHeight-Math.random()*window.innerHeight
     this.randomRectangle.anchor.set(0.5)
     TweenLite.to(this.randomRectangle, 0.5, {
       rotation: "+="+3
@@ -294,26 +293,26 @@ class ThirdChallenge {
         that.circle = new PIXI.Sprite(that.assets.resources[objectKey].texture)
       }
     })
-    this.circle.width = 1069/12
-    this.circle.height = 1069/12
-    this.circle.x = window.innerWidth-window.innerWidth/6*4
-    this.circle.y = window.innerHeight/2
+    this.circle.width = 1069/20
+    this.circle.height = 1069/20
+    this.circle.x = window.innerWidth-window.innerWidth/8*3
+    this.circle.y = window.innerHeight-this.circle.height-30
     this.circle.anchor.set(0.5)
     this.circle.interactive = true
     this.ThirdChallengeContainer.addChild(this.circle) 
   }
 
-  drawRandomCircle() {
+  drawRandomCircle(width) {
     let that = this
     Object.keys(this.assets.resources).map(function(objectKey, index) {
       if (index == 2) {
         that.randomCircle = new PIXI.Sprite(that.assets.resources[objectKey].texture)
       }
     })
-    this.randomCircle.width = Math.random()*100
+    this.randomCircle.width = width
     this.randomCircle.height = this.randomCircle.width
-    this.randomCircle.x = window.innerWidth/(Math.random()*5)
-    this.randomCircle.y = window.innerHeight/(Math.random()*5)
+    this.randomCircle.x = window.innerWidth-Math.random()*window.innerWidth
+    this.randomCircle.y = window.innerHeight-Math.random()*window.innerHeight
     this.randomCircle.anchor.set(0.5)
     TweenLite.to(this.randomCircle, 0.5, {
       rotation: "+="+3
@@ -328,27 +327,26 @@ class ThirdChallenge {
         that.triangle = new PIXI.Sprite(that.assets.resources[objectKey].texture)
       }
     })
-    this.triangle.width = 1920/12
-    this.triangle.height = 962/12
-    this.triangle.x = window.innerWidth-window.innerWidth/6*3
-    this.triangle.y = window.innerHeight/2
+    this.triangle.width = 1920/20
+    this.triangle.height = 962/20
+    this.triangle.x = window.innerWidth-window.innerWidth/8*6
+    this.triangle.y = window.innerHeight-this.triangle.height-30
     this.triangle.anchor.set(0.5)
     this.triangle.interactive = true
     this.ThirdChallengeContainer.addChild(this.triangle) 
   }
 
-  drawRandomTriangle() {
+  drawRandomTriangle(width, height) {
     let that = this
     Object.keys(this.assets.resources).map(function(objectKey, index) {
       if (index == 3) {
         that.randomTriangle = new PIXI.Sprite(that.assets.resources[objectKey].texture)
       }
     })
-    this.randomNumber = Math.random()
-    this.randomTriangle.width = 1920/12*this.randomNumber
-    this.randomTriangle.height = 962/12*this.randomNumber
-    this.randomTriangle.x = window.innerWidth/(Math.random()*5)
-    this.randomTriangle.y = window.innerHeight/(Math.random()*5)
+    this.randomTriangle.width = width
+    this.randomTriangle.height = height
+    this.randomTriangle.x = window.innerWidth-Math.random()*window.innerWidth
+    this.randomTriangle.y = window.innerHeight-Math.random()*window.innerHeight
     this.randomTriangle.anchor.set(0.5)
     TweenLite.to(this.randomTriangle, 0.5, {
       rotation: "-="+3
@@ -363,27 +361,26 @@ class ThirdChallenge {
         that.line = new PIXI.Sprite(that.assets.resources[objectKey].texture)
       }
     })
-    this.line.width = 1056/12
-    this.line.height = 1064/12
-    this.line.x = window.innerWidth-window.innerWidth/6*2
-    this.line.y = window.innerHeight/2
+    this.line.width = 1056/20
+    this.line.height = 1064/20
+    this.line.x = window.innerWidth-window.innerWidth/8*4
+    this.line.y = window.innerHeight-this.line.height-30
     this.line.anchor.set(0.5)
     this.line.interactive = true
     this.ThirdChallengeContainer.addChild(this.line) 
   }
 
-  drawRandomLine() {
+  drawRandomLine(width, height) {
     let that = this
     Object.keys(this.assets.resources).map(function(objectKey, index) {
       if (index == 4) {
         that.randomLine = new PIXI.Sprite(that.assets.resources[objectKey].texture)
       }
     })
-    this.randomNumber = Math.random()
-    this.randomLine.width = 1056/12*this.randomNumber
-    this.randomLine.height = 1064/12*this.randomNumber
-    this.randomLine.x = window.innerWidth/(Math.random()*5)
-    this.randomLine.y = window.innerHeight/(Math.random()*5)
+    this.randomLine.width = width
+    this.randomLine.height = height
+    this.randomLine.x = window.innerWidth-Math.random()*window.innerWidth
+    this.randomLine.y = window.innerHeight-Math.random()*window.innerHeight
     this.randomLine.anchor.set(0.5)
     TweenLite.to(this.randomLine, 0.5, {
       rotation: "-="+3
@@ -398,27 +395,26 @@ class ThirdChallenge {
         that.halfcircle = new PIXI.Sprite(that.assets.resources[objectKey].texture)
       }
     })
-    this.halfcircle.width = 532/12
-    this.halfcircle.height = 1065/12
-    this.halfcircle.x = window.innerWidth-window.innerWidth/6
-    this.halfcircle.y = window.innerHeight/2
+    this.halfcircle.width = 532/20
+    this.halfcircle.height = 1065/20
+    this.halfcircle.x = window.innerWidth-window.innerWidth/8*2
+    this.halfcircle.y = window.innerHeight-this.halfcircle.height-30
     this.halfcircle.anchor.set(0.5)
     this.halfcircle.interactive = true
     this.ThirdChallengeContainer.addChild(this.halfcircle) 
   }
 
-  drawRandomHalfcircle() {
+  drawRandomHalfcircle(width, height) {
     let that = this
     Object.keys(this.assets.resources).map(function(objectKey, index) {
       if (index == 5) {
         that.randomHalfcircle = new PIXI.Sprite(that.assets.resources[objectKey].texture)
       }
     })
-    this.randomNumber = Math.random()
-    this.randomHalfcircle.width = 532/12*this.randomNumber
-    this.randomHalfcircle.height = 1065/12*this.randomNumber
-    this.randomHalfcircle.x = window.innerWidth/(Math.random()*5)
-    this.randomHalfcircle.y = window.innerHeight/(Math.random()*5)
+    this.randomHalfcircle.width = width
+    this.randomHalfcircle.height = height
+    this.randomHalfcircle.x = window.innerWidth-Math.random()*window.innerWidth
+    this.randomHalfcircle.y = window.innerHeight-Math.random()*window.innerHeight
     this.randomHalfcircle.anchor.set(0.5)
     TweenLite.to(this.randomHalfcircle, 0.5, {
       rotation: "+="+3
@@ -426,58 +422,19 @@ class ThirdChallenge {
     this.ThirdChallengeContainer.addChild(this.randomHalfcircle) 
   }
 
-  drawZoomIcon() {
+  drawHelpButton() {
     let that = this
     Object.keys(this.assets.resources).map(function(objectKey, index) {
       if (index == 6) {
-        that.zoomIcon = new PIXI.Sprite(that.assets.resources[objectKey].texture)
+        that.helpButton = new PIXI.Sprite(that.assets.resources[objectKey].texture)
       }
     })
-    this.zoomIcon.width = 30
-    this.zoomIcon.height = 30
-    this.zoomIcon.x = window.innerWidth/10*4-this.zoomIcon.width
-    this.zoomIcon.y = window.innerHeight-this.zoomIcon.height-50
-    this.zoomIcon.interactive = true
-    this.ThirdChallengeContainer.addChild(this.zoomIcon) 
-  }
-
-  drawDezoomIcon() {
-    let that = this
-    Object.keys(this.assets.resources).map(function(objectKey, index) {
-      if (index == 6) {
-        that.dezoomIcon = new PIXI.Sprite(that.assets.resources[objectKey].texture)
-      }
-    })
-    this.dezoomIcon.width = 30
-    this.dezoomIcon.height = 30
-    this.dezoomIcon.x = window.innerWidth/10*5-this.dezoomIcon.width
-    this.dezoomIcon.y = window.innerHeight-this.dezoomIcon.height-50
-    this.dezoomIcon.interactive = true
-    this.ThirdChallengeContainer.addChild(this.dezoomIcon) 
-  }
-
-  drawRotationIcon() {
-    let that = this
-    Object.keys(this.assets.resources).map(function(objectKey, index) {
-      if (index == 7) {
-        that.rotationIcon = new PIXI.Sprite(that.assets.resources[objectKey].texture)
-      }
-    })
-    this.rotationIcon.width = 30
-    this.rotationIcon.height = 30
-    this.rotationIcon.x = window.innerWidth/10*6-this.rotationIcon.width
-    this.rotationIcon.y = window.innerHeight-this.rotationIcon.height-50
-    this.rotationIcon.interactive = true
-    this.ThirdChallengeContainer.addChild(this.rotationIcon) 
-  }
-
-  drawCheckpoint() {
-    this.checkpoint.beginFill(0xFFFFFF)
-    this.checkpoint.lineStyle(2, 0xFFFFFF)
-    this.checkpoint.drawCircle(50, 50, 10)
-    this.checkpoint.endFill()
-    this.checkpoint.interactive = true
-    this.ThirdChallengeContainer.addChild(this.checkpoint) 
+    this.helpButton.width = 30
+    this.helpButton.height = 30
+    this.helpButton.x = 60
+    this.helpButton.y = window.innerHeight-100
+    this.helpButton.interactive = true
+    this.ThirdChallengeContainer.addChild(this.helpButton)
   }
 
   displayRecompenseButton() {
@@ -492,9 +449,7 @@ class ThirdChallenge {
     })
   }
 
-  handleRecompenseButtonClick() {
-    STORAGE.ThirdChallengeClass.undDisplayRecompenseButton()
-
+  thirdChallengeEnding() {
     TweenLite.to([STORAGE.ThirdChallengeContainer, STORAGE.conclusionChallengeTextContainer], 0.5, {
       alpha: 0,
       display:'none',
@@ -518,7 +473,12 @@ class ThirdChallenge {
   }
 
   showConclusion() {
-    /*TweenLite.to([this.cursor, this.pathBasic, this.pathPassed, this.pupilEmpty, this.eye], 0.6, {
+    for(let i=0; i < this.ThirdChallengeContainer.children.length; i++) {
+      TweenLite.to(this.ThirdChallengeContainer.children[i], 0.6, {
+        alpha: 0
+      })
+    }
+    TweenLite.to([this.helpButton, this.rectangle, this.triangle, this.circle, this.halfcircle, this.line, this.thirdChallengeHtmlElements], 0.6, {
       alpha: 0
     })
 
@@ -526,7 +486,43 @@ class ThirdChallenge {
       autoAlpha: 1,
       delay: 1
     })
-    this.displayRecompenseButton()*/
+    this.displayRecompenseButton()
+  }
+
+  handleRecompenseButtonClick() {
+    STORAGE.ThirdChallengeClass.undDisplayRecompenseButton()
+
+    TweenLite.to([STORAGE.ThirdChallengeContainer, STORAGE.conclusionChallengeTextContainer], 0.5, {
+      alpha: 0,
+      display:'none',
+      delay: 1
+    })
+    TweenLite.to([STORAGE.stage], 0.4, {
+      alpha: 0,
+      onComplete: function() {
+        setTimeout(function(){
+          STORAGE.ThirdChallengeContainer.destroy()
+          STORAGE.ThirdChallengeClass.unbind()
+          STORAGE.ThirdChallengeContainer = null
+          STORAGE.conclusionChallengeTextContainer = null
+          STORAGE.ThirdChallengeClass = null
+          //new ThirdRecompense()
+        }, 1000)
+      },
+      delay: 2
+    })
+  }
+
+  displayRecompenseButton() {
+    TweenLite.to(this.recompenseButton, 1.2, {
+      autoAlpha: 1
+    })
+  }
+
+  undDisplayRecompenseButton() {
+    TweenLite.to(this.recompenseButton, 1.2, {
+      autoAlpha: 0
+    })
   }
 
 }

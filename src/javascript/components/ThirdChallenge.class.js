@@ -33,7 +33,7 @@ class ThirdChallenge {
 
   init() {
 
-    console.log(window.innerWidth)
+    //console.log(window.innerWidth)
 
     STORAGE.loaderClass.loadThirdChallengePictures([
       'assets/third-challenge/fond.jpg',
@@ -50,6 +50,9 @@ class ThirdChallenge {
     })
     TweenLite.to(this.ThirdChallengeContainer, 0.6, {
       alpha: 1
+    })
+    TweenLite.to(this.thirdChallengeHtmlElements, 1.2, {
+      autoAlpha: 1
     })
   }
 
@@ -506,7 +509,7 @@ class ThirdChallenge {
           STORAGE.ThirdChallengeContainer = null
           STORAGE.conclusionChallengeTextContainer = null
           STORAGE.ThirdChallengeClass = null
-          // new Recompense({ number: 3})
+          new Recompense({ number: 3})
         }, 1000)
       },
       delay: 2

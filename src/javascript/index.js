@@ -20,11 +20,11 @@ function initCanvas() {
   new Renderer()
   new Loader()
   new SoundManager()
-  // new Carousel({ number: 1 })
+  new Carousel({ number: 1 })
   new Menu()
   // new FirstChallenge()
   // new SecondChallenge()
-  new ThirdChallenge()
+  // new ThirdChallenge()
   // new Video()
 
   render()

@@ -1,25 +1,10 @@
-const carouselDatas = {
-  datasEyes: [
-    {
-      x: 150,
-      y: 250,
-    }, {
-      x: 760,
-      y: 560,
-    }, {
-      x: 360,
-      y: 660,
-    }, {
-      x: 1060,
-      y: 160,
-    }
-  ],
+const videoDatas = {
   datasBlackboards: [
       {
         width: 400,
         height: 400,
-        x: 740,
-        y: 7900,
+        x: 400,
+        y: 200,
         checkPoints : [{
           rayon: 30,
           x: 200,
@@ -43,4 +28,4 @@ const carouselDatas = {
   ]
 }
 
-export default carouselDatas
+export default videoDatas

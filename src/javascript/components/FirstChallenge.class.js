@@ -19,7 +19,7 @@ class FirstChallenge {
     this.eye = new PIXI.Graphics
     this.pathBasic = new PIXI.Graphics
     this.pathPassed = new PIXI.Graphics
-    this.cursor = new PIXI.Graphics
+    this.cursor = new PIXI.Sprite()
     this.pupilEmpty = new PIXI.Graphics
     this.eyeIndex = 1
     this.movie
@@ -42,13 +42,15 @@ class FirstChallenge {
     this.firstChallengeNextText = document.querySelector('.nextText')
     STORAGE.conclusionChallengeTextContainer = this.conclusionChallengeTextContainer
 
+    this.entrance = true
+
     this.init()
   }
 
   init() {
 
     console.log(window.innerWidth)
-    
+
     STORAGE.loaderClass.loadFirstChallengePictures([
       'assets/first-challenge/fond.png',
       'assets/first-challenge/oeil.png',
@@ -99,8 +101,6 @@ class FirstChallenge {
     this.createBackground()
     this.createEye()
     this.createGif(this.movieIndex)
-    this.createPath()
-    this.createCursor()
     this.createPupilEmpty()
     this.bind()
   }
@@ -165,31 +165,21 @@ class FirstChallenge {
   createGif(index) {
     this.framesArray = []
 
-    for (let i = 1; i < 35; i++) {
-      let val = i < 10 ? '0' + i : i
+
+    if (index == 3) {
+      for (let i = 1; i < 28; i++) {
+        let val = i < 10 ? '0' + i : i
+        let texture = PIXI.Texture.fromImage(frames[3] + val + '.png')
+        this.framesArray.push(texture)
+      }
+    }
+    else {
+      for (let i = 1; i < 35; i++) {
+        let val = i < 10 ? '0' + i : i
         let texture = PIXI.Texture.fromImage(frames[index] + val + '.png')
         this.framesArray.push(texture)
+      }
     }
-
-    /*if (index == 0) {
-      for (let i = 1; i < 35; i++) {
-        let val = i < 10 ? '0' + i : i
-        let texture1 = PIXI.Texture.fromImage(frames[0] + val + '.png')
-        this.framesArray.push(texture1)
-      }
-    } else if (index == 1) {
-      for (let i = 1; i < 35; i++) {
-        let val = i < 10 ? '0' + i : i
-        let texture2 = PIXI.Texture.fromImage(frames[1] + val + '.png')
-        this.framesArray.push(texture2)
-      }
-    } else if (index == 2) {
-      for (let i = 1; i < 35; i++) {
-        let val = i < 10 ? '0' + i : i
-        let texture3 = PIXI.Texture.fromImage(frames[2] + val + '.png')
-        this.framesArray.push(texture3)
-      }
-    }*/
 
     this.movie = new PIXI.extras.AnimatedSprite(this.framesArray)
     this.movie.alpha = 0
@@ -207,21 +197,32 @@ class FirstChallenge {
     this.pathBasic.lineStyle(2, 0xffffff)
     this.pathBasic.lineTo(this.pathEnd[0], this.pathEnd[1])
     this.pathBasic.endFill()
-    TweenLite.set(this.pathBasic, {
-      alpha: 0.3
-    })
     this.FirstChallengeContainer.addChild(this.pathBasic)
 
     this.pathPassed.beginFill(0xFFFFFF);
     this.pathPassed.drawRect(this.pathEnd[0] - 1, this.pathEnd[1], 2, 1)
+
+    this.cursor.pathPassed = 1
+    this.cursor.pathBasic = 1
+
     this.FirstChallengeContainer.addChild(this.pathPassed)
+
+    TweenLite.set([this.pathBasic, this.pathPassed], {
+      alpha: 0
+    })
+    TweenLite.to(this.pathBasic, 0.6, {
+      alpha: 0.3
+    })
+    TweenLite.to(this.pathPassed, 0.6, {
+      alpha: 1
+    })
   }
 
   createCursor() {
     let that = this
     Object.keys(this.assets.resources).map(function(objectKey, index) {
       if (index == 2) {
-        that.cursor = new PIXI.Sprite(that.assets.resources[objectKey].texture)
+        that.cursor.texture = that.assets.resources[objectKey].texture
       }
     })
     this.cursor.width = 126/2
@@ -229,6 +230,13 @@ class FirstChallenge {
     this.cursor.x = this.pathEnd[0] - this.cursor.width/2
     this.cursor.y = this.pathEnd[1]
     this.cursor.interactive = true // pour attribuer événements à this.cursor
+
+    TweenLite.set(this.cursor, {
+      alpha: 0
+    })
+    TweenLite.to(this.cursor, 0.6, {
+      alpha: 1
+    })
     this.FirstChallengeContainer.addChild(this.cursor)
   }
 
@@ -372,6 +380,17 @@ class FirstChallenge {
   }
 
   manageSounds(kill) {
+    let that = this
+    if (this.entrance) {
+      STORAGE.soundManagerClass.launchVoiceOver(soundBank.voiceOver.firstChallenge)
+      setTimeout(function(){
+        STORAGE.soundManagerClass.pauseAndPlay(false, soundBank['firstChallenge'][that.movieIndex][0], soundBank['firstChallenge'][that.movieIndex][1])
+        that.createPath()
+        that.createCursor()
+      }, 10000)
+      this.entrance = false
+      return
+    }
     if (kill) {
       STORAGE.soundManagerClass.pauseAndPlay(true)
       return
@@ -388,7 +407,7 @@ class FirstChallenge {
   backToBegining() {
     let that = this
 
-    if (this.movieIndex < 2) {
+    if (this.movieIndex < 3) {
       TweenLite.to(this.eye, 0.6, {
         rotation: 0
       })
@@ -406,7 +425,7 @@ class FirstChallenge {
         y: this.pathEnd[1]
       })
 
-      if (this.movieIndex == 1) {
+      if (this.movieIndex == 2) {
         TweenLite.set(that.firstChallengeNextText, {
           display: 'none'
         })

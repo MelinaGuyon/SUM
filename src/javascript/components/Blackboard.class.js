@@ -1,4 +1,7 @@
-import carouselDatas from '../datas/carouselDatas.js'
+import firstCarouselDatas from '../datas/firstCarouselDatas.js'
+import secondCarouselDatas from '../datas/secondCarouselDatas.js'
+import thirdCarouselDatas from '../datas/thirdCarouselDatas.js'
+import videoDatas from '../datas/videoDatas.js'
 import TweenLite from 'gsap';
 import CheckPointClass from './CheckPoint.class.js'
 
@@ -8,6 +11,16 @@ class Blackboard {
       this.blackboard = new PIXI.Graphics
 
       this.index = options.index
+      this.context = options.context
+
+      this.carouselNumber = STORAGE.carouselClass.carouselNumber
+      if (this.carouselNumber == 1) {
+        this.carouselDatas = firstCarouselDatas
+      } else if (this.carouselNumber == 2) {
+        this.carouselDatas = secondCarouselDatas
+      } else if (this.carouselNumber == 3) {
+        this.carouselDatas = thirdCarouselDatas
+      }
 
       this.drawnLine
       this.checkpoints = []
@@ -17,19 +30,39 @@ class Blackboard {
     }
 
     init() {
-      this.blackboard.beginFill(0x000000, 0)
-      console.log(STORAGE.ratioVertical, 'in blackboard', carouselDatas.datasBlackboards[this.index].width * STORAGE.ratioVertical )
-      this.blackboard.drawRect(carouselDatas.datasBlackboards[this.index].x * STORAGE.ratioVertical + STORAGE.positionHorizontal, carouselDatas.datasBlackboards[this.index].y * STORAGE.ratioVertical, carouselDatas.datasBlackboards[this.index].width * STORAGE.ratioVertical, carouselDatas.datasBlackboards[this.index].height * STORAGE.ratioVertical)
-      this.blackboard.interactive = true // pour attribuer événements à this.blackboard
+      if (this.context == "Carousel") {
 
-      STORAGE.carousel.addChild(this.blackboard)
+        this.blackboard.beginFill(0x000000, 0.3)
+        console.log(STORAGE.ratioVertical, 'in blackboard', this.carouselDatas.datasBlackboards[this.index].width * STORAGE.ratioVertical )
+        this.blackboard.drawRect(this.carouselDatas.datasBlackboards[this.index].x * STORAGE.ratioVertical, this.carouselDatas.datasBlackboards[this.index].y * STORAGE.ratioVertical, this.carouselDatas.datasBlackboards[this.index].width * STORAGE.ratioVertical, this.carouselDatas.datasBlackboards[this.index].height * STORAGE.ratioVertical)
+        this.blackboard.interactive = true // pour attribuer événements à this.blackboard
 
-      if (carouselDatas.datasBlackboards[this.index].isTestLaunch) {
-        this.blackboard.isTestLaunch = true
+        STORAGE.carousel.addChild(this.blackboard)
+
+        if (this.carouselDatas.datasBlackboards[this.index].isTestLaunch) {
+          this.blackboard.isTestLaunch = true
+        }
+
+        for(let i = 0; i < this.carouselDatas.datasBlackboards[this.index].checkPoints.length; i++) {
+          this.checkpoints.push(new CheckPointClass({ index : i, blackBoardIndex : this.index, blackboard : this.blackboard, context : "Carousel" }))
+        }
       }
+      else if (this.context == "VideoIntro") {
 
-      for(let i = 0; i < carouselDatas.datasBlackboards[this.index].checkPoints.length; i++) {
-        this.checkpoints.push(new CheckPointClass({ index : i, blackBoardIndex : this.index, blackboard : this.blackboard }))
+        this.blackboard.beginFill(0xff0000, 1)
+        console.log(STORAGE.videoRatioVertical, 'in blackboard', videoDatas.datasBlackboards[this.index].width * STORAGE.videoRatioVertical )
+        this.blackboard.drawRect(window.innerWidth / STORAGE.videoRatioX, window.innerHeight / STORAGE.videoRatioY, videoDatas.datasBlackboards[this.index].width, videoDatas.datasBlackboards[this.index].height)
+        this.blackboard.interactive = true // pour attribuer événements à this.blackboard
+
+        STORAGE.VideoContainer.addChild(this.blackboard)
+
+        if (videoDatas.datasBlackboards[this.index].isTestLaunch) {
+          this.blackboard.isTestLaunch = true
+        }
+
+        for(let i = 0; i < videoDatas.datasBlackboards[this.index].checkPoints.length; i++) {
+          this.checkpoints.push(new CheckPointClass({ index : i, blackBoardIndex : this.index, blackboard : this.blackboard, context : "VideoIntro" }))
+        }
       }
     }
 
@@ -38,6 +71,7 @@ class Blackboard {
       this.blackboard.mousedown = function(mouseData){
         that.onBlackboardMouseDown(mouseData)
       }
+
       this.blackboard.mouseover = function(mouseData){
         that.onBlackboardMouseHover(mouseData)
       }

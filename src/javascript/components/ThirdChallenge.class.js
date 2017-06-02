@@ -1,5 +1,5 @@
 import conclusionTextsDatas from '../datas/conclusionTexts.js'
-import ThirdRecompense from './ThirdRecompense.class.js'
+import Recompense from './Recompense.class.js'
 import TweenLite from 'gsap'
 
 class ThirdChallenge {
@@ -34,7 +34,7 @@ class ThirdChallenge {
   init() {
 
     console.log(window.innerWidth)
-    
+
     STORAGE.loaderClass.loadThirdChallengePictures([
       'assets/third-challenge/fond.jpg',
       'assets/third-challenge/rectangle.png',
@@ -91,7 +91,7 @@ class ThirdChallenge {
     this.halfcircle.mouseover = null
     this.halfcircle.mouseout = null
     this.halfcircle.mousedown = null
-    this.checkpoint.removeEventListener('click', that.onCheckpointMouseDown)    
+    this.checkpoint.removeEventListener('click', that.onCheckpointMouseDown)
     this.recompenseButton.removeEventListener('click', that.handleRecompenseButtonClick)
   }
 
@@ -179,7 +179,7 @@ class ThirdChallenge {
     let that = this
     Object.keys(this.assets.resources).map(function(objectKey, index) {
       if (index == 1) {
-        that.drawRectangle()      
+        that.drawRectangle()
       }
       else if (index == 2) {
         that.drawCircle()
@@ -195,15 +195,15 @@ class ThirdChallenge {
       }
     })
 
-/*  if (shape.graphicsData[0].shape.constructor.name == 'Circle') { that.drawCircle() } 
-    else if (shape.graphicsData[0].shape.constructor.name == 'Rectangle') { that.drawRectangle() } 
+/*  if (shape.graphicsData[0].shape.constructor.name == 'Circle') { that.drawCircle() }
+    else if (shape.graphicsData[0].shape.constructor.name == 'Rectangle') { that.drawRectangle() }
     else if (shape.graphicsData[0].shape.constructor.name == 'Polygon') { that.drawTriangle() }
 */
     this.bind()
   }
 
   onCheckpointMouseDown() {
-    setTimeout(function(){ 
+    setTimeout(function(){
       STORAGE.ThirdChallengeClass.keepDoing = false
     }, 5000)
 
@@ -215,8 +215,8 @@ class ThirdChallenge {
 
     if(STORAGE.ThirdChallengeClass.keepDoing == true) {
       console.log(this.keepDoing)
-      setTimeout(function(){ 
-        STORAGE.ThirdChallengeClass.onCheckpointMouseDown() 
+      setTimeout(function(){
+        STORAGE.ThirdChallengeClass.onCheckpointMouseDown()
       }, 100)
     }
     else {
@@ -266,7 +266,7 @@ class ThirdChallenge {
     this.rectangle.anchor.set(0.5)
     this.rectangle.interactive = true
     this.ThirdChallengeContainer.addChild(this.rectangle)
-  }  
+  }
 
   drawRandomRectangle(width, height) {
     let that = this
@@ -299,7 +299,7 @@ class ThirdChallenge {
     this.circle.y = window.innerHeight-this.circle.height-30
     this.circle.anchor.set(0.5)
     this.circle.interactive = true
-    this.ThirdChallengeContainer.addChild(this.circle) 
+    this.ThirdChallengeContainer.addChild(this.circle)
   }
 
   drawRandomCircle(width) {
@@ -317,7 +317,7 @@ class ThirdChallenge {
     TweenLite.to(this.randomCircle, 0.5, {
       rotation: "+="+3
     })
-    this.ThirdChallengeContainer.addChild(this.randomCircle) 
+    this.ThirdChallengeContainer.addChild(this.randomCircle)
   }
 
   drawTriangle() {
@@ -333,7 +333,7 @@ class ThirdChallenge {
     this.triangle.y = window.innerHeight-this.triangle.height-30
     this.triangle.anchor.set(0.5)
     this.triangle.interactive = true
-    this.ThirdChallengeContainer.addChild(this.triangle) 
+    this.ThirdChallengeContainer.addChild(this.triangle)
   }
 
   drawRandomTriangle(width, height) {
@@ -351,7 +351,7 @@ class ThirdChallenge {
     TweenLite.to(this.randomTriangle, 0.5, {
       rotation: "-="+3
     })
-    this.ThirdChallengeContainer.addChild(this.randomTriangle) 
+    this.ThirdChallengeContainer.addChild(this.randomTriangle)
   }
 
   drawLine() {
@@ -367,7 +367,7 @@ class ThirdChallenge {
     this.line.y = window.innerHeight-this.line.height-30
     this.line.anchor.set(0.5)
     this.line.interactive = true
-    this.ThirdChallengeContainer.addChild(this.line) 
+    this.ThirdChallengeContainer.addChild(this.line)
   }
 
   drawRandomLine(width, height) {
@@ -385,7 +385,7 @@ class ThirdChallenge {
     TweenLite.to(this.randomLine, 0.5, {
       rotation: "-="+3
     })
-    this.ThirdChallengeContainer.addChild(this.randomLine) 
+    this.ThirdChallengeContainer.addChild(this.randomLine)
   }
 
   drawHalfcircle() {
@@ -401,7 +401,7 @@ class ThirdChallenge {
     this.halfcircle.y = window.innerHeight-this.halfcircle.height-30
     this.halfcircle.anchor.set(0.5)
     this.halfcircle.interactive = true
-    this.ThirdChallengeContainer.addChild(this.halfcircle) 
+    this.ThirdChallengeContainer.addChild(this.halfcircle)
   }
 
   drawRandomHalfcircle(width, height) {
@@ -419,7 +419,7 @@ class ThirdChallenge {
     TweenLite.to(this.randomHalfcircle, 0.5, {
       rotation: "+="+3
     })
-    this.ThirdChallengeContainer.addChild(this.randomHalfcircle) 
+    this.ThirdChallengeContainer.addChild(this.randomHalfcircle)
   }
 
   drawHelpButton() {
@@ -506,7 +506,7 @@ class ThirdChallenge {
           STORAGE.ThirdChallengeContainer = null
           STORAGE.conclusionChallengeTextContainer = null
           STORAGE.ThirdChallengeClass = null
-          //new ThirdRecompense()
+          // new Recompense({ number: 3})
         }, 1000)
       },
       delay: 2

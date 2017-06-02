@@ -7,6 +7,7 @@ import soundBank from '../datas/soundBank.js'
 class Carousel {
 
     constructor(options) {
+      console.log('je me relance')
       this.carousel = new PIXI.Container()
       STORAGE.carouselClass = this
       STORAGE.carousel = this.carousel
@@ -34,6 +35,8 @@ class Carousel {
       this.blackboards = []
 
       this.voiceOverLaunch = false
+
+      console.log(STORAGE.carouselClass, STORAGE.carousel, this.carouselDatas.datasImages)
 
       this.init()
       this.bind()

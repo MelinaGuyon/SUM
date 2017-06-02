@@ -1,5 +1,5 @@
 import conclusionTextsDatas from '../datas/conclusionTexts.js'
-import SecondRecompense from './SecondRecompense.class.js'
+import Recompense from './Recompense.class.js'
 import TweenLite from 'gsap'
 
 class SecondChallenge {
@@ -378,7 +378,7 @@ class SecondChallenge {
           STORAGE.SecondChallengeContainer = null
           STORAGE.conclusionChallengeTextContainer = null
           STORAGE.SecondChallengeClass = null
-          new SecondRecompense()
+          new Recompense({ number: 2})
         }, 1000)
       },
       delay: 2

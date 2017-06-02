@@ -1,6 +1,6 @@
 .js-third-challenge {
     opacity: 1;
-    /*visibility: hidden;*/
+    visibility: hidden;
     color: white;
     font-family: westeindeCaptionThin;
 }
@@ -34,7 +34,7 @@
 
 
 
-@media all and (max-width: 1200px) { 
+@media all and (max-width: 1200px) {
     .js-third-challenge-letter { font-size: 20px}
     .js-third-challenge-interaction { font-size: 10px}
 }

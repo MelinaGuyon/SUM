@@ -230,7 +230,7 @@ class FirstChallenge {
     this.cursor.x = this.pathEnd[0] - this.cursor.width/2
     this.cursor.y = this.pathEnd[1]
     this.cursor.interactive = true // pour attribuer événements à this.cursor
-    
+
     TweenLite.set(this.cursor, {
       alpha: 0
     })
@@ -376,7 +376,7 @@ class FirstChallenge {
       })
     }
 
-    //this.manageSounds()
+    this.manageSounds()
   }
 
   manageSounds(kill) {

@@ -33,11 +33,11 @@ class CheckPoint {
   init() {
 
     if (this.context == "Carousel") {
-      this.checkPoint.beginFill(0xffffff, 1)
+      this.checkPoint.beginFill(0xffffff, 0.4)
       this.checkPoint.drawCircle(0, 0, this.carouselDatas.datasBlackboards[this.blackBoardIndex].checkPoints[this.index].rayon)
       this.checkPoint.endFill()
-      this.checkPoint.x = this.carouselDatas.datasBlackboards[this.blackBoardIndex].checkPoints[this.index].x * STORAGE.ratioVertical + this.blackboard.graphicsData[0].shape.x
-      this.checkPoint.y = this.carouselDatas.datasBlackboards[this.blackBoardIndex].checkPoints[this.index].y * STORAGE.ratioVertical + this.blackboard.graphicsData[0].shape.y
+      this.checkPoint.x = this.carouselDatas.datasBlackboards[this.blackBoardIndex].checkPoints[this.index].x * STORAGE.ratioHorizontal + this.blackboard.graphicsData[0].shape.x
+      this.checkPoint.y = this.carouselDatas.datasBlackboards[this.blackBoardIndex].checkPoints[this.index].y * STORAGE.ratioHorizontal + this.blackboard.graphicsData[0].shape.y
       this.checkPoint.interactive = true // pour attribuer événements à this.checkPoint
       this.checkPoint.isChecked = false
       this.blackboard.addChild(this.checkPoint)
@@ -84,7 +84,7 @@ class CheckPoint {
       if (this.blackboard.isTestLaunch) {
 
         if (this.context == "Carousel") {
-          new ImageDeformation()
+          new ImageDeformation({ number : this.carouselNumber })
           this.animateSectionTransition()
         }
         else if (this.context == "VideoIntro") {
@@ -117,20 +117,24 @@ class CheckPoint {
 
     TweenLite.to(textContainer, 2, {
       autoAlpha: 1,
+      ease: Power3.easeInOut,
       delay: 4
     })
 
     let that = this
     TweenLite.to(STORAGE.carousel, 0.5, {
       alpha: 0,
-      delay: 1
+      ease: Power2.easeOut,
+      delay: 0.2
+    })
+    TweenLite.to(textContainer, 0.6, {
+      autoAlpha: 0,
+      ease: Power3.easeInOut,
+      delay: 8
     })
     TweenLite.to([STORAGE.stage], 0.4, {
       alpha: 0,
       onComplete: function() {
-        TweenLite.to(textContainer, 0.2, {
-          autoAlpha: 0
-        })
         setTimeout(function(){
           STORAGE.deformation.destroy()
           STORAGE.carousel.destroy()
@@ -147,9 +151,9 @@ class CheckPoint {
             new ThirdChallenge()
           }
 
-        }, 1000)
+        }, 300)
       },
-      delay: 6.5
+      delay: 8.5
     })
   }
 }

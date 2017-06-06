@@ -32,13 +32,9 @@ class Blackboard {
     init() {
       if (this.context == "Carousel") {
         this.blackboard.beginFill(0x000000, 0.3)
-        if (STORAGE.carousel.widthSup == true) {
-          this.blackboard.drawRect(this.carouselDatas.datasBlackboards[this.index].x * STORAGE.ratioVertical - (STORAGE.carousel.postionHorizontal / 2) , this.carouselDatas.datasBlackboards[this.index].y * STORAGE.ratioVertical,
-          this.carouselDatas.datasBlackboards[this.index].width * STORAGE.ratioVertical, this.carouselDatas.datasBlackboards[this.index].height * STORAGE.ratioVertical)
-        } else if(STORAGE.carousel.widthSup == false) {
-          this.blackboard.drawRect(this.carouselDatas.datasBlackboards[this.index].x * STORAGE.ratioVertical +  (STORAGE.carousel.postionHorizontal / 2) , this.carouselDatas.datasBlackboards[this.index].y * STORAGE.ratioVertical,
-          this.carouselDatas.datasBlackboards[this.index].width * STORAGE.ratioVertical, this.carouselDatas.datasBlackboards[this.index].height * STORAGE.ratioVertical)
-        }
+
+        this.blackboard.drawRect(this.carouselDatas.datasBlackboards[this.index].x * STORAGE.ratioHorizontal, this.carouselDatas.datasBlackboards[this.index].y * STORAGE.ratioHorizontal,
+        this.carouselDatas.datasBlackboards[this.index].width * STORAGE.ratioHorizontal, this.carouselDatas.datasBlackboards[this.index].height * STORAGE.ratioHorizontal)
 
         this.blackboard.interactive = true // pour attribuer événements à this.blackboard
 

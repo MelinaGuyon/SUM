@@ -30,10 +30,10 @@ class ThirdChallenge {
     this.conclusionChallengeTextContainer = document.querySelector('.js-conclusion-text-container')
     STORAGE.conclusionChallengeTextContainer = this.conclusionChallengeTextContainer
 
-    let textConclusion = document.createTextNode(conclusionTextsDatas.thirdChallenge)
-    let buttonConclusion = document.createTextNode(conclusionTextsDatas.thirdChallengeButton)
-    this.conclusionChallengeText.appendChild(textConclusion)
-    this.conclusionChallengeButton.appendChild(buttonConclusion)
+    STORAGE.textConclusion3 = document.createTextNode(conclusionTextsDatas.thirdChallenge.conclusion)
+    STORAGE.buttonConclusion3 = document.createTextNode(conclusionTextsDatas.thirdChallenge.button)
+    this.conclusionChallengeText.replaceChild(STORAGE.textConclusion3, STORAGE.textConclusion2)
+    this.conclusionChallengeButton.replaceChild(STORAGE.buttonConclusion3, STORAGE.buttonConclusion2)
 
     this.init()
   }
@@ -508,7 +508,9 @@ class ThirdChallenge {
     TweenLite.to([this.helpButton, this.rectangle, this.triangle, this.circle, this.halfcircle, this.line, this.thirdChallengeHtmlElements], 0.6, {
       alpha: 0
     })
-
+    TweenLite.set(this.conclusionChallengeTextContainer, {
+      display: 'block'
+    })
     TweenLite.to(this.conclusionChallengeTextContainer, 2, {
       autoAlpha: 1,
       delay: 1

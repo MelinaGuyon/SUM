@@ -252,6 +252,7 @@ class SecondChallenge {
               that.container.destroy()
               that.background.destroy()
               that.showConclusion()
+              console.log('je shoz')
             }
           })
         }, 2000)
@@ -348,6 +349,9 @@ class SecondChallenge {
   }
 
   showConclusion() {
+    TweenLite.set(this.conclusionChallengeTextContainer, {
+      display: 'block'
+    })
     TweenLite.to(this.conclusionChallengeTextContainer, 2, {
       autoAlpha: 1,
       delay: 1
@@ -364,11 +368,17 @@ class SecondChallenge {
   handleRecompenseButtonClick() {
     STORAGE.SecondChallengeClass.undDisplayRecompenseButton()
 
-    TweenLite.to([STORAGE.SecondChallengeContainer, STORAGE.conclusionChallengeTextContainer], 0.5, {
+    TweenLite.to([STORAGE.SecondChallengeContainer], 0.5, {
       alpha: 0,
       display:'none',
       delay: 1
     })
+
+    TweenLite.to([STORAGE.conclusionChallengeTextContainer], 0.5, {
+      autoAlpha: 0,
+      delay: 1
+    })
+
     TweenLite.to([STORAGE.stage], 0.4, {
       alpha: 0,
       onComplete: function() {
@@ -387,7 +397,12 @@ class SecondChallenge {
 
   undDisplayRecompenseButton() {
     TweenLite.to(this.recompenseButton, 1.2, {
-      autoAlpha: 0
+      autoAlpha: 0,
+      onComplete: () => {
+        TweenLite.set(this.conclusionChallengeTextContainer, {
+          display: 'none'
+        })
+      }
     })
   }
 

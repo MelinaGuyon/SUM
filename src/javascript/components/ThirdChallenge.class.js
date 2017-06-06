@@ -20,6 +20,8 @@ class ThirdChallenge {
     this.keepDoing = true
 
     this.thirdChallengeHtmlElements = document.querySelector('.js-third-challenge')
+    this.thirdChallengeHelpInformations = document.querySelector('.js-third-challenge-interactions')
+    this.thirdChallengeHelpInformations.state = 0
     this.checkpoint = document.querySelector('.js-third-challenge-checkpointText')
 
     this.recompenseButton = document.querySelector('.js-first-recompense-button')
@@ -27,6 +29,11 @@ class ThirdChallenge {
     this.conclusionChallengeButton = document.querySelector('.js-first-recompense-button')
     this.conclusionChallengeTextContainer = document.querySelector('.js-conclusion-text-container')
     STORAGE.conclusionChallengeTextContainer = this.conclusionChallengeTextContainer
+
+    STORAGE.textConclusion3 = document.createTextNode(conclusionTextsDatas.thirdChallenge.conclusion)
+    STORAGE.buttonConclusion3 = document.createTextNode(conclusionTextsDatas.thirdChallenge.button)
+    this.conclusionChallengeText.replaceChild(STORAGE.textConclusion3, STORAGE.textConclusion2)
+    this.conclusionChallengeButton.replaceChild(STORAGE.buttonConclusion3, STORAGE.buttonConclusion2)
 
     this.init()
   }
@@ -76,6 +83,7 @@ class ThirdChallenge {
     this.halfcircle.mouseover = function(){ that.onShapeMouseOver() }
     this.halfcircle.mouseout = function(){ that.onShapeMouseOut() }
     this.halfcircle.mousedown = function(mouseData){ that.onShapeMouseDown(mouseData, this) }
+    this.helpButton.mousedown = function(mouseData){ that.onHelpButtonMouseDown(mouseData, this) }
     this.checkpoint.addEventListener('click', that.onCheckpointMouseDown)
     this.recompenseButton.addEventListener('click', that.handleRecompenseButtonClick)
   }
@@ -97,6 +105,7 @@ class ThirdChallenge {
     this.halfcircle.mouseover = null
     this.halfcircle.mouseout = null
     this.halfcircle.mousedown = null
+    this.helpButton.mousedown = null
     this.checkpoint.removeEventListener('click', that.onCheckpointMouseDown)
     this.recompenseButton.removeEventListener('click', that.handleRecompenseButtonClick)
   }
@@ -443,6 +452,21 @@ class ThirdChallenge {
     this.ThirdChallengeContainer.addChild(this.helpButton)
   }
 
+  onHelpButtonMouseDown() {
+    let that = this
+    if (that.thirdChallengeHelpInformations.state == 0) {
+      TweenLite.to(this.thirdChallengeHelpInformations, 0.6, {
+        autoAlpha: 1
+      })      
+      that.thirdChallengeHelpInformations.state = 1
+    } else { 
+      TweenLite.to(this.thirdChallengeHelpInformations, 0.6, {
+        autoAlpha: 0
+      })
+      that.thirdChallengeHelpInformations.state = 0
+    }    
+  }
+
   displayRecompenseButton() {
     TweenLite.to(this.recompenseButton, 1.2, {
       autoAlpha: 1
@@ -487,7 +511,9 @@ class ThirdChallenge {
     TweenLite.to([this.helpButton, this.rectangle, this.triangle, this.circle, this.halfcircle, this.line, this.thirdChallengeHtmlElements], 0.6, {
       alpha: 0
     })
-
+    TweenLite.set(this.conclusionChallengeTextContainer, {
+      display: 'block'
+    })
     TweenLite.to(this.conclusionChallengeTextContainer, 2, {
       autoAlpha: 1,
       delay: 1

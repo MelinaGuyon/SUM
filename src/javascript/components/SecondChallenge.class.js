@@ -34,10 +34,10 @@ class SecondChallenge {
     this.conclusionChallengeTextContainer = document.querySelector('.js-conclusion-text-container')
     STORAGE.conclusionChallengeTextContainer = this.conclusionChallengeTextContainer
 
-    let textConclusion = document.createTextNode(conclusionTextsDatas.secondChallenge)
-    let buttonConclusion = document.createTextNode(conclusionTextsDatas.secondChallengeButton)
-    this.conclusionChallengeText.appendChild(textConclusion)
-    this.conclusionChallengeButton.appendChild(buttonConclusion)
+    STORAGE.textConclusion2 = document.createTextNode(conclusionTextsDatas.secondChallenge.conclusion)
+    STORAGE.buttonConclusion2 = document.createTextNode(conclusionTextsDatas.secondChallenge.button)
+    this.conclusionChallengeText.replaceChild(STORAGE.textConclusion2, STORAGE.textConclusion1)
+    this.conclusionChallengeButton.replaceChild(STORAGE.buttonConclusion2, STORAGE.buttonConclusion1)
 
     this.init()
     this.bind()
@@ -353,6 +353,7 @@ class SecondChallenge {
     TweenLite.set(this.conclusionChallengeTextContainer, {
       display: 'block'
     })
+    console.log("fesse")
     TweenLite.to(this.conclusionChallengeTextContainer, 2, {
       autoAlpha: 1,
       delay: 1

@@ -22,6 +22,7 @@ function initCanvas() {
   new SoundManager()
   new Carousel({ number: 3 })
   new Menu()
+  new Video()
   // new FirstChallenge()
   // new SecondChallenge()
   // new ThirdChallenge()

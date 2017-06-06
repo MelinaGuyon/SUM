@@ -13,13 +13,15 @@ class Blackboard {
       this.index = options.index
       this.context = options.context
 
-      this.carouselNumber = STORAGE.carouselClass.carouselNumber
-      if (this.carouselNumber == 1) {
-        this.carouselDatas = firstCarouselDatas
-      } else if (this.carouselNumber == 2) {
-        this.carouselDatas = secondCarouselDatas
-      } else if (this.carouselNumber == 3) {
-        this.carouselDatas = thirdCarouselDatas
+      if (this.context == "Carousel") {
+        this.carouselNumber = STORAGE.carouselClass.carouselNumber
+        if (this.carouselNumber == 1) {
+          this.carouselDatas = firstCarouselDatas
+        } else if (this.carouselNumber == 2) {
+          this.carouselDatas = secondCarouselDatas
+        } else if (this.carouselNumber == 3) {
+          this.carouselDatas = thirdCarouselDatas
+        }
       }
 
       this.drawnLine

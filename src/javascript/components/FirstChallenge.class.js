@@ -157,10 +157,10 @@ class FirstChallenge {
 
     this.eye.addChild(this.pupilEmpty)
 
-    let textConclusion = document.createTextNode(conclusionTextsDatas.firstChallenge)
-    let buttonConclusion = document.createTextNode(conclusionTextsDatas.firstChallengeButton)
-    this.conclusionChallengeText.appendChild(textConclusion)
-    this.conclusionChallengeButton.appendChild(buttonConclusion)
+    STORAGE.textConclusion1 = document.createTextNode(conclusionTextsDatas.firstChallenge.conclusion)
+    STORAGE.buttonConclusion1 = document.createTextNode(conclusionTextsDatas.firstChallenge.button)
+    this.conclusionChallengeText.appendChild(STORAGE.textConclusion1)
+    this.conclusionChallengeButton.appendChild(STORAGE.buttonConclusion1)
   }
 
   createGif(index) {

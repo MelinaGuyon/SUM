@@ -6,6 +6,7 @@ import ImageDeformation from './ImageDeformation.class.js'
 import FirstChallenge from './FirstChallenge.class.js'
 import SecondChallenge from './SecondChallenge.class.js'
 import ThirdChallenge from './ThirdChallenge.class.js'
+import Carousel from './Carousel.class.js'
 
 class CheckPoint {
 
@@ -17,13 +18,15 @@ class CheckPoint {
     this.index = options.index
     this.context = options.context
 
-    this.carouselNumber = STORAGE.carouselClass.carouselNumber
-    if (this.carouselNumber == 1) {
-      this.carouselDatas = firstCarouselDatas
-    } else if (this.carouselNumber == 2) {
-      this.carouselDatas = secondCarouselDatas
-    } else if (this.carouselNumber == 3) {
-      this.carouselDatas = thirdCarouselDatas
+    if (this.context == "Carousel") {
+      this.carouselNumber = STORAGE.carouselClass.carouselNumber
+      if (this.carouselNumber == 1) {
+        this.carouselDatas = firstCarouselDatas
+      } else if (this.carouselNumber == 2) {
+        this.carouselDatas = secondCarouselDatas
+      } else if (this.carouselNumber == 3) {
+        this.carouselDatas = thirdCarouselDatas
+      }
     }
 
     this.init()
@@ -95,6 +98,11 @@ class CheckPoint {
               STORAGE.blackboards[0].blackboard.destroy()
             }
           })
+          setTimeout(function(){
+            STORAGE.videoIntro.pause()
+            STORAGE.VideoContainer.destroy()
+            new Carousel({ number: 1 })
+          }, 7000) // durée de la vidéo
         }
       }
     }

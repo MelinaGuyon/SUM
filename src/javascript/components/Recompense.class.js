@@ -12,7 +12,7 @@ class Recompense {
     } else if (this.recompenseNumber == 2) {
       this.recompense = document.querySelector('.second-recompense')
     }  else if (this.recompenseNumber == 3) {
-      this.recompense = document.querySelector('.second-recompense')
+      this.recompense = document.querySelector('.third-recompense')
     }
 
     this.init()

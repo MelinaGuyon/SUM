@@ -32,8 +32,8 @@ class ThirdChallenge {
 
     STORAGE.textConclusion3 = document.createTextNode(conclusionTextsDatas.thirdChallenge.conclusion)
     STORAGE.buttonConclusion3 = document.createTextNode(conclusionTextsDatas.thirdChallenge.button)
-    this.conclusionChallengeText.replaceChild(STORAGE.textConclusion3, STORAGE.textConclusion2)
-    this.conclusionChallengeButton.replaceChild(STORAGE.buttonConclusion3, STORAGE.buttonConclusion2)
+    // this.conclusionChallengeText.replaceChild(STORAGE.textConclusion3, STORAGE.textConclusion2)
+    // this.conclusionChallengeButton.replaceChild(STORAGE.buttonConclusion3, STORAGE.buttonConclusion2)
 
     this.init()
   }
@@ -457,14 +457,14 @@ class ThirdChallenge {
     if (that.thirdChallengeHelpInformations.state == 0) {
       TweenLite.to(this.thirdChallengeHelpInformations, 0.6, {
         autoAlpha: 1
-      })      
+      })
       that.thirdChallengeHelpInformations.state = 1
-    } else { 
+    } else {
       TweenLite.to(this.thirdChallengeHelpInformations, 0.6, {
         autoAlpha: 0
       })
       that.thirdChallengeHelpInformations.state = 0
-    }    
+    }
   }
 
   displayRecompenseButton() {

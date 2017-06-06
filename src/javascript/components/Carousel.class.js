@@ -83,22 +83,34 @@ class Carousel {
     }
 
     makeCarousel() {
+
+      this.totalHeightSteps = [0]
+
       let that = this
       Object.keys(that.spritesFonds).map(function(objectKey, index) {
-          that.spritesFonds[objectKey].height = window.innerHeight * STORAGE.carousel.numberOfWindow
 
-          let positionX = Math.abs(window.innerWidth - that.spritesFonds[objectKey].width)
-          if (window.innerWidth < that.spritesFonds[objectKey].width) {
-            that.spritesFonds[objectKey].x = -(positionX / 2)
-          } else if (window.innerWidth > that.spritesFonds[objectKey].width) {
-            that.spritesFonds[objectKey].x = positionX / 2
-          }
+        STORAGE.ratioHorizontal = window.innerWidth / that.spritesFonds[objectKey].texture.width
+        that.spritesFonds[objectKey].scale = new PIXI.Point(STORAGE.ratioHorizontal , STORAGE.ratioHorizontal)
+
+          console.log(that.spritesFonds[objectKey].height)
+
+          // that.spritesFonds[objectKey].height = window.innerHeight * STORAGE.carousel.numberOfWindow
+
+          // let positionX = Math.abs(window.innerWidth - that.spritesFonds[objectKey].width)
+          // if (window.innerWidth < that.spritesFonds[objectKey].width) {
+          //   that.spritesFonds[objectKey].x = -(positionX / 2)
+          // } else if (window.innerWidth > that.spritesFonds[objectKey].width) {
+          //   that.spritesFonds[objectKey].x = positionX / 2
+          // }
+
 
           for (var i = 0; i < Math.floor(STORAGE.carousel.numberOfWindow); i++) {
             that.totalHeightSteps.push(that.totalHeightSteps[that.totalHeightSteps.length -1] + that.spritesFonds[objectKey].height / Math.floor(STORAGE.carousel.numberOfWindow))
           }
 
           that.spritesFonds[objectKey].zIndex = 1
+
+
       })
 
       let keysForms = Object.keys(that.spritesForms)
@@ -107,21 +119,32 @@ class Carousel {
       Object.keys(that.spritesForms).map(function(objectKey, index) {
 
         // pour que chaque image fasse 100% de hauteur
-        STORAGE.ratioVertical = window.innerHeight / that.spritesForms[objectKey].texture.height
-        that.spritesForms[objectKey].scale = new PIXI.Point(STORAGE.ratioVertical , STORAGE.ratioVertical)
 
-        STORAGE.carousel.postionHorizontal = Math.abs(window.innerWidth - that.spritesForms[objectKey].width)
-        if (window.innerWidth < that.spritesForms[objectKey].width) {
-          that.spritesForms[objectKey].x = -(STORAGE.carousel.postionHorizontal / 2)
-          STORAGE.carousel.widthSup = true
-        } else if (window.innerWidth > that.spritesForms[objectKey].width) {
-          that.spritesForms[objectKey].x = STORAGE.carousel.postionHorizontal / 2
-          STORAGE.carousel.widthSup = false
-        }
+        // STORAGE.ratioHorizontal = window.innerWidth / that.spritesFonds[objectKey].texture.width
+        that.spritesForms[objectKey].scale = new PIXI.Point(STORAGE.ratioHorizontal , STORAGE.ratioHorizontal)
+
+        // STORAGE.ratioVertical = window.innerHeight / that.spritesForms[objectKey].texture.height
+        // that.spritesForms[objectKey].scale = new PIXI.Point(STORAGE.ratioVertical , STORAGE.ratioVertical)
+
+        // STORAGE.carousel.postionHorizontal = Math.abs(window.innerWidth - that.spritesForms[objectKey].width)
+        // if (window.innerWidth < that.spritesForms[objectKey].width) {
+        //   that.spritesForms[objectKey].x = -(STORAGE.carousel.postionHorizontal / 2)
+        //   STORAGE.carousel.widthSup = true
+        // } else if (window.innerWidth > that.spritesForms[objectKey].width) {
+        //   that.spritesForms[objectKey].x = STORAGE.carousel.postionHorizontal / 2
+        //   STORAGE.carousel.widthSup = false
+        // }
 
         // pour placer en y
-        let position = objectKey.split('.')[0].split('/')[2].split('-')[0]
-        that.spritesForms[objectKey].y = that.totalHeightSteps[position]
+        if (objectKey == lastForm) {
+          let position = objectKey.split('.')[0].split('/')[2].split('-')[0]
+          that.spritesForms[objectKey].y = that.totalHeightSteps[position]
+
+        } else {
+          let position = objectKey.split('.')[0].split('/')[2].split('-')[0]
+          that.spritesForms[objectKey].y = that.totalHeightSteps[position]
+        }
+
         that.spritesForms[objectKey].zIndex = 2
 
         if (objectKey == lastForm) {
@@ -138,8 +161,6 @@ class Carousel {
         }
       })
 
-      that.totalHeightSteps = [0]
-
       for (var i = 0; i < this.blackboards.length; i++) {
         this.blackboards[i].blackboard.destroy()
       }
@@ -155,7 +176,8 @@ class Carousel {
     }
 
     handleScroll(e) {
-      if (Math.abs(STORAGE.carousel.y - window.innerHeight) < window.innerHeight * STORAGE.carousel.numberOfWindow - 25 && e.deltaY > 0 ) { // stop le défilement au dernier sprite (défile tant que x abs < à largeur totale de tous les spritesFonds-1)
+      console.log(STORAGE.carouselClass)
+      if (Math.abs(STORAGE.carousel.y - window.innerHeight) <  STORAGE.carouselClass.totalHeightSteps[1] * STORAGE.carousel.numberOfWindow - 25 && e.deltaY > 0 ) { // stop le défilement au dernier sprite (défile tant que x abs < à largeur totale de tous les spritesFonds-1)
         STORAGE.carousel.y -= Math.abs(e.deltaY) / 5
         STORAGE.carouselClass.doParallax('down')
       } else if (STORAGE.carousel.y > -25) {

@@ -55,11 +55,14 @@ class ThirdChallenge {
     TweenLite.set(STORAGE.stage, {
       alpha: 1
     })
-    TweenLite.to(this.ThirdChallengeContainer, 0.6, {
-      alpha: 1
+    TweenLite.to(this.ThirdChallengeContainer, 2, {
+      alpha: 1,
+      ease: Power4.easeInOut
     })
-    TweenLite.to(this.thirdChallengeHtmlElements, 1.2, {
-      autoAlpha: 1
+    TweenLite.to(this.thirdChallengeHtmlElements, 0.8, {
+      autoAlpha: 1,
+      ease: Power2.easeInOut,
+      delay: 1.8
     })
   }
 

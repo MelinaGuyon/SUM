@@ -6,7 +6,7 @@ class SecondChallenge {
 
   constructor(options) {
     this.SecondChallengeContainer = new PIXI.Container()
-    this.SecondChallengeContainer.alpha = 1
+    this.SecondChallengeContainer.alpha = 0
     this.SecondChallengeContainer.interactive = true
     STORAGE.SecondChallengeClass = this
     STORAGE.SecondChallengeContainer = this.SecondChallengeContainer
@@ -77,8 +77,9 @@ class SecondChallenge {
     TweenLite.set(STORAGE.stage, {
       alpha: 1
     })
-    TweenLite.to(this.SecondChallengeContainer, 0.6, {
-      alpha: 1
+    TweenLite.to(this.SecondChallengeContainer, 2, {
+      alpha: 1,
+      ease: Power4.easeInOut
     })
   }
 

@@ -352,6 +352,7 @@ class SecondChallenge {
     TweenLite.set(this.conclusionChallengeTextContainer, {
       display: 'block'
     })
+    console.log("fesse")
     TweenLite.to(this.conclusionChallengeTextContainer, 2, {
       autoAlpha: 1,
       delay: 1

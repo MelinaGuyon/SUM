@@ -6,6 +6,7 @@ const secondCarouselDatas = {
     'assets/before-challenge-2/1-forme-1.png',
     'assets/before-challenge-2/1-forme-2.png',
     'assets/before-challenge-2/1-forme-3.png',
+    'assets/before-challenge-2/1-forme-4.png',
     'assets/before-challenge-2/2-forme-1.png',
     'assets/before-challenge-2/2-forme-2.png',
     'assets/before-challenge-2/2-forme-3.png',
@@ -14,7 +15,7 @@ const secondCarouselDatas = {
     'assets/before-challenge-2/5-forme-2.png',
     'assets/before-challenge-2/5-forme-1.png',
     'assets/before-challenge-2/4-forme-2.png',
-    'assets/before-challenge-2/5-forme-3.png',
+    'assets/before-challenge-2/5-forme-3.png'
   ],
   datasEyes: [
     {
@@ -33,22 +34,26 @@ const secondCarouselDatas = {
   ],
   datasBlackboards: [
       {
-        width: 420,
-        height: 740,
-        x: 600,
-        y: 5680,
+        width: 1050,
+        height: 450,
+        x: 800,
+        y: 5960,
         checkPoints : [{
           rayon: 30,
-          x: 350,
-          y: 30
+          x: 80,
+          y: 420
         }, {
           rayon: 30,
-          x: 50,
-          y: 180
+          x: 300,
+          y: 310
         }, {
           rayon: 30,
-          x: 235,
-          y: 710
+          x: 600,
+          y: 240
+        }, {
+          rayon: 30,
+          x: 1010,
+          y: 40
         }
       ],
       isTestLaunch: true

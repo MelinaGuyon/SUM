@@ -42,28 +42,6 @@ body {
   line-height: 3.1vw;
   color: #A7A6F0;
   padding: 25px 0;
-
-  &:after {
-    content: '';
-    position : absolute;
-    background-color : #A7A6F0;
-    width : 2px;
-    height : 90%;
-    left : 62%;
-    top : -45px;
-    transform : translate(-50%, -55%) rotate(30deg);
-  }
-
-  &:before {
-    content: '';
-    position : absolute;
-    background-color : #A7A6F0;
-    width : 2px;
-    height : 90%;
-    left : 35%;
-    top : 193px;
-    transform : translate(-50%, -55%) rotate(30deg);
-  }
 }
 
 .js-first-recompense-button {
@@ -81,6 +59,7 @@ body {
   font-family : westeindeCaptionThin;
   font-size : 18px;
   padding : 10px 15px;
+  cursor: pointer;
   transition: all 0.6s;
   -webkit-transition: all 0.6s;
   -moz-transition: all 0.6s;

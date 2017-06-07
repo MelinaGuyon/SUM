@@ -33,7 +33,7 @@ class Blackboard {
 
     init() {
       if (this.context == "Carousel") {
-        this.blackboard.beginFill(0x000000, 0.3)
+        this.blackboard.beginFill(0x000000, 0)
 
         this.blackboard.drawRect(this.carouselDatas.datasBlackboards[this.index].x * STORAGE.ratioHorizontal, this.carouselDatas.datasBlackboards[this.index].y * STORAGE.ratioHorizontal,
         this.carouselDatas.datasBlackboards[this.index].width * STORAGE.ratioHorizontal, this.carouselDatas.datasBlackboards[this.index].height * STORAGE.ratioHorizontal)

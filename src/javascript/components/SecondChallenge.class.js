@@ -61,7 +61,8 @@ class SecondChallenge {
   unbind() {
     let that = this
     this.SecondChallengeContainer.mousemove = null
-    window.removeEventListener('click', that.handleRecompenseButtonClick)
+    
+    this.recompenseButton.removeEventListener('click', that.handleRecompenseButtonClick)
 
     document.removeEventListener("mousemove", that.handleMove)
   }

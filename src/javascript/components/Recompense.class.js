@@ -26,17 +26,29 @@ class Recompense {
       if (this.voiceOverLaunch != true) {
         STORAGE.soundManagerClass.launchVoiceOver(soundBank.voiceOver.firstChallengeRecompense)
         this.voiceOverLaunch = true
-      }    
+
+        setTimeout(function() {
+          STORAGE.soundManagerClass.stopAmbiance(STORAGE.soundManagerClass.ambiance)
+        }, 4000)
+      }
     } else if (this.recompenseNumber == 2) {
       if (this.voiceOverLaunch != true) {
         STORAGE.soundManagerClass.launchVoiceOver(soundBank.voiceOver.secondChallengeRecompense)
         this.voiceOverLaunch = true
-      }   
+
+        setTimeout(function() {
+          STORAGE.soundManagerClass.stopAmbiance(STORAGE.soundManagerClass.ambiance)
+        }, 4000)
+      }
     } else if (this.recompenseNumber == 3) {
       if (this.voiceOverLaunch != true) {
         STORAGE.soundManagerClass.launchVoiceOver(soundBank.voiceOver.thirdChallengeRecompense)
         this.voiceOverLaunch = true
-      }   
+
+        setTimeout(function() {
+          STORAGE.soundManagerClass.stopAmbiance(STORAGE.soundManagerClass.ambiance)
+        }, 4000)
+      }
     }
   }
 

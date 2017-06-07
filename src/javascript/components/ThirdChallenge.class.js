@@ -257,7 +257,7 @@ class ThirdChallenge {
   manageSounds(kill) {
     let that = this
     if (this.entrance) {
-      //STORAGE.soundManagerClass.lowerAmbiance(STORAGE.soundManagerClass.ambiance)
+      STORAGE.soundManagerClass.lowerAmbiance(STORAGE.soundManagerClass.ambiance)
       STORAGE.soundManagerClass.launchVoiceOver(soundBank.voiceOver.thirdChallenge)
       setTimeout(function(){
         that.bind()

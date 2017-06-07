@@ -20,10 +20,12 @@ class Carousel {
         STORAGE.soundManagerClass.launchAmbiance(soundBank.firstChallengeCarousel.ambiance)
       } else if (this.carouselNumber == 2) {
         this.carouselDatas = secondCarouselDatas
+        STORAGE.soundManagerClass.launchAmbiance(soundBank.secondChallengeCarousel.ambiance)
         STORAGE.carousel.numberOfWindow = 6
         STORAGE.time_pourcentage = 60
       } else if (this.carouselNumber == 3) {
         this.carouselDatas = thirdCarouselDatas
+        STORAGE.soundManagerClass.launchAmbiance(soundBank.thirdChallengeCarousel.ambiance)
         STORAGE.carousel.numberOfWindow = 6
         STORAGE.time_pourcentage = 90
       }
@@ -180,9 +182,6 @@ class Carousel {
     }
 
     handleScroll(e) {
-
-      console.log(STORAGE.carouselClass.carouselNumber)
-
       if (Math.abs(STORAGE.carousel.y - window.innerHeight) <  STORAGE.carouselClass.totalHeightSteps[1] * STORAGE.carousel.numberOfWindow - 25 && e.deltaY > 0 ) { // stop le défilement au dernier sprite (défile tant que x abs < à largeur totale de tous les spritesFonds-1)
         STORAGE.carousel.y -= Math.abs(e.deltaY) / 8
         STORAGE.carouselClass.doParallax('down')
@@ -193,7 +192,7 @@ class Carousel {
         STORAGE.carouselClass.doParallax('up')
       }
 
-      if ( STORAGE.carouselClass.scaredDone != true && STORAGE.carousel.y < -2000) {
+      if ( STORAGE.carouselClass.scaredDone != true && STORAGE.carousel.y < -2000 && STORAGE.carouselClass.carouselNumber == 1) {
         TweenLite.to( STORAGE.carousel, 1.6, {
           y: -800,
           ease: Power2.easeInOut
@@ -228,7 +227,7 @@ class Carousel {
       }
 
       // carousel 1
-      if (STORAGE.carouselClass.carouselNumber == 1 && STORAGE.carousel.y < -1900 && STORAGE.carouselClass.launchMurmure != true) {
+      if (STORAGE.carouselClass.carouselNumber == 1 && STORAGE.carousel.y < -1800 && STORAGE.carouselClass.launchMurmure != true) {
         STORAGE.soundManagerClass.launchMurmure(soundBank.firstChallengeCarousel.ambiance2)
         STORAGE.carouselClass.launchMurmure = true
       }

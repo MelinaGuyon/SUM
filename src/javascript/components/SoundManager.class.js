@@ -23,7 +23,17 @@ class SoundManager {
 
   lowerAmbiance(track){
     TweenLite.to(track, 2, {
-      volume: 0.4
+      volume: 0.2
+    })
+  }
+
+  stopAmbiance(track) {
+    TweenLite.to(track, 6, {
+      volume: 0,
+      onComplete: function(){
+        track.stop()
+        track.removeSprites()
+      }
     })
   }
 
@@ -31,8 +41,8 @@ class SoundManager {
     this.murmure = PIXI.sound.Sound.from(track)
     this.murmure.volume = 0
     this.murmure.play()
-    TweenLite.to(this.murmure, 4, {
-      volume: 0.4
+    TweenLite.to(this.murmure, 9, {
+      volume: 0.2
     })
     this.murmure.loop = true
   }

@@ -87,7 +87,7 @@ class SecondChallenge {
       ease: Power4.easeInOut
     })
   }
-  
+
   setUpExternalCanvas() {
     this.externalCanvas.width = window.innerWidth
     this.externalCanvas.height = window.innerHeight
@@ -111,7 +111,7 @@ class SecondChallenge {
   manageSounds(kill) {
     let that = this
     if (this.entrance) {
-      //STORAGE.soundManagerClass.lowerAmbiance(STORAGE.soundManagerClass.ambiance)
+      STORAGE.soundManagerClass.lowerAmbiance(STORAGE.soundManagerClass.ambiance)
       STORAGE.soundManagerClass.launchVoiceOver(soundBank.voiceOver.secondChallenge)
       setTimeout(function(){
         that.bind()

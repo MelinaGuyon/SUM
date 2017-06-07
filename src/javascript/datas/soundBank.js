@@ -3,6 +3,12 @@ const soundBank = {
     ambiance: 'assets/sounds/first-challenge/Carousel-1-ambiance.mp3',
     ambiance2: 'assets/sounds/first-challenge/Carousel-1-ambiance-2.mp3'
   },
+  secondChallengeCarousel : {
+    ambiance: 'assets/sounds/second-challenge/Carousel-2-ambiance.mp3'
+  },
+  thirdChallengeCarousel : {
+    ambiance: 'assets/sounds/third-challenge/Carousel-3-ambiance.mp3'
+  },
   firstChallenge : [
     ['assets/sounds/first-challenge/oiseaux.mp3', 'assets/sounds/first-challenge/montagne.mp3'],
     ['assets/sounds/first-challenge/gouttes.mp3', 'assets/sounds/first-challenge/feu.mp3'],

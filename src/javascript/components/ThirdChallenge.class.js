@@ -33,8 +33,8 @@ class ThirdChallenge {
 
     STORAGE.textConclusion3 = document.createTextNode(conclusionTextsDatas.thirdChallenge.conclusion)
     STORAGE.buttonConclusion3 = document.createTextNode(conclusionTextsDatas.thirdChallenge.button)
-    this.conclusionChallengeText.replaceChild(STORAGE.textConclusion3, STORAGE.textConclusion2)
-    this.conclusionChallengeButton.replaceChild(STORAGE.buttonConclusion3, STORAGE.buttonConclusion2)
+    // this.conclusionChallengeText.replaceChild(STORAGE.textConclusion3, STORAGE.textConclusion2)
+    // this.conclusionChallengeButton.replaceChild(STORAGE.buttonConclusion3, STORAGE.buttonConclusion2)
 
     this.entrance = true
 
@@ -172,21 +172,21 @@ class ThirdChallenge {
 
   onShapeRotation(shape) {
     TweenLite.to(shape, 0.3, {
-      rotation: "+="+1
+      rotation: "+=" + 1
     })
   }
 
   onShapeZoom(shape) {
     TweenLite.to(shape, 0.3, {
-      width: "+="+5,
-      height: "+="+5
+      width: "+=" + 15,
+      height: "+=" + 15
     })
   }
 
   onShapeDezoom(shape) {
     TweenLite.to(shape, 0.3, {
-      width: "-="+5,
-      height: "-="+5
+      width: "-=" + 15,
+      height: "-=" + 15
     })
   }
 

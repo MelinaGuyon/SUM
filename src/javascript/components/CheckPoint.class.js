@@ -122,6 +122,7 @@ class CheckPoint {
     textIntro.querySelector('.title1').innerText = this.carouselDatas.textIntroChallenge[1]
     textIntro.querySelector('.title2').innerText = this.carouselDatas.textIntroChallenge[2]
 
+    STORAGE.carouselClass.unbind()
 
     TweenLite.to(textContainer, 2, {
       autoAlpha: 1,
@@ -146,7 +147,6 @@ class CheckPoint {
         setTimeout(function(){
           STORAGE.deformation.destroy()
           STORAGE.carousel.destroy()
-          STORAGE.carouselClass.unbind()
           STORAGE.carousel = null
           STORAGE.carouselClass = null
           STORAGE.deformation = null
@@ -158,7 +158,6 @@ class CheckPoint {
           } else if (that.carouselNumber == 3) {
             new ThirdChallenge()
           }
-
         }, 300)
       },
       delay: 8.5

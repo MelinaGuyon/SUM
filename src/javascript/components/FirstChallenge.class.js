@@ -48,9 +48,6 @@ class FirstChallenge {
   }
 
   init() {
-
-    console.log(window.innerWidth)
-
     STORAGE.loaderClass.loadFirstChallengePictures([
       'assets/first-challenge/fond.png',
       'assets/first-challenge/oeil.png',
@@ -383,25 +380,15 @@ class FirstChallenge {
   manageSounds(kill) {
     let that = this
     if (this.entrance) {
+      STORAGE.soundManagerClass.lowerAmbiance(STORAGE.soundManagerClass.ambiance)
+      STORAGE.soundManagerClass.stopMurmure(STORAGE.soundManagerClass.murmure)
       STORAGE.soundManagerClass.launchVoiceOver(soundBank.voiceOver.firstChallenge)
       setTimeout(function(){
-        STORAGE.soundManagerClass.pauseAndPlay(false, soundBank['firstChallenge'][that.movieIndex][0], soundBank['firstChallenge'][that.movieIndex][1])
         that.createPath()
         that.createCursor()
       }, 10000)
       this.entrance = false
       return
-    }
-    if (kill) {
-      STORAGE.soundManagerClass.pauseAndPlay(true)
-      return
-    }
-    if (this.eye.rotation < 3.141592653589793 / 2 && this.soundPlaying != 0) {
-      STORAGE.soundManagerClass.pauseAndPlay(false, soundBank['firstChallenge'][this.movieIndex][0], soundBank['firstChallenge'][this.movieIndex][1])
-      this.soundPlaying = 0
-    } else if (this.eye.rotation > 3.141592653589793 / 2 && this.soundPlaying != 1) {
-      STORAGE.soundManagerClass.pauseAndPlay(false, soundBank['firstChallenge'][this.movieIndex][1], soundBank['firstChallenge'][this.movieIndex][0])
-      this.soundPlaying = 1
     }
   }
 

@@ -7,7 +7,6 @@ import soundBank from '../datas/soundBank.js'
 class Carousel {
 
     constructor(options) {
-      console.log('je me relance')
       this.carousel = new PIXI.Container()
       STORAGE.carouselClass = this
       STORAGE.carousel = this.carousel
@@ -18,6 +17,7 @@ class Carousel {
         this.carouselDatas = firstCarouselDatas
         STORAGE.carousel.numberOfWindow = 8
         STORAGE.time_pourcentage = 30
+        STORAGE.soundManagerClass.launchAmbiance(soundBank.firstChallengeCarousel.ambiance)
       } else if (this.carouselNumber == 2) {
         this.carouselDatas = secondCarouselDatas
         STORAGE.carousel.numberOfWindow = 6
@@ -36,7 +36,20 @@ class Carousel {
 
       this.blackboards = []
 
+      // sounds
       this.voiceOverLaunch = false
+      this.launchMurmure = false
+
+      // animattion
+      this.scaredDone = false
+
+
+      this.blurFilter = new PIXI.filters.BlurFilter()
+      this.blurFilter.blur = 0
+
+      STORAGE.stage.filters = [
+        this.blurFilter
+      ]
 
       this.init()
       this.bind()
@@ -140,11 +153,11 @@ class Carousel {
           that.spritesForms[objectKey].rapidity = 0
         } else {
           if (that.carouselNumber == 1) {
-            that.spritesForms[objectKey].rapidity = Math.random() * (2 - 0.7) + 0.7
+            that.spritesForms[objectKey].rapidity = Math.random() * (0.8 - 0.1) + 0.1
           } else if(that.carouselNumber == 2){
-            that.spritesForms[objectKey].rapidity = Math.random() * (0.9 - 0.5) + 0.5
+            that.spritesForms[objectKey].rapidity = Math.random() * (0.8 - 0.1) + 0.1
           } else if(that.carouselNumber == 3){
-            that.spritesForms[objectKey].rapidity = Math.random() * (0.8 - 0.4) + 0.4
+            that.spritesForms[objectKey].rapidity = Math.random() * (0.8 - 0.1) + 0.1
           }
 
         }
@@ -166,16 +179,57 @@ class Carousel {
 
     handleScroll(e) {
       if (Math.abs(STORAGE.carousel.y - window.innerHeight) <  STORAGE.carouselClass.totalHeightSteps[1] * STORAGE.carousel.numberOfWindow - 25 && e.deltaY > 0 ) { // stop le défilement au dernier sprite (défile tant que x abs < à largeur totale de tous les spritesFonds-1)
-        STORAGE.carousel.y -= Math.abs(e.deltaY) / 5
+        STORAGE.carousel.y -= Math.abs(e.deltaY) / 8
         STORAGE.carouselClass.doParallax('down')
       } else if (STORAGE.carousel.y > -25) {
         return
       } else if (e.deltaY < 0) {
-        STORAGE.carousel.y += Math.abs(e.deltaY) / 5
+        STORAGE.carousel.y += Math.abs(e.deltaY) / 8
         STORAGE.carouselClass.doParallax('up')
       }
 
-      if (STORAGE.carouselClass.voiceOverLaunch != true && STORAGE.carousel.y < -4000) {
+      if ( STORAGE.carouselClass.scaredDone != true && STORAGE.carousel.y < -2000) {
+        TweenLite.to( STORAGE.carousel, 1.6, {
+          y: -800,
+          ease: Power2.easeInOut
+        })
+        TweenLite.to( STORAGE.carousel, 1.4, {
+          y: -1700,
+          ease: Power4.easeInOut,
+          delay: 1.6
+        })
+        TweenLite.to(STORAGE.carouselClass.blurFilter, 2, {
+          blur: 12,
+          ease: Power4.easeInOut,
+          onUpdate: function() {
+            STORAGE.stage.filters = [
+              STORAGE.carouselClass.blurFilter
+            ]
+          },
+          onComplete: function() {
+            TweenLite.to(STORAGE.carouselClass.blurFilter, 1, {
+              blur: 0,
+              ease: Power2.easeInOut,
+              onUpdate: function() {
+                STORAGE.stage.filters = [
+                  STORAGE.carouselClass.blurFilter
+                ]
+              }
+            })
+          }
+        })
+
+        STORAGE.carouselClass.scaredDone = true
+      }
+
+      // carousel 1
+      if (STORAGE.carouselClass.carouselNumber == 1 && STORAGE.carousel.y < -1900 && STORAGE.carouselClass.launchMurmure != true) {
+        STORAGE.soundManagerClass.launchMurmure(soundBank.firstChallengeCarousel.ambiance2)
+        STORAGE.carouselClass.launchMurmure = true
+      }
+
+      // carousel 1
+      if (STORAGE.carouselClass.carouselNumber == 1 && STORAGE.carouselClass.voiceOverLaunch != true && STORAGE.carousel.y < -4000) {
         STORAGE.soundManagerClass.launchVoiceOver(soundBank.voiceOver.firstChallengeCarousel)
         STORAGE.carouselClass.voiceOverLaunch = true
       }

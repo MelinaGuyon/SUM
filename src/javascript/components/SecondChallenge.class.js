@@ -64,7 +64,7 @@ class SecondChallenge {
     document.removeEventListener("mousemove", that.handleMove)
   }
 
-  init() {$
+  init() {
     this.setUpExternalCanvas()
 
     STORAGE.loaderClass.loadSecondChallengePictures([

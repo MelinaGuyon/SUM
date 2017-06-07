@@ -373,8 +373,6 @@ class FirstChallenge {
         rotation: 0
       })
     }
-
-    this.manageSounds()
   }
 
   manageSounds(kill) {
@@ -405,7 +403,6 @@ class FirstChallenge {
           that.eye.removeChild(that.movie)
           that.movieIndex ++
           that.createGif(that.movieIndex)
-          that.manageSounds()
         }
       })
       this.pathPassed.clear()
@@ -419,7 +416,6 @@ class FirstChallenge {
         })
       }
     } else {
-      that.manageSounds(true)
       this.eye.removeChild(that.movie)
       this.showConclusion()
     }

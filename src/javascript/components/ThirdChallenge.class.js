@@ -1,4 +1,5 @@
 import conclusionTextsDatas from '../datas/conclusionTexts.js'
+import soundBank from '../datas/soundBank.js'
 import Recompense from './Recompense.class.js'
 import TweenLite from 'gsap'
 
@@ -32,15 +33,15 @@ class ThirdChallenge {
 
     STORAGE.textConclusion3 = document.createTextNode(conclusionTextsDatas.thirdChallenge.conclusion)
     STORAGE.buttonConclusion3 = document.createTextNode(conclusionTextsDatas.thirdChallenge.button)
-    //this.conclusionChallengeText.replaceChild(STORAGE.textConclusion3, STORAGE.textConclusion2)
-    //this.conclusionChallengeButton.replaceChild(STORAGE.buttonConclusion3, STORAGE.buttonConclusion2)
+    this.conclusionChallengeText.replaceChild(STORAGE.textConclusion3, STORAGE.textConclusion2)
+    this.conclusionChallengeButton.replaceChild(STORAGE.buttonConclusion3, STORAGE.buttonConclusion2)
+
+    this.entrance = true
 
     this.init()
   }
 
   init() {
-
-    //console.log(window.innerWidth)
 
     STORAGE.loaderClass.loadThirdChallengePictures([
       'assets/third-challenge/fond.jpg',
@@ -244,13 +245,26 @@ class ThirdChallenge {
     this.assets.resources = STORAGE.loader.resources
 
     this.createBackground()
+    this.manageSounds()
     this.drawRectangle()
     this.drawCircle()
     this.drawTriangle()
     this.drawLine()
     this.drawHalfcircle()
     this.drawHelpButton()
-    this.bind()
+  }
+
+  manageSounds(kill) {
+    let that = this
+    if (this.entrance) {
+      //STORAGE.soundManagerClass.lowerAmbiance(STORAGE.soundManagerClass.ambiance)
+      STORAGE.soundManagerClass.launchVoiceOver(soundBank.voiceOver.thirdChallenge)
+      setTimeout(function(){
+        that.bind()
+      }, 10000)
+      this.entrance = false
+      return
+    }
   }
 
   createBackground() {

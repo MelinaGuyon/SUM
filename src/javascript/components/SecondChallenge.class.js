@@ -36,8 +36,8 @@ class SecondChallenge {
 
     STORAGE.textConclusion2 = document.createTextNode(conclusionTextsDatas.secondChallenge.conclusion)
     STORAGE.buttonConclusion2 = document.createTextNode(conclusionTextsDatas.secondChallenge.button)
-    this.conclusionChallengeText.replaceChild(STORAGE.textConclusion2, STORAGE.textConclusion1)
-    this.conclusionChallengeButton.replaceChild(STORAGE.buttonConclusion2, STORAGE.buttonConclusion1)
+    //this.conclusionChallengeText.replaceChild(STORAGE.textConclusion2, STORAGE.textConclusion1)
+    //this.conclusionChallengeButton.replaceChild(STORAGE.buttonConclusion2, STORAGE.buttonConclusion1)
 
     this.init()
     this.bind()

@@ -1,4 +1,5 @@
 import Carousel from './Carousel.class.js'
+import soundBank from '../datas/soundBank.js'
 import TweenLite from 'gsap'
 
 class Recompense {
@@ -6,6 +7,7 @@ class Recompense {
   constructor(options) {
     STORAGE.ThirdRecompenseClass = this
     this.recompenseNumber = options.number
+    this.voiceOverLaunch = false
 
     if (this.recompenseNumber == 1) {
       this.recompense =  document.querySelector('.first-recompense')
@@ -20,6 +22,22 @@ class Recompense {
 
   init() {
     this.recompenseAppearing()
+    if (this.recompenseNumber == 1) {
+      if (this.voiceOverLaunch != true) {
+        STORAGE.soundManagerClass.launchVoiceOver(soundBank.voiceOver.firstChallengeRecompense)
+        this.voiceOverLaunch = true
+      }    
+    } else if (this.recompenseNumber == 2) {
+      if (this.voiceOverLaunch != true) {
+        STORAGE.soundManagerClass.launchVoiceOver(soundBank.voiceOver.secondChallengeRecompense)
+        this.voiceOverLaunch = true
+      }   
+    } else if (this.recompenseNumber == 3) {
+      if (this.voiceOverLaunch != true) {
+        STORAGE.soundManagerClass.launchVoiceOver(soundBank.voiceOver.thirdChallengeRecompense)
+        this.voiceOverLaunch = true
+      }   
+    }
   }
 
   recompenseAppearing() {

@@ -28,6 +28,8 @@ class Carousel {
         STORAGE.time_pourcentage = 90
       }
 
+      console.log(this.carouselNumber)
+
       this.spritesFonds = {}
       this.spritesForms = {}
       this.assets = {}
@@ -165,6 +167,9 @@ class Carousel {
     }
 
     handleScroll(e) {
+
+      console.log(STORAGE.carouselClass.carouselNumber)
+
       if (Math.abs(STORAGE.carousel.y - window.innerHeight) <  STORAGE.carouselClass.totalHeightSteps[1] * STORAGE.carousel.numberOfWindow - 25 && e.deltaY > 0 ) { // stop le défilement au dernier sprite (défile tant que x abs < à largeur totale de tous les spritesFonds-1)
         STORAGE.carousel.y -= Math.abs(e.deltaY) / 5
         STORAGE.carouselClass.doParallax('down')
@@ -175,9 +180,23 @@ class Carousel {
         STORAGE.carouselClass.doParallax('up')
       }
 
-      if (STORAGE.carouselClass.voiceOverLaunch != true && STORAGE.carousel.y < -4000) {
-        STORAGE.soundManagerClass.launchVoiceOver(soundBank.voiceOver.firstChallengeCarousel)
-        STORAGE.carouselClass.voiceOverLaunch = true
+      if (STORAGE.carouselClass.carouselNumber == 1) {
+        if (STORAGE.carouselClass.voiceOverLaunch != true && STORAGE.carousel.y < -3000) {
+          STORAGE.soundManagerClass.launchVoiceOver(soundBank.voiceOver.firstChallengeCarousel)
+          STORAGE.carouselClass.voiceOverLaunch = true
+        }
+      }
+      else if (STORAGE.carouselClass.carouselNumber == 2) {
+        if (STORAGE.carouselClass.voiceOverLaunch != true && STORAGE.carousel.y < -2000) {
+          STORAGE.soundManagerClass.launchVoiceOver(soundBank.voiceOver.secondChallengeCarousel)
+          STORAGE.carouselClass.voiceOverLaunch = true
+        }
+      }
+      else if (STORAGE.carouselClass.carouselNumber == 3) {
+        if (STORAGE.carouselClass.voiceOverLaunch != true && STORAGE.carousel.y < -4000) {
+          STORAGE.soundManagerClass.launchVoiceOver(soundBank.voiceOver.thirdChallengeCarousel)
+          STORAGE.carouselClass.voiceOverLaunch = true
+        }
       }
     }
 

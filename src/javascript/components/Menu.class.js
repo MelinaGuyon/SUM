@@ -49,24 +49,24 @@ class Menu {
     if (STORAGE.time_pourcentage == 30) {
       TweenLite.to(STORAGE.timelinePosition, 0.6, {
         y: 100,
-        opacity: 1,
+        autoAlpha: 1,
       })
     }
     else if (STORAGE.time_pourcentage == 60) {
       TweenLite.to(STORAGE.timelinePosition, 0.6, {
         y: 200,
-        opacity: 1,
+        autoAlpha: 1,
       })
     }
     else if (STORAGE.time_pourcentage == 90) {
       TweenLite.to(STORAGE.timelinePosition, 0.6, {
         y: 300,
-        opacity: 1,
+        autoAlpha: 1
       })
     }
     TweenLite.to(STORAGE.epreuves, 0.6, {
       x: -50,
-      opacity: 1,
+      autoAlpha: 1,
       delay: 0.6
     })
   }
@@ -77,12 +77,12 @@ class Menu {
     })
     TweenLite.to(STORAGE.timelinePosition, 0.6, {
       y: 0,
-      opacity: 0,
+      autoAlpha: 0,
       delay: 0.6
     })
     TweenLite.to(STORAGE.epreuves, 0.6, {
       x: 0,
-      opacity: 0
+      autoAlpha: 0
     })
   }
 

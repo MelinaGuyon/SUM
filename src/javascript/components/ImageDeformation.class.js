@@ -31,18 +31,18 @@ class ImageDeformation {
 
     if (this.number == 1) {
       STORAGE.loaderClass.loadDeformationPictures([
-        'assets/deformation-eye1.jpg',
-        'assets/displacement_map.png'
+        'assets/deformation/deformation-eye.jpg',
+        'assets/deformation/displacement_map.png'
       ])
     } else if (this.number == 2) {
       STORAGE.loaderClass.loadDeformationPictures([
-        'assets/deformation-eye2.png',
-        'assets/displacement_map.png'
+        'assets/deformation/deformation-masque.png',
+        'assets/deformation/displacement_map.png'
       ])
     } else if (this.number == 3) {
       STORAGE.loaderClass.loadDeformationPictures([
-        'assets/deformation-eye3.png',
-        'assets/displacement_map.png'
+        'assets/deformation/deformation-forme.png',
+        'assets/deformation/displacement_map.png'
       ])
     }
 

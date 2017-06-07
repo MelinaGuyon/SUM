@@ -86,10 +86,11 @@ class FirstChallenge {
       this.cursor.mousedown = null
       this.cursor.mouseover = null
       this.cursor.mouseout = null
-      window.removeEventListener('click', that.handleNextAnimButtonClick)
-      window.removeEventListener('click', that.handleRecompenseButtonClick)
-      window.removeEventListener('mouseover', that.firstChallengeNextButtonMouseOver)
-      window.removeEventListener('mouseout', that.firstChallengeNextButtonMouseOut)
+      
+      this.nextAnimButton.removeEventListener('click', that.handleNextAnimButtonClick)
+      this.recompenseButton.removeEventListener('click', that.handleRecompenseButtonClick)
+      this.firstChallengeNextButton.removeEventListener('mouseover', that.firstChallengeNextButtonMouseOver)
+      this.firstChallengeNextButton.removeEventListener('mouseout', that.firstChallengeNextButtonMouseOut)
     }
 
   setupFirstChallengePicturesLoaded() {

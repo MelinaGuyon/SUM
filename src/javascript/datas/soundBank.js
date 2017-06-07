@@ -10,7 +10,14 @@ const soundBank = {
   ],
   voiceOver : {
     firstChallengeCarousel: 'assets/sounds/first-challenge/sum.m4a',
-    firstChallenge: 'assets/sounds/first-challenge/voice.wav'
+    firstChallenge: 'assets/sounds/first-challenge/voice.wav',
+    firstChallengeRecompense: 'assets/sounds/first-challenge/sum.m4a',
+    secondChallengeCarousel: 'assets/sounds/first-challenge/sum.m4a',
+    secondChallenge: 'assets/sounds/first-challenge/voice.wav',
+    secondChallengeRecompense: 'assets/sounds/first-challenge/sum.m4a',
+    thirdChallengeCarousel: 'assets/sounds/first-challenge/sum.m4a',
+    thirdChallenge: 'assets/sounds/first-challenge/voice.wav',
+    thirdChallengeRecompense: 'assets/sounds/first-challenge/sum.m4a'
   }
 }
 

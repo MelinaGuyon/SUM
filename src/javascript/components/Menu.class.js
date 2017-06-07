@@ -1,3 +1,4 @@
+import FirstChallenge from './FirstChallenge.class.js'
 import TweenLite from 'gsap'
 
 class Menu {
@@ -9,49 +10,77 @@ class Menu {
     STORAGE.stage.addChild(this.MenuContainer)
 
     this.icone3 = document.getElementById("icone3")
-    this.path = document.getElementById("path")
-    this.path.state = 0
-    this.epreuves = document.getElementById("epreuves")
-    this.epreuves.x = window.innerWidth
-    this.epreuves.alpha = 0
+    STORAGE.path = document.getElementById("path")
+    STORAGE.path.state = 0
+    STORAGE.epreuves = document.getElementById("epreuves")
+    STORAGE.epreuves.x = window.innerWidth
+    STORAGE.timelinePosition = document.querySelector('.js-timeline-position')
+    STORAGE.epreuves.alpha = 0
+
 
     this.init()
     this.bind()
   }
 
   init() {
-
+    TweenLite.set(STORAGE.timelinePosition, {
+      x: -5
+    })
   }
 
   bind() {
     let that = this
     this.icone3.onclick = function(){
-      if (that.path.state == 0) {
+      if (STORAGE.path.state == 0) {
         that.onIcone3Click()
-        that.path.state = 1
+        STORAGE.path.state = 1
       } else {
         that.onIcone3ClickAgain()
-        that.path.state = 0
+        STORAGE.path.state = 0
       }
     }
   }
 
   onIcone3Click() {
-    TweenLite.to(this.path, 0.6, {
+    console.log(STORAGE.time_pourcentage)
+    TweenLite.to(STORAGE.path, 0.6, {
       height: '55vh'
     })
-    TweenLite.to(this.epreuves, 0.6, {
+    if (STORAGE.time_pourcentage == 30) {
+      TweenLite.to(STORAGE.timelinePosition, 0.6, {
+        y: 100,
+        opacity: 1,
+      })
+    }
+    else if (STORAGE.time_pourcentage == 60) {
+      TweenLite.to(STORAGE.timelinePosition, 0.6, {
+        y: 200,
+        opacity: 1,
+      })
+    }
+    else if (STORAGE.time_pourcentage == 90) {
+      TweenLite.to(STORAGE.timelinePosition, 0.6, {
+        y: 300,
+        opacity: 1,
+      })
+    }
+    TweenLite.to(STORAGE.epreuves, 0.6, {
       x: -50,
       opacity: 1,
       delay: 0.6
     })
   }
   onIcone3ClickAgain() {
-    TweenLite.to(this.path, 0.6, {
+    TweenLite.to(STORAGE.path, 0.6, {
       height: 0,
       delay: 0.6
     })
-    TweenLite.to(this.epreuves, 0.6, {
+    TweenLite.to(STORAGE.timelinePosition, 0.6, {
+      y: 0,
+      opacity: 0,
+      delay: 0.6
+    })
+    TweenLite.to(STORAGE.epreuves, 0.6, {
       x: 0,
       opacity: 0
     })

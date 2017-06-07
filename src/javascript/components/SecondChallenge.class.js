@@ -64,7 +64,7 @@ class SecondChallenge {
     document.removeEventListener("mousemove", that.handleMove)
   }
 
-  init() {
+  init() {$
     this.setUpExternalCanvas()
 
     STORAGE.loaderClass.loadSecondChallengePictures([
@@ -85,7 +85,7 @@ class SecondChallenge {
       ease: Power4.easeInOut
     })
   }
-
+  
   setUpExternalCanvas() {
     this.externalCanvas.width = window.innerWidth
     this.externalCanvas.height = window.innerHeight

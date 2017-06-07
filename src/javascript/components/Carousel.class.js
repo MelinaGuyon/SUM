@@ -17,12 +17,15 @@ class Carousel {
       if (this.carouselNumber == 1) {
         this.carouselDatas = firstCarouselDatas
         STORAGE.carousel.numberOfWindow = 8
+        STORAGE.time_pourcentage = 30
       } else if (this.carouselNumber == 2) {
         this.carouselDatas = secondCarouselDatas
         STORAGE.carousel.numberOfWindow = 6
+        STORAGE.time_pourcentage = 60
       } else if (this.carouselNumber == 3) {
         this.carouselDatas = thirdCarouselDatas
         STORAGE.carousel.numberOfWindow = 6
+        STORAGE.time_pourcentage = 90
       }
 
       this.spritesFonds = {}
@@ -40,6 +43,7 @@ class Carousel {
     }
 
     init() {
+      this.reinitializeMenu()
       STORAGE.loaderClass.loadCarouselPictures(this.carouselDatas.datasImages)
     }
 
@@ -54,6 +58,22 @@ class Carousel {
       window.removeEventListener('mousewheel', that.handleScroll)
       window.removeEventListener('resize', that.handleResize)
       document.body.style.cursor = 'auto'
+    }
+
+    reinitializeMenu() {
+      TweenLite.to(STORAGE.path, 0.6, {
+        height: 0,
+        delay: 0.6
+      })
+      TweenLite.to(STORAGE.timelinePosition, 0.6, {
+        y: 0,
+        opacity: 0,
+        delay: 0.6
+      })
+      TweenLite.to(STORAGE.epreuves, 0.6, {
+        x: 0,
+        opacity: 0
+      })
     }
 
     loadCarouselPicturesProgressHandler() {

@@ -26,6 +26,17 @@
 	right : 15px;
 }
 
+.js-timeline-position {
+	position : absolute;
+	opacity : 0;
+    top: 0px;
+    display : block;
+	background-color : white;
+	width : 10px;
+	height : 10px;
+	border-radius : 50%;
+}
+
 #timeline a {
 	color : white;
 	text-decoration : none;

@@ -6,7 +6,7 @@ class SecondChallenge {
 
   constructor(options) {
     this.SecondChallengeContainer = new PIXI.Container()
-    this.SecondChallengeContainer.alpha = 1
+    this.SecondChallengeContainer.alpha = 0
     this.SecondChallengeContainer.interactive = true
     STORAGE.SecondChallengeClass = this
     STORAGE.SecondChallengeContainer = this.SecondChallengeContainer
@@ -36,8 +36,8 @@ class SecondChallenge {
 
     STORAGE.textConclusion2 = document.createTextNode(conclusionTextsDatas.secondChallenge.conclusion)
     STORAGE.buttonConclusion2 = document.createTextNode(conclusionTextsDatas.secondChallenge.button)
-    this.conclusionChallengeText.replaceChild(STORAGE.textConclusion2, STORAGE.textConclusion1)
-    this.conclusionChallengeButton.replaceChild(STORAGE.buttonConclusion2, STORAGE.buttonConclusion1)
+    // this.conclusionChallengeText.replaceChild(STORAGE.textConclusion2, STORAGE.textConclusion1)
+    // this.conclusionChallengeButton.replaceChild(STORAGE.buttonConclusion2, STORAGE.buttonConclusion1)
 
     this.init()
     this.bind()
@@ -50,7 +50,10 @@ class SecondChallenge {
     }
     this.recompenseButton.addEventListener('click', that.handleRecompenseButtonClick)
 
-    document.addEventListener("mousemove", that.handleMove)
+    setTimeout(function(){
+      document.addEventListener("mousemove", that.handleMove)
+    }, 2000)
+
   }
 
   unbind() {
@@ -77,8 +80,9 @@ class SecondChallenge {
     TweenLite.set(STORAGE.stage, {
       alpha: 1
     })
-    TweenLite.to(this.SecondChallengeContainer, 0.6, {
-      alpha: 1
+    TweenLite.to(this.SecondChallengeContainer, 2, {
+      alpha: 1,
+      ease: Power4.easeInOut
     })
   }
 
@@ -96,9 +100,11 @@ class SecondChallenge {
   setupSecondChallengePicturesLoaded() {
     this.assets.resources = STORAGE.loader.resources
 
-    this.createGlobalBackground()
+
     this.createBackground()
     this.createSum()
+
+    this.createGlobalBackground()
   }
 
   createGlobalBackground() {
@@ -114,6 +120,8 @@ class SecondChallenge {
       this.gobalBackground.scale = new PIXI.Point(ratioHorizontal, ratioHorizontal)
       this.gobalBackground.y = - (this.gobalBackground.texture.height * this.gobalBackground.scale.x - window.innerHeight) / 2
     }
+
+    this.gobalBackground.alpha = 0
 
     this.SecondChallengeContainer.addChild(this.gobalBackground)
   }
@@ -140,6 +148,9 @@ class SecondChallenge {
       if (that.stepIndex == 5 && index == 5) {
         that.background = new PIXI.Sprite(that.assets.resources[objectKey].texture)
       }
+      if (that.stepIndex == 6 && index == 6) {
+        that.background = new PIXI.Sprite(that.assets.resources[objectKey].texture)
+      }
     })
 
     let ratioVertical = window.innerHeight / this.background.texture.height
@@ -151,6 +162,7 @@ class SecondChallenge {
       this.background.scale = new PIXI.Point(ratioHorizontal, ratioHorizontal)
       this.background.y = - (this.background.texture.height * this.background.scale.x - window.innerHeight) / 2
     }
+
 
     this.SecondChallengeContainer.addChild(this.background)
   }
@@ -213,32 +225,42 @@ class SecondChallenge {
 
     STORAGE.SecondChallengeClass.time = setTimeout(function() {
       STORAGE.SecondChallengeClass.coolTexture.texture = new PIXI.Texture(myBaseTexture)
-    }, 15)
+    }, 20)
   }
 
   allCheckpointsChecked() {
     this.stepIndex++
 
-    document.removeEventListener("mousemove", this.handleMove)
-    this.externalCanvasCTX.clearRect(0, 0, this.externalCanvas.width, this.externalCanvas.height)
-    let imageMask = STORAGE.SecondChallengeClass.externalCanvas.toDataURL("image/png")
-    STORAGE.SecondChallengeClass.imagePixi.src = imageMask
-    var myBaseTexture = new PIXI.BaseTexture(STORAGE.SecondChallengeClass.imagePixi)
-    STORAGE.SecondChallengeClass.coolTexture.texture = new PIXI.Texture(myBaseTexture)
-
     let that = this
+
+    document.removeEventListener("mousemove", this.handleMove)
+
     if (this.stepIndex <= 5) {
-      TweenLite.to( [this.background, this.container], 0.6, {
-        alpha: 0,
+
+      TweenLite.to(this.gobalBackground, 1, {
+        alpha: 1,
+        ease: Power2.easeInOut,
         onComplete: () => {
           this.createBackground()
           this.createSum()
-          this.container.alpha = 1
-          this.background.alpha = 1
+
+          this.SecondChallengeContainer.addChild(this.gobalBackground)
+
+          TweenLite.to(this.gobalBackground, 1, {
+            alpha: 0,
+            ease: Power2.easeInOut
+          })
+
+          that.externalCanvasCTX.clearRect(0, 0, that.externalCanvas.width, that.externalCanvas.height)
+          let imageMask = STORAGE.SecondChallengeClass.externalCanvas.toDataURL("image/png")
+          STORAGE.SecondChallengeClass.imagePixi.src = imageMask
+          var myBaseTexture = new PIXI.BaseTexture(STORAGE.SecondChallengeClass.imagePixi)
+          STORAGE.SecondChallengeClass.coolTexture.texture = new PIXI.Texture(myBaseTexture)
+
           if (this.stepIndex != 5) {
             setTimeout(function() {
               document.addEventListener("mousemove", that.handleMove)
-            }, 500)
+            }, 1000)
           }
         }
       })
@@ -246,13 +268,17 @@ class SecondChallenge {
       let that = this
       if (this.stepIndex == 5) {
         setTimeout(function() {
+          TweenLite.to(that.gobalBackground, 1, {
+            alpha: 1,
+            delay : 1
+          })
           TweenLite.to([that.sum, that.background, that.container], 0.8, {
             alpha: 0,
+            delay: 2,
             onComplete: () => {
               that.container.destroy()
               that.background.destroy()
               that.showConclusion()
-              console.log('je shoz')
             }
           })
         }, 2000)

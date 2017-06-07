@@ -9,6 +9,8 @@ class ImageDeformation {
     STORAGE.deformationClass = this
     STORAGE.deformation = this.deformationContainer
 
+    this.number = options.number
+
     this.assets = {}
 
     this.image
@@ -26,10 +28,24 @@ class ImageDeformation {
   }
 
   init() {
-    STORAGE.loaderClass.loadDeformationPictures([
-      'assets/deformation-eye2.jpg',
-      'assets/displacement_map.png'
-    ])
+
+    if (this.number == 1) {
+      STORAGE.loaderClass.loadDeformationPictures([
+        'assets/deformation-eye1.jpg',
+        'assets/displacement_map.png'
+      ])
+    } else if (this.number == 2) {
+      STORAGE.loaderClass.loadDeformationPictures([
+        'assets/deformation-eye2.png',
+        'assets/displacement_map.png'
+      ])
+    } else if (this.number == 3) {
+      STORAGE.loaderClass.loadDeformationPictures([
+        'assets/deformation-eye3.png',
+        'assets/displacement_map.png'
+      ])
+    }
+
   }
 
   setupDeformationPicturesLoaded() {
@@ -44,8 +60,10 @@ class ImageDeformation {
       this.blurFilter
     ]
     let that = this
-    TweenLite.to(this.deformationContainer, 0.7, {
-      alpha: 1
+    TweenLite.to(this.deformationContainer, 2, {
+      alpha: 1,
+      ease: Power3.easeInOut,
+      delay: 0.6
     })
     this.animate(that)
   }
@@ -60,10 +78,9 @@ class ImageDeformation {
       }
     })
 
-    this.image.scale = new PIXI.Point(STORAGE.ratioVertical, STORAGE.ratioVertical)
+    this.image.scale = new PIXI.Point(STORAGE.ratioHorizontal, STORAGE.ratioHorizontal)
 
     this.deformationContainer.addChild(this.image)
-
 
     STORAGE.stage.addChild(this.deformationContainer)
 
@@ -107,7 +124,7 @@ class ImageDeformation {
       setTimeout(function() {
         it.animateBool = false
         return
-      }, 7000)
+      }, 9000)
 
       if (it.animateBool) {
         it.animate(it);

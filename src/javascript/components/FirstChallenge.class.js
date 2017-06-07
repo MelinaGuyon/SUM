@@ -60,8 +60,9 @@ class FirstChallenge {
     TweenLite.set(STORAGE.stage, {
       alpha: 1
     })
-    TweenLite.to(this.FirstChallengeContainer, 0.6, {
-      alpha: 1
+    TweenLite.to(this.FirstChallengeContainer, 2, {
+      alpha: 1,
+      ease: Power4.easeInOut
     })
   }
 

@@ -51,7 +51,7 @@ const firstCarouselDatas = {
         width: 400,
         height: 400,
         x: 740,
-        y: 7900,
+        y: 9050,
         checkPoints : [{
           rayon: 30,
           x: 200,

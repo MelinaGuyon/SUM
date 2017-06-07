@@ -30,13 +30,10 @@ class Carousel {
       this.assets = {}
       this.totalHeightSteps = [0]
       STORAGE.ratioVertical = 1
-      STORAGE.carousel.widthSup = false
 
       this.blackboards = []
 
       this.voiceOverLaunch = false
-
-      console.log(STORAGE.carouselClass, STORAGE.carousel, this.carouselDatas.datasImages)
 
       this.init()
       this.bind()
@@ -83,16 +80,14 @@ class Carousel {
     }
 
     makeCarousel() {
+
+      this.totalHeightSteps = [0]
+
       let that = this
       Object.keys(that.spritesFonds).map(function(objectKey, index) {
-          that.spritesFonds[objectKey].height = window.innerHeight * STORAGE.carousel.numberOfWindow
 
-          let positionX = Math.abs(window.innerWidth - that.spritesFonds[objectKey].width)
-          if (window.innerWidth < that.spritesFonds[objectKey].width) {
-            that.spritesFonds[objectKey].x = -(positionX / 2)
-          } else if (window.innerWidth > that.spritesFonds[objectKey].width) {
-            that.spritesFonds[objectKey].x = positionX / 2
-          }
+        STORAGE.ratioHorizontal = window.innerWidth / that.spritesFonds[objectKey].texture.width
+        that.spritesFonds[objectKey].scale = new PIXI.Point(STORAGE.ratioHorizontal , STORAGE.ratioHorizontal)
 
           for (var i = 0; i < Math.floor(STORAGE.carousel.numberOfWindow); i++) {
             that.totalHeightSteps.push(that.totalHeightSteps[that.totalHeightSteps.length -1] + that.spritesFonds[objectKey].height / Math.floor(STORAGE.carousel.numberOfWindow))
@@ -106,22 +101,19 @@ class Carousel {
 
       Object.keys(that.spritesForms).map(function(objectKey, index) {
 
-        // pour que chaque image fasse 100% de hauteur
-        STORAGE.ratioVertical = window.innerHeight / that.spritesForms[objectKey].texture.height
-        that.spritesForms[objectKey].scale = new PIXI.Point(STORAGE.ratioVertical , STORAGE.ratioVertical)
-
-        STORAGE.carousel.postionHorizontal = Math.abs(window.innerWidth - that.spritesForms[objectKey].width)
-        if (window.innerWidth < that.spritesForms[objectKey].width) {
-          that.spritesForms[objectKey].x = -(STORAGE.carousel.postionHorizontal / 2)
-          STORAGE.carousel.widthSup = true
-        } else if (window.innerWidth > that.spritesForms[objectKey].width) {
-          that.spritesForms[objectKey].x = STORAGE.carousel.postionHorizontal / 2
-          STORAGE.carousel.widthSup = false
-        }
+        // pour que chaque image fasse 100% de largeur
+        that.spritesForms[objectKey].scale = new PIXI.Point(STORAGE.ratioHorizontal , STORAGE.ratioHorizontal)
 
         // pour placer en y
-        let position = objectKey.split('.')[0].split('/')[2].split('-')[0]
-        that.spritesForms[objectKey].y = that.totalHeightSteps[position]
+        if (objectKey == lastForm) {
+          let position = objectKey.split('.')[0].split('/')[2].split('-')[0]
+          that.spritesForms[objectKey].y = that.totalHeightSteps[position]
+
+        } else {
+          let position = objectKey.split('.')[0].split('/')[2].split('-')[0]
+          that.spritesForms[objectKey].y = that.totalHeightSteps[position]
+        }
+
         that.spritesForms[objectKey].zIndex = 2
 
         if (objectKey == lastForm) {
@@ -130,15 +122,13 @@ class Carousel {
           if (that.carouselNumber == 1) {
             that.spritesForms[objectKey].rapidity = Math.random() * (2 - 0.7) + 0.7
           } else if(that.carouselNumber == 2){
-            that.spritesForms[objectKey].rapidity = Math.random() * (2 - 0.7) + 0.7
+            that.spritesForms[objectKey].rapidity = Math.random() * (0.9 - 0.5) + 0.5
           } else if(that.carouselNumber == 3){
             that.spritesForms[objectKey].rapidity = Math.random() * (0.8 - 0.4) + 0.4
           }
 
         }
       })
-
-      that.totalHeightSteps = [0]
 
       for (var i = 0; i < this.blackboards.length; i++) {
         this.blackboards[i].blackboard.destroy()
@@ -155,7 +145,7 @@ class Carousel {
     }
 
     handleScroll(e) {
-      if (Math.abs(STORAGE.carousel.y - window.innerHeight) < window.innerHeight * STORAGE.carousel.numberOfWindow - 25 && e.deltaY > 0 ) { // stop le défilement au dernier sprite (défile tant que x abs < à largeur totale de tous les spritesFonds-1)
+      if (Math.abs(STORAGE.carousel.y - window.innerHeight) <  STORAGE.carouselClass.totalHeightSteps[1] * STORAGE.carousel.numberOfWindow - 25 && e.deltaY > 0 ) { // stop le défilement au dernier sprite (défile tant que x abs < à largeur totale de tous les spritesFonds-1)
         STORAGE.carousel.y -= Math.abs(e.deltaY) / 5
         STORAGE.carouselClass.doParallax('down')
       } else if (STORAGE.carousel.y > -25) {
@@ -173,7 +163,6 @@ class Carousel {
 
     handleResize() {
       STORAGE.renderer.resize(window.innerWidth, window.innerHeight)
-      console.log('test')
       let timeOut
       clearTimeout(timeOut)
       timeOut = setTimeout(()=> {
@@ -187,10 +176,10 @@ class Carousel {
       if (direction == 'down') {
         Object.keys(that.spritesForms).map(function(objectKey, index) {
           if (Math.abs(that.carousel.y + that.spritesForms[objectKey].y) < 1000) {
-            if (that.carouselNumber == 2 && index == 4 || that.carouselNumber == 2 && index == 6 || that.carouselNumber == 2 && index == 10 || that.carouselNumber == 3 && index == 3 || that.carouselNumber == 3 && index == 5 || that.carouselNumber == 3 && index == 16 || that.carouselNumber == 3 && index == 9) {
+            if (that.carouselNumber == 2 && index == 4 || that.carouselNumber == 2 && index == 6 || that.carouselNumber == 2 && index == 12 || that.carouselNumber == 3 && index == 3 || that.carouselNumber == 3 && index == 5 || that.carouselNumber == 3 && index == 16 || that.carouselNumber == 3 && index == 9) {
               return
             }
-            if (that.carouselNumber == 2 && index == 0 || that.carouselNumber == 2 && index == 5 || that.carouselNumber == 2 && index == 3 || that.carouselNumber == 3 && index == 7 || that.carouselNumber == 3 && index == 11) {
+            if (that.carouselNumber == 2 && index == 0 || that.carouselNumber == 2 && index == 7 || that.carouselNumber == 2 && index == 3 || that.carouselNumber == 3 && index == 7 || that.carouselNumber == 3 && index == 11) {
               that.spritesForms[objectKey].y += that.spritesForms[objectKey].rapidity
               return
             }
@@ -200,10 +189,10 @@ class Carousel {
       } else if (direction == 'up') {
         Object.keys(that.spritesForms).map(function(objectKey, index) {
           if (Math.abs(that.carousel.y + that.spritesForms[objectKey].y) < 1000) {
-            if (that.carouselNumber == 2 && index == 4 || that.carouselNumber == 2 && index == 6 || that.carouselNumber == 2 && index == 10 || that.carouselNumber == 3 && index == 3 || that.carouselNumber == 3 && index == 5 || that.carouselNumber == 3 && index == 16 || that.carouselNumber == 3 && index == 9) {
+            if (that.carouselNumber == 2 && index == 4 || that.carouselNumber == 2 && index == 6 || that.carouselNumber == 2 && index == 12 || that.carouselNumber == 3 && index == 3 || that.carouselNumber == 3 && index == 5 || that.carouselNumber == 3 && index == 16 || that.carouselNumber == 3 && index == 9) {
               return
             }
-            if (that.carouselNumber == 2 && index == 0 || that.carouselNumber == 2 && index == 5 || that.carouselNumber == 2 && index == 3 || that.carouselNumber == 3 && index == 7 || that.carouselNumber == 3 && index == 11) {
+            if (that.carouselNumber == 2 && index == 0 || that.carouselNumber == 2 && index == 7 || that.carouselNumber == 2 && index == 3 || that.carouselNumber == 3 && index == 7 || that.carouselNumber == 3 && index == 11) {
               that.spritesForms[objectKey].y -= that.spritesForms[objectKey].rapidity
               return
             }

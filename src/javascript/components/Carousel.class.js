@@ -76,6 +76,10 @@ class Carousel {
         this.scaleTimer3 = window.setInterval(that.doScale3, 1550)
       }
 
+      if (this.carouselNumber == 2) {
+        this.opacityTimer = window.setInterval(that.doOpacity, 6000)
+      }
+
       if (this.carouselNumber == 3) {
         this.rotationTimer1 = window.setInterval(that.doRotation1, 1550)
       }
@@ -90,6 +94,8 @@ class Carousel {
       window.clearInterval(STORAGE.carouselClass.scaleTimer1)
       window.clearInterval(STORAGE.carouselClass.scaleTimer2)
       window.clearInterval(STORAGE.carouselClass.scaleTimer3)
+
+      window.clearInterval(STORAGE.carouselClass.opacityTimer)
 
       window.clearInterval(STORAGE.carouselClass.doRotation1)
     }
@@ -319,6 +325,35 @@ class Carousel {
       timeOut = setTimeout(()=> {
         STORAGE.carouselClass.makeCarousel()
       }, 200)
+    }
+
+    doOpacity() {
+      console.log('test')
+      if (document.hasFocus() ) {
+        Object.keys(STORAGE.carouselClass.spritesForms).map(function(objectKey, index) {
+          if (index == 1 || index == 5 || index == 7 || index == 9) {
+            TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 3, {
+              alpha : 0.2,
+              onComplete: function() {
+                TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 3, {
+                  alpha : 1
+                })
+              }
+            })
+          }
+          if (index == 0 || index == 6 || index == 10 || index == 13) {
+            TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 3, {
+              alpha : 0.2,
+              delay : 3,
+              onComplete: function() {
+                TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 3, {
+                  alpha : 1
+                })
+              }
+            })
+          }
+        })
+      }
     }
 
     doScale1() {

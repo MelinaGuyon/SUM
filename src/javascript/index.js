@@ -29,7 +29,7 @@ function initCanvas() {
   // new FirstChallenge()
   // new Recompense({ number: 3 })
   // new Video()
-  // new SecondChallenge()
+  new SecondChallenge()
   // new ThirdChallenge()
   // new Video()
 

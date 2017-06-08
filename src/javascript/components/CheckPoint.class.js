@@ -146,6 +146,8 @@ class CheckPoint {
       onComplete: function() {
         setTimeout(function(){
           STORAGE.deformation.destroy()
+        }, 300)
+        setTimeout(function() {
           STORAGE.carousel.destroy()
           STORAGE.carousel = null
           STORAGE.carouselClass = null
@@ -158,7 +160,7 @@ class CheckPoint {
           } else if (that.carouselNumber == 3) {
             new ThirdChallenge()
           }
-        }, 300)
+        }, 600)
       },
       delay: 8.5
     })

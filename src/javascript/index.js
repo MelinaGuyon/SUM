@@ -23,7 +23,7 @@ function initCanvas() {
   new Loader()
   new Menu()
   new SoundManager()
-  // new Carousel({ number: 3 })
+  new Carousel({ number: 1 })
   // new Recompense({ number: 1 })
   // new Video()
   // new FirstChallenge()

@@ -1,11 +1,12 @@
 const secondCarouselDatas = {
-  datasImages: [
+datasImages: [
     'assets/before-challenge-2/carousel-fond.jpg',
     'assets/before-challenge-2/0-forme-1.png',
     'assets/before-challenge-2/0-forme-2.png',
     'assets/before-challenge-2/1-forme-1.png',
     'assets/before-challenge-2/1-forme-2.png',
     'assets/before-challenge-2/1-forme-3.png',
+    'assets/before-challenge-2/1-forme-4.png',
     'assets/before-challenge-2/2-forme-1.png',
     'assets/before-challenge-2/2-forme-2.png',
     'assets/before-challenge-2/2-forme-3.png',
@@ -14,7 +15,7 @@ const secondCarouselDatas = {
     'assets/before-challenge-2/5-forme-2.png',
     'assets/before-challenge-2/5-forme-1.png',
     'assets/before-challenge-2/4-forme-2.png',
-    'assets/before-challenge-2/5-forme-3.png',
+    'assets/before-challenge-2/5-forme-3.png'
   ],
   datasEyes: [
     {

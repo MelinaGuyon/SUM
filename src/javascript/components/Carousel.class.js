@@ -89,7 +89,7 @@ class Carousel {
 
       window.clearInterval(STORAGE.carouselClass.opacityTimer)
 
-      window.clearInterval(STORAGE.carouselClass.doRotation1)
+      window.clearInterval(STORAGE.carouselClass.rotationTimer1)
     }
 
     reinitializeMenu() {
@@ -211,11 +211,11 @@ class Carousel {
         STORAGE.carouselClass.doAnimeUpAndBlur()
       }
 
-      if (STORAGE.carousel.y < -4300 && STORAGE.carouselClass.carouselNumber == 1 && STORAGE.carouselClass.animeZigZag != true) {
+      if (STORAGE.carousel.y < -4000 && STORAGE.carouselClass.carouselNumber == 1 && STORAGE.carouselClass.animeZigZag != true) {
         STORAGE.carouselClass.doZigZag()
       }
 
-      if (STORAGE.carousel.y < -4500 && STORAGE.carouselClass.carouselNumber == 1) {
+      if (STORAGE.carousel.y < -4300 && STORAGE.carouselClass.carouselNumber == 1) {
         STORAGE.carouselClass.doScale(22, 0.6, 0.17)
         STORAGE.carouselClass.doScale(24, 2, 0.17)
         STORAGE.carouselClass.doScale(25, 1.2, 0.13)
@@ -361,7 +361,7 @@ class Carousel {
 
       setTimeout(function() {
         STORAGE.renderer.backgroundColor = 0x000000
-      }, 6000)
+      }, 4000)
     }
 
     doOpacity() {

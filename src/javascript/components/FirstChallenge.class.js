@@ -86,7 +86,7 @@ class FirstChallenge {
       this.cursor.mousedown = null
       this.cursor.mouseover = null
       this.cursor.mouseout = null
-      
+
       this.nextAnimButton.removeEventListener('click', that.handleNextAnimButtonClick)
       this.recompenseButton.removeEventListener('click', that.handleRecompenseButtonClick)
       this.firstChallengeNextButton.removeEventListener('mouseover', that.firstChallengeNextButtonMouseOver)
@@ -357,7 +357,10 @@ class FirstChallenge {
       this.rightCursorDistance = Math.abs(this.actualCursorDistance - 3.141592653589793)
     }
     TweenLite.set(this.eye, {
-      rotation: this.rightCursorDistance
+      rotation: -this.rightCursorDistance
+    })
+    TweenLite.set(this.movie, {
+      rotation: this.rightCursorDistance * 2
     })
     this.pathPassed.clear()
     this.pathPassed.drawRect(this.pathEnd[0] - 1, this.pathEnd[1], 2,  this.cursor.y - this.pathEnd[1])
@@ -365,7 +368,10 @@ class FirstChallenge {
     // To avoid twisted image
     if (this.eye.rotation < 3.141592653589793 && this.cursor.y < this.pathStart[1] + 10 ) {
       TweenLite.to(this.eye, 0.3, {
-        rotation: 3.141592653589793
+        rotation: -3.141592653589793
+      })
+      TweenLite.to(this.movie, 0.3, {
+        rotation: 3.141592653589793 * 2
       })
       this.displayNextAnimButton()
     }

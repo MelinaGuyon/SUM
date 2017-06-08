@@ -45,7 +45,8 @@ class Carousel {
       this.launchMurmure = false
 
       // animattion
-      this.scaredDone = false
+      this.animeUpAndBlur = false
+      this.animeZigZag = false
 
 
       this.blurFilter = new PIXI.filters.BlurFilter()
@@ -68,6 +69,10 @@ class Carousel {
       let that = this
       window.addEventListener('mousewheel', that.handleScroll)
       window.addEventListener('resize', that.handleResize)
+
+      if (this.carouselNumber == 1) {
+        this.scaleTimer = window.setInterval(that.doScale, 1550)
+      }
     }
 
     unbind() {
@@ -75,6 +80,8 @@ class Carousel {
       window.removeEventListener('mousewheel', that.handleScroll)
       window.removeEventListener('resize', that.handleResize)
       document.body.style.cursor = 'auto'
+
+      window.clearInterval(STORAGE.carouselClass.scaleTimer)
     }
 
     reinitializeMenu() {
@@ -192,7 +199,7 @@ class Carousel {
         STORAGE.carouselClass.doParallax('up')
       }
 
-      if ( STORAGE.carouselClass.scaredDone != true && STORAGE.carousel.y < -2000 && STORAGE.carouselClass.carouselNumber == 1) {
+      if ( STORAGE.carouselClass.animeUpAndBlur != true && STORAGE.carousel.y < -2000 && STORAGE.carouselClass.carouselNumber == 1) {
         TweenLite.to( STORAGE.carousel, 1.6, {
           y: -800,
           ease: Power2.easeInOut
@@ -223,7 +230,50 @@ class Carousel {
           }
         })
 
-        STORAGE.carouselClass.scaredDone = true
+        STORAGE.carouselClass.animeUpAndBlur = true
+      }
+
+
+      if ( STORAGE.carouselClass.animeZigZag != true && STORAGE.carousel.y < -2000 && STORAGE.carouselClass.carouselNumber == 2) {
+
+        STORAGE.renderer.backgroundColor = 0xffffff
+
+        TweenLite.to( STORAGE.carousel, 4, {
+          x:-4,
+          ease: Elastic.easeInOut.config(4, 0.1),
+          onComplete: function() {
+            TweenLite.to( STORAGE.carousel, 0.2, {
+              x: 0
+            })
+          }
+        })
+
+        TweenLite.to(STORAGE.carouselClass.blurFilter, 0.7, {
+          blur: 8,
+          ease: Power4.easeInOut,
+          onUpdate: function() {
+            STORAGE.stage.filters = [
+              STORAGE.carouselClass.blurFilter
+            ]
+          },
+          onComplete: function() {
+            TweenLite.to(STORAGE.carouselClass.blurFilter, 4.5, {
+              blur: 0,
+              ease: Power2.easeInOut,
+              onUpdate: function() {
+                STORAGE.stage.filters = [
+                  STORAGE.carouselClass.blurFilter
+                ]
+              }
+            })
+
+            setTimeout(function() {
+              STORAGE.renderer.backgroundColor = 0x000000
+            }, 6000)
+          }
+        })
+
+        STORAGE.carouselClass.animeZigZag = true
       }
 
       // carousel 1
@@ -259,6 +309,46 @@ class Carousel {
       timeOut = setTimeout(()=> {
         STORAGE.carouselClass.makeCarousel()
       }, 200)
+    }
+
+    doScale() {
+      console.log('test')
+      if (document.hasFocus() ) {
+        Object.keys(STORAGE.carouselClass.spritesForms).map(function(objectKey, index) {
+          if (index == 18  || index == 19 || index == 23 || index == 21 || index == 27) {
+            let initialX = STORAGE.carouselClass.spritesForms[objectKey].x
+            let initialY = STORAGE.carouselClass.spritesForms[objectKey].y
+
+            TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey].scale, 0.6, {
+              x : "+=" + 0.02,
+              y : "+=" + 0.02,
+              onUpdate: function() {
+                TweenLite.set(STORAGE.carouselClass.spritesForms[objectKey], {
+                  x: initialX -( STORAGE.carouselClass.spritesForms[objectKey].width - window.innerWidth ) / 2,
+                  y: initialY -( STORAGE.carouselClass.spritesForms[objectKey].width - window.innerWidth ) / 2
+                })
+              },
+              onComplete: function() {
+                TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey].scale, 0.6, {
+                  x : "-=" + 0.02,
+                  y : "-=" + 0.02,
+                  onUpdate: function() {
+                    TweenLite.set(STORAGE.carouselClass.spritesForms[objectKey], {
+                      x: initialX - ( STORAGE.carouselClass.spritesForms[objectKey].width - window.innerWidth ) / 2,
+                      y: initialY - ( STORAGE.carouselClass.spritesForms[objectKey].width - window.innerWidth ) / 2
+                    })
+                  },
+                  onComplete: function() {
+                    TweenLite.set(STORAGE.carouselClass.spritesForms[objectKey], {
+                      clearProps: "all"
+                    })
+                  }
+                })
+              }
+            })
+          }
+        })
+      }
     }
 
     doParallax(direction) {

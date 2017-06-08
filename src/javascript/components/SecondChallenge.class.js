@@ -37,8 +37,8 @@ class SecondChallenge {
 
     STORAGE.textConclusion2 = document.createTextNode(conclusionTextsDatas.secondChallenge.conclusion)
     STORAGE.buttonConclusion2 = document.createTextNode(conclusionTextsDatas.secondChallenge.button)
-    //this.conclusionChallengeText.replaceChild(STORAGE.textConclusion2, STORAGE.textConclusion1)
-    //this.conclusionChallengeButton.replaceChild(STORAGE.buttonConclusion2, STORAGE.buttonConclusion1)
+    this.conclusionChallengeText.replaceChild(STORAGE.textConclusion2, STORAGE.textConclusion1)
+    this.conclusionChallengeButton.replaceChild(STORAGE.buttonConclusion2, STORAGE.buttonConclusion1)
 
     this.entrance = true
 
@@ -104,10 +104,9 @@ class SecondChallenge {
     this.assets.resources = STORAGE.loader.resources
 
     this.createGlobalBackground()
-    //this.manageSounds()
+    this.manageSounds()
     this.createBackground()
     this.createSum()
-    this.bind() // A VIRER
   }
 
   manageSounds(kill) {

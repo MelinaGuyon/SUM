@@ -71,7 +71,13 @@ class Carousel {
       window.addEventListener('resize', that.handleResize)
 
       if (this.carouselNumber == 1) {
-        this.scaleTimer = window.setInterval(that.doScale, 1550)
+        this.scaleTimer1 = window.setInterval(that.doScale1, 1550)
+        this.scaleTimer2 = window.setInterval(that.doScale2, 1000)
+        this.scaleTimer3 = window.setInterval(that.doScale3, 1550)
+      }
+
+      if (this.carouselNumber == 3) {
+        this.rotationTimer1 = window.setInterval(that.doRotation1, 1550)
       }
     }
 
@@ -81,7 +87,11 @@ class Carousel {
       window.removeEventListener('resize', that.handleResize)
       document.body.style.cursor = 'auto'
 
-      window.clearInterval(STORAGE.carouselClass.scaleTimer)
+      window.clearInterval(STORAGE.carouselClass.scaleTimer1)
+      window.clearInterval(STORAGE.carouselClass.scaleTimer2)
+      window.clearInterval(STORAGE.carouselClass.scaleTimer3)
+
+      window.clearInterval(STORAGE.carouselClass.doRotation1)
     }
 
     reinitializeMenu() {
@@ -311,17 +321,16 @@ class Carousel {
       }, 200)
     }
 
-    doScale() {
-      console.log('test')
+    doScale1() {
       if (document.hasFocus() ) {
         Object.keys(STORAGE.carouselClass.spritesForms).map(function(objectKey, index) {
-          if (index == 18  || index == 19 || index == 23 || index == 21 || index == 27) {
+          if (index == 19 || index == 21) {
             let initialX = STORAGE.carouselClass.spritesForms[objectKey].x
             let initialY = STORAGE.carouselClass.spritesForms[objectKey].y
 
             TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey].scale, 0.6, {
-              x : "+=" + 0.02,
-              y : "+=" + 0.02,
+              x : "+=" + 0.05,
+              y : "+=" + 0.05,
               onUpdate: function() {
                 TweenLite.set(STORAGE.carouselClass.spritesForms[objectKey], {
                   x: initialX -( STORAGE.carouselClass.spritesForms[objectKey].width - window.innerWidth ) / 2,
@@ -330,8 +339,8 @@ class Carousel {
               },
               onComplete: function() {
                 TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey].scale, 0.6, {
-                  x : "-=" + 0.02,
-                  y : "-=" + 0.02,
+                  x : "-=" + 0.05,
+                  y : "-=" + 0.05,
                   onUpdate: function() {
                     TweenLite.set(STORAGE.carouselClass.spritesForms[objectKey], {
                       x: initialX - ( STORAGE.carouselClass.spritesForms[objectKey].width - window.innerWidth ) / 2,
@@ -343,6 +352,196 @@ class Carousel {
                       clearProps: "all"
                     })
                   }
+                })
+              }
+            })
+          }
+        })
+      }
+    }
+
+    doScale2() {
+      if (document.hasFocus() ) {
+        Object.keys(STORAGE.carouselClass.spritesForms).map(function(objectKey, index) {
+          if (index == 18  || index == 23 || index == 27) {
+            let initialX = STORAGE.carouselClass.spritesForms[objectKey].x
+            let initialY = STORAGE.carouselClass.spritesForms[objectKey].y
+
+            TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey].scale, 0.4, {
+              x : "+=" + 0.015,
+              y : "+=" + 0.015,
+              onUpdate: function() {
+                TweenLite.set(STORAGE.carouselClass.spritesForms[objectKey], {
+                  x: initialX -( STORAGE.carouselClass.spritesForms[objectKey].width - window.innerWidth ) / 2,
+                  y: initialY -( STORAGE.carouselClass.spritesForms[objectKey].width - window.innerWidth ) / 2
+                })
+              },
+              onComplete: function() {
+                TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey].scale, 0.4, {
+                  x : "-=" + 0.015,
+                  y : "-=" + 0.015,
+                  onUpdate: function() {
+                    TweenLite.set(STORAGE.carouselClass.spritesForms[objectKey], {
+                      x: initialX - ( STORAGE.carouselClass.spritesForms[objectKey].width - window.innerWidth ) / 2,
+                      y: initialY - ( STORAGE.carouselClass.spritesForms[objectKey].width - window.innerWidth ) / 2
+                    })
+                  },
+                  onComplete: function() {
+                    TweenLite.set(STORAGE.carouselClass.spritesForms[objectKey], {
+                      clearProps: "all"
+                    })
+                  }
+                })
+              }
+            })
+          }
+        })
+      }
+    }
+
+    doScale3() {
+      if (document.hasFocus() ) {
+        Object.keys(STORAGE.carouselClass.spritesForms).map(function(objectKey, index) {
+          if (index == 22  || index == 25 || index == 17) {
+            let initialX = STORAGE.carouselClass.spritesForms[objectKey].x
+            let initialY = STORAGE.carouselClass.spritesForms[objectKey].y
+
+            TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey].scale, 0.5, {
+              x : "+=" + 0.09,
+              y : "+=" + 0.09,
+              onUpdate: function() {
+                TweenLite.set(STORAGE.carouselClass.spritesForms[objectKey], {
+                  x: initialX -( STORAGE.carouselClass.spritesForms[objectKey].width - window.innerWidth ) / 2,
+                  y: initialY -( STORAGE.carouselClass.spritesForms[objectKey].width - window.innerWidth ) / 2
+                })
+              },
+              onComplete: function() {
+                TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey].scale, 0.5, {
+                  x : "-=" + 0.09,
+                  y : "-=" + 0.09,
+                  onUpdate: function() {
+                    TweenLite.set(STORAGE.carouselClass.spritesForms[objectKey], {
+                      x: initialX - ( STORAGE.carouselClass.spritesForms[objectKey].width - window.innerWidth ) / 2,
+                      y: initialY - ( STORAGE.carouselClass.spritesForms[objectKey].width - window.innerWidth ) / 2
+                    })
+                  },
+                  onComplete: function() {
+                    TweenLite.set(STORAGE.carouselClass.spritesForms[objectKey], {
+                      clearProps: "all"
+                    })
+                  }
+                })
+              }
+            })
+          }
+        })
+      }
+    }
+
+    doRotation1() {
+      if (document.hasFocus() ) {
+        Object.keys(STORAGE.carouselClass.spritesForms).map(function(objectKey, index) {
+          if (index == 14) {
+            STORAGE.carouselClass.spritesForms[objectKey].anchor.set(0.06, 0.05)
+            TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 0.3, {
+              rotation : "+=" + 0.1,
+              onComplete: function() {
+                TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 0.3, {
+                  rotation : "-=" + 0.1
+                })
+              }
+            })
+          }
+          if (index == 6) {
+            STORAGE.carouselClass.spritesForms[objectKey].anchor.set(0.01, 0.05)
+            TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 0.5, {
+              rotation : "+=" + 0.2,
+              onComplete: function() {
+                TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 0.5, {
+                  rotation : "-=" + 0.2
+                })
+              }
+            })
+          }
+          // truc qu'elle ne va peut etre pas aimer
+          if (index == 3) {
+            TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 0.5, {
+              rotation : "-=" + 0.2,
+              onComplete: function() {
+                TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 0.5, {
+                  rotation : "+=" + 0.2
+                })
+              }
+            })
+          }
+          if (index == 13) {
+            TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 0.6, {
+              rotation : "+=" + 0.05,
+              onComplete: function() {
+                TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 0.6, {
+                  rotation : "-=" + 0.05
+                })
+              }
+            })
+          }
+          if (index == 7) {
+            TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 0.6, {
+              rotation : "+=" + 0.05,
+              onComplete: function() {
+                TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 0.6, {
+                  rotation : "-=" + 0.05
+                })
+              }
+            })
+          }
+          if (index == 4) {
+            TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 0.3, {
+              rotation : "+=" + 0.05,
+              onComplete: function() {
+                TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 0.3, {
+                  rotation : "-=" + 0.05
+                })
+              }
+            })
+          }
+          if (index == 10) {
+            TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 0.3, {
+              rotation : "-=" + 0.08,
+              onComplete: function() {
+                TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 0.3, {
+                  rotation : "+=" + 0.08
+                })
+              }
+            })
+          }
+          if (index == 12) {
+            STORAGE.carouselClass.spritesForms[objectKey].anchor.set(0.01, 0.01)
+            TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 0.6, {
+              rotation : "-=" + 0.1,
+              onComplete: function() {
+                TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 0.5, {
+                  rotation : "+=" + 0.1
+                })
+              }
+            })
+          }
+          if (index == 15) {
+            STORAGE.carouselClass.spritesForms[objectKey].anchor.set(0.01, 0.01)
+            TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 0.5, {
+              rotation : "-=" + 0.05,
+              onComplete: function() {
+                TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 0.5, {
+                  rotation : "+=" + 0.05
+                })
+              }
+            })
+          }
+          if (index == 9) {
+            TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 0.5, {
+              rotation : "+=" + 0.05,
+              onComplete: function() {
+                TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 0.5, {
+                  rotation : "-=" + 0.05
                 })
               }
             })

@@ -400,9 +400,11 @@ class Carousel {
             STORAGE.carouselClass.spritesForms[objectKey].anchor.set(0.06, 0.05)
             TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 0.3, {
               rotation : "+=" + 0.1,
+              ease: Power1.easeInOut,
               onComplete: function() {
                 TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 0.3, {
-                  rotation : "-=" + 0.1
+                  rotation : "-=" + 0.1,
+                  ease: Power1.easeInOut
                 })
               }
             })
@@ -411,9 +413,11 @@ class Carousel {
             STORAGE.carouselClass.spritesForms[objectKey].anchor.set(0.01, 0.05)
             TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 0.5, {
               rotation : "+=" + 0.2,
+              ease: Power1.easeInOut,
               onComplete: function() {
                 TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 0.5, {
-                  rotation : "-=" + 0.2
+                  rotation : "-=" + 0.2,
+                  ease: Power1.easeInOut
                 })
               }
             })
@@ -421,9 +425,11 @@ class Carousel {
           if (index == 7) {
             TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 0.6, {
               rotation : "+=" + 0.05,
+              ease: Power1.easeInOut,
               onComplete: function() {
                 TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 0.6, {
-                  rotation : "-=" + 0.05
+                  rotation : "-=" + 0.05,
+                  ease: Power1.easeInOut
                 })
               }
             })
@@ -431,9 +437,11 @@ class Carousel {
           if (index == 4) {
             TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 0.3, {
               rotation : "+=" + 0.05,
+              ease: Power1.easeInOut,
               onComplete: function() {
                 TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 0.3, {
-                  rotation : "-=" + 0.05
+                  rotation : "-=" + 0.05,
+                  ease: Power1.easeInOut
                 })
               }
             })
@@ -441,9 +449,11 @@ class Carousel {
           if (index == 10) {
             TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 0.3, {
               rotation : "-=" + 0.08,
+              ease: Power1.easeInOut,
               onComplete: function() {
                 TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 0.3, {
-                  rotation : "+=" + 0.08
+                  rotation : "+=" + 0.08,
+                  ease: Power1.easeInOut
                 })
               }
             })
@@ -452,9 +462,11 @@ class Carousel {
             STORAGE.carouselClass.spritesForms[objectKey].anchor.set(0.01, 0.01)
             TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 0.6, {
               rotation : "-=" + 0.1,
+              ease: Power1.easeInOut,
               onComplete: function() {
                 TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 0.5, {
-                  rotation : "+=" + 0.1
+                  rotation : "+=" + 0.1,
+                  ease: Power1.easeInOut
                 })
               }
             })
@@ -463,9 +475,11 @@ class Carousel {
             STORAGE.carouselClass.spritesForms[objectKey].anchor.set(0.01, 0.01)
             TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 0.5, {
               rotation : "-=" + 0.05,
+              ease: Power1.easeInOut,
               onComplete: function() {
                 TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 0.5, {
-                  rotation : "+=" + 0.05
+                  rotation : "+=" + 0.05,
+                  ease: Power1.easeInOut
                 })
               }
             })
@@ -473,9 +487,11 @@ class Carousel {
           if (index == 9) {
             TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 0.5, {
               rotation : "+=" + 0.05,
+              ease: Power1.easeInOut,
               onComplete: function() {
                 TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 0.5, {
-                  rotation : "-=" + 0.05
+                  rotation : "-=" + 0.05,
+                  ease: Power1.easeInOut
                 })
               }
             })

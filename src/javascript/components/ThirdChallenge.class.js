@@ -125,6 +125,9 @@ class ThirdChallenge {
     let that = this
     this.shape = shape
 
+    this.shape.stroke = 0xff0a00;
+    this.shape.strokeThickness = 24;
+
     this.isDragging = true
     this.mouseX = mouseData.data.global.x
     this.mouseY = mouseData.data.global.y
@@ -178,15 +181,15 @@ class ThirdChallenge {
 
   onShapeZoom(shape) {
     TweenLite.to(shape, 0.3, {
-      width: "+=" + 15,
-      height: "+=" + 15
+      width: "+=" + 25,
+      height: "+=" + 25
     })
   }
 
   onShapeDezoom(shape) {
     TweenLite.to(shape, 0.3, {
-      width: "-=" + 15,
-      height: "-=" + 15
+      width: "-=" + 25,
+      height: "-=" + 25
     })
   }
 
@@ -221,7 +224,7 @@ class ThirdChallenge {
   onCheckpointMouseDown() {
     setTimeout(function(){
       STORAGE.ThirdChallengeClass.keepDoing = false
-    }, 5000)
+    }, 3500)
 
     STORAGE.ThirdChallengeClass.drawRandomCircle(STORAGE.ThirdChallengeClass.circle.width)
     STORAGE.ThirdChallengeClass.drawRandomRectangle(STORAGE.ThirdChallengeClass.rectangle.width, STORAGE.ThirdChallengeClass.rectangle.height)
@@ -230,13 +233,14 @@ class ThirdChallenge {
     STORAGE.ThirdChallengeClass.drawRandomHalfcircle(STORAGE.ThirdChallengeClass.halfcircle.width, STORAGE.ThirdChallengeClass.halfcircle.height)
 
     if(STORAGE.ThirdChallengeClass.keepDoing == true) {
-      console.log(this.keepDoing)
       setTimeout(function(){
         STORAGE.ThirdChallengeClass.onCheckpointMouseDown()
       }, 100)
     }
     else {
-      STORAGE.ThirdChallengeClass.showConclusion()
+      setTimeout(function(){
+        STORAGE.ThirdChallengeClass.showConclusion()
+      }, 2500)
       return
     }
   }
@@ -518,16 +522,54 @@ class ThirdChallenge {
 
   showConclusion() {
     for(let i=0; i < this.ThirdChallengeContainer.children.length; i++) {
-      TweenLite.to(this.ThirdChallengeContainer.children[i], 0.6, {
-        alpha: 0
-      })
+      if (this.ThirdChallengeContainer.children[i] != this.background) {
+        TweenLite.to(this.ThirdChallengeContainer.children[i], 0.8, {
+          y: "+=" + 50,
+          x: "+=" + 50,
+          ease: Power4.easeInOut
+        })
+
+        TweenLite.to(this.ThirdChallengeContainer.children[i].scale, 0.8, {
+          y: "+=" + 0.4,
+          x: "+=" + 0.4,
+          ease: Power4.easeInOut
+        })
+      }
     }
+
+    TweenLite.to(this.background, 0.3, {
+      alpha: 0,
+      ease: Power2.easeInOut,
+      onComplete: function() {
+        STORAGE.ThirdChallengeClass.ThirdChallengeContainer.addChild(STORAGE.ThirdChallengeClass.background)
+      }
+    })
+
     TweenLite.to([this.helpButton, this.rectangle, this.triangle, this.circle, this.halfcircle, this.line, this.thirdChallengeHtmlElements], 0.6, {
-      alpha: 0
+      y: "+=" + 100,
+      alpha: 0,
+      ease: Power2.easeOut
     })
-    TweenLite.to(this.background, 2, {
-      alpha: 1
+
+    TweenLite.to(this.background, 0.3, {
+      alpha: 1,
+      delay: 0.4,
+      ease: Power2.easeIn,
+      onComplete: function() {
+        for(let i=0; i < STORAGE.ThirdChallengeClass.ThirdChallengeContainer.children.length; i++) {
+          if (STORAGE.ThirdChallengeClass.ThirdChallengeContainer.children[i] != STORAGE.ThirdChallengeClass.background) {
+            TweenLite.set(STORAGE.ThirdChallengeClass.ThirdChallengeContainer.children[i], {
+              alpha: 0
+            })
+          }
+        }
+      }
     })
+    TweenLite.set(this.background,{
+      y: 0,
+      delay: 1.7
+    })
+
     TweenLite.set(this.conclusionChallengeTextContainer, {
       display: 'block'
     })

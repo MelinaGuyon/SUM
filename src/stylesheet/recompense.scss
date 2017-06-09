@@ -29,13 +29,13 @@
 /*---------------MEDIA QUERIES----------------------*/
 
 /*svg { transition: fill .1s ease-out, opacity .1s ease-out; }*/
- 
 
-@media all and (max-width: 1600px) { 
+
+@media all and (max-width: 1600px) {
 	.first-recompense-scale, .second-recompense-scale, .third-recompense-scale { transform: scale(0.7); }
 }
 
-@media all and (max-width: 1200px) { 
+@media all and (max-width: 1200px) {
 	.first-recompense-scale, .second-recompense-scale, .third-recompense-scale { transform: scale(0.5); }
 }
 

@@ -11,14 +11,14 @@ class SecondChallenge {
     this.SecondChallengeContainer.interactive = true
     STORAGE.SecondChallengeClass = this
     STORAGE.SecondChallengeContainer = this.SecondChallengeContainer
-    STORAGE.stage.addChild(this.SecondChallengeContainer)
+    STORAGE.canvasStage.addChild(this.SecondChallengeContainer)
 
-    this.externalCanvas = document.getElementById('canvas')
-    this.externalCanvasCTX
-    this.imageMask
-    this.imagePixi
-    this.texture
-    this.coolTexture
+    document.querySelector('.webGLRenderer').classList.add('hidden')
+    document.querySelector('.canvasRenderer').classList.remove('hidden')
+
+    STORAGE.renderCanvas = true
+
+    console.log(STORAGE)
 
     this.time
 
@@ -37,8 +37,8 @@ class SecondChallenge {
 
     STORAGE.textConclusion2 = document.createTextNode(conclusionTextsDatas.secondChallenge.conclusion)
     STORAGE.buttonConclusion2 = document.createTextNode(conclusionTextsDatas.secondChallenge.button)
-    this.conclusionChallengeText.replaceChild(STORAGE.textConclusion2, STORAGE.textConclusion1)
-    this.conclusionChallengeButton.replaceChild(STORAGE.buttonConclusion2, STORAGE.buttonConclusion1)
+    // this.conclusionChallengeText.replaceChild(STORAGE.textConclusion2, STORAGE.textConclusion1)
+    // this.conclusionChallengeButton.replaceChild(STORAGE.buttonConclusion2, STORAGE.buttonConclusion1)
 
     this.entrance = true
 
@@ -61,15 +61,13 @@ class SecondChallenge {
   unbind() {
     let that = this
     this.SecondChallengeContainer.mousemove = null
-    
+
     this.recompenseButton.removeEventListener('click', that.handleRecompenseButtonClick)
 
     document.removeEventListener("mousemove", that.handleMove)
   }
 
   init() {
-    this.setUpExternalCanvas()
-
     STORAGE.loaderClass.loadSecondChallengePictures([
       'assets/second-challenge/step_0.png',
       'assets/second-challenge/step_1.png',
@@ -80,7 +78,7 @@ class SecondChallenge {
       'assets/second-challenge/step_6.png'
     ])
 
-    TweenLite.set(STORAGE.stage, {
+    TweenLite.set(STORAGE.canvasStage, {
       alpha: 1
     })
     TweenLite.to(this.SecondChallengeContainer, 2, {
@@ -89,37 +87,33 @@ class SecondChallenge {
     })
   }
 
-  setUpExternalCanvas() {
-    this.externalCanvas.width = window.innerWidth
-    this.externalCanvas.height = window.innerHeight
-
-    this.externalCanvasCTX = this.externalCanvas.getContext('2d')
-
-    this.imagePixi = new Image()
-    this.texture = PIXI.Texture.fromCanvas(this.externalCanvas)
-    this.coolTexture = new PIXI.Sprite(this.texture)
-  }
-
   setupSecondChallengePicturesLoaded() {
     this.assets.resources = STORAGE.loader.resources
 
-    this.createGlobalBackground()
+    this.createMask()
     this.manageSounds()
     this.createBackground()
     this.createSum()
+    this.createGlobalBackground()
   }
 
   manageSounds(kill) {
     let that = this
     if (this.entrance) {
-      STORAGE.soundManagerClass.lowerAmbiance(STORAGE.soundManagerClass.ambiance)
-      STORAGE.soundManagerClass.launchVoiceOver(soundBank.voiceOver.secondChallenge)
+      // STORAGE.soundManagerClass.lowerAmbiance(STORAGE.soundManagerClass.ambiance)
+      // STORAGE.soundManagerClass.launchVoiceOver(soundBank.voiceOver.secondChallenge)
       setTimeout(function(){
         that.bind()
-      }, 10000)
+      }, 10)
       this.entrance = false
       return
     }
+  }
+
+  createMask() {
+    this.mask = new PIXI.Graphics()
+    this.mask.beginFill(0xFFFFFF)
+    STORAGE.SecondChallengeContainer.addChild(this.mask)
   }
 
   createGlobalBackground() {
@@ -215,43 +209,23 @@ class SecondChallenge {
     this.sum.anchor.x = 0.5
     this.sum.anchor.y = 0.5
     this.container.addChild(this.sum)
-    this.container.mask = this.coolTexture
+    this.container.mask = this.mask
     this.SecondChallengeContainer.addChild(this.container)
   }
 
   handleMove(e) {
-    window.clearTimeout(STORAGE.SecondChallengeClass.time)
-
-    STORAGE.SecondChallengeClass.externalCanvasCTX.save()
-    STORAGE.SecondChallengeClass.externalCanvasCTX.beginPath()
-
-    STORAGE.SecondChallengeClass.externalCanvasCTX.arc(e.x, e.y, 150, 0, 2 * Math.PI, false)
-
-    STORAGE.SecondChallengeClass.externalCanvasCTX.fillStyle = "white"
-    STORAGE.SecondChallengeClass.externalCanvasCTX.fill()
-    STORAGE.SecondChallengeClass.externalCanvasCTX.restore()
-
-    let imageMask = STORAGE.SecondChallengeClass.externalCanvas.toDataURL("image/png")
-
-    STORAGE.SecondChallengeClass.imagePixi.src = imageMask
-    var myBaseTexture = new PIXI.BaseTexture(STORAGE.SecondChallengeClass.imagePixi)
-
-    // STORAGE.SecondChallengeClass.coolTexture.texture = new PIXI.Texture(myBaseTexture)
-
-    STORAGE.SecondChallengeClass.time = setTimeout(function() {
-      STORAGE.SecondChallengeClass.coolTexture.texture = new PIXI.Texture(myBaseTexture)
-    }, 20)
+    STORAGE.SecondChallengeClass.mask.beginFill()
+    STORAGE.SecondChallengeClass.mask.drawCircle(e.x, e.y, 100, 0, 2 * Math.PI)
+    STORAGE.SecondChallengeClass.mask.endFill()
   }
 
   allCheckpointsChecked() {
     this.stepIndex++
 
     let that = this
-
     document.removeEventListener("mousemove", this.handleMove)
 
     if (this.stepIndex <= 5) {
-
       TweenLite.to(this.gobalBackground, 1, {
         alpha: 1,
         ease: Power2.easeInOut,
@@ -266,11 +240,11 @@ class SecondChallenge {
             ease: Power2.easeInOut
           })
 
-          that.externalCanvasCTX.clearRect(0, 0, that.externalCanvas.width, that.externalCanvas.height)
-          let imageMask = STORAGE.SecondChallengeClass.externalCanvas.toDataURL("image/png")
-          STORAGE.SecondChallengeClass.imagePixi.src = imageMask
-          var myBaseTexture = new PIXI.BaseTexture(STORAGE.SecondChallengeClass.imagePixi)
-          STORAGE.SecondChallengeClass.coolTexture.texture = new PIXI.Texture(myBaseTexture)
+          STORAGE.SecondChallengeClass.mask.clear()
+          STORAGE.SecondChallengeClass.mask.beginFill()
+          STORAGE.SecondChallengeClass.mask.drawCircle(0, 0, 10, 0, 2 * Math.PI)
+          STORAGE.SecondChallengeClass.mask.endFill()
+          STORAGE.SecondChallengeClass.container.mask = STORAGE.SecondChallengeClass.mask
 
           if (this.stepIndex != 5) {
             setTimeout(function() {
@@ -405,7 +379,6 @@ class SecondChallenge {
     TweenLite.set(this.conclusionChallengeTextContainer, {
       display: 'block'
     })
-    console.log("fesse")
     TweenLite.to(this.conclusionChallengeTextContainer, 2, {
       autoAlpha: 1,
       delay: 1
@@ -422,31 +395,23 @@ class SecondChallenge {
   handleRecompenseButtonClick() {
     STORAGE.SecondChallengeClass.undDisplayRecompenseButton()
 
-    TweenLite.to([STORAGE.SecondChallengeContainer], 0.5, {
-      alpha: 0,
-      display:'none',
-      delay: 1
-    })
-
     TweenLite.to([STORAGE.conclusionChallengeTextContainer], 0.5, {
       autoAlpha: 0,
       delay: 1
     })
 
-    TweenLite.to([STORAGE.stage], 0.4, {
-      alpha: 0,
-      onComplete: function() {
-        setTimeout(function(){
-          STORAGE.SecondChallengeContainer.destroy()
-          STORAGE.SecondChallengeClass.unbind()
-          STORAGE.SecondChallengeContainer = null
-          STORAGE.conclusionChallengeTextContainer = null
-          STORAGE.SecondChallengeClass = null
-          new Recompense({ number: 2})
-        }, 1000)
-      },
-      delay: 2
-    })
+    setTimeout(function(){
+      new Recompense({ number: 2})
+    }, 1000)
+
+    setTimeout(function(){
+      STORAGE.SecondChallengeContainer.destroy()
+      STORAGE.SecondChallengeClass.unbind()
+      STORAGE.SecondChallengeContainer = null
+      STORAGE.conclusionChallengeTextContainer = null
+      STORAGE.SecondChallengeClass = null
+    }, 3000)
+
   }
 
   undDisplayRecompenseButton() {

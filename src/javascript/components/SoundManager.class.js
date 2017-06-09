@@ -16,14 +16,14 @@ class SoundManager {
     this.ambiance.volume = 0
     this.ambiance.play()
     TweenLite.to(this.ambiance, 4, {
-      volume: 0.7
+      volume: 0.4
     })
     this.ambiance.loop = true
   }
 
   lowerAmbiance(track){
     TweenLite.to(track, 2, {
-      volume: 0.2
+      volume: 0.1
     })
   }
 
@@ -42,7 +42,7 @@ class SoundManager {
     this.murmure.volume = 0
     this.murmure.play()
     TweenLite.to(this.murmure, 9, {
-      volume: 0.2
+      volume: 0.1
     })
     this.murmure.loop = true
   }
@@ -62,53 +62,10 @@ class SoundManager {
     this.voiceOver.volume = 0
     this.voiceOver.play()
     TweenLite.to(this.voiceOver, 4, {
-      volume: 1
+      volume: 3
     })
   }
 
-  // pauseAndPlay(kill, soundToPlay, soundToStop) {
-  //   let that = this
-  //
-  //   // the end of chellenge one, kill all sounds
-  //   if (kill) {
-  //     TweenLite.to([this.toStop, this.toPlay], 3, {
-  //       volume: 0,
-  //       onComplete: function(){
-  //         that.toStop.stop()
-  //         that.toPlay.stop()
-  //         that.toStop.removeSprites()
-  //         that.toPlay.removeSprites()
-  //       }
-  //     })
-  //     return
-  //   }
-  //
-  //   // during challenge one, switch sounds
-  //   this.toStop = this.toPlay
-  //   this.toPlay = PIXI.sound.Sound.from(soundToPlay)
-  //   if (this.toStop) {
-  //     TweenLite.to(this.toStop, 1, {
-  //       volume: 0,
-  //       onComplete: function(){
-  //         that.toStop.stop()
-  //         that.toStop.removeSprites()
-  //         that.toPlay.volume = 0
-  //         that.toPlay.play()
-  //         TweenLite.to(that.toPlay, 4, {
-  //           volume: 0.5
-  //         })
-  //         that.toPlay.loop = true
-  //       }
-  //     })
-  //   } else {
-  //     this.toPlay.volume = 0
-  //     this.toPlay.play()
-  //     TweenLite.to(this.toPlay, 4, {
-  //       volume: 0.5
-  //     })
-  //     this.toPlay.loop = true
-  //   }
-  // }
 }
 
 export default SoundManager

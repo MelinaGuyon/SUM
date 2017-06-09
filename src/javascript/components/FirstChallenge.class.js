@@ -35,9 +35,11 @@ class FirstChallenge {
 
     this.nextAnimButton = document.querySelector('.js-first-challenge-next')
     this.recompenseButton = document.querySelector('.js-first-recompense-button')
+
     this.conclusionChallengeText = document.querySelector('.js-conclusion-p')
     this.conclusionChallengeButton = document.querySelector('.js-first-recompense-button')
     this.conclusionChallengeTextContainer = document.querySelector('.js-conclusion-text-container')
+
     this.firstChallengeNextButton = document.querySelector('.nextImg')
     this.firstChallengeNextText = document.querySelector('.nextText')
     STORAGE.conclusionChallengeTextContainer = this.conclusionChallengeTextContainer
@@ -155,10 +157,8 @@ class FirstChallenge {
 
     this.eye.addChild(this.pupilEmpty)
 
-    STORAGE.textConclusion1 = document.createTextNode(conclusionTextsDatas.firstChallenge.conclusion)
-    STORAGE.buttonConclusion1 = document.createTextNode(conclusionTextsDatas.firstChallenge.button)
-    this.conclusionChallengeText.appendChild(STORAGE.textConclusion1)
-    this.conclusionChallengeButton.appendChild(STORAGE.buttonConclusion1)
+    this.conclusionChallengeText.innerText = conclusionTextsDatas.firstChallenge.conclusion
+    this.conclusionChallengeButton.innerText = conclusionTextsDatas.firstChallenge.button
   }
 
   createGif(index) {

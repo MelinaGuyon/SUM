@@ -16,15 +16,15 @@ const soundBank = {
     ['assets/sounds/first-challenge/oiseaux.mp3', 'assets/sounds/first-challenge/montagne.mp3']
   ],
   voiceOver : {
-    firstChallengeCarousel: 'assets/sounds/first-challenge/sum.m4a',
-    firstChallenge: 'assets/sounds/first-challenge/voice.wav',
-    firstChallengeRecompense: 'assets/sounds/first-challenge/sum.m4a',
-    secondChallengeCarousel: 'assets/sounds/first-challenge/sum.m4a',
-    secondChallenge: 'assets/sounds/first-challenge/voice.wav',
-    secondChallengeRecompense: 'assets/sounds/first-challenge/sum.m4a',
-    thirdChallengeCarousel: 'assets/sounds/first-challenge/sum.m4a',
-    thirdChallenge: 'assets/sounds/first-challenge/voice.wav',
-    thirdChallengeRecompense: 'assets/sounds/first-challenge/sum.m4a'
+    firstChallengeCarousel: 'assets/sounds/first-challenge/1-caroussel.mp3',
+    firstChallenge: 'assets/sounds/first-challenge/Challenge-1-interaction.mp3',
+    firstChallengeRecompense: 'assets/sounds/first-challenge/Challenge-1-recompense.mp3',
+    secondChallengeCarousel: 'assets/sounds/second-challenge/2-caroussel.mp3',
+    secondChallenge: 'assets/sounds/second-challenge/Challenge-2-interaction.mp3',
+    secondChallengeRecompense: 'assets/sounds/second-challenge/Challenge-2-recompense.mp3',
+    thirdChallengeCarousel: 'assets/sounds/third-challenge/3-caroussel.mp3',
+    thirdChallenge: 'assets/sounds/third-challenge/Challenge-3-interaction.mp3',
+    thirdChallengeRecompense: 'assets/sounds/third-challenge/Challenge-3-recompense.mp3'
   }
 }
 

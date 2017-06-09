@@ -1,20 +1,20 @@
 const soundBank = {
   firstChallengeCarousel : {
-    ambiance: 'assets/sounds/first-challenge/Carousel-1-ambiance.mp3',
-    ambiance2: 'assets/sounds/first-challenge/Carousel-1-ambiance-2.mp3'
+    ambiance_beginning: 'assets/sounds/first-challenge/atmosphere_beginning.mp3',
+    ambiance_loop: 'assets/sounds/first-challenge/atmosphere_loop.mp3',
+    ambiance_ending: 'assets/sounds/first-challenge/atmosphere_ending.mp3',
+    ambiance_chuchotements: 'assets/sounds/first-challenge/chuchotements.mp3'
   },
   secondChallengeCarousel : {
-    ambiance: 'assets/sounds/second-challenge/Carousel-2-ambiance.mp3'
+    ambiance_beginning: 'assets/sounds/second-challenge/atmosphere_beginning.mp3',
+    ambiance_loop: 'assets/sounds/second-challenge/atmosphere_loop.mp3',
+    ambiance_ending: 'assets/sounds/second-challenge/atmosphere_ending.mp3'
   },
   thirdChallengeCarousel : {
-    ambiance: 'assets/sounds/third-challenge/Carousel-3-ambiance.mp3'
+    ambiance_beginning: 'assets/sounds/third-challenge/atmosphere_beginning.mp3',
+    ambiance_loop: 'assets/sounds/third-challenge/atmosphere_loop.mp3',
+    ambiance_ending: 'assets/sounds/third-challenge/atmosphere_ending.mp3'
   },
-  firstChallenge : [
-    ['assets/sounds/first-challenge/oiseaux.mp3', 'assets/sounds/first-challenge/montagne.mp3'],
-    ['assets/sounds/first-challenge/gouttes.mp3', 'assets/sounds/first-challenge/feu.mp3'],
-    ['assets/sounds/first-challenge/gouttes.mp3', 'assets/sounds/first-challenge/feu.mp3'],
-    ['assets/sounds/first-challenge/oiseaux.mp3', 'assets/sounds/first-challenge/montagne.mp3']
-  ],
   voiceOver : {
     firstChallengeCarousel: 'assets/sounds/first-challenge/sum.m4a',
     firstChallenge: 'assets/sounds/first-challenge/voice.wav',

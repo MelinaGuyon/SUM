@@ -23,6 +23,7 @@ class Recompense {
   init() {
     this.recompenseAppearing()
     if (this.recompenseNumber == 1) {
+      STORAGE.soundManagerClass.launchAmbianceRecompense(soundBank.firstChallengeCarousel.ambiance_ending)
       if (this.voiceOverLaunch != true) {
         STORAGE.soundManagerClass.launchVoiceOver(soundBank.voiceOver.firstChallengeRecompense)
         this.voiceOverLaunch = true
@@ -32,6 +33,7 @@ class Recompense {
         }, 4000)
       }
     } else if (this.recompenseNumber == 2) {
+      STORAGE.soundManagerClass.launchAmbianceRecompense(soundBank.secondChallengeCarousel.ambiance_ending)
       if (this.voiceOverLaunch != true) {
         STORAGE.soundManagerClass.launchVoiceOver(soundBank.voiceOver.secondChallengeRecompense)
         this.voiceOverLaunch = true
@@ -41,13 +43,12 @@ class Recompense {
         }, 4000)
       }
     } else if (this.recompenseNumber == 3) {
+      STORAGE.soundManagerClass.launchAmbianceRecompense(soundBank.thirdChallengeCarousel.ambiance_ending)
       if (this.voiceOverLaunch != true) {
         STORAGE.soundManagerClass.launchVoiceOver(soundBank.voiceOver.thirdChallengeRecompense)
         this.voiceOverLaunch = true
 
-        setTimeout(function() {
-          STORAGE.soundManagerClass.stopAmbiance(STORAGE.soundManagerClass.ambiance)
-        }, 4000)
+        STORAGE.soundManagerClass.stopAmbiance(STORAGE.soundManagerClass.ambiance)
       }
     }
   }
@@ -79,6 +80,7 @@ class Recompense {
               delay: 1
             })
           }
+          STORAGE.soundManagerClass.stopAmbiance(STORAGE.soundManagerClass.ambianceRecompense)
         }
       })
     }, 6000)

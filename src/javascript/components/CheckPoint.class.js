@@ -149,8 +149,8 @@ class CheckPoint {
         }, 300)
         setTimeout(function() {
           STORAGE.carousel.destroy()
-          STORAGE.carousel = null
-          STORAGE.carouselClass = null
+          // STORAGE.carousel = null
+          // STORAGE.carouselClass = null
           // STORAGE.deformation = null
           // STORAGE.deformationClass = null
           if (that.carouselNumber == 1) {

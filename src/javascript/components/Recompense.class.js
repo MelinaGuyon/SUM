@@ -56,10 +56,20 @@ class Recompense {
 
     let that = this
 
-    TweenLite.to(this.recompense, 0.5, {
-      autoAlpha: 1,
+    TweenLite.set(this.recompense, {
       display:'block',
-      onComplete: that.recompenseDisappearing()
+    })
+
+    TweenLite.to(this.recompense, 4, {
+      autoAlpha: 1,
+      onComplete: function() {
+        if (that.recompenseNumber == 2) {
+          document.querySelector('.webGLRenderer').classList.remove('hidden')
+          document.querySelector('.canvasRenderer').classList.add('hidden')
+          STORAGE.renderCanvas = false
+        }
+        that.recompenseDisappearing()
+      }
     })
   }
 
@@ -70,7 +80,6 @@ class Recompense {
     setTimeout(function(){
       TweenLite.to(that.recompense, 0.5, {
         autoAlpha: 0,
-        display:'none',
         onComplete: () => {
           if (that.recompenseNumber < 3) {
             new Carousel({ number: that.recompenseNumber + 1 })
@@ -79,6 +88,9 @@ class Recompense {
               delay: 1
             })
           }
+          TweenLite.set(that.recompense, {
+            display:'none'
+          })
         }
       })
     }, 6000)

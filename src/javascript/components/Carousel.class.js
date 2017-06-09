@@ -17,15 +17,15 @@ class Carousel {
         this.carouselDatas = firstCarouselDatas
         STORAGE.carousel.numberOfWindow = 8
         STORAGE.time_pourcentage = 30
-        STORAGE.soundManagerClass.launchAmbiance(soundBank.firstChallengeCarousel.ambiance)
+        STORAGE.soundManagerClass.launchAmbianceBeginning(soundBank.firstChallengeCarousel.ambiance_beginning, soundBank.firstChallengeCarousel.ambiance_loop)
       } else if (this.carouselNumber == 2) {
         this.carouselDatas = secondCarouselDatas
-        STORAGE.soundManagerClass.launchAmbiance(soundBank.secondChallengeCarousel.ambiance)
+        STORAGE.soundManagerClass.launchAmbianceBeginning(soundBank.secondChallengeCarousel.ambiance_beginning, soundBank.secondChallengeCarousel.ambiance_loop)
         STORAGE.carousel.numberOfWindow = 6
         STORAGE.time_pourcentage = 60
       } else if (this.carouselNumber == 3) {
         this.carouselDatas = thirdCarouselDatas
-        STORAGE.soundManagerClass.launchAmbiance(soundBank.thirdChallengeCarousel.ambiance)
+        STORAGE.soundManagerClass.launchAmbianceBeginning(soundBank.thirdChallengeCarousel.ambiance_beginning, soundBank.thirdChallengeCarousel.ambiance_loop)
         STORAGE.carousel.numberOfWindow = 6
         STORAGE.time_pourcentage = 90
       }
@@ -226,7 +226,7 @@ class Carousel {
 
       // carousel 1 ambiance2
       if (STORAGE.carouselClass.carouselNumber == 1 && STORAGE.carousel.y < -1800 && STORAGE.carouselClass.launchMurmure != true) {
-        STORAGE.soundManagerClass.launchMurmure(soundBank.firstChallengeCarousel.ambiance2)
+        STORAGE.soundManagerClass.launchMurmure(soundBank.firstChallengeCarousel.ambiance_chuchotements)
         STORAGE.carouselClass.launchMurmure = true
       }
 

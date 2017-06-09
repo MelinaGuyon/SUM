@@ -7,15 +7,45 @@ class SoundManager {
   constructor(options) {
     STORAGE.soundManagerClass = this
     this.ambiance
+    this.ambianceRecompense
     this.murmure
     this.voiceOver
   }
 
-  launchAmbiance(track) {
-    this.ambiance = PIXI.sound.Sound.from(track)
+  launchAmbianceBeginning(trackBeginning, trackLoop) {
+
+    let that = this
+    this.loop = true
+
+    this.ambiance = PIXI.sound.Sound.from({
+      src: trackBeginning,
+      preload: true,
+      loaded: function(err, sound) {
+        let instance = sound.play()
+        instance.on('progress', function(progress) {
+          if (progress*100 >= 95 && that.loop == true ) {
+            console.log('son de début fini')
+            TweenLite.to(sound, 1, {
+              volume: 0,
+              onComplete: function() {
+                sound.stop()
+              }
+            })
+            that.launchAmbianceLoop(trackLoop)
+            that.loop = false 
+          }
+        })
+      }
+    })
+  }
+
+  launchAmbianceLoop(trackLoop) {
+    console.log("looping en cours")
+    this.ambiance = PIXI.sound.Sound.from(trackLoop)
     this.ambiance.volume = 0
     this.ambiance.play()
-    TweenLite.to(this.ambiance, 4, {
+
+    TweenLite.to(this.ambiance, 1, {
       volume: 0.4
     })
     this.ambiance.loop = true
@@ -35,6 +65,16 @@ class SoundManager {
         track.removeSprites()
       }
     })
+  }
+
+  launchAmbianceRecompense(track) {
+    this.ambianceRecompense = PIXI.sound.Sound.from(track)
+    this.ambianceRecompense.volume = 0
+    this.ambianceRecompense.play()
+    TweenLite.to(this.ambianceRecompense, 1, {
+      volume: 0.5
+    })
+    this.ambianceRecompense.loop = true
   }
 
   launchMurmure(track) {

@@ -379,6 +379,7 @@ class Carousel {
               }
             })
           }
+          console.log(STORAGE.carouselClass.spritesForms)
           if (index == 0 || index == 6 || index == 10 || index == 13) {
             TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 2, {
               alpha : 0.2,

@@ -32,7 +32,7 @@ class SoundManager {
               }
             })
             that.launchAmbianceLoop(trackLoop)
-            that.loop = false 
+            that.loop = false
           }
         })
       }
@@ -58,6 +58,7 @@ class SoundManager {
   }
 
   stopAmbiance(track) {
+    console.log(track)
     TweenLite.to(track, 6, {
       volume: 0,
       onComplete: function(){

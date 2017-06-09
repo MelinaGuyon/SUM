@@ -27,7 +27,7 @@ function initCanvas() {
   new Loader()
   new Menu()
   new SoundManager()
-  new Carousel({ number: 2 })
+  new Carousel({ number: 3 })
   // new Video()
   // new SecondChallenge()
 

@@ -244,7 +244,7 @@ class Carousel {
         }
       }
       else if (STORAGE.carouselClass.carouselNumber == 3) {
-        if (STORAGE.carouselClass.voiceOverLaunch != true && STORAGE.carousel.y < -4000) {
+        if (STORAGE.carouselClass.voiceOverLaunch != true && STORAGE.carousel.y < -2000) {
           STORAGE.soundManagerClass.launchVoiceOver(soundBank.voiceOver.thirdChallengeCarousel)
           STORAGE.carouselClass.voiceOverLaunch = true
         }

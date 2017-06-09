@@ -35,10 +35,8 @@ class SecondChallenge {
     this.conclusionChallengeTextContainer = document.querySelector('.js-conclusion-text-container')
     STORAGE.conclusionChallengeTextContainer = this.conclusionChallengeTextContainer
 
-    STORAGE.textConclusion2 = document.createTextNode(conclusionTextsDatas.secondChallenge.conclusion)
-    STORAGE.buttonConclusion2 = document.createTextNode(conclusionTextsDatas.secondChallenge.button)
-    // this.conclusionChallengeText.replaceChild(STORAGE.textConclusion2, STORAGE.textConclusion1)
-    // this.conclusionChallengeButton.replaceChild(STORAGE.buttonConclusion2, STORAGE.buttonConclusion1)
+    this.conclusionChallengeText.innerText = conclusionTextsDatas.secondChallenge.conclusion
+    this.conclusionChallengeButton.innerText = conclusionTextsDatas.secondChallenge.button
 
     this.entrance = true
 
@@ -100,11 +98,11 @@ class SecondChallenge {
   manageSounds(kill) {
     let that = this
     if (this.entrance) {
-      // STORAGE.soundManagerClass.lowerAmbiance(STORAGE.soundManagerClass.ambiance)
-      // STORAGE.soundManagerClass.launchVoiceOver(soundBank.voiceOver.secondChallenge)
+      STORAGE.soundManagerClass.lowerAmbiance(STORAGE.soundManagerClass.ambiance)
+      STORAGE.soundManagerClass.launchVoiceOver(soundBank.voiceOver.secondChallenge)
       setTimeout(function(){
         that.bind()
-      }, 10)
+      }, 10000)
       this.entrance = false
       return
     }

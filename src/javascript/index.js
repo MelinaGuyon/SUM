@@ -1,6 +1,7 @@
 const PIXI = require('pixi.js')
 
 import Renderer from './components/Renderer.class.js'
+import CanvasRenderer from './components/CanvasRenderer.class.js'
 import Loader from './components/Loader.class.js'
 import SoundManager from './components/SoundManager.class.js'
 import Carousel from './components/Carousel.class.js'
@@ -19,7 +20,10 @@ window.onload = function() {
 }
 
 function initCanvas() {
+  STORAGE.renderCanvas = false
+
   new Renderer()
+  new CanvasRenderer()
   new Loader()
   new Menu()
   new SoundManager()
@@ -28,15 +32,20 @@ function initCanvas() {
   // new Video()
   // new FirstChallenge()
   // new Recompense({ number: 3 })
+  // new Carousel({ number: 3 })
   // new Video()
   // new SecondChallenge()
-  // new ThirdChallenge()
-  // new Video()
 
   render()
 }
 
 function render() {
   requestAnimationFrame(render)
-  STORAGE.renderer.render(STORAGE.stage)
+  if (STORAGE.renderCanvas == false) {
+    STORAGE.renderer.render(STORAGE.stage)
+  } else if (STORAGE.renderCanvas == true) {
+
+    STORAGE.canvasRenderer.render(STORAGE.canvasStage)
+  }
+
 }

@@ -73,7 +73,7 @@ class Carousel {
       window.addEventListener('resize', that.handleResize)
 
       if (this.carouselNumber == 2) {
-        this.opacityTimer = window.setInterval(that.doOpacity, 6000)
+        this.opacityTimer = window.setInterval(that.doOpacity, 4000)
       }
 
       if (this.carouselNumber == 3) {
@@ -244,7 +244,7 @@ class Carousel {
         }
       }
       else if (STORAGE.carouselClass.carouselNumber == 3) {
-        if (STORAGE.carouselClass.voiceOverLaunch != true && STORAGE.carousel.y < -4000) {
+        if (STORAGE.carouselClass.voiceOverLaunch != true && STORAGE.carousel.y < -2000) {
           STORAGE.soundManagerClass.launchVoiceOver(soundBank.voiceOver.thirdChallengeCarousel)
           STORAGE.carouselClass.voiceOverLaunch = true
         }
@@ -365,26 +365,29 @@ class Carousel {
     }
 
     doOpacity() {
-      console.log('test')
       if (document.hasFocus() ) {
         Object.keys(STORAGE.carouselClass.spritesForms).map(function(objectKey, index) {
           if (index == 1 || index == 5 || index == 7 || index == 9) {
-            TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 3, {
+            TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 2, {
               alpha : 0.2,
+              ease: Power2.easeOut,
               onComplete: function() {
-                TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 3, {
-                  alpha : 1
+                TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 2, {
+                  alpha : 1,
+                  ease: Power2.easeOut
                 })
               }
             })
           }
           if (index == 0 || index == 6 || index == 10 || index == 13) {
-            TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 3, {
+            TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 2, {
               alpha : 0.2,
-              delay : 3,
+              delay : 2,
+              ease: Power2.easeOut,
               onComplete: function() {
-                TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 3, {
-                  alpha : 1
+                TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 2, {
+                  alpha : 1,
+                  ease: Power2.easeOut
                 })
               }
             })

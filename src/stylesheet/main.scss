@@ -17,6 +17,10 @@ body {
   overflow: hidden;
  }
 
+ .webGLRenderer.hidden, .canvasRenderer.hidden  {
+   display: none;
+ }
+
 .js-conclusion-text-container {
   position: absolute;
   top: 50%;

@@ -9,13 +9,13 @@
 
 .path { fill: none; stroke: #FFFFFF; stroke-width: 2; }
 
-.first_path_sum, .first_path_cercle1, .first_path_cercle2, .first_path_cercle3, .first_path_cercle4 { stroke-dasharray: 5,40; stroke-dashoffset: 1000; animation: dash 10s linear infinite; }
+.first_path_sum, .first_path_cercle1, .first_path_cercle2, .first_path_cercle3, .first_path_cercle4 { stroke-dasharray: 5,25; stroke-dashoffset: 1000; animation: dash 10s linear infinite; }
 .first_path_sumEye { stroke-dasharray: 1,12; stroke-dashoffset: 1000; stroke-width: 3.3; }
 
-.second_path_sum, .second_path_cercle1, .second_path_cercle2, .second_path_cercle3, .second_path_cercle4 { stroke-dasharray: 15,30; stroke-dashoffset: 1000; animation: dash 10s linear infinite; }
+.second_path_sum, .second_path_cercle1, .second_path_cercle2, .second_path_cercle3, .second_path_cercle4 { stroke-dasharray: 25,20; stroke-dashoffset: 1000; animation: dash 10s linear infinite; }
 .second_path_sumEye { stroke-dasharray: 1,12; stroke-dashoffset: 1000; stroke-width: 3.3; }
 
-.third_path_sum, .third_path_cercle1, .third_path_cercle2, .third_path_cercle3, .third_path_cercle4 { stroke-dasharray: 40,10; stroke-dashoffset: 1000; animation: dash 10s linear infinite; }
+.third_path_sum, .third_path_cercle1, .third_path_cercle2, .third_path_cercle3, .third_path_cercle4 { stroke-dasharray: 60,5; stroke-dashoffset: 1000; animation: dash 10s linear infinite; }
 .third_path_sumEye { stroke-dasharray: 1,12; stroke-dashoffset: 1000; stroke-width: 3.3; }
 
 .path_sumPupille { fill: #FFFFFF; }

@@ -278,16 +278,16 @@ class SecondChallenge {
   }
 
   isWellErased(mouseData) {
-    if (mouseData.data.global.x <= window.innerWidth*3 / 10 && mouseData.data.global.y <= window.innerHeight*2 / 10  && this.stepIndex == 0) {
+    if (mouseData.data.global.x <= window.innerWidth*2 / 10 && mouseData.data.global.y <= window.innerHeight*2 / 10  && this.stepIndex == 0) {
       this.firstCheckpointChecked = true
     }
-    if (mouseData.data.global.x <= window.innerWidth*3 / 10 && mouseData.data.global.y >= window.innerHeight*8 / 10  && this.stepIndex == 0) {
+    if (mouseData.data.global.x <= window.innerWidth*2 / 10 && mouseData.data.global.y >= window.innerHeight*8 / 10  && this.stepIndex == 0) {
       this.secondCheckpointChecked = true
     }
-    if (mouseData.data.global.x >= window.innerWidth*7 / 10 && mouseData.data.global.y <= window.innerHeight*2 / 10  && this.stepIndex == 0) {
+    if (mouseData.data.global.x >= window.innerWidth*8 / 10 && mouseData.data.global.y <= window.innerHeight*2 / 10  && this.stepIndex == 0) {
       this.thirdCheckpointChecked = true
     }
-    if (mouseData.data.global.x >= window.innerWidth*7 / 10 && mouseData.data.global.y >= window.innerHeight*8 / 10  && this.stepIndex == 0) {
+    if (mouseData.data.global.x >= window.innerWidth*8 / 10 && mouseData.data.global.y >= window.innerHeight*8 / 10  && this.stepIndex == 0) {
       this.fourthCheckpointChecked = true
     }
     if (mouseData.data.global.x >= window.innerWidth/2 - 100 && mouseData.data.global.y <= window.innerWidth/2 + 100  && this.stepIndex == 0) {
@@ -295,16 +295,16 @@ class SecondChallenge {
     }
 
 
-    if (mouseData.data.global.x <= window.innerWidth*4 / 10 && mouseData.data.global.y <= window.innerHeight*2 / 10  && this.stepIndex == 1) {
+    if (mouseData.data.global.x <= window.innerWidth*3.5 / 10 && mouseData.data.global.y <= window.innerHeight*2 / 10  && this.stepIndex == 1) {
       this.firstCheckpointChecked = true
     }
-    if (mouseData.data.global.x <= window.innerWidth*4 / 10 && mouseData.data.global.y >= window.innerHeight*8 / 10  && this.stepIndex == 1) {
+    if (mouseData.data.global.x <= window.innerWidth*3.5 / 10 && mouseData.data.global.y >= window.innerHeight*8 / 10  && this.stepIndex == 1) {
       this.secondCheckpointChecked = true
     }
-    if (mouseData.data.global.x >= window.innerWidth*6 / 10 && mouseData.data.global.y <= window.innerHeight*2 / 10  && this.stepIndex == 1) {
+    if (mouseData.data.global.x >= window.innerWidth*6.5 / 10 && mouseData.data.global.y <= window.innerHeight*2 / 10  && this.stepIndex == 1) {
       this.thirdCheckpointChecked = true
     }
-    if (mouseData.data.global.x >= window.innerWidth*6 / 10 && mouseData.data.global.y >= window.innerHeight*8 / 10  && this.stepIndex == 1) {
+    if (mouseData.data.global.x >= window.innerWidth*6.5 / 10 && mouseData.data.global.y >= window.innerHeight*8 / 10  && this.stepIndex == 1) {
       this.fourthCheckpointChecked = true
     }
     if (mouseData.data.global.x >= window.innerWidth/2 - 100 && mouseData.data.global.y <= window.innerWidth/2 + 100  && this.stepIndex == 1) {
@@ -312,16 +312,16 @@ class SecondChallenge {
     }
 
 
-    if (mouseData.data.global.x <= window.innerWidth*4.5 / 10 && mouseData.data.global.y <= window.innerHeight*3 / 10  && this.stepIndex == 2) {
+    if (mouseData.data.global.x <= window.innerWidth*4.5 / 10 && mouseData.data.global.y <= window.innerHeight*2 / 10  && this.stepIndex == 2) {
       this.firstCheckpointChecked = true
     }
-    if (mouseData.data.global.x <= window.innerWidth*4.5 / 10 && mouseData.data.global.y >= window.innerHeight*7 / 10  && this.stepIndex == 2) {
+    if (mouseData.data.global.x <= window.innerWidth*4.5 / 10 && mouseData.data.global.y >= window.innerHeight*8 / 10  && this.stepIndex == 2) {
       this.secondCheckpointChecked = true
     }
-    if (mouseData.data.global.x >= window.innerWidth*5.5 / 10 && mouseData.data.global.y <= window.innerHeight*3 / 10  && this.stepIndex == 2) {
+    if (mouseData.data.global.x >= window.innerWidth*5.5 / 10 && mouseData.data.global.y <= window.innerHeight*2 / 10  && this.stepIndex == 2) {
       this.thirdCheckpointChecked = true
     }
-    if (mouseData.data.global.x >= window.innerWidth*5.5 / 10 && mouseData.data.global.y >= window.innerHeight*7 / 10  && this.stepIndex == 2) {
+    if (mouseData.data.global.x >= window.innerWidth*5.5 / 10 && mouseData.data.global.y >= window.innerHeight*8 / 10  && this.stepIndex == 2) {
       this.fourthCheckpointChecked = true
     }
     if (mouseData.data.global.x >= window.innerWidth/2 - 100 && mouseData.data.global.y <= window.innerWidth/2 + 100  && this.stepIndex == 2) {
@@ -329,16 +329,16 @@ class SecondChallenge {
     }
 
 
-    if (mouseData.data.global.x <= window.innerWidth*4.5 / 10 && mouseData.data.global.y <= window.innerHeight*4 / 10  && this.stepIndex == 3) {
+    if (mouseData.data.global.x <= window.innerWidth*4.5 / 10 && mouseData.data.global.y <= window.innerHeight*1 / 10  && this.stepIndex == 3) {
       this.firstCheckpointChecked = true
     }
-    if (mouseData.data.global.x <= window.innerWidth*4.5 / 10 && mouseData.data.global.y >= window.innerHeight*6 / 10  && this.stepIndex == 3) {
+    if (mouseData.data.global.x <= window.innerWidth*4.5 / 10 && mouseData.data.global.y >= window.innerHeight*5 / 10  && this.stepIndex == 3) {
       this.secondCheckpointChecked = true
     }
-    if (mouseData.data.global.x >= window.innerWidth*5.5 / 10 && mouseData.data.global.y <= window.innerHeight*4 / 10  && this.stepIndex == 3) {
+    if (mouseData.data.global.x >= window.innerWidth*5.5 / 10 && mouseData.data.global.y <= window.innerHeight*1 / 10  && this.stepIndex == 3) {
       this.thirdCheckpointChecked = true
     }
-    if (mouseData.data.global.x >= window.innerWidth*5.5 / 10 && mouseData.data.global.y >= window.innerHeight*6 / 10  && this.stepIndex == 3) {
+    if (mouseData.data.global.x >= window.innerWidth*5.5 / 10 && mouseData.data.global.y >= window.innerHeight*5 / 10  && this.stepIndex == 3) {
       this.fourthCheckpointChecked = true
     }
     if (mouseData.data.global.x >= window.innerWidth/2 - 100 && mouseData.data.global.y <= window.innerWidth/2 + 100  && this.stepIndex == 3) {
@@ -346,16 +346,16 @@ class SecondChallenge {
     }
 
 
-    if (mouseData.data.global.x <= window.innerWidth*4.75 / 10 && mouseData.data.global.y <= window.innerHeight*4.25 / 10  && this.stepIndex == 4) {
+    if (mouseData.data.global.x <= window.innerWidth*4.75 / 10 && mouseData.data.global.y <= window.innerHeight*1 / 10  && this.stepIndex == 4) {
       this.firstCheckpointChecked = true
     }
-    if (mouseData.data.global.x <= window.innerWidth*4.75 / 10 && mouseData.data.global.y >= window.innerHeight*5.15 / 10  && this.stepIndex == 4) {
+    if (mouseData.data.global.x <= window.innerWidth*4.75 / 10 && mouseData.data.global.y >= window.innerHeight*9 / 10  && this.stepIndex == 4) {
       this.secondCheckpointChecked = true
     }
-    if (mouseData.data.global.x >= window.innerWidth*5.25 / 10 && mouseData.data.global.y <= window.innerHeight*4.25 / 10  && this.stepIndex == 4) {
+    if (mouseData.data.global.x >= window.innerWidth*5.25 / 10 && mouseData.data.global.y <= window.innerHeight*1 / 10  && this.stepIndex == 4) {
       this.thirdCheckpointChecked = true
     }
-    if (mouseData.data.global.x >= window.innerWidth*5.25 / 10 && mouseData.data.global.y >= window.innerHeight*5.75 / 10  && this.stepIndex == 4) {
+    if (mouseData.data.global.x >= window.innerWidth*5.25 / 10 && mouseData.data.global.y >= window.innerHeight*9 / 10  && this.stepIndex == 4) {
       this.fourthCheckpointChecked = true
     }
     if (mouseData.data.global.x >= window.innerWidth/2 - 100 && mouseData.data.global.y <= window.innerWidth/2 + 100  && this.stepIndex == 4) {

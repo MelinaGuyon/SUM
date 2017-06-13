@@ -102,8 +102,8 @@ class SoundManager {
     this.voiceOver = PIXI.sound.Sound.from(track)
     this.voiceOver.volume = 0
     this.voiceOver.play()
-    TweenLite.to(this.voiceOver, 4, {
-      volume: 3
+    TweenLite.to(this.voiceOver, 2, {
+      volume: 4
     })
   }
 

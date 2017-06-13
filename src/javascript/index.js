@@ -30,11 +30,10 @@ function initCanvas() {
   new Carousel({ number: 1 })
   // new Recompense({ number: 1 })
   // new Video()
-  // new FirstChallenge()
-  // new Recompense({ number: 3 })
   // new Carousel({ number: 3 })
-  // new Video()
   // new SecondChallenge()
+  // new FirstChallenge()
+  // new ThirdChallenge()
 
   render()
 }

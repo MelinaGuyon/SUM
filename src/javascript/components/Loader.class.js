@@ -9,6 +9,7 @@ class Loader {
   loadCarouselPictures(pictures) {
     this.loader.resources = {}
 
+
     for (var i = 0; i < pictures.length; i++) {
       this.loader
       .add([pictures[i]])
@@ -17,6 +18,15 @@ class Loader {
     .load(function(){
       STORAGE.carouselClass.setupCarouselPicturesLoaded()
     })
+
+    if (STORAGE.carouselClass.carouselNumber == 1) {
+      this.loader.carousel1 = this.loader.resources
+    } else if (STORAGE.carouselClass.carouselNumber == 2) {
+      this.loader.carousel2 = this.loader.resources
+    } else if (STORAGE.carouselClass.carouselNumber == 3) {
+      this.loader.carousel3 = this.loader.resources
+    }
+
   }
 
   loadMenuPictures(pictures) {
@@ -45,6 +55,8 @@ class Loader {
     .load(function(){
       STORAGE.FirstChallengeClass.setupFirstChallengePicturesLoaded()
     })
+
+    this.loader.firstChallenge = this.loader.resources
   }
 
   loadSecondChallengePictures(pictures) {
@@ -59,6 +71,8 @@ class Loader {
     .load(function(){
       STORAGE.SecondChallengeClass.setupSecondChallengePicturesLoaded()
     })
+
+    this.loader.secondChallenge = this.loader.resources
   }
 
   loadThirdChallengePictures(pictures) {
@@ -73,6 +87,8 @@ class Loader {
     .load(function(){
       STORAGE.ThirdChallengeClass.setupThirdChallengePicturesLoaded()
     })
+
+    this.loader.thirdChallenge = this.loader.resources
   }
 
   loadVideoPictures(pictures) {

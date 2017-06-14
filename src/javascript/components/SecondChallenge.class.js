@@ -18,8 +18,6 @@ class SecondChallenge {
 
     STORAGE.renderCanvas = true
 
-    console.log(STORAGE)
-
     this.time
 
     this.assets = {}
@@ -66,15 +64,21 @@ class SecondChallenge {
   }
 
   init() {
-    STORAGE.loaderClass.loadSecondChallengePictures([
-      'assets/second-challenge/step_0.png',
-      'assets/second-challenge/step_1.png',
-      'assets/second-challenge/step_2.png',
-      'assets/second-challenge/step_3.png',
-      'assets/second-challenge/step_4.png',
-      'assets/second-challenge/step_5.png',
-      'assets/second-challenge/step_6.png'
-    ])
+
+    if (STORAGE.loader.secondChallenge) {
+      STORAGE.loader.resources = STORAGE.loader.secondChallenge
+      this.setupSecondChallengePicturesLoaded()
+    } else {
+      STORAGE.loaderClass.loadSecondChallengePictures([
+        'assets/second-challenge/step_0.png',
+        'assets/second-challenge/step_1.png',
+        'assets/second-challenge/step_2.png',
+        'assets/second-challenge/step_3.png',
+        'assets/second-challenge/step_4.png',
+        'assets/second-challenge/step_5.png',
+        'assets/second-challenge/step_6.png'
+      ])
+    }
 
     TweenLite.set(STORAGE.canvasStage, {
       alpha: 1

@@ -41,15 +41,20 @@ class ThirdChallenge {
 
   init() {
 
-    STORAGE.loaderClass.loadThirdChallengePictures([
-      'assets/third-challenge/fond.jpg',
-      'assets/third-challenge/rectangle.png',
-      'assets/third-challenge/circle.png',
-      'assets/third-challenge/triangle.png',
-      'assets/third-challenge/line.png',
-      'assets/third-challenge/half-circle.png',
-      'assets/third-challenge/aide.svg'
-    ])
+    if (STORAGE.loader.thirdChallenge) {
+      STORAGE.loader.resources = STORAGE.loader.thirdChallenge
+      this.setupThirdChallengePicturesLoaded()
+    } else {
+      STORAGE.loaderClass.loadThirdChallengePictures([
+        'assets/third-challenge/fond.jpg',
+        'assets/third-challenge/rectangle.png',
+        'assets/third-challenge/circle.png',
+        'assets/third-challenge/triangle.png',
+        'assets/third-challenge/line.png',
+        'assets/third-challenge/half-circle.png',
+        'assets/third-challenge/aide.svg'
+      ])
+    }
 
     TweenLite.set(STORAGE.stage, {
       alpha: 1

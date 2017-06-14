@@ -59,7 +59,7 @@ class SoundManager {
 
   stopAmbiance(track) {
     console.log(track)
-    TweenLite.to(track, 6, {
+    TweenLite.to(track, 2, {
       volume: 0,
       onComplete: function(){
         track.stop()

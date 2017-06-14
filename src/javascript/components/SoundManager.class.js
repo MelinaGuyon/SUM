@@ -24,7 +24,6 @@ class SoundManager {
         let instance = sound.play()
         instance.on('progress', function(progress) {
           if (progress*100 >= 95 && that.loop == true ) {
-            console.log('son de début fini')
             TweenLite.to(sound, 1, {
               volume: 0,
               onComplete: function() {
@@ -40,7 +39,6 @@ class SoundManager {
   }
 
   launchAmbianceLoop(trackLoop) {
-    console.log("looping en cours")
     this.ambiance = PIXI.sound.Sound.from(trackLoop)
     this.ambiance.volume = 0
     this.ambiance.play()
@@ -58,7 +56,6 @@ class SoundManager {
   }
 
   stopAmbiance(track) {
-    console.log(track)
     TweenLite.to(track, 0.5, {
       volume: 0,
       onComplete: function(){
@@ -99,7 +96,6 @@ class SoundManager {
   }
 
   launchVoiceOver(track) {
-    console.log("voice over en cours")
     this.voiceOver = PIXI.sound.Sound.from(track)
     this.voiceOver.volume = 0
     this.voiceOver.play()

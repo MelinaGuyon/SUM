@@ -50,11 +50,16 @@ class FirstChallenge {
   }
 
   init() {
-    STORAGE.loaderClass.loadFirstChallengePictures([
-      'assets/first-challenge/fond.png',
-      'assets/first-challenge/oeil.png',
-      'assets/first-challenge/eye-cursor.png'
-    ])
+    if (STORAGE.loader.firstChallenge) {
+      STORAGE.loader.resources = STORAGE.loader.firstChallenge
+      this.setupFirstChallengePicturesLoaded()
+    } else {
+      STORAGE.loaderClass.loadFirstChallengePictures([
+        'assets/first-challenge/fond.png',
+        'assets/first-challenge/oeil.png',
+        'assets/first-challenge/eye-cursor.png'
+      ])
+    }
 
     TweenLite.set(STORAGE.stage, {
       alpha: 1

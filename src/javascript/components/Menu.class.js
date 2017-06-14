@@ -19,6 +19,7 @@ class Menu {
     STORAGE.epreuves.alpha = 0
 
     this.navItems = document.querySelectorAll('.navItem')
+    this.clicked = false
 
 
     this.init()
@@ -44,14 +45,11 @@ class Menu {
     }
 
     for (var i = 0; i < this.navItems.length; i++) {
-      console.log(this.navItems[i])
       this.navItems[i].addEventListener('click', that.handleNavItemClick)
     }
   }
 
   onIcone3Click() {
-    console.log(STORAGE.time_pourcentage)
-
     TweenLite.set(STORAGE.epreuves, {
       display: "block"
     })
@@ -105,38 +103,58 @@ class Menu {
   }
 
   handleNavItemClick(e) {
-    let id = e.target.closest('li').getAttribute('id').split('-')[1]
 
-    STORAGE.carouselClass.unbind()
-    STORAGE.soundManagerClass.stopAmbiance(STORAGE.soundManagerClass.ambiance)
-    if (STORAGE.soundManagerClass.murmure) {
-      STORAGE.soundManagerClass.stopMurmure(STORAGE.soundManagerClass.murmure)
+    if (!STORAGE.MenuClass.clicked) {
+
+      STORAGE.MenuClass.clicked = true
+
+      let id = e.target.closest('li').getAttribute('id').split('-')[1]
+
+      STORAGE.carouselClass.unbind()
+      STORAGE.soundManagerClass.stopAmbiance(STORAGE.soundManagerClass.ambiance)
+      if (STORAGE.soundManagerClass.murmure) {
+        STORAGE.soundManagerClass.stopMurmure(STORAGE.soundManagerClass.murmure)
+      }
+
+
+      TweenLite.to([STORAGE.stage], 0.4, {
+        alpha: 0,
+        onComplete: function() {
+          setTimeout(function() {
+            STORAGE.carousel.destroy()
+            STORAGE.carousel = null
+            STORAGE.carouselClass = null
+            STORAGE.deformation = null
+            STORAGE.deformationClass = null
+
+            if (id == 1) {
+              new Carousel({ number: 1 })
+            } else if (id == 2) {
+              new Carousel({ number: 2 })
+            } else if (id == 3) {
+              new Carousel({ number: 3 })
+            }
+            TweenLite.to([STORAGE.carousel, STORAGE.stage], 0.5, {
+              alpha: 1,
+              delay: 1
+            })
+          }, 3000)
+
+          setTimeout(function() {
+            TweenLite.set(STORAGE.epreuves, {
+              display: "none"
+            })
+          }, 2000)
+        },
+        delay: 0.4
+      })
+
+      setTimeout(function() {
+        STORAGE.MenuClass.clicked = false
+      }, 6000)
+
     }
 
-
-    TweenLite.to([STORAGE.stage], 0.4, {
-      alpha: 0,
-      onComplete: function() {
-        if (id == 1) {
-          new Carousel({ number: 1 })
-        } else if (id == 2) {
-          new Carousel({ number: 2 })
-        } else if (id == 3) {
-          new Carousel({ number: 3 })
-        }
-        TweenLite.to([STORAGE.carousel, STORAGE.stage], 0.5, {
-          alpha: 1,
-          delay: 1
-        })
-
-        setTimeout(function() {
-          TweenLite.set(STORAGE.epreuves, {
-            display: "none"
-          })
-        }, 2000)
-      },
-      delay: 0.4
-    })
   }
 
 }

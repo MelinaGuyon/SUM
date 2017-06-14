@@ -59,7 +59,7 @@ class SoundManager {
 
   stopAmbiance(track) {
     console.log(track)
-    TweenLite.to(track, 2, {
+    TweenLite.to(track, 0.5, {
       volume: 0,
       onComplete: function(){
         track.stop()
@@ -99,6 +99,7 @@ class SoundManager {
   }
 
   launchVoiceOver(track) {
+    console.log("voice over en cours")
     this.voiceOver = PIXI.sound.Sound.from(track)
     this.voiceOver.volume = 0
     this.voiceOver.play()

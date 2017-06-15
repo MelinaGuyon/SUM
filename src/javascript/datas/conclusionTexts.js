@@ -1,18 +1,18 @@
 const conclusionTextsDatas = {
 	firstChallenge:
     {
-      conclusion: "Je vois les choses\nautrement, j\’ai le choix\nentre le recto-verso\nde mes pensées.",
-      button: "Je maîtrise désormais mes pensées."
+      conclusion: "Désormais, tu vois les choses autrement. Tu sais maîtriser et orienter tes pensées.",
+      button: "Je me sens mieux"
     },
 	secondChallenge:
 	{
-		conclusion: "Les masques c'est vraiment pas bien.",
-		button: "Bas les masques !"
+		conclusion: "Tu n\'es plus dans le paraître, mais dans l\'être. Tu te dévoiles entièrement, simplement. Tu es toi, tout en nuances.",
+		button: "Je m'accepte"
 	},
 	thirdChallenge:
 	{
-		conclusion: "Les accidents font parfois bien les choses...",
-		button: "Place à l'imperfection !"
+		conclusion: "Les accidents sont parfois heureux. Accepte de perdre le contrôle, et laisse toi porter par l\'aléatoire.",
+		button: "Je lâche prise"
 	}
 }
 

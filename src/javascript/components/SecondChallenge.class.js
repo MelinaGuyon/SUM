@@ -28,6 +28,9 @@ class SecondChallenge {
     this.stepIndex = 0
 
     this.recompenseButton = document.querySelector('.js-first-recompense-button')
+    this.recompenseButtonLine = document.querySelector('.js-first-recompense-button-underLine')
+    STORAGE.recompenseButtonLine = this.recompenseButtonLine
+
     this.conclusionChallengeText = document.querySelector('.js-conclusion-p')
     this.conclusionChallengeButton = document.querySelector('.js-first-recompense-button')
     this.conclusionChallengeTextContainer = document.querySelector('.js-conclusion-text-container')
@@ -46,6 +49,8 @@ class SecondChallenge {
     this.SecondChallengeContainer.mousemove = function(mouseData){
       that.onMouseMove(mouseData)
     }
+    this.recompenseButton.addEventListener('mouseover', that.handleRecompenseButtonMouseOver)
+    this.recompenseButton.addEventListener('mouseout', that.handleRecompenseButtonMouseOut)
     this.recompenseButton.addEventListener('click', that.handleRecompenseButtonClick)
 
     setTimeout(function(){
@@ -58,6 +63,8 @@ class SecondChallenge {
     let that = this
     this.SecondChallengeContainer.mousemove = null
 
+    this.recompenseButton.removeEventListener('mouseover', that.handleRecompenseButtonMouseOver)
+    this.recompenseButton.removeEventListener('mouseout', that.handleRecompenseButtonMouseOut)
     this.recompenseButton.removeEventListener('click', that.handleRecompenseButtonClick)
 
     document.removeEventListener("mousemove", that.handleMove)
@@ -389,8 +396,20 @@ class SecondChallenge {
   }
 
   displayRecompenseButton() {
-    TweenLite.to(this.recompenseButton, 1.2, {
+    TweenLite.to([this.recompenseButton, this.recompenseButtonLine], 1.2, {
       autoAlpha: 1
+    })
+  }
+
+  handleRecompenseButtonMouseOver() {
+    TweenLite.to(STORAGE.recompenseButtonLine, 0.2, {
+      width: '25%'
+    })
+  }
+
+  handleRecompenseButtonMouseOut() {
+    TweenLite.to(STORAGE.recompenseButtonLine, 0.2, {
+      width: '10%'
     })
   }
 
@@ -417,7 +436,7 @@ class SecondChallenge {
   }
 
   undDisplayRecompenseButton() {
-    TweenLite.to(this.recompenseButton, 1.2, {
+    TweenLite.to([this.recompenseButton, this.recompenseButtonLine], 1.2, {
       autoAlpha: 0,
       onComplete: () => {
         TweenLite.set(this.conclusionChallengeTextContainer, {

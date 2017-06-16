@@ -26,6 +26,9 @@ class ThirdChallenge {
     this.checkpoint = document.querySelector('.js-third-challenge-checkpointText')
 
     this.recompenseButton = document.querySelector('.js-first-recompense-button')
+    this.recompenseButtonLine = document.querySelector('.js-first-recompense-button-underLine')
+    STORAGE.recompenseButtonLine = this.recompenseButtonLine
+
     this.conclusionChallengeText = document.querySelector('.js-conclusion-p')
     this.conclusionChallengeButton = document.querySelector('.js-first-recompense-button')
     this.conclusionChallengeTextContainer = document.querySelector('.js-conclusion-text-container')
@@ -89,6 +92,8 @@ class ThirdChallenge {
     this.halfcircle.mousedown = function(mouseData){ that.onShapeMouseDown(mouseData, this) }
     this.helpButton.mousedown = function(mouseData){ that.onHelpButtonMouseDown(mouseData, this) }
     this.checkpoint.addEventListener('click', that.onCheckpointMouseDown)
+    this.recompenseButton.addEventListener('mouseover', that.handleRecompenseButtonMouseOver)
+    this.recompenseButton.addEventListener('mouseout', that.handleRecompenseButtonMouseOut)
     this.recompenseButton.addEventListener('click', that.handleRecompenseButtonClick)
   }
 
@@ -111,6 +116,8 @@ class ThirdChallenge {
     this.halfcircle.mousedown = null
     this.helpButton.mousedown = null
     this.checkpoint.removeEventListener('click', that.onCheckpointMouseDown)
+    this.recompenseButton.removeEventListener('mouseover', that.handleRecompenseButtonMouseOver)
+    this.recompenseButton.removeEventListener('mouseout', that.handleRecompenseButtonMouseOut)
     this.recompenseButton.removeEventListener('click', that.handleRecompenseButtonClick)
   }
 
@@ -583,6 +590,24 @@ class ThirdChallenge {
     this.displayRecompenseButton()
   }
 
+  displayRecompenseButton() {
+    TweenLite.to([this.recompenseButton, this.recompenseButtonLine], 1.2, {
+      autoAlpha: 1
+    })
+  }
+
+  handleRecompenseButtonMouseOver() {
+    TweenLite.to(STORAGE.recompenseButtonLine, 0.2, {
+      width: '25%'
+    })
+  }
+
+  handleRecompenseButtonMouseOut() {
+    TweenLite.to(STORAGE.recompenseButtonLine, 0.2, {
+      width: '10%'
+    })
+  }
+
   handleRecompenseButtonClick() {
     STORAGE.ThirdChallengeClass.undDisplayRecompenseButton()
 
@@ -607,14 +632,8 @@ class ThirdChallenge {
     })
   }
 
-  displayRecompenseButton() {
-    TweenLite.to(this.recompenseButton, 1.2, {
-      autoAlpha: 1
-    })
-  }
-
   undDisplayRecompenseButton() {
-    TweenLite.to(this.recompenseButton, 1.2, {
+    TweenLite.to([this.recompenseButton, this.recompenseButtonLine], 1.2, {
       autoAlpha: 0
     })
   }

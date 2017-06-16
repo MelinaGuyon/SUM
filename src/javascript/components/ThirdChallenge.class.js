@@ -15,6 +15,7 @@ class ThirdChallenge {
     this.assets = {}
 
     this.background
+    this.conclusionBackground
     this.helpButton = new PIXI.Graphics()
     this.shape
     this.isDragging = false
@@ -55,7 +56,8 @@ class ThirdChallenge {
         'assets/third-challenge/triangle.png',
         'assets/third-challenge/line.png',
         'assets/third-challenge/half-circle.png',
-        'assets/third-challenge/aide.svg'
+        'assets/third-challenge/aide.svg',
+        'assets/global/conclusion1-3.png'
       ])
     }
 
@@ -259,6 +261,7 @@ class ThirdChallenge {
     this.assets.resources = STORAGE.loader.resources
 
     this.createBackground()
+    this.createConclusionBackground()
     this.manageSounds()
     this.drawRectangle()
     this.drawCircle()
@@ -293,6 +296,22 @@ class ThirdChallenge {
     this.background.height = window.innerHeight
 
     this.ThirdChallengeContainer.addChild(this.background)
+  }
+
+  createConclusionBackground() {
+    let that = this
+    Object.keys(this.assets.resources).map(function(objectKey, index) {
+      if (index == 7) {
+        that.conclusionBackground = new PIXI.Sprite(that.assets.resources[objectKey].texture)
+      }
+    })
+
+    this.conclusionBackground.width = window.innerWidth
+    this.conclusionBackground.height = window.innerHeight
+
+    this.conclusionBackground.alpha = 0
+
+    this.ThirdChallengeContainer.addChild(this.conclusionBackground)
   }
 
   drawRectangle() {
@@ -531,8 +550,9 @@ class ThirdChallenge {
   }
 
   showConclusion() {
+
     for(let i=0; i < this.ThirdChallengeContainer.children.length; i++) {
-      if (this.ThirdChallengeContainer.children[i] != this.background) {
+      if (this.ThirdChallengeContainer.children[i] != this.background && this.ThirdChallengeContainer.children[i] != this.conclusionBackground  )  {
         TweenLite.to(this.ThirdChallengeContainer.children[i], 0.8, {
           y: "+=" + 50,
           x: "+=" + 50,
@@ -562,7 +582,7 @@ class ThirdChallenge {
     })
 
     TweenLite.to(this.background, 0.3, {
-      alpha: 1,
+      alpha: 0,
       delay: 0.4,
       ease: Power2.easeIn,
       onComplete: function() {
@@ -575,18 +595,20 @@ class ThirdChallenge {
         }
       }
     })
-    TweenLite.set(this.background,{
+    TweenLite.set([this.background, this.conclusionBackground], {
       y: 0,
       delay: 1.7
     })
 
     TweenLite.set(this.conclusionChallengeTextContainer, {
-      display: 'block'
+      display: 'block',
     })
-    TweenLite.to(this.conclusionChallengeTextContainer, 2, {
+    TweenLite.to([this.conclusionBackground, this.conclusionChallengeTextContainer], 2, {
       autoAlpha: 1,
-      delay: 1
+      alpha: 1,
+      delay: 1,
     })
+
     this.displayRecompenseButton()
   }
 
@@ -598,13 +620,13 @@ class ThirdChallenge {
 
   handleRecompenseButtonMouseOver() {
     TweenLite.to(STORAGE.recompenseButtonLine, 0.2, {
-      width: '25%'
+      width: '15%'
     })
   }
 
   handleRecompenseButtonMouseOut() {
     TweenLite.to(STORAGE.recompenseButtonLine, 0.2, {
-      width: '10%'
+      width: '7%'
     })
   }
 

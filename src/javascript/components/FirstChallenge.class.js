@@ -275,13 +275,13 @@ class FirstChallenge {
 
   handleRecompenseButtonMouseOver() {
     TweenLite.to(STORAGE.recompenseButtonLine, 0.2, {
-      width: '25%'
+      width: '15%'
     })
   }
 
   handleRecompenseButtonMouseOut() {
     TweenLite.to(STORAGE.recompenseButtonLine, 0.2, {
-      width: '10%'
+      width: '7%'
     })
   }
 

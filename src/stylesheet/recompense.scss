@@ -1,7 +1,7 @@
 .first-recompense, .second-recompense, .third-recompense { display : none; opacity : 0; width: 100vw; height: 100vh; position: relative; }
-.first-recompense { background-color : #030225; }
-.second-recompense { background-image : url('/assets/second-challenge/step_6.png'); background-size: cover; }
-.third-recompense { background-image : url('/assets/third-challenge/fond-conclu.png'); background-size: cover; }
+.first-recompense { background-image : url('/assets/first-challenge/fond-recompense-1.png'); background-size: cover; }
+.second-recompense { background-image : url('/assets/second-challenge/fond-recompense-2.png'); background-size: cover; }
+.third-recompense { background-image : url('/assets/third-challenge/fond-recompense-3.png'); background-size: cover; }
 
 .first-recompense-scale, .second-recompense-scale, .third-recompense-scale { position: absolute; transform: scale(0.9); left: 50%; top: 50%; }
 
@@ -15,7 +15,7 @@
 .second_path_sum, .second_path_cercle1, .second_path_cercle2, .second_path_cercle3, .second_path_cercle4 { stroke-dasharray: 25,20; stroke-dashoffset: 1000; animation: dash 10s linear infinite; }
 .second_path_sumEye { stroke-dasharray: 1,12; stroke-dashoffset: 1000; stroke-width: 3.3; }
 
-.third_path_sum, .third_path_cercle1, .third_path_cercle2, .third_path_cercle3, .third_path_cercle4 { stroke-dasharray: 60,5; stroke-dashoffset: 1000; animation: dash 10s linear infinite; }
+.third_path_sum, .third_path_cercle1, .third_path_cercle2, .third_path_cercle3, .third_path_cercle4 { stroke-dasharray: 80,3; stroke-dashoffset: 1000; animation: dash 10s linear infinite; }
 .third_path_sumEye { stroke-dasharray: 1,12; stroke-dashoffset: 1000; stroke-width: 3.3; }
 
 .path_sumPupille { fill: #FFFFFF; }

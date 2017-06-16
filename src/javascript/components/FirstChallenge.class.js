@@ -35,6 +35,8 @@ class FirstChallenge {
 
     this.nextAnimButton = document.querySelector('.js-first-challenge-next')
     this.recompenseButton = document.querySelector('.js-first-recompense-button')
+    this.recompenseButtonLine = document.querySelector('.js-first-recompense-button-underLine')
+    STORAGE.recompenseButtonLine = this.recompenseButtonLine
 
     this.conclusionChallengeText = document.querySelector('.js-conclusion-p')
     this.conclusionChallengeButton = document.querySelector('.js-first-recompense-button')
@@ -83,6 +85,8 @@ class FirstChallenge {
     }
 
     this.nextAnimButton.addEventListener('click', that.handleNextAnimButtonClick)
+    this.recompenseButton.addEventListener('mouseover', that.handleRecompenseButtonMouseOver)
+    this.recompenseButton.addEventListener('mouseout', that.handleRecompenseButtonMouseOut)
     this.recompenseButton.addEventListener('click', that.handleRecompenseButtonClick)
     this.firstChallengeNextButton.addEventListener('mouseover', that.firstChallengeNextButtonMouseOver)
     this.firstChallengeNextButton.addEventListener('mouseout', that.firstChallengeNextButtonMouseOut)
@@ -95,6 +99,8 @@ class FirstChallenge {
       this.cursor.mouseout = null
 
       this.nextAnimButton.removeEventListener('click', that.handleNextAnimButtonClick)
+      this.recompenseButton.removeEventListener('mouseover', that.handleRecompenseButtonMouseOver)
+      this.recompenseButton.removeEventListener('mouseout', that.handleRecompenseButtonMouseOut)
       this.recompenseButton.removeEventListener('click', that.handleRecompenseButtonClick)
       this.firstChallengeNextButton.removeEventListener('mouseover', that.firstChallengeNextButtonMouseOver)
       this.firstChallengeNextButton.removeEventListener('mouseout', that.firstChallengeNextButtonMouseOut)
@@ -256,21 +262,27 @@ class FirstChallenge {
     })
   }
 
+  handleNextAnimButtonClick() {
+    STORAGE.FirstChallengeClass.undDisplayNextAnimButton()
+    STORAGE.FirstChallengeClass.backToBegining()
+  }
+
   displayRecompenseButton() {
-    TweenLite.to(this.recompenseButton, 1.2, {
+    TweenLite.to([this.recompenseButton, this.recompenseButtonLine], 1.2, {
       autoAlpha: 1
     })
   }
 
-  undDisplayRecompenseButton() {
-    TweenLite.to(this.recompenseButton, 1.2, {
-      autoAlpha: 0
+  handleRecompenseButtonMouseOver() {
+    TweenLite.to(STORAGE.recompenseButtonLine, 0.2, {
+      width: '25%'
     })
   }
 
-  handleNextAnimButtonClick() {
-    STORAGE.FirstChallengeClass.undDisplayNextAnimButton()
-    STORAGE.FirstChallengeClass.backToBegining()
+  handleRecompenseButtonMouseOut() {
+    TweenLite.to(STORAGE.recompenseButtonLine, 0.2, {
+      width: '10%'
+    })
   }
 
   handleRecompenseButtonClick() {
@@ -295,7 +307,12 @@ class FirstChallenge {
       },
       delay: 2
     })
+  }
 
+  undDisplayRecompenseButton() {
+    TweenLite.to([this.recompenseButton, this.recompenseButtonLine], 1.2, {
+      autoAlpha: 0
+    })
   }
 
   onWindowMouseUp(that) {

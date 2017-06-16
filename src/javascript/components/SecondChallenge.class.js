@@ -23,6 +23,8 @@ class SecondChallenge {
     this.assets = {}
 
     this.background
+    this.conclusionBackground
+
     this.sum
     this.container = new PIXI.Container()
     this.stepIndex = 0
@@ -83,7 +85,8 @@ class SecondChallenge {
         'assets/second-challenge/step_3.png',
         'assets/second-challenge/step_4.png',
         'assets/second-challenge/step_5.png',
-        'assets/second-challenge/step_6.png'
+        'assets/second-challenge/step_6.png',
+        'assets/global/conclusion2.png'
       ])
     }
 
@@ -102,6 +105,7 @@ class SecondChallenge {
     this.createMask()
     this.manageSounds()
     this.createBackground()
+    this.createConclusionBackground()
     this.createSum()
     this.createGlobalBackground()
   }
@@ -183,6 +187,22 @@ class SecondChallenge {
 
 
     this.SecondChallengeContainer.addChild(this.background)
+  }
+
+  createConclusionBackground() {
+    let that = this
+    Object.keys(this.assets.resources).map(function(objectKey, index) {
+      if (index == 7) {
+        that.conclusionBackground = new PIXI.Sprite(that.assets.resources[objectKey].texture)
+      }
+    })
+
+    this.conclusionBackground.width = window.innerWidth
+    this.conclusionBackground.height = window.innerHeight
+
+    this.conclusionBackground.alpha = 0
+
+    this.SecondChallengeContainer.addChild(this.conclusionBackground)
   }
 
   createSum(stepIndex) {
@@ -388,10 +408,17 @@ class SecondChallenge {
     TweenLite.set(this.conclusionChallengeTextContainer, {
       display: 'block'
     })
-    TweenLite.to(this.conclusionChallengeTextContainer, 2, {
-      autoAlpha: 1,
+    TweenLite.to(this.background, 0.3, {
+      alpha: 0,
       delay: 1
     })
+    TweenLite.to([this.conclusionBackground, this.conclusionChallengeTextContainer], 2, {
+      autoAlpha: 1,
+      alpha: 1,
+      delay: 1
+    })
+
+    console.log(this.conclusionBackground)
     this.displayRecompenseButton()
   }
 

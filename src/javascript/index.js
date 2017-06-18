@@ -28,8 +28,8 @@ function initCanvas() {
   new Menu()
   new SoundManager()
   // new Video({ number: 1 })
-  new Carousel({ number: 3 })
-  // new Recompense({ number: 3 })
+  // new Carousel({ number: 3 })
+  new Recompense({ number: 1 })
 
   render()
 }

@@ -1,4 +1,4 @@
-.first-recompense, .second-recompense, .third-recompense { display : none; opacity : 0; width: 100vw; height: 100vh; position: relative; background-position: center center; background-size: cover; }
+.first-recompense, .second-recompense, .third-recompense { display : none; opacity : 0; width: 100vw; height: 100vh; border: solid red; position: relative; background-position: center center; background-size: cover; }
 .first-recompense { background-image : url('/assets/first-challenge/fond-recompense-1.png'); }
 .second-recompense { background-image : url('/assets/second-challenge/fond-recompense-2.png'); }
 .third-recompense { background-image : url('/assets/third-challenge/fond-recompense-3.png'); }

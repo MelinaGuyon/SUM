@@ -14,6 +14,7 @@ class Video {
 
     this.assets = {}
     this.blackboards = []
+    
     STORAGE.videoRatioVertical = 1
 
     this.largeurVideo = 576
@@ -87,7 +88,6 @@ class Video {
         that.initBlackboards()
       }, 1000)
     }
-
   }
 
   resize() {

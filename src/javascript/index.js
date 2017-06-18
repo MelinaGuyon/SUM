@@ -27,13 +27,9 @@ function initCanvas() {
   new Loader()
   new Menu()
   new SoundManager()
-  // new Carousel({ number: 3 })
-  new Recompense({ number: 3 })
-  // new Video()
-  // new Carousel({ number: 3 })
-  // new SecondChallenge()
-  // new FirstChallenge()
-  // new ThirdChallenge()
+  // new Video({ number: 1 })
+  new Carousel({ number: 3 })
+  // new Recompense({ number: 3 })
 
   render()
 }

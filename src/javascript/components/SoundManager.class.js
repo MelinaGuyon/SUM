@@ -50,9 +50,9 @@ class SoundManager {
     this.ambiance.loop = true
   }
 
-  lowerAmbiance(track){
+  lowerAmbiance(track) {
     TweenLite.to(track, 2, {
-      volume: 0.15
+      volume: 0.1
     })
   }
 

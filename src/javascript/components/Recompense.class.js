@@ -9,6 +9,8 @@ class Recompense {
     STORAGE.ThirdRecompenseClass = this
     this.recompenseNumber = options.number
 
+    this.menu = document.querySelector('.js-menu')
+
     if (this.recompenseNumber == 1) {
       this.recompense =  document.querySelector('.first-recompense')
     } else if (this.recompenseNumber == 2) {
@@ -43,6 +45,10 @@ class Recompense {
   recompenseAppearing() {
 
     let that = this
+
+    TweenLite.to(this.menu, 1, {
+      autoAlpha : 0,
+    })
 
     TweenLite.set(this.recompense, {
       display:'block',

@@ -30,6 +30,8 @@ class Carousel {
         STORAGE.time_pourcentage = 90
       }
 
+      this.menu = document.querySelector('.js-menu')
+
       this.spritesFonds = {}
       this.spritesForms = {}
       this.assets = {}
@@ -62,6 +64,10 @@ class Carousel {
 
     init() {
       this.reinitializeMenu()
+
+      TweenLite.to(this.menu, 1, {
+        autoAlpha : 1,
+      })
 
       if (STORAGE.loader.carousel1 && this.carouselNumber == 1) {
         STORAGE.loader.resources = STORAGE.loader.carousel1

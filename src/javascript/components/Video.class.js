@@ -8,6 +8,7 @@ class Video {
     this.VideoContainer = new PIXI.Container()
     this.VideoContainer.alpha = 0
     STORAGE.VideoClass = this
+    this.videoNumber = options.number
     STORAGE.VideoContainer = this.VideoContainer
     STORAGE.stage.addChild(this.VideoContainer)
 
@@ -62,7 +63,12 @@ class Video {
   playVideo() {
     let that = this
 
-    this.texture = PIXI.Texture.fromVideo('assets/video.mp4')
+    if (this.videoNumber == 1) {
+      this.texture = PIXI.Texture.fromVideo('assets/video.mp4')
+    }
+    else if (this.videoNumber == 2) {
+      this.texture = PIXI.Texture.fromVideo('assets/video.mp4')
+    }
     this.videoSprite = new PIXI.Sprite(this.texture)
 
     this.ratio = window.innerWidth/this.largeurVideo
@@ -74,11 +80,13 @@ class Video {
 
     this.VideoContainer.addChild(this.videoSprite)
 
-    setTimeout(function(){
-      STORAGE.videoIntro = that.texture.baseTexture.source
-      STORAGE.videoIntro.pause()
-      that.initBlackboards()
-    }, 1000)
+    if (this.videoNumber == 1) {
+      setTimeout(function(){
+        STORAGE.videoIntro = that.texture.baseTexture.source
+        STORAGE.videoIntro.pause()
+        that.initBlackboards()
+      }, 1000)
+    }
 
   }
 

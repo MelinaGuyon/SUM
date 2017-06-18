@@ -1,5 +1,6 @@
 import Carousel from './Carousel.class.js'
 import soundBank from '../datas/soundBank.js'
+import Video from './Video.class.js'
 import TweenLite from 'gsap'
 
 class Recompense {
@@ -78,6 +79,9 @@ class Recompense {
               alpha: 1,
               delay: 1
             })
+          }
+          else {
+            new Video({ number: 2})
           }
 
           TweenLite.set(that.recompense, {

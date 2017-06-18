@@ -7,7 +7,6 @@ class Recompense {
   constructor(options) {
     STORAGE.ThirdRecompenseClass = this
     this.recompenseNumber = options.number
-    this.voiceOverLaunch = false
 
     if (this.recompenseNumber == 1) {
       this.recompense =  document.querySelector('.first-recompense')
@@ -24,32 +23,19 @@ class Recompense {
     this.recompenseAppearing()
     if (this.recompenseNumber == 1) {
       STORAGE.soundManagerClass.launchAmbianceRecompense(soundBank.firstChallengeCarousel.ambiance_ending)
-      if (this.voiceOverLaunch != true) {
-        STORAGE.soundManagerClass.launchVoiceOver(soundBank.voiceOver.firstChallengeRecompense)
-        this.voiceOverLaunch = true
-
-        setTimeout(function() {
-          STORAGE.soundManagerClass.stopAmbiance(STORAGE.soundManagerClass.ambiance)
-        }, 4000)
-      }
+      setTimeout(function() {
+        STORAGE.soundManagerClass.stopAmbiance(STORAGE.soundManagerClass.ambiance)
+      }, 3000)
     } else if (this.recompenseNumber == 2) {
       STORAGE.soundManagerClass.launchAmbianceRecompense(soundBank.secondChallengeCarousel.ambiance_ending)
-      if (this.voiceOverLaunch != true) {
-        STORAGE.soundManagerClass.launchVoiceOver(soundBank.voiceOver.secondChallengeRecompense)
-        this.voiceOverLaunch = true
-
-        setTimeout(function() {
-          STORAGE.soundManagerClass.stopAmbiance(STORAGE.soundManagerClass.ambiance)
-        }, 4000)
-      }
+      setTimeout(function() {
+        STORAGE.soundManagerClass.stopAmbiance(STORAGE.soundManagerClass.ambiance)
+      }, 3000)
     } else if (this.recompenseNumber == 3) {
       STORAGE.soundManagerClass.launchAmbianceRecompense(soundBank.thirdChallengeCarousel.ambiance_ending)
-      if (this.voiceOverLaunch != true) {
-        STORAGE.soundManagerClass.launchVoiceOver(soundBank.voiceOver.thirdChallengeRecompense)
-        this.voiceOverLaunch = true
-
+      setTimeout(function() {
         STORAGE.soundManagerClass.stopAmbiance(STORAGE.soundManagerClass.ambiance)
-      }
+      }, 3000) 
     }
   }
 
@@ -79,6 +65,10 @@ class Recompense {
     let that = this
 
     setTimeout(function(){
+      STORAGE.soundManagerClass.stopAmbiance(STORAGE.soundManagerClass.ambianceRecompense)
+    }, 5500)
+
+    setTimeout(function(){
       TweenLite.to(that.recompense, 0.5, {
         autoAlpha: 0,
         onComplete: () => {
@@ -90,7 +80,6 @@ class Recompense {
             })
           }
 
-          STORAGE.soundManagerClass.stopAmbiance(STORAGE.soundManagerClass.ambianceRecompense)
           TweenLite.set(that.recompense, {
             display:'none'
           })

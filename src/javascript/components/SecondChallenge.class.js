@@ -405,6 +405,10 @@ class SecondChallenge {
   }
 
   showConclusion() {
+    setTimeout(function() {
+      STORAGE.soundManagerClass.launchVoiceOver(soundBank.voiceOver.secondChallengeRecompense)
+    }, 1500)
+
     TweenLite.set(this.conclusionChallengeTextContainer, {
       display: 'block'
     })

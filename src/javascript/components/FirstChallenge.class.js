@@ -475,6 +475,11 @@ class FirstChallenge {
   }
 
   showConclusion() {
+
+    setTimeout(function() {
+      STORAGE.soundManagerClass.launchVoiceOver(soundBank.voiceOver.firstChallengeRecompense)
+    }, 1500)
+
     TweenLite.to([this.cursor, this.pathBasic, this.pathPassed, this.pupilEmpty, this.eye], 0.6, {
       alpha: 0
     })

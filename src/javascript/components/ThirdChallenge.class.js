@@ -550,6 +550,9 @@ class ThirdChallenge {
   }
 
   showConclusion() {
+    setTimeout(function() {
+      STORAGE.soundManagerClass.launchVoiceOver(soundBank.voiceOver.thirdChallengeRecompense)
+    }, 1500)
 
     for(let i=0; i < this.ThirdChallengeContainer.children.length; i++) {
       if (this.ThirdChallengeContainer.children[i] != this.background && this.ThirdChallengeContainer.children[i] != this.conclusionBackground  )  {

@@ -57,7 +57,7 @@ class FirstChallenge {
       this.setupFirstChallengePicturesLoaded()
     } else {
       STORAGE.loaderClass.loadFirstChallengePictures([
-        'assets/first-challenge/fond.png',
+        'assets/global/conclusion1-3.png',
         'assets/first-challenge/oeil.png',
         'assets/first-challenge/eye-cursor.png'
       ])

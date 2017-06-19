@@ -10,17 +10,20 @@ class SoundManager {
     this.ambianceRecompense
     this.murmure
     this.voiceOver
+
+    this.ambianceHasBeenLowed = false
   }
 
   launchAmbianceBeginning(trackBeginning, trackLoop) {
 
     let that = this
     this.loop = true
+    this.ambianceHasBeenLowed = false
 
     this.ambiance = PIXI.sound.Sound.from({
       src: trackBeginning,
       preload: true,
-      volume: 0.4,
+      volume: 0.8,
       loaded: function(err, sound) {
         let instance = sound.play()
         instance.on('progress', function(progress) {
@@ -44,16 +47,25 @@ class SoundManager {
     this.ambiance.volume = 0
     this.ambiance.play()
 
-    TweenLite.to(this.ambiance, 1, {
-      volume: 0.4
-    })
+    if (this.ambianceHasBeenLowed) {
+      TweenLite.to(this.ambiance, 1, {
+        volume: 0.4
+      })
+    } else {
+      TweenLite.to(this.ambiance, 1, {
+        volume: 0.8
+      })
+    }
+
     this.ambiance.loop = true
   }
 
   lowerAmbiance(track) {
     TweenLite.to(track, 2, {
-      volume: 0.1
+      volume: 0.4
     })
+
+    this.ambianceHasBeenLowed = true
   }
 
   stopAmbiance(track) {
@@ -81,7 +93,7 @@ class SoundManager {
     this.murmure.volume = 0
     this.murmure.play()
     TweenLite.to(this.murmure, 9, {
-      volume: 0.1
+      volume: 0.4
     })
     this.murmure.loop = true
   }

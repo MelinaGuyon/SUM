@@ -24,14 +24,18 @@ class Video {
 
     this.init()
     this.playVideo()
-    this.bind()
+
+    if (this.videoNumber == 1) {
+      this.bind()
+    }
+
   }
 
   init() {
-    TweenLite.set(STORAGE.stage, {
+    TweenLite.to(STORAGE.stage, 1.6, {
       alpha: 1
     })
-    TweenLite.to(this.VideoContainer, 0.6, {
+    TweenLite.to(this.VideoContainer, 1.6, {
       alpha: 1
     })
 
@@ -69,6 +73,13 @@ class Video {
     }
     else if (this.videoNumber == 2) {
       this.texture = PIXI.Texture.fromVideo('assets/video.mp4')
+      STORAGE.videoConclusion = this.texture.baseTexture.source
+      TweenLite.set(STORAGE.videoConclusion, {
+        volume: 0
+      })
+      TweenLite.to(STORAGE.videoConclusion, 4, {
+        volume: 1
+      })
     }
     this.videoSprite = new PIXI.Sprite(this.texture)
 

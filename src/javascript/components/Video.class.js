@@ -14,7 +14,7 @@ class Video {
 
     this.assets = {}
     this.blackboards = []
-    
+
     STORAGE.videoRatioVertical = 1
 
     this.largeurVideo = 576
@@ -36,9 +36,9 @@ class Video {
     })
 
     //STORAGE.videoRatioWidth = window.innerWidth / videoDatas.datasBlackboards[0].width
-    //STORAGE.videoRatioHeight = window.innerHeight / videoDatas.datasBlackboards[0].height      
-    STORAGE.videoRatioX = window.innerWidth / videoDatas.datasBlackboards[0].x 
-    STORAGE.videoRatioY = window.innerHeight / videoDatas.datasBlackboards[0].y 
+    //STORAGE.videoRatioHeight = window.innerHeight / videoDatas.datasBlackboards[0].height
+    STORAGE.videoRatioX = window.innerWidth / videoDatas.datasBlackboards[0].x
+    STORAGE.videoRatioY = window.innerHeight / videoDatas.datasBlackboards[0].y
   }
 
   bind() {

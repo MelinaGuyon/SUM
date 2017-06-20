@@ -285,6 +285,8 @@ class SecondChallenge {
 
       let that = this
       if (this.stepIndex == 5) {
+        STORAGE.soundManagerClass.launchInteractionSound()
+
         setTimeout(function() {
           TweenLite.to(that.gobalBackground, 1, {
             alpha: 1,
@@ -445,6 +447,9 @@ class SecondChallenge {
   }
 
   handleRecompenseButtonClick() {
+
+    STORAGE.soundManagerClass.launchInteractionSound()
+    
     STORAGE.SecondChallengeClass.undDisplayRecompenseButton()
 
     TweenLite.to([STORAGE.conclusionChallengeTextContainer], 0.5, {

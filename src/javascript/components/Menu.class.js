@@ -59,19 +59,19 @@ class Menu {
     })
     if (STORAGE.time_pourcentage == 30) {
       TweenLite.to(STORAGE.timelinePosition, 0.6, {
-        y: 100,
+        y: 120,
         autoAlpha: 1,
       })
     }
     else if (STORAGE.time_pourcentage == 60) {
       TweenLite.to(STORAGE.timelinePosition, 0.6, {
-        y: 200,
+        y: 250,
         autoAlpha: 1,
       })
     }
     else if (STORAGE.time_pourcentage == 90) {
       TweenLite.to(STORAGE.timelinePosition, 0.6, {
-        y: 300,
+        y: 365,
         autoAlpha: 1
       })
     }
@@ -110,7 +110,10 @@ class Menu {
 
       let id = e.target.closest('li').getAttribute('id').split('-')[1]
 
-      STORAGE.carouselClass.unbind()
+      if (STORAGE.carouselClass) {
+        STORAGE.carouselClass.unbind()
+      }
+
       STORAGE.soundManagerClass.stopAmbiance(STORAGE.soundManagerClass.ambiance)
       if (STORAGE.soundManagerClass.murmure) {
         STORAGE.soundManagerClass.stopMurmure(STORAGE.soundManagerClass.murmure)
@@ -121,11 +124,27 @@ class Menu {
         alpha: 0,
         onComplete: function() {
           setTimeout(function() {
-            STORAGE.carousel.destroy()
-            STORAGE.carousel = null
-            STORAGE.carouselClass = null
-            STORAGE.deformation = null
-            STORAGE.deformationClass = null
+
+            if (STORAGE.carouselClass) {
+              STORAGE.carousel.destroy()
+              STORAGE.carousel = null
+              STORAGE.carouselClass = null
+              STORAGE.deformation = null
+              STORAGE.deformationClass = null
+            }
+
+            if (STORAGE.FirstChallengeClass) {
+              STORAGE.FirstChallengeClass.unbind()
+            }
+
+            if (STORAGE.ThirdChallengeClass) {
+              STORAGE.ThirdChallengeClass.unbind()
+            }
+
+            if (STORAGE.SecondChallengeClass) {
+              STORAGE.SecondChallengeClass.unbind()
+            }
+
 
             if (id == 1) {
               new Carousel({ number: 1 })

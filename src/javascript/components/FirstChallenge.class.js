@@ -265,6 +265,7 @@ class FirstChallenge {
   handleNextAnimButtonClick() {
     STORAGE.FirstChallengeClass.undDisplayNextAnimButton()
     STORAGE.FirstChallengeClass.backToBegining()
+    STORAGE.soundManagerClass.launchInteractionSound()
   }
 
   displayRecompenseButton() {
@@ -286,6 +287,9 @@ class FirstChallenge {
   }
 
   handleRecompenseButtonClick() {
+
+    STORAGE.soundManagerClass.launchInteractionSound()
+    
     STORAGE.FirstChallengeClass.undDisplayRecompenseButton()
 
     TweenLite.to([STORAGE.FirstChallengeContainer, STORAGE.conclusionChallengeTextContainer], 0.5, {

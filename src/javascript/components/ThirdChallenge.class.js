@@ -21,6 +21,8 @@ class ThirdChallenge {
     this.isDragging = false
     this.keepDoing = true
 
+    this.interactionSoundLaunched = false
+
     this.thirdChallengeHtmlElements = document.querySelector('.js-third-challenge')
     this.thirdChallengeHelpInformations = document.querySelector('.js-third-challenge-interactions')
     this.thirdChallengeHelpInformations.state = 0
@@ -234,6 +236,12 @@ class ThirdChallenge {
   }
 
   onCheckpointMouseDown() {
+
+    if (STORAGE.ThirdChallengeClass.interactionSoundLaunched == false) {
+      STORAGE.soundManagerClass.launchInteractionSound()
+      STORAGE.ThirdChallengeClass.interactionSoundLaunched = true
+    }
+
     setTimeout(function(){
       STORAGE.ThirdChallengeClass.keepDoing = false
     }, 3500)
@@ -634,6 +642,9 @@ class ThirdChallenge {
   }
 
   handleRecompenseButtonClick() {
+
+    STORAGE.soundManagerClass.launchInteractionSound()
+
     STORAGE.ThirdChallengeClass.undDisplayRecompenseButton()
 
     TweenLite.to([STORAGE.ThirdChallengeContainer, STORAGE.conclusionChallengeTextContainer], 0.5, {

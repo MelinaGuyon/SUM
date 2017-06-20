@@ -86,11 +86,12 @@ class CheckPoint {
 
       if (this.blackboard.isTestLaunch) {
 
+        STORAGE.soundManagerClass.launchInteractionSound()
+
         if (this.context == "Carousel") {
           new ImageDeformation({ number : this.carouselNumber })
           this.animateSectionTransition()
-        }
-        else if (this.context == "VideoIntro") {
+        } else if (this.context == "VideoIntro") {
           STORAGE.videoIntro.play()
           TweenLite.to(STORAGE.blackboards[0].blackboard, 0.5, {
             alpha: 0,
@@ -119,6 +120,7 @@ class CheckPoint {
             })
           }, 7000) // durée de la vidéo
         }
+
       }
     }
   }

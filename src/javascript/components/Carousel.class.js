@@ -229,10 +229,6 @@ class Carousel {
         STORAGE.carouselClass.doAnimeUpAndBlur()
       }
 
-      if (STORAGE.carousel.y < -4000 && STORAGE.carouselClass.carouselNumber == 1 && STORAGE.carouselClass.animeZigZag != true) {
-        STORAGE.carouselClass.doZigZag()
-      }
-
       if (STORAGE.carousel.y < -4300 && STORAGE.carouselClass.carouselNumber == 1) {
         STORAGE.carouselClass.doScale(22, 0.6, 0.17)
         STORAGE.carouselClass.doScale(24, 2, 0.17)

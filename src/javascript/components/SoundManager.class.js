@@ -117,6 +117,16 @@ class SoundManager {
     })
   }
 
+  launchInteractionSound(track) {
+    console.log('sound interaction')
+    // this.interactionSound = PIXI.sound.Sound.from(track)
+    // this.interactionSound.volume = 0
+    // this.interactionSound.play()
+    // TweenLite.to(this.voiceOver, 0.6, {
+    //   volume: 5
+    // })
+  }
+
 }
 
 export default SoundManager

@@ -49,7 +49,7 @@ class SoundManager {
 
     if (this.ambianceHasBeenLowed) {
       TweenLite.to(this.ambiance, 1, {
-        volume: 0.4
+        volume: 0.1
       })
     } else {
       TweenLite.to(this.ambiance, 1, {
@@ -62,7 +62,7 @@ class SoundManager {
 
   lowerAmbiance(track) {
     TweenLite.to(track, 2, {
-      volume: 0.4
+      volume: 0.1
     })
 
     this.ambianceHasBeenLowed = true

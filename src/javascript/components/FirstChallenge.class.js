@@ -289,7 +289,7 @@ class FirstChallenge {
   handleRecompenseButtonClick() {
 
     STORAGE.soundManagerClass.launchInteractionSound()
-    
+
     STORAGE.FirstChallengeClass.undDisplayRecompenseButton()
 
     TweenLite.to([STORAGE.FirstChallengeContainer, STORAGE.conclusionChallengeTextContainer], 0.5, {

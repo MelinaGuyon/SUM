@@ -260,7 +260,7 @@ class ThirdChallenge {
     else {
       setTimeout(function(){
         STORAGE.ThirdChallengeClass.showConclusion()
-      }, 2500)
+      }, 3500)
       return
     }
   }

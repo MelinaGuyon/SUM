@@ -7,6 +7,7 @@ import FirstChallenge from './FirstChallenge.class.js'
 import SecondChallenge from './SecondChallenge.class.js'
 import ThirdChallenge from './ThirdChallenge.class.js'
 import Carousel from './Carousel.class.js'
+import soundBank from '../datas/soundBank.js'
 
 class CheckPoint {
 
@@ -68,6 +69,11 @@ class CheckPoint {
     }
   }
 
+  unbind() {
+    this.checkPoint.mouseover = null
+    this.checkPoint.mousedown = null
+  }
+
   drawingDetection() {
     let that = this
     this.checkPoint.isChecked = true
@@ -80,13 +86,14 @@ class CheckPoint {
     }
 
     if (drawValidated) {
-      TweenLite.to(this.blackboard.children, 0.3, {
-        alpha: 0.5
-      })
+
+      for (var i = 0; i < this.blackboard.children.length; i++) {
+        this.blackboard.children[i].isChecked = false
+      }
 
       if (this.blackboard.isTestLaunch) {
 
-        STORAGE.soundManagerClass.launchInteractionSound()
+        STORAGE.soundManagerClass.launchInteractionSound(soundBank.interaction.interactionCarousel, 1)
 
         if (this.context == "Carousel") {
           new ImageDeformation({ number : this.carouselNumber })

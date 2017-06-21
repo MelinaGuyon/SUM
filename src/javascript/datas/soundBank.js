@@ -25,6 +25,13 @@ const soundBank = {
     thirdChallengeCarousel: 'assets/sounds/third-challenge/3-caroussel.mp3',
     thirdChallenge: 'assets/sounds/third-challenge/Challenge-3-interaction.mp3',
     thirdChallengeRecompense: 'assets/sounds/third-challenge/Challenge-3-recompense.mp3'
+  },
+  interaction: {
+    interactionCarousel: 'assets/sounds/son-interaction-carousel.mp3',
+    interaction1: 'assets/sounds/son-interaction-1.mp3',
+    interaction2: 'assets/sounds/son-interaction-2.mp3',
+    interaction3: 'assets/sounds/son-interaction-3.mp3',
+    interaction4: 'assets/sounds/son-interaction-4.mp3'
   }
 }
 

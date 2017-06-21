@@ -265,7 +265,19 @@ class FirstChallenge {
   handleNextAnimButtonClick() {
     STORAGE.FirstChallengeClass.undDisplayNextAnimButton()
     STORAGE.FirstChallengeClass.backToBegining()
-    STORAGE.soundManagerClass.launchInteractionSound()
+
+    console.log(STORAGE.FirstChallengeClass.movieIndex)
+    if (STORAGE.FirstChallengeClass.movieIndex ==  0) {
+      console.log(STORAGE.FirstChallengeClass.movieIndex)
+      STORAGE.soundManagerClass.launchInteractionSound(soundBank.interaction.interaction1, 3)
+    } else if (STORAGE.FirstChallengeClass.movieIndex ==  1) {
+      STORAGE.soundManagerClass.launchInteractionSound(soundBank.interaction.interaction2, 3)
+    } else if (STORAGE.FirstChallengeClass.movieIndex ==  2) {
+      STORAGE.soundManagerClass.launchInteractionSound(soundBank.interaction.interaction3, 3)
+    } else if (STORAGE.FirstChallengeClass.movieIndex ==  3) {
+      STORAGE.soundManagerClass.launchInteractionSound(soundBank.interaction.interaction4, 3)
+    }
+
   }
 
   displayRecompenseButton() {
@@ -288,7 +300,7 @@ class FirstChallenge {
 
   handleRecompenseButtonClick() {
 
-    STORAGE.soundManagerClass.launchInteractionSound()
+    STORAGE.soundManagerClass.launchInteractionSound(soundBank.interaction.interactionCarousel, 1)
 
     STORAGE.FirstChallengeClass.undDisplayRecompenseButton()
 

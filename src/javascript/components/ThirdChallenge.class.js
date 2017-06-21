@@ -238,7 +238,7 @@ class ThirdChallenge {
   onCheckpointMouseDown() {
 
     if (STORAGE.ThirdChallengeClass.interactionSoundLaunched == false) {
-      STORAGE.soundManagerClass.launchInteractionSound()
+      STORAGE.soundManagerClass.launchInteractionSound(soundBank.interaction.interaction1, 3)
       STORAGE.ThirdChallengeClass.interactionSoundLaunched = true
     }
 
@@ -643,7 +643,7 @@ class ThirdChallenge {
 
   handleRecompenseButtonClick() {
 
-    STORAGE.soundManagerClass.launchInteractionSound()
+    STORAGE.soundManagerClass.launchInteractionSound(soundBank.interaction.interactionCarousel, 1)
 
     STORAGE.ThirdChallengeClass.undDisplayRecompenseButton()
 

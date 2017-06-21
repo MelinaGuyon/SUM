@@ -49,7 +49,7 @@ class SoundManager {
 
     if (this.ambianceHasBeenLowed) {
       TweenLite.to(this.ambiance, 1, {
-        volume: 0.1
+        volume: 0.15
       })
     } else {
       TweenLite.to(this.ambiance, 1, {
@@ -62,7 +62,7 @@ class SoundManager {
 
   lowerAmbiance(track) {
     TweenLite.to(track, 2, {
-      volume: 0.1
+      volume: 0.15
     })
 
     this.ambianceHasBeenLowed = true
@@ -117,14 +117,14 @@ class SoundManager {
     })
   }
 
-  launchInteractionSound(track) {
+  launchInteractionSound(track, volume) {
     console.log('sound interaction')
-    // this.interactionSound = PIXI.sound.Sound.from(track)
-    // this.interactionSound.volume = 0
-    // this.interactionSound.play()
-    // TweenLite.to(this.voiceOver, 0.6, {
-    //   volume: 5
-    // })
+    this.interactionSound = PIXI.sound.Sound.from(track)
+    this.interactionSound.volume = 0
+    this.interactionSound.play()
+    TweenLite.to(this.interactionSound, 1, {
+      volume: volume
+    })
   }
 
 }

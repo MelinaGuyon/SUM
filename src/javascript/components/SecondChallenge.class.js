@@ -285,7 +285,7 @@ class SecondChallenge {
 
       let that = this
       if (this.stepIndex == 5) {
-        STORAGE.soundManagerClass.launchInteractionSound()
+        STORAGE.soundManagerClass.launchInteractionSound(soundBank.interaction.interaction1, 3)
 
         setTimeout(function() {
           TweenLite.to(that.gobalBackground, 1, {
@@ -448,7 +448,7 @@ class SecondChallenge {
 
   handleRecompenseButtonClick() {
 
-    STORAGE.soundManagerClass.launchInteractionSound()
+    STORAGE.soundManagerClass.launchInteractionSound(soundBank.interaction.interactionCarousel, 1)
 
     STORAGE.SecondChallengeClass.undDisplayRecompenseButton()
 

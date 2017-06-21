@@ -45,7 +45,7 @@ class CheckPoint {
       this.checkPoint.isChecked = false
       this.blackboard.addChild(this.checkPoint)
     }
-    else if(this.context == "VideoIntro") {
+/*    else if(this.context == "VideoIntro") {
       this.checkPoint.beginFill(0xffffff, 1)
       this.checkPoint.drawCircle(0, 0, videoDatas.datasBlackboards[this.blackBoardIndex].checkPoints[this.index].rayon)
       this.checkPoint.endFill()
@@ -54,7 +54,7 @@ class CheckPoint {
       this.checkPoint.interactive = true // pour attribuer événements à this.checkPoint
       this.checkPoint.isChecked = false
       this.blackboard.addChild(this.checkPoint)
-    }
+    }*/
 
   }
 
@@ -91,35 +91,36 @@ class CheckPoint {
         if (this.context == "Carousel") {
           new ImageDeformation({ number : this.carouselNumber })
           this.animateSectionTransition()
-        } else if (this.context == "VideoIntro") {
-          STORAGE.videoIntro.play()
-          TweenLite.to(STORAGE.blackboards[0].blackboard, 0.5, {
-            alpha: 0,
-            onComplete: function() {
-              STORAGE.blackboards[0].blackboard.destroy()
-              document.body.style.cursor = 'auto'
-              STORAGE.VideoClass.unbind()
-            }
-          })
-          setTimeout(function(){
-            TweenLite.to([STORAGE.stage], 0.4, {
-              alpha: 0,
-              onComplete: function() {
-                setTimeout(function() {
-                  STORAGE.videoIntro.pause()
-                  STORAGE.VideoContainer.destroy()
-                  new Carousel({ number: 1 })
-                  TweenLite.to(STORAGE.stage, 1.5, {
-                    alpha: 1
-                  })
-                }, 200)
-              }
-            })
-            TweenLite.to(STORAGE.videoIntro, 4, {
-              volume: 0
-            })
-          }, 7000) // durée de la vidéo
-        }
+        } 
+        // else if (this.context == "VideoIntro") {
+        //   STORAGE.videoIntro.play()
+        //   TweenLite.to(STORAGE.blackboards[0].blackboard, 0.5, {
+        //     alpha: 0,
+        //     onComplete: function() {
+        //       STORAGE.blackboards[0].blackboard.destroy()
+        //       document.body.style.cursor = 'auto'
+        //       STORAGE.VideoClass.unbind()
+        //     }
+        //   })
+        //   setTimeout(function(){
+        //     TweenLite.to([STORAGE.stage], 0.4, {
+        //       alpha: 0,
+        //       onComplete: function() {
+        //         setTimeout(function() {
+        //           STORAGE.videoIntro.pause()
+        //           STORAGE.VideoContainer.destroy()
+        //           new Carousel({ number: 1 })
+        //           TweenLite.to(STORAGE.stage, 1.5, {
+        //             alpha: 1
+        //           })
+        //         }, 200)
+        //       }
+        //     })
+        //     TweenLite.to(STORAGE.videoIntro, 4, {
+        //       volume: 0
+        //     })
+        //   }, 73000) // durée de la vidéo
+        // }
 
       }
     }

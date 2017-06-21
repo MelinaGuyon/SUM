@@ -50,10 +50,10 @@ class Blackboard {
           this.checkpoints.push(new CheckPointClass({ index : i, blackBoardIndex : this.index, blackboard : this.blackboard, context : "Carousel" }))
         }
       }
-      else if (this.context == "VideoIntro") {
+      /*else if (this.context == "VideoIntro") {
 
-        this.blackboard.beginFill(0xff0000, 1)
-        this.blackboard.drawRect(window.innerWidth / STORAGE.videoRatioX, window.innerHeight / STORAGE.videoRatioY, videoDatas.datasBlackboards[this.index].width, videoDatas.datasBlackboards[this.index].height)
+        this.blackboard.beginFill(0x000000, 0.2)
+        this.blackboard.drawRect(100, 100, videoDatas.datasBlackboards[this.index].width * STORAGE.videoRatioWidth, videoDatas.datasBlackboards[this.index].height * STORAGE.videoRatioWidth)
         this.blackboard.interactive = true // pour attribuer événements à this.blackboard
 
         STORAGE.VideoContainer.addChild(this.blackboard)
@@ -65,7 +65,7 @@ class Blackboard {
         for(let i = 0; i < videoDatas.datasBlackboards[this.index].checkPoints.length; i++) {
           this.checkpoints.push(new CheckPointClass({ index : i, blackBoardIndex : this.index, blackboard : this.blackboard, context : "VideoIntro" }))
         }
-      }
+      }*/
     }
 
     bind() {
@@ -131,7 +131,9 @@ class Blackboard {
 
       TweenLite.to(this.drawnLine, 0.3, {
         alpha: 0,
-        onComplete: () => { this.drawnLine.clear() }
+        onComplete: () => { 
+          this.drawnLine.clear()
+        }
       })
 
       this.checkpoints.forEach(function(el) {

@@ -27,8 +27,8 @@ function initCanvas() {
   new Loader()
   new Menu()
   new SoundManager()
-  // new Video({ number: 2 })
-  new Carousel({ number: 3 })
+  new Video({ number: 2 })
+  // new Carousel({ number: 3 })
   // new Recompense({ number: 1 })
 
   render()

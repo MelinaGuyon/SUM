@@ -1,26 +1,30 @@
 const videoDatas = {
   datasBlackboards: [
       {
-        width: 400,
-        height: 400,
-        x: 400,
-        y: 200,
+        width: 680,
+        height: 450,
+        x: 760,
+        y: 80,
         checkPoints : [{
           rayon: 30,
-          x: 200,
-          y: 30
+          x: 60,
+          y: 145
         }, {
           rayon: 30,
-          x: 40,
-          y: 200
+          x: 350,
+          y: 65
         }, {
           rayon: 30,
-          x: 370,
-          y: 200
+          x: 650,
+          y: 120
         }, {
           rayon: 30,
-          x: 200,
-          y: 360
+          x: 500,
+          y: 310
+        }, {
+          rayon: 30,
+          x: 180,
+          y: 410
         }
       ],
       isTestLaunch: true

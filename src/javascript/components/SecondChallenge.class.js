@@ -86,7 +86,7 @@ class SecondChallenge {
         'assets/second-challenge/step_4.png',
         'assets/second-challenge/step_5.png',
         'assets/second-challenge/step_6.png',
-        'assets/global/conclusion2.png'
+        'assets/global/fond-conclusion2.png'
       ])
     }
 
@@ -449,7 +449,7 @@ class SecondChallenge {
   handleRecompenseButtonClick() {
 
     STORAGE.soundManagerClass.launchInteractionSound()
-    
+
     STORAGE.SecondChallengeClass.undDisplayRecompenseButton()
 
     TweenLite.to([STORAGE.conclusionChallengeTextContainer], 0.5, {

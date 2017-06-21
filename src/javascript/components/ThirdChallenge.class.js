@@ -59,7 +59,7 @@ class ThirdChallenge {
         'assets/third-challenge/line.png',
         'assets/third-challenge/half-circle.png',
         'assets/third-challenge/aide.svg',
-        'assets/global/conclusion1-3.png'
+        'assets/global/fond-conclusion1et3.png'
       ])
     }
 

@@ -72,7 +72,7 @@ class Video {
       this.texture = PIXI.Texture.fromVideo('assets/video.mp4')
     }
     else if (this.videoNumber == 2) {
-      this.texture = PIXI.Texture.fromVideo('assets/video.mp4')
+      this.texture = PIXI.Texture.fromVideo('assets/conclusion.mp4')
       STORAGE.videoConclusion = this.texture.baseTexture.source
       TweenLite.set(STORAGE.videoConclusion, {
         volume: 0

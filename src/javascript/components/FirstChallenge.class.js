@@ -57,7 +57,7 @@ class FirstChallenge {
       this.setupFirstChallengePicturesLoaded()
     } else {
       STORAGE.loaderClass.loadFirstChallengePictures([
-        'assets/global/conclusion1-3.png',
+        'assets/global/fond-conclusion1et3.png',
         'assets/first-challenge/oeil.png',
         'assets/first-challenge/eye-cursor.png'
       ])
@@ -289,7 +289,7 @@ class FirstChallenge {
   handleRecompenseButtonClick() {
 
     STORAGE.soundManagerClass.launchInteractionSound()
-    
+
     STORAGE.FirstChallengeClass.undDisplayRecompenseButton()
 
     TweenLite.to([STORAGE.FirstChallengeContainer, STORAGE.conclusionChallengeTextContainer], 0.5, {

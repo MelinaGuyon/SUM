@@ -1,7 +1,7 @@
 const conclusionTextsDatas = {
 	firstChallenge:
     {
-      conclusion: "Désormais, tu vois les choses autrement. Tu sais maîtriser et orienter tes pensées.",
+      conclusion: "<span>Désormais, tu vois les choses autrement. Tu sais maîtriser et orienter tes pensées.</span>",
       button: "Je me sens mieux"
     },
 	secondChallenge:
@@ -17,5 +17,3 @@ const conclusionTextsDatas = {
 }
 
 export default conclusionTextsDatas
-
-

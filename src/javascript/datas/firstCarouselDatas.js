@@ -1,6 +1,6 @@
 const firstCarouselDatas = {
   datasImages: [
-    'assets/before-challenge-1/carousel-fond.jpg',
+    'assets/before-challenge-1/carousel-fond-2.jpg',
     'assets/before-challenge-1/0-forme-1.png',
     'assets/before-challenge-1/0-forme-2.png',
     'assets/before-challenge-1/0-forme-3.png',
@@ -29,7 +29,20 @@ const firstCarouselDatas = {
     'assets/before-challenge-1/5-forme-5.png',
     'assets/before-challenge-1/6-forme-1.png',
     'assets/before-challenge-1/6-forme-2.png',
-    'assets/before-challenge-1/7-forme-1.png'
+    'assets/before-challenge-1/6-forme-3.png',
+    'assets/before-challenge-1/6-forme-4.png',
+    'assets/before-challenge-1/6-forme-5.png',
+    'assets/before-challenge-1/7-forme-1.png',
+    'assets/before-challenge-1/7-forme-2.png',
+    'assets/before-challenge-1/7-forme-3.png',
+    'assets/before-challenge-1/7-forme-4.png',
+    'assets/before-challenge-1/7-forme-5.png',
+    'assets/before-challenge-1/7-forme-6.png',
+    'assets/before-challenge-1/7-forme-7.png',
+    'assets/before-challenge-1/7-forme-8.png',
+    'assets/before-challenge-1/8-forme-1.png',
+    'assets/before-challenge-1/8-forme-2.png',
+    'assets/before-challenge-1/9-forme-1.png'
   ],
   datasEyes: [
     {
@@ -51,7 +64,8 @@ const firstCarouselDatas = {
         width: 400,
         height: 400,
         x: 740,
-        y: 9050,
+        // y: 9050,
+        y: 11250,
         checkPoints : [{
           rayon: 30,
           x: 200,

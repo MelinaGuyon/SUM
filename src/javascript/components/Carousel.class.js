@@ -15,7 +15,7 @@ class Carousel {
       this.carouselNumber = options.number
       if (this.carouselNumber == 1) {
         this.carouselDatas = firstCarouselDatas
-        STORAGE.carousel.numberOfWindow = 8
+        STORAGE.carousel.numberOfWindow = 10
         STORAGE.time_pourcentage = 30
         STORAGE.soundManagerClass.launchAmbianceBeginning(soundBank.firstChallengeCarousel.ambiance_beginning, soundBank.firstChallengeCarousel.ambiance_loop)
       } else if (this.carouselNumber == 2) {
@@ -190,7 +190,7 @@ class Carousel {
           that.spritesForms[objectKey].rapidity = 0
         } else {
           if (that.carouselNumber == 1) {
-            that.spritesForms[objectKey].rapidity = Math.random() * (0.8 - 0.1) + 0.1
+            that.spritesForms[objectKey].rapidity = Math.random() * (1.2 - 0.4) + 0.4
           } else if(that.carouselNumber == 2){
             that.spritesForms[objectKey].rapidity = Math.random() * (0.8 - 0.1) + 0.1
           } else if(that.carouselNumber == 3){
@@ -526,10 +526,10 @@ class Carousel {
       if (direction == 'down') {
         Object.keys(that.spritesForms).map(function(objectKey, index) {
           if (Math.abs(that.carousel.y + that.spritesForms[objectKey].y) < 1000) {
-            if (that.carouselNumber == 2 && index == 4 || that.carouselNumber == 2 && index == 5 || that.carouselNumber == 2 && index == 7 || that.carouselNumber == 2 && index == 13 || that.carouselNumber == 3 && index == 3 || that.carouselNumber == 3 && index == 5 || that.carouselNumber == 3 && index == 16 || that.carouselNumber == 3 && index == 9) {
+            if (that.carouselNumber == 1 && index == 8 || that.carouselNumber == 1 && index == 12 || that.carouselNumber == 1 && index == 32 || that.carouselNumber == 1 && index == 33 || that.carouselNumber == 1 && index == 37 || that.carouselNumber == 1 && index == 36 || that.carouselNumber == 1 && index == 28 || that.carouselNumber == 2 && index == 4 || that.carouselNumber == 2 && index == 5 || that.carouselNumber == 2 && index == 7 || that.carouselNumber == 2 && index == 13 || that.carouselNumber == 3 && index == 3 || that.carouselNumber == 3 && index == 5 || that.carouselNumber == 3 && index == 16 || that.carouselNumber == 3 && index == 9) {
               return
             }
-            if (that.carouselNumber == 2 && index == 0 || that.carouselNumber == 2 && index == 8 || that.carouselNumber == 2 && index == 3 || that.carouselNumber == 3 && index == 7 || that.carouselNumber == 3 && index == 11) {
+            if (that.carouselNumber == 1 && index == 22 || that.carouselNumber == 1 && index == 11 || that.carouselNumber == 1 && index == 6 || that.carouselNumber == 1 && index == 15 || that.carouselNumber == 1 && index == 13 || that.carouselNumber == 1 && index == 31 || that.carouselNumber == 1 && index == 35 || that.carouselNumber == 1 && index == 34 || that.carouselNumber == 1 && index == 29 || that.carouselNumber == 2 && index == 0 || that.carouselNumber == 2 && index == 8 || that.carouselNumber == 2 && index == 3 || that.carouselNumber == 3 && index == 7 || that.carouselNumber == 3 && index == 11) {
               that.spritesForms[objectKey].y += that.spritesForms[objectKey].rapidity
               return
             }
@@ -539,10 +539,10 @@ class Carousel {
       } else if (direction == 'up') {
         Object.keys(that.spritesForms).map(function(objectKey, index) {
           if (Math.abs(that.carousel.y + that.spritesForms[objectKey].y) < 1000) {
-            if (that.carouselNumber == 2 && index == 4 || that.carouselNumber == 2 && index == 5 || that.carouselNumber == 2 && index == 7 || that.carouselNumber == 2 && index == 13 || that.carouselNumber == 3 && index == 3 || that.carouselNumber == 3 && index == 5 || that.carouselNumber == 3 && index == 16 || that.carouselNumber == 3 && index == 9) {
+            if (that.carouselNumber == 1 && index == 8 || that.carouselNumber == 1 && index == 12 || that.carouselNumber == 1 && index == 32 || that.carouselNumber == 1 && index == 33 || that.carouselNumber == 1 && index == 37 || that.carouselNumber == 1 && index == 36 || that.carouselNumber == 1 && index == 28 || that.carouselNumber == 2 && index == 4 || that.carouselNumber == 2 && index == 5 || that.carouselNumber == 2 && index == 7 || that.carouselNumber == 2 && index == 13 || that.carouselNumber == 3 && index == 3 || that.carouselNumber == 3 && index == 5 || that.carouselNumber == 3 && index == 16 || that.carouselNumber == 3 && index == 9) {
               return
             }
-            if (that.carouselNumber == 2 && index == 0 || that.carouselNumber == 2 && index == 8 || that.carouselNumber == 2 && index == 3 || that.carouselNumber == 3 && index == 7 || that.carouselNumber == 3 && index == 11) {
+            if (that.carouselNumber == 1 && index == 22 || that.carouselNumber == 1 && index == 11 || that.carouselNumber == 1 && index == 6 || that.carouselNumber == 1 && index == 15 || that.carouselNumber == 1 && index == 13 || that.carouselNumber == 1 && index == 31 || that.carouselNumber == 1 && index == 35 || that.carouselNumber == 1 && index == 34 || that.carouselNumber == 1 && index == 29 || that.carouselNumber == 2 && index == 0 || that.carouselNumber == 2 && index == 8 || that.carouselNumber == 2 && index == 3 || that.carouselNumber == 3 && index == 7 || that.carouselNumber == 3 && index == 11) {
               that.spritesForms[objectKey].y -= that.spritesForms[objectKey].rapidity
               return
             }

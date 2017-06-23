@@ -55,8 +55,6 @@ class SecondChallenge {
     this.recompenseButton.addEventListener('mouseout', that.handleRecompenseButtonMouseOut)
     this.recompenseButton.addEventListener('click', that.handleRecompenseButtonClick)
 
-    window.addEventListener('resize', that.handleResize)
-
     setTimeout(function(){
       document.addEventListener("mousemove", that.handleMove)
     }, 2000)
@@ -77,6 +75,7 @@ class SecondChallenge {
   }
 
   init() {
+    let that = this
 
     if (STORAGE.loader.secondChallenge) {
       STORAGE.loader.resources = STORAGE.loader.secondChallenge
@@ -101,6 +100,8 @@ class SecondChallenge {
       alpha: 1,
       ease: Power4.easeInOut
     })
+
+    window.addEventListener('resize', that.handleResize)
   }
 
   setupSecondChallengePicturesLoaded() {

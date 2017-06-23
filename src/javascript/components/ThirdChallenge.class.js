@@ -46,6 +46,7 @@ class ThirdChallenge {
   }
 
   init() {
+    let that = this
 
     if (STORAGE.loader.thirdChallenge) {
       STORAGE.loader.resources = STORAGE.loader.thirdChallenge
@@ -75,11 +76,12 @@ class ThirdChallenge {
       ease: Power2.easeInOut,
       delay: 1.8
     })
+
+    window.addEventListener('resize', that.handleResize)
   }
 
   bind() {
     let that = this
-    window.addEventListener('resize', that.handleResize)
     this.rectangle.mouseover = function(){ that.onShapeMouseOver() }
     this.rectangle.mouseout = function(){ that.onShapeMouseOut() }
     this.rectangle.mousedown = function(mouseData){ that.onShapeMouseDown(mouseData, this) }

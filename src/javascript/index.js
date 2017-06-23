@@ -14,12 +14,38 @@ import Recompense from './components/Recompense.class.js'
 
 
 window.STORAGE = {}
+let startButton
 
 window.onload = function() {
-  initCanvas()
+  startButton = document.querySelector('.js-launch-exp-button')
+  bind()
+}
+
+function bind() {
+  startButton.addEventListener('click', initCanvas)
+}
+
+function unbind() {
+  startButton.removeEventListener('click', initCanvas)
+}
+
+function undisplayBackground() {
+  let background = document.querySelector('.begining-container')
+  TweenLite.to(background, 0.3, {
+    autoAlpha: 0,
+    onComplete: function() {
+      TweenLite.set(background, {
+        display: "none"
+      })
+    }
+  })
 }
 
 function initCanvas() {
+
+  unbind()
+  undisplayBackground()
+
   STORAGE.renderCanvas = false
 
   new Renderer()
@@ -28,8 +54,6 @@ function initCanvas() {
   new Menu()
   new SoundManager()
   new Video({ number: 1 })
-  // new Carousel({ number: 3 })
-  // new Recompense({ number: 1 })
 
   render()
 }

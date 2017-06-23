@@ -27,10 +27,28 @@ body {
   background-color: black;
   margin: 0;
   overflow: hidden;
+  width: 100%;
+  height: 100%;
  }
 
  .webGLRenderer.hidden, .canvasRenderer.hidden  {
    display: none;
+ }
+
+ .begining-container {
+   width: 100%;
+   height: 100%;
+   position: relative;
+   background-size: contain;
+   background-repeat: no-repeat;
+
+   img {
+     position: relative;
+     left: 50%;
+     top: 50%;
+     transform: translate(-50%);
+
+   }
  }
 
 .js-conclusion-text-container {
@@ -58,6 +76,70 @@ body {
   font-family: brownBold;
   text-align: center;
 }
+
+
+.js-launch-exp-button {
+  position: absolute;
+  left : 50%;
+  bottom : 20%;
+  transform : translate(-50%, 0);
+  width: 35%;
+  color: white;
+  text-align : center;
+  font-family : brownLight;
+  font-size : 18px;
+  cursor: pointer;
+
+  &:after {
+    content: '';
+    position: absolute;
+    left : 50%;
+    bottom : -17px;
+    transform : translate(-50%, 0);
+    width: 10%;
+    color: white;
+    border: solid white 0.1px;
+    cursor: pointer;
+    transition: all 0.6s;
+    -webkit-transition: all 0.6s;
+    -moz-transition: all 0.6s;
+  }
+}
+
+.js-video-button {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  left : 50%;
+  bottom : 6%;
+  transform : translate(-50%, 0);
+  width: 35%;
+  color: white;
+  text-align : center;
+  font-family : brownLight;
+  font-size : 18px;
+  cursor: pointer;
+
+  &:after {
+    content: '';
+    position: absolute;
+    left : 50%;
+    bottom : -17px;
+    transform : translate(-50%, 0);
+    width: 10%;
+    color: white;
+    border: solid white 0.1px;
+    cursor: pointer;
+    transition: all 0.6s;
+    -webkit-transition: all 0.6s;
+    -moz-transition: all 0.6s;
+  }
+}
+
+.js-launch-exp-button:hover:after {
+    width: 20%;
+}
+
 
 .js-first-recompense-button {
   position: absolute;

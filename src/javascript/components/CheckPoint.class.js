@@ -99,36 +99,6 @@ class CheckPoint {
           new ImageDeformation({ number : this.carouselNumber })
           this.animateSectionTransition()
         } 
-        // else if (this.context == "VideoIntro") {
-        //   STORAGE.videoIntro.play()
-        //   TweenLite.to(STORAGE.blackboards[0].blackboard, 0.5, {
-        //     alpha: 0,
-        //     onComplete: function() {
-        //       STORAGE.blackboards[0].blackboard.destroy()
-        //       document.body.style.cursor = 'auto'
-        //       STORAGE.VideoClass.unbind()
-        //     }
-        //   })
-        //   setTimeout(function(){
-        //     TweenLite.to([STORAGE.stage], 0.4, {
-        //       alpha: 0,
-        //       onComplete: function() {
-        //         setTimeout(function() {
-        //           STORAGE.videoIntro.pause()
-        //           STORAGE.VideoContainer.destroy()
-        //           new Carousel({ number: 1 })
-        //           TweenLite.to(STORAGE.stage, 1.5, {
-        //             alpha: 1
-        //           })
-        //         }, 200)
-        //       }
-        //     })
-        //     TweenLite.to(STORAGE.videoIntro, 4, {
-        //       volume: 0
-        //     })
-        //   }, 73000) // durée de la vidéo
-        // }
-
       }
     }
   }

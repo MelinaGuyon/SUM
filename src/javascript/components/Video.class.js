@@ -14,7 +14,8 @@ class Video {
     STORAGE.stage.addChild(this.VideoContainer)
 
     this.assets = {}
-    //this.blackboards = []
+
+    this.videoButton = document.querySelector('.js-video-button')
 
     STORAGE.videoRatioVertical = 1
 
@@ -79,46 +80,54 @@ class Video {
     this.videoSprite.width = this.largeurVideo * this.ratio
     this.videoSprite.height = this.hauteurVideo * this.ratio
 
-/*    STORAGE.videoRatioWidth = this.videoSprite.width / videoDatas.datasBlackboards[0].width
-    STORAGE.videoRatioHeight = this.videoSprite.height / videoDatas.datasBlackboards[0].height
-    STORAGE.videoRatioX = window.innerWidth / videoDatas.datasBlackboards[0].x
-    STORAGE.videoRatioY = window.innerHeight / videoDatas.datasBlackboards[0].y*/
-
     this.videoSprite.x = 0
     this.videoSprite.y = (window.innerHeight-this.videoSprite.height)/2
 
     this.VideoContainer.addChild(this.videoSprite)
 
-/*    if (this.videoNumber == 1) {
-      setTimeout(function(){
-        STORAGE.videoIntro = that.texture.baseTexture.source
-        STORAGE.videoIntro.pause()
-        that.initBlackboards()
-      }, 25500)
-    }*/
-
 
     if (this.videoNumber == 1) {
       setTimeout(function(){
         TweenLite.to([STORAGE.stage], 0.4, {
-          alpha: 0,
+          alpha: 1,
           onComplete: function() {
             setTimeout(function() {
               STORAGE.videoIntro = that.texture.baseTexture.source
               STORAGE.videoIntro.pause()
-              STORAGE.VideoContainer.destroy()
-              new Carousel({ number: 1 })
-              TweenLite.to(STORAGE.stage, 1.5, {
-                alpha: 1
+              TweenLite.to(STORAGE.videoIntro, 4, {
+                volume: 0
+              })
+              console.log(STORAGE.VideoClass.videoButton)
+              TweenLite.to(STORAGE.VideoClass.videoButton, 0.3, {
+                autoAlpha: 1,
+                onComplete: function() {
+                  STORAGE.VideoClass.videoButton.addEventListener('click', STORAGE.VideoClass.launchXP)
+                }
               })
             }, 200)
           }
         })
-        TweenLite.to(STORAGE.videoIntro, 4, {
-          volume: 0
-        })
-      }, 98000) // durée de la vidéo
+      }, 92000) //durée de la vidéo
     }
+  }
+
+  launchXP() {
+    TweenLite.to([STORAGE.stage], 0.4, {
+      alpha: 0,
+      onComplete: function() {
+        TweenLite.to(STORAGE.VideoClass.videoButton, 0.3, {
+          autoAlpha: 0
+        })
+        STORAGE.VideoClass.videoButton.removeEventListener('click', STORAGE.VideoClass.launchXP)
+        setTimeout(function() {
+          STORAGE.VideoContainer.destroy()
+          new Carousel({ number: 1 })
+          TweenLite.to(STORAGE.stage, 1.5, {
+            alpha: 1
+          })
+        })
+      }
+    })
   }
 
   resize() {
@@ -128,21 +137,7 @@ class Video {
 
     this.videoSprite.y = (window.innerHeight-this.videoSprite.height)/2
 
-    //this.initBlackboards()
   }
-
-/*  initBlackboards() {
-    for (var i = 0; i < this.blackboards.length; i++) {
-      this.blackboards[i].blackboard.destroy()
-    }
-    this.blackboards = []
-
-    for(let i = 0; i < videoDatas.datasBlackboards.length; i++) {
-      this.blackboards.push(new Blackboard({ index : i, context : "VideoIntro" }))
-    }
-
-    STORAGE.blackboards = this.blackboards
-  }*/
 
 }
 

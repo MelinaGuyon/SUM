@@ -46,6 +46,7 @@ class ThirdChallenge {
   }
 
   init() {
+    let that = this
 
     if (STORAGE.loader.thirdChallenge) {
       STORAGE.loader.resources = STORAGE.loader.thirdChallenge
@@ -75,6 +76,8 @@ class ThirdChallenge {
       ease: Power2.easeInOut,
       delay: 1.8
     })
+
+    window.addEventListener('resize', that.handleResize)
   }
 
   bind() {
@@ -103,6 +106,7 @@ class ThirdChallenge {
 
   unbind() {
     let that = this
+    window.removeEventListener('resize', that.handleResize)
     this.rectangle.mouseover = null
     this.rectangle.mouseout = null
     this.rectangle.mousedown = null
@@ -509,6 +513,27 @@ class ThirdChallenge {
     this.helpButton.y = window.innerHeight-100
     this.helpButton.interactive = true
     this.ThirdChallengeContainer.addChild(this.helpButton)
+  }
+
+  handleResize() {
+    STORAGE.renderer.resize(window.innerWidth, window.innerHeight)
+    let timeOut
+    clearTimeout(timeOut)
+    timeOut = setTimeout(()=> {
+      STORAGE.ThirdChallengeClass.background.width = window.innerWidth
+      STORAGE.ThirdChallengeClass.background.height = window.innerHeight 
+      STORAGE.ThirdChallengeClass.rectangle.x = window.innerWidth-window.innerWidth/8*5
+      STORAGE.ThirdChallengeClass.rectangle.y = window.innerHeight-STORAGE.ThirdChallengeClass.rectangle.height-30  
+      STORAGE.ThirdChallengeClass.circle.x = window.innerWidth-window.innerWidth/8*3
+      STORAGE.ThirdChallengeClass.circle.y = window.innerHeight-STORAGE.ThirdChallengeClass.circle.height-30 
+      STORAGE.ThirdChallengeClass.triangle.x = window.innerWidth-window.innerWidth/8*6
+      STORAGE.ThirdChallengeClass.triangle.y = window.innerHeight-STORAGE.ThirdChallengeClass.triangle.height-30
+      STORAGE.ThirdChallengeClass.line.x = window.innerWidth-window.innerWidth/8*4
+      STORAGE.ThirdChallengeClass.line.y = window.innerHeight-STORAGE.ThirdChallengeClass.line.height-30
+      STORAGE.ThirdChallengeClass.halfcircle.x = window.innerWidth-window.innerWidth/8*2
+      STORAGE.ThirdChallengeClass.halfcircle.y = window.innerHeight-STORAGE.ThirdChallengeClass.halfcircle.height-30
+      STORAGE.ThirdChallengeClass.helpButton.y = window.innerHeight-100
+    }, 200)
   }
 
   onHelpButtonMouseDown() {

@@ -55,6 +55,8 @@ class SecondChallenge {
     this.recompenseButton.addEventListener('mouseout', that.handleRecompenseButtonMouseOut)
     this.recompenseButton.addEventListener('click', that.handleRecompenseButtonClick)
 
+    window.addEventListener('resize', that.handleResize)
+
     setTimeout(function(){
       document.addEventListener("mousemove", that.handleMove)
     }, 2000)
@@ -68,6 +70,8 @@ class SecondChallenge {
     this.recompenseButton.removeEventListener('mouseover', that.handleRecompenseButtonMouseOver)
     this.recompenseButton.removeEventListener('mouseout', that.handleRecompenseButtonMouseOut)
     this.recompenseButton.removeEventListener('click', that.handleRecompenseButtonClick)
+
+    window.removeEventListener('resize', that.handleResize)
 
     document.removeEventListener("mousemove", that.handleMove)
   }
@@ -133,13 +137,13 @@ class SecondChallenge {
 
     this.gobalBackground = new PIXI.Sprite(this.assets.resources['assets/second-challenge/step_6.png'].texture)
 
-    let ratioVertical = window.innerHeight / this.gobalBackground.texture.height
-    let ratioHorizontal = window.innerWidth / this.gobalBackground.texture.width
-    if (ratioHorizontal < ratioVertical) {
-      this.gobalBackground.scale = new PIXI.Point(ratioVertical, ratioVertical)
+    let ratioVerticalGlobal = window.innerHeight / this.gobalBackground.texture.height
+    let ratioHorizontalGlobal = window.innerWidth / this.gobalBackground.texture.width
+    if (ratioHorizontalGlobal < ratioVerticalGlobal) {
+      this.gobalBackground.scale = new PIXI.Point(ratioVerticalGlobal, ratioVerticalGlobal)
       this.gobalBackground.x = - (this.gobalBackground.texture.width * this.gobalBackground.scale.x - window.innerWidth) / 2
     } else {
-      this.gobalBackground.scale = new PIXI.Point(ratioHorizontal, ratioHorizontal)
+      this.gobalBackground.scale = new PIXI.Point(ratioHorizontalGlobal, ratioHorizontalGlobal)
       this.gobalBackground.y = - (this.gobalBackground.texture.height * this.gobalBackground.scale.x - window.innerHeight) / 2
     }
 
@@ -175,16 +179,15 @@ class SecondChallenge {
       }
     })
 
-    let ratioVertical = window.innerHeight / this.background.texture.height
-    let ratioHorizontal = window.innerWidth / this.background.texture.width
+    let ratioVertical = window.innerHeight / STORAGE.SecondChallengeClass.background.texture.height
+    let ratioHorizontal = window.innerWidth / STORAGE.SecondChallengeClass.background.texture.width
     if (ratioHorizontal < ratioVertical) {
-      this.background.scale = new PIXI.Point(ratioVertical, ratioVertical)
-      this.background.x = - (this.background.texture.width * this.background.scale.x - window.innerWidth) / 2
+      STORAGE.SecondChallengeClass.background.scale = new PIXI.Point(ratioVertical, ratioVertical)
+      STORAGE.SecondChallengeClass.background.x = - (STORAGE.SecondChallengeClass.background.texture.width * STORAGE.SecondChallengeClass.background.scale.x - window.innerWidth) / 2
     } else {
-      this.background.scale = new PIXI.Point(ratioHorizontal, ratioHorizontal)
-      this.background.y = - (this.background.texture.height * this.background.scale.x - window.innerHeight) / 2
+      STORAGE.SecondChallengeClass.background.scale = new PIXI.Point(ratioHorizontal, ratioHorizontal)
+      STORAGE.SecondChallengeClass.background.y = - (STORAGE.SecondChallengeClass.background.texture.height * STORAGE.SecondChallengeClass.background.scale.x - window.innerHeight) / 2
     }
-
 
     this.SecondChallengeContainer.addChild(this.background)
   }
@@ -246,6 +249,47 @@ class SecondChallenge {
     STORAGE.SecondChallengeClass.mask.beginFill()
     STORAGE.SecondChallengeClass.mask.drawCircle(e.x, e.y, 100, 0, 2 * Math.PI)
     STORAGE.SecondChallengeClass.mask.endFill()
+  }
+
+  handleResize() {
+    STORAGE.canvasRenderer.resize(window.innerWidth, window.innerHeight)
+    let timeOut
+    clearTimeout(timeOut)
+    timeOut = setTimeout(()=> {
+
+      let ratioVerticalGlobal = window.innerHeight / STORAGE.SecondChallengeClass.gobalBackground.texture.height
+      let ratioHorizontalGlobal = window.innerWidth / STORAGE.SecondChallengeClass.gobalBackground.texture.width
+      if (ratioHorizontalGlobal < ratioVerticalGlobal) {
+        STORAGE.SecondChallengeClass.gobalBackground.scale = new PIXI.Point(ratioVerticalGlobal, ratioVerticalGlobal)
+        STORAGE.SecondChallengeClass.gobalBackground.x = - (STORAGE.SecondChallengeClass.gobalBackground.texture.width * STORAGE.SecondChallengeClass.gobalBackground.scale.x - window.innerWidth) / 2
+      } else {
+        STORAGE.SecondChallengeClass.gobalBackground.scale = new PIXI.Point(ratioHorizontalGlobal, ratioHorizontalGlobal)
+        STORAGE.SecondChallengeClass.gobalBackground.y = - (STORAGE.SecondChallengeClass.gobalBackground.texture.height * STORAGE.SecondChallengeClass.gobalBackground.scale.x - window.innerHeight) / 2
+      }
+
+      let ratioVertical = window.innerHeight / STORAGE.SecondChallengeClass.background.texture.height
+      let ratioHorizontal = window.innerWidth / STORAGE.SecondChallengeClass.background.texture.width
+      if (ratioHorizontal < ratioVertical) {
+        STORAGE.SecondChallengeClass.background.scale = new PIXI.Point(ratioVertical, ratioVertical)
+        STORAGE.SecondChallengeClass.background.x = - (STORAGE.SecondChallengeClass.background.texture.width * STORAGE.SecondChallengeClass.background.scale.x - window.innerWidth) / 2
+      } else {
+        STORAGE.SecondChallengeClass.background.scale = new PIXI.Point(ratioHorizontal, ratioHorizontal)
+        STORAGE.SecondChallengeClass.background.y = - (STORAGE.SecondChallengeClass.background.texture.height * STORAGE.SecondChallengeClass.background.scale.x - window.innerHeight) / 2
+      }
+
+      STORAGE.SecondChallengeClass.container.position.x = window.innerWidth / 2
+      STORAGE.SecondChallengeClass.container.position.y = window.innerHeight / 2
+
+      STORAGE.SecondChallengeClass.sum.scale = STORAGE.SecondChallengeClass.background.scale
+      STORAGE.SecondChallengeClass.sum.x = STORAGE.SecondChallengeClass.sum.x
+      STORAGE.SecondChallengeClass.sum.y = STORAGE.SecondChallengeClass.sum.y
+
+
+
+      STORAGE.SecondChallengeClass.conclusionBackground.width = window.innerWidth
+      STORAGE.SecondChallengeClass.conclusionBackground.height = window.innerHeight
+
+    }, 200)
   }
 
   allCheckpointsChecked() {

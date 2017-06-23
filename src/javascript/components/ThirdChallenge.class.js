@@ -123,6 +123,10 @@ class ThirdChallenge {
     this.recompenseButton.removeEventListener('mouseover', that.handleRecompenseButtonMouseOver)
     this.recompenseButton.removeEventListener('mouseout', that.handleRecompenseButtonMouseOut)
     this.recompenseButton.removeEventListener('click', that.handleRecompenseButtonClick)
+
+    TweenLite.to(this.thirdChallengeHtmlElements, 0.3, {
+      autoAlpha: 0
+    })
   }
 
   onShapeMouseOver() {

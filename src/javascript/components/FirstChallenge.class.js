@@ -84,6 +84,8 @@ class FirstChallenge {
       that.onCursorMouseOut()
     }
 
+    window.addEventListener('resize', that.handleResize)
+
     this.nextAnimButton.addEventListener('click', that.handleNextAnimButtonClick)
     this.recompenseButton.addEventListener('mouseover', that.handleRecompenseButtonMouseOver)
     this.recompenseButton.addEventListener('mouseout', that.handleRecompenseButtonMouseOut)
@@ -97,6 +99,8 @@ class FirstChallenge {
       this.cursor.mousedown = null
       this.cursor.mouseover = null
       this.cursor.mouseout = null
+
+      window.removeEventListener('resize', that.handleResize)
 
       this.nextAnimButton.removeEventListener('click', that.handleNextAnimButtonClick)
       this.recompenseButton.removeEventListener('mouseover', that.handleRecompenseButtonMouseOver)
@@ -419,6 +423,33 @@ class FirstChallenge {
       })
     }
   }
+
+  handleResize() {
+    STORAGE.renderer.resize(window.innerWidth, window.innerHeight)
+    let timeOut
+    clearTimeout(timeOut)
+    timeOut = setTimeout(()=> {
+
+      let ratioVertical = window.innerHeight / STORAGE.FirstChallengeClass.background.texture.height
+      let ratioHorizontal = window.innerWidth / STORAGE.FirstChallengeClass.background.texture.width
+      if (ratioHorizontal < ratioVertical) {
+        STORAGE.FirstChallengeClass.background.scale = new PIXI.Point(ratioVertical, ratioVertical)
+        STORAGE.FirstChallengeClass.background.x = - (STORAGE.FirstChallengeClass.background.texture.width * STORAGE.FirstChallengeClass.background.scale.x - window.innerWidth) / 2
+      } else {
+        STORAGE.FirstChallengeClass.background.scale = new PIXI.Point(ratioHorizontal, ratioHorizontal)
+        STORAGE.FirstChallengeClass.background.y = - (STORAGE.FirstChallengeClass.background.texture.height * STORAGE.FirstChallengeClass.background.scale.x - window.innerHeight) / 2
+      }
+
+      let ratioHorizontalEye = window.innerWidth / STORAGE.FirstChallengeClass.eye.texture.width
+      STORAGE.FirstChallengeClass.eye.scale = new PIXI.Point(ratioHorizontalEye, ratioHorizontalEye)
+
+      STORAGE.FirstChallengeClass.eye.position.x = window.innerWidth / 2
+      STORAGE.FirstChallengeClass.eye.position.y = window.innerHeight / 2
+      STORAGE.FirstChallengeClass.eye.anchor.x = 0.5
+      STORAGE.FirstChallengeClass.eye.anchor.y = 0.5
+      
+    }, 200)
+  }  
 
   manageSounds(kill) {
     let that = this

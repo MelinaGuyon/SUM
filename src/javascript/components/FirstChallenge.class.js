@@ -108,6 +108,8 @@ class FirstChallenge {
       this.recompenseButton.removeEventListener('click', that.handleRecompenseButtonClick)
       this.firstChallengeNextButton.removeEventListener('mouseover', that.firstChallengeNextButtonMouseOver)
       this.firstChallengeNextButton.removeEventListener('mouseout', that.firstChallengeNextButtonMouseOut)
+
+      STORAGE.FirstChallengeClass.undDisplayNextAnimButton()
     }
 
   setupFirstChallengePicturesLoaded() {
@@ -255,13 +257,13 @@ class FirstChallenge {
   }
 
   displayNextAnimButton() {
-    TweenLite.to(this.nextAnimButton, 1.2, {
+    TweenLite.to(this.nextAnimButton, 0.6, {
       autoAlpha: 1
     })
   }
 
   undDisplayNextAnimButton() {
-    TweenLite.to(this.nextAnimButton, 1.2, {
+    TweenLite.to(this.nextAnimButton, 0.6, {
       autoAlpha: 0
     })
   }
@@ -310,8 +312,12 @@ class FirstChallenge {
 
     TweenLite.to([STORAGE.FirstChallengeContainer, STORAGE.conclusionChallengeTextContainer], 0.5, {
       alpha: 0,
-      display:'none',
-      delay: 1
+      delay: 1,
+      onComplete: function() {
+        TweenLite.set([STORAGE.FirstChallengeContainer, STORAGE.conclusionChallengeTextContainer], {
+          display:'none'
+        })
+      }
     })
     TweenLite.to([STORAGE.stage], 0.4, {
       alpha: 0,

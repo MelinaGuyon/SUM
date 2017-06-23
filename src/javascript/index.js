@@ -54,7 +54,7 @@ function initCanvas() {
   new Menu()
   new SoundManager()
   new Video({ number: 1 })
-  new Carousel({ number: 2 })
+  // new Carousel({ number: 1 })
 
   render()
 }

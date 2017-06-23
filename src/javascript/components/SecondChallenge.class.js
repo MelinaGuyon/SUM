@@ -62,6 +62,9 @@ class SecondChallenge {
   }
 
   unbind() {
+
+    STORAGE.SecondChallengeClass.mask.clear()
+
     let that = this
     this.SecondChallengeContainer.mousemove = null
 
@@ -72,6 +75,10 @@ class SecondChallenge {
     window.removeEventListener('resize', that.handleResize)
 
     document.removeEventListener("mousemove", that.handleMove)
+
+    document.querySelector('.webGLRenderer').classList.remove('hidden')
+    document.querySelector('.canvasRenderer').classList.add('hidden')
+    STORAGE.renderCanvas = false
   }
 
   init() {
@@ -100,7 +107,6 @@ class SecondChallenge {
       alpha: 1,
       ease: Power4.easeInOut
     })
-
     window.addEventListener('resize', that.handleResize)
   }
 

@@ -135,14 +135,36 @@ class Menu {
 
             if (STORAGE.FirstChallengeClass) {
               STORAGE.FirstChallengeClass.unbind()
+              STORAGE.FirstChallengeContainer.destroy()
+              STORAGE.FirstChallengeContainer = null
+              STORAGE.conclusionChallengeTextContainer = null
+              STORAGE.FirstChallengeClass = null
+
+              TweenLite.to([STORAGE.FirstChallengeContainer, STORAGE.conclusionChallengeTextContainer], 0.5, {
+                alpha: 0,
+                delay: 1,
+                onComplete: function() {
+                  TweenLite.set([STORAGE.FirstChallengeContainer, STORAGE.conclusionChallengeTextContainer], {
+                    display:'none'
+                  })
+                }
+              })
             }
 
             if (STORAGE.ThirdChallengeClass) {
+              STORAGE.ThirdChallengeContainer.destroy()
               STORAGE.ThirdChallengeClass.unbind()
+              STORAGE.ThirdChallengeContainer = null
+              STORAGE.conclusionChallengeTextContainer = null
+              STORAGE.ThirdChallengeClass = null
             }
 
             if (STORAGE.SecondChallengeClass) {
+              STORAGE.SecondChallengeContainer.destroy()
               STORAGE.SecondChallengeClass.unbind()
+              STORAGE.SecondChallengeContainer = null
+              STORAGE.conclusionChallengeTextContainer = null
+              STORAGE.SecondChallengeClass = null
             }
 
 
@@ -153,6 +175,7 @@ class Menu {
             } else if (id == 3) {
               new Carousel({ number: 3 })
             }
+
             TweenLite.to([STORAGE.carousel, STORAGE.stage], 0.5, {
               alpha: 1,
               delay: 1

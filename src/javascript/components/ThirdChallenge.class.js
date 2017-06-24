@@ -521,11 +521,11 @@ class ThirdChallenge {
     clearTimeout(timeOut)
     timeOut = setTimeout(()=> {
       STORAGE.ThirdChallengeClass.background.width = window.innerWidth
-      STORAGE.ThirdChallengeClass.background.height = window.innerHeight 
+      STORAGE.ThirdChallengeClass.background.height = window.innerHeight
       STORAGE.ThirdChallengeClass.rectangle.x = window.innerWidth-window.innerWidth/8*5
-      STORAGE.ThirdChallengeClass.rectangle.y = window.innerHeight-STORAGE.ThirdChallengeClass.rectangle.height-30  
+      STORAGE.ThirdChallengeClass.rectangle.y = window.innerHeight-STORAGE.ThirdChallengeClass.rectangle.height-30
       STORAGE.ThirdChallengeClass.circle.x = window.innerWidth-window.innerWidth/8*3
-      STORAGE.ThirdChallengeClass.circle.y = window.innerHeight-STORAGE.ThirdChallengeClass.circle.height-30 
+      STORAGE.ThirdChallengeClass.circle.y = window.innerHeight-STORAGE.ThirdChallengeClass.circle.height-30
       STORAGE.ThirdChallengeClass.triangle.x = window.innerWidth-window.innerWidth/8*6
       STORAGE.ThirdChallengeClass.triangle.y = window.innerHeight-STORAGE.ThirdChallengeClass.triangle.height-30
       STORAGE.ThirdChallengeClass.line.x = window.innerWidth-window.innerWidth/8*4

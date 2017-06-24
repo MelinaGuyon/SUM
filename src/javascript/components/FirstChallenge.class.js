@@ -453,9 +453,9 @@ class FirstChallenge {
       STORAGE.FirstChallengeClass.eye.position.y = window.innerHeight / 2
       STORAGE.FirstChallengeClass.eye.anchor.x = 0.5
       STORAGE.FirstChallengeClass.eye.anchor.y = 0.5
-      
+
     }, 200)
-  }  
+  }
 
   manageSounds(kill) {
     let that = this
@@ -535,6 +535,10 @@ class FirstChallenge {
 
     TweenLite.to([this.cursor, this.pathBasic, this.pathPassed, this.pupilEmpty, this.eye], 0.6, {
       alpha: 0
+    })
+
+    TweenLite.set(this.conclusionChallengeTextContainer, {
+      display: "block"
     })
 
     TweenLite.to(this.conclusionChallengeTextContainer, 2, {

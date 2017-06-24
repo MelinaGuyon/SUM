@@ -120,11 +120,10 @@ class Menu {
       }
 
 
-      TweenLite.to([STORAGE.stage], 0.4, {
+      TweenLite.to([STORAGE.stage], 0.3, {
         alpha: 0,
         onComplete: function() {
           setTimeout(function() {
-
             if (STORAGE.carouselClass) {
               STORAGE.carousel.destroy()
               STORAGE.carousel = null
@@ -134,53 +133,82 @@ class Menu {
             }
 
             if (STORAGE.FirstChallengeClass) {
-              STORAGE.FirstChallengeClass.unbind()
-              STORAGE.FirstChallengeContainer.destroy()
-              STORAGE.FirstChallengeContainer = null
-              STORAGE.conclusionChallengeTextContainer = null
-              STORAGE.FirstChallengeClass = null
-
-              TweenLite.to([STORAGE.FirstChallengeContainer, STORAGE.conclusionChallengeTextContainer], 0.5, {
+              TweenLite.to([STORAGE.conclusionChallengeTextContainer], 0.3, {
+                autoAlpha: 0
+              })
+              TweenLite.to([STORAGE.FirstChallengeContainer], 0.3, {
                 alpha: 0,
-                delay: 1,
+                delay: 0.2,
                 onComplete: function() {
                   TweenLite.set([STORAGE.FirstChallengeContainer, STORAGE.conclusionChallengeTextContainer], {
                     display:'none'
                   })
+                  STORAGE.FirstChallengeClass.unbind()
+                  STORAGE.FirstChallengeContainer.destroy()
+                  STORAGE.FirstChallengeContainer = null
+                  STORAGE.conclusionChallengeTextContainer = null
+                  STORAGE.FirstChallengeClass = null
                 }
               })
             }
 
             if (STORAGE.ThirdChallengeClass) {
-              STORAGE.ThirdChallengeContainer.destroy()
-              STORAGE.ThirdChallengeClass.unbind()
-              STORAGE.ThirdChallengeContainer = null
-              STORAGE.conclusionChallengeTextContainer = null
-              STORAGE.ThirdChallengeClass = null
+              TweenLite.to([STORAGE.conclusionChallengeTextContainer], 0.3, {
+                autoAlpha: 0
+              })
+              TweenLite.to([STORAGE.ThirdChallengeContainer], 0.3, {
+                alpha: 0,
+                delay: 0.2,
+                onComplete: function() {
+                  TweenLite.set([STORAGE.ThirdChallengeContainer, STORAGE.conclusionChallengeTextContainer], {
+                    display:'none'
+                  })
+                  STORAGE.ThirdChallengeClass.unbind()
+                  STORAGE.ThirdChallengeContainer.destroy()
+                  STORAGE.ThirdChallengeContainer = null
+                  STORAGE.conclusionChallengeTextContainer = null
+                  STORAGE.ThirdChallengeClass = null
+                }
+              })
+
             }
 
             if (STORAGE.SecondChallengeClass) {
-              STORAGE.SecondChallengeContainer.destroy()
-              STORAGE.SecondChallengeClass.unbind()
-              STORAGE.SecondChallengeContainer = null
-              STORAGE.conclusionChallengeTextContainer = null
-              STORAGE.SecondChallengeClass = null
+              TweenLite.to([STORAGE.conclusionChallengeTextContainer], 0.3, {
+                autoAlpha: 0
+              })
+              TweenLite.to([STORAGE.SecondChallengeContainer], 0.3, {
+                alpha: 0,
+                delay: 0.2,
+                onComplete: function() {
+                  TweenLite.set([STORAGE.SecondChallengeContainer, STORAGE.conclusionChallengeTextContainer], {
+                    display:'none'
+                  })
+                  STORAGE.SecondChallengeClass.unbind()
+                  STORAGE.SecondChallengeContainer.destroy()
+                  STORAGE.SecondChallengeContainer = null
+                  STORAGE.conclusionChallengeTextContainer = null
+                  STORAGE.SecondChallengeClass = null
+                }
+              })
             }
 
+            setTimeout(function() {
+              if (id == 1) {
+                new Carousel({ number: 1 })
+              } else if (id == 2) {
+                new Carousel({ number: 2 })
+              } else if (id == 3) {
+                new Carousel({ number: 3 })
+              }
+            }, 700)
 
-            if (id == 1) {
-              new Carousel({ number: 1 })
-            } else if (id == 2) {
-              new Carousel({ number: 2 })
-            } else if (id == 3) {
-              new Carousel({ number: 3 })
-            }
 
             TweenLite.to([STORAGE.carousel, STORAGE.stage], 0.5, {
               alpha: 1,
               delay: 1
             })
-          }, 3000)
+          }, 1000)
 
           setTimeout(function() {
             TweenLite.set(STORAGE.epreuves, {

@@ -66,7 +66,7 @@ class Carousel {
       this.reinitializeMenu()
 
       TweenLite.to(this.menu, 1, {
-        autoAlpha : 1,
+        autoAlpha : 1
       })
 
       if (STORAGE.loader.carousel1 && this.carouselNumber == 1) {

@@ -3,7 +3,7 @@
 .second-recompense { background-image : url('/assets/second-challenge/fond-recompense-2.png'); }
 .third-recompense { background-image : url('/assets/third-challenge/fond-recompense-3.png'); }
 
-.first-recompense-scale, .second-recompense-scale, .third-recompense-scale { position: absolute; transform: scale(0.9); left: 50%; top: 50%; }
+.first-recompense-scale, .second-recompense-scale, .third-recompense-scale { position: absolute; transform: scale(1); left: 50%; top: 50%; }
 
 .first-recompense-path, .second-recompense-path, .third-recompense-path { display: block; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
 
@@ -24,6 +24,9 @@
 
 /*svg { transition: fill .1s ease-out, opacity .1s ease-out; }*/
 
+@media all and (max-width: 1920px) {
+	.first-recompense-scale, .second-recompense-scale, .third-recompense-scale { transform: scale(1); }
+}
 
 @media all and (max-width: 1600px) {
 	.first-recompense-scale, .second-recompense-scale, .third-recompense-scale { transform: scale(0.8); }

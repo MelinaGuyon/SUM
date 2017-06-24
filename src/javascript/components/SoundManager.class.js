@@ -48,9 +48,23 @@ class SoundManager {
     this.ambiance.play()
 
     if (this.ambianceHasBeenLowed) {
-      TweenLite.to(this.ambiance, 1, {
-        volume: 0.15
-      })
+      if (STORAGE.FirstChallengeClass) {
+        TweenLite.to(this.ambiance, 1, {
+          volume: 0.15
+        })
+      } else if (STORAGE.SecondChallengeClass) {
+        TweenLite.to(this.ambiance, 1, {
+          volume: 0.3
+        })
+      } else if (STORAGE.ThirdChallengeClass) {
+        TweenLite.to(this.ambiance, 1, {
+          volume: 0.07
+        })
+      } else {
+        TweenLite.to(this.ambiance, 1, {
+          volume: 0.15
+        })
+      }
     } else {
       TweenLite.to(this.ambiance, 1, {
         volume: 0.8
@@ -61,9 +75,28 @@ class SoundManager {
   }
 
   lowerAmbiance(track) {
-    TweenLite.to(track, 2, {
-      volume: 0.15
-    })
+    console.log(STORAGE)
+    if (STORAGE.FirstChallengeClass) {
+      TweenLite.to(track, 2, {
+        volume: 0.15
+      })
+      console.log('one')
+    } else if (STORAGE.SecondChallengeClass) {
+      TweenLite.to(track, 2, {
+        volume: 0.3
+      })
+      console.log('two')
+    } else if (STORAGE.ThirdChallengeClass) {
+      TweenLite.to(track, 2, {
+        volume: 0.07
+      })
+      console.log('three')
+    } else {
+      TweenLite.to(track, 2, {
+        volume: 0.15
+      })
+    }
+
 
     this.ambianceHasBeenLowed = true
   }

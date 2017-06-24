@@ -174,7 +174,7 @@ class FirstChallenge {
 
     this.eye.addChild(this.pupilEmpty)
 
-    this.conclusionChallengeText.innerText = conclusionTextsDatas.firstChallenge.conclusion
+    this.conclusionChallengeText.innerHTML = conclusionTextsDatas.firstChallenge.conclusion
     this.conclusionChallengeButton.innerText = conclusionTextsDatas.firstChallenge.button
   }
 

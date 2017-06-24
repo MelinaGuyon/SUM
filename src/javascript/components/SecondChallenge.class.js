@@ -38,7 +38,7 @@ class SecondChallenge {
     this.conclusionChallengeTextContainer = document.querySelector('.js-conclusion-text-container')
     STORAGE.conclusionChallengeTextContainer = this.conclusionChallengeTextContainer
 
-    this.conclusionChallengeText.innerText = conclusionTextsDatas.secondChallenge.conclusion
+    this.conclusionChallengeText.innerHTML = conclusionTextsDatas.secondChallenge.conclusion
     this.conclusionChallengeButton.innerText = conclusionTextsDatas.secondChallenge.button
 
     this.entrance = true

@@ -174,7 +174,7 @@ class FirstChallenge {
 
     this.eye.addChild(this.pupilEmpty)
 
-    this.conclusionChallengeText.innerText = conclusionTextsDatas.firstChallenge.conclusion
+    this.conclusionChallengeText.innerHTML = conclusionTextsDatas.firstChallenge.conclusion
     this.conclusionChallengeButton.innerText = conclusionTextsDatas.firstChallenge.button
   }
 
@@ -462,7 +462,9 @@ class FirstChallenge {
     if (this.entrance) {
       STORAGE.soundManagerClass.lowerAmbiance(STORAGE.soundManagerClass.ambiance)
       STORAGE.soundManagerClass.stopMurmure(STORAGE.soundManagerClass.murmure)
-      STORAGE.soundManagerClass.launchVoiceOver(soundBank.voiceOver.firstChallenge)
+      setTimeout(function() {
+        STORAGE.soundManagerClass.launchVoiceOver(soundBank.voiceOver.firstChallenge)
+      }, 2000)
       setTimeout(function(){
         that.createPath()
         that.createCursor()

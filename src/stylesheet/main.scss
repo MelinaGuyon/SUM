@@ -36,19 +36,14 @@ body {
  }
 
  .begining-container {
-   width: 100%;
-   height: 100%;
+   width: 100vw;
+   height: 100vh;
    position: relative;
    background-size: contain;
    background-repeat: no-repeat;
-
-   img {
-     position: relative;
-     left: 50%;
-     top: 50%;
-     transform: translate(-50%);
-
-   }
+   background-image: url('http://localhost:8080/assets/global/sum-cover.png');
+   background-size: cover;
+   background-position: center;
  }
 
 .js-conclusion-text-container {
@@ -81,7 +76,7 @@ body {
 .js-launch-exp-button {
   position: absolute;
   left : 50%;
-  bottom : 20%;
+  top : 88vh;
   transform : translate(-50%, 0);
   width: 35%;
   color: white;
@@ -111,7 +106,7 @@ body {
   opacity: 0;
   position: absolute;
   left : 50%;
-  bottom : 6%;
+  top : 88vh;
   transform : translate(-50%, 0);
   width: 35%;
   color: white;
@@ -136,7 +131,7 @@ body {
   }
 }
 
-.js-launch-exp-button:hover:after {
+.js-launch-exp-button:hover:after, .js-video-button:hover:after {
     width: 20%;
 }
 

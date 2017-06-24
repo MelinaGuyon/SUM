@@ -37,7 +37,7 @@ class ThirdChallenge {
     this.conclusionChallengeTextContainer = document.querySelector('.js-conclusion-text-container')
     STORAGE.conclusionChallengeTextContainer = this.conclusionChallengeTextContainer
 
-    this.conclusionChallengeText.innerText = conclusionTextsDatas.thirdChallenge.conclusion
+    this.conclusionChallengeText.innerHTML = conclusionTextsDatas.thirdChallenge.conclusion
     this.conclusionChallengeButton.innerText = conclusionTextsDatas.thirdChallenge.button
 
     this.entrance = true
@@ -291,7 +291,9 @@ class ThirdChallenge {
     let that = this
     if (this.entrance) {
       STORAGE.soundManagerClass.lowerAmbiance(STORAGE.soundManagerClass.ambiance)
-      STORAGE.soundManagerClass.launchVoiceOver(soundBank.voiceOver.thirdChallenge)
+      setTimeout(function() {
+        STORAGE.soundManagerClass.launchVoiceOver(soundBank.voiceOver.thirdChallenge)
+      }, 2000)
       setTimeout(function(){
         that.bind()
       }, 10000)

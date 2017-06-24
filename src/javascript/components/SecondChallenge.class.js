@@ -38,7 +38,7 @@ class SecondChallenge {
     this.conclusionChallengeTextContainer = document.querySelector('.js-conclusion-text-container')
     STORAGE.conclusionChallengeTextContainer = this.conclusionChallengeTextContainer
 
-    this.conclusionChallengeText.innerText = conclusionTextsDatas.secondChallenge.conclusion
+    this.conclusionChallengeText.innerHTML = conclusionTextsDatas.secondChallenge.conclusion
     this.conclusionChallengeButton.innerText = conclusionTextsDatas.secondChallenge.button
 
     this.entrance = true
@@ -125,10 +125,12 @@ class SecondChallenge {
     let that = this
     if (this.entrance) {
       STORAGE.soundManagerClass.lowerAmbiance(STORAGE.soundManagerClass.ambiance)
-      STORAGE.soundManagerClass.launchVoiceOver(soundBank.voiceOver.secondChallenge)
+      setTimeout(function() {
+        STORAGE.soundManagerClass.launchVoiceOver(soundBank.voiceOver.secondChallenge)
+      }, 2000)
       setTimeout(function(){
         that.bind()
-      }, 10000)
+      }, 7500)
       this.entrance = false
       return
     }

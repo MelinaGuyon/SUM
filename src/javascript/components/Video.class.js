@@ -107,7 +107,7 @@ class Video {
             }, 200)
           }
         })
-      }, 2000) //durée de la vidéo,  92000
+      }, 92000) //durée de la vidéo,  92000
     }
   }
 

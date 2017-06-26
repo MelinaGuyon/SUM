@@ -30,8 +30,8 @@ class FirstChallenge {
     this.rightCursorDistance
     this.isDragging = false
 
-    this.pathStart = [200, window.innerHeight / 2 - 100]
-    this.pathEnd = [200, window.innerHeight / 2 + 100]
+    this.pathStart = [window.innerWidth/5.5, window.innerHeight / 2 - 100]
+    this.pathEnd = [window.innerWidth/5.5, window.innerHeight / 2 + 100]
 
     this.nextAnimButton = document.querySelector('.js-first-challenge-next')
     this.recompenseButton = document.querySelector('.js-first-recompense-button')

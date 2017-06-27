@@ -382,7 +382,7 @@ class Carousel {
 
       if (document.hasFocus() ) {
         Object.keys(STORAGE.carouselClass.spritesForms).map(function(objectKey, index) {
-          if (index == 1 || index == 5 || index == 7 || index == 9) {
+          if (index == 1 || index == 5 || index == 7 || index == 8) {
             TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 1.5, {
               alpha : 0.2,
               ease: Power2.easeIn,
@@ -394,7 +394,7 @@ class Carousel {
               }
             })
           }
-          if (index == 0 || index == 6 || index == 10 || index == 13) {
+          if (index == 0 || index == 6 || index == 9 || index == 12) {
 
             TweenLite.to(STORAGE.carouselClass.spritesForms[objectKey], 1.5, {
               alpha : 0.2,

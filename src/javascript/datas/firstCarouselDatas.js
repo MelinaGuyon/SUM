@@ -1,6 +1,6 @@
 const firstCarouselDatas = {
   datasImages: [
-    'assets/before-challenge-1/carousel-fond-2.jpg',
+    'assets/before-challenge-1/carousel-fond-final.jpg',
     'assets/before-challenge-1/0-forme-1.png',
     'assets/before-challenge-1/0-forme-2.png',
     'assets/before-challenge-1/0-forme-3.png',

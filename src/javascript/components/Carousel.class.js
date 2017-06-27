@@ -216,12 +216,12 @@ class Carousel {
 
     handleScroll(e) {
       if (Math.abs(STORAGE.carousel.y - window.innerHeight) <  STORAGE.carouselClass.totalHeightSteps[1] * STORAGE.carousel.numberOfWindow - 25 && e.deltaY > 0 ) { // stop le défilement au dernier sprite (défile tant que x abs < à largeur totale de tous les spritesFonds-1)
-        STORAGE.carousel.y -= Math.abs(e.deltaY) / 8
+        STORAGE.carousel.y -= Math.abs(e.deltaY) / 5
         STORAGE.carouselClass.doParallax('down')
       } else if (STORAGE.carousel.y > -25) {
         return
       } else if (e.deltaY < 0) {
-        STORAGE.carousel.y += Math.abs(e.deltaY) / 8
+        STORAGE.carousel.y += Math.abs(e.deltaY) / 5
         STORAGE.carouselClass.doParallax('up')
       }
 

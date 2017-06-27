@@ -93,9 +93,11 @@ class Video {
           onComplete: function() {
             setTimeout(function() {
               STORAGE.videoIntro = that.texture.baseTexture.source
-              STORAGE.videoIntro.pause()
               TweenLite.to(STORAGE.videoIntro, 4, {
-                volume: 0
+                volume: 0,
+                onComplete: function() {
+                  STORAGE.videoIntro.pause()
+                }
               })
               console.log(STORAGE.VideoClass.videoButton)
               TweenLite.to(STORAGE.VideoClass.videoButton, 0.3, {
@@ -107,7 +109,7 @@ class Video {
             }, 200)
           }
         })
-      }, 92000) //durée de la vidéo,  92000
+      }, 95000) //durée de la vidéo,  92000
     }
   }
 

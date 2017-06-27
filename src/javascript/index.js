@@ -55,7 +55,7 @@ function initCanvas() {
   new SoundManager()
   new Video({ number: 1 })
   // new Recompense({ number: 2 })
-  // new Carousel({ number: 1 })
+  // new Carousel({ number: 2 })
 
   render()
 }

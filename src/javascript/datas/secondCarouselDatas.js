@@ -6,7 +6,6 @@ const secondCarouselDatas = {
     'assets/before-challenge-2/1-forme-1.png',
     'assets/before-challenge-2/1-forme-2.png',
     'assets/before-challenge-2/1-forme-3.png',
-    'assets/before-challenge-2/1-forme-4.png',
     'assets/before-challenge-2/2-forme-1.png',
     'assets/before-challenge-2/2-forme-2.png',
     'assets/before-challenge-2/2-forme-3.png',

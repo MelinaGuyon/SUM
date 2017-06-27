@@ -674,7 +674,7 @@ class ThirdChallenge {
 
   handleRecompenseButtonClick() {
 
-    STORAGE.soundManagerClass.launchInteractionSound(soundBank.interaction.interactionCarousel, 1)
+    STORAGE.soundManagerClass.launchInteractionSound(soundBank.interaction.interactionCarousel, 1.5)
 
     STORAGE.ThirdChallengeClass.undDisplayRecompenseButton()
 

@@ -501,7 +501,7 @@ class SecondChallenge {
 
   handleRecompenseButtonClick() {
 
-    STORAGE.soundManagerClass.launchInteractionSound(soundBank.interaction.interactionCarousel, 1)
+    STORAGE.soundManagerClass.launchInteractionSound(soundBank.interaction.interactionCarousel, 1.5)
 
     STORAGE.SecondChallengeClass.undDisplayRecompenseButton()
 
